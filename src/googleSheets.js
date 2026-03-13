@@ -52,9 +52,13 @@ async function searchBrand(brand, keyword) {
 async function checkStock(sku) {
   try {
     const data = await getTabData('Stock');
-    const match = data.find(row => String(row['SKU'] || '').toLowerCase() === sku.toLowerCase());
+    const skuLower = sku.toLowerCase();
+    const match = data.find(row => {
+      const name = String(row['NAME'] || row['SKU'] || '').toLowerCase();
+      return name === skuLower || name.includes(skuLower) || skuLower.includes(name);
+    });
     if (!match) return { found: false, sku };
-    return { found: true, sku, qty_available: parseInt(match['Qty Available'] || '0'), qty_on_hand: parseInt(match['Qty On Hand'] || '0'), qty_on_order: parseInt(match['Qty On Order'] || '0'), last_updated: match['Last Updated'] || '' };
+    return { found: true, sku, qty_available: parseFloat(match['AVAILABLE'] || match['Qty Available'] || '0'), uom: match['PRIMARY STOCK UNIT'] || match['UOM'] || '', brand: match['BRAND'] || '', description: match['DISPLAY NAME'] || match['Description'] || '' };
   } catch (e) { return { found: false, sku, error: e.message }; }
 }
 
