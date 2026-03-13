@@ -30,8 +30,11 @@ app.post('/webhook/new-email', async (req, res) => {
   console.log(`[SUBJECT] ${subject}`);
   console.log(`[BODY] ${body.substring(0, 200)}...`);
 
+  // Respond to Zapier immediately (agent processes in background)
+  res.json({ status: 'processing', message_id });
+
   try {
-    // Run the agent
+    // Run the agent (in background)
     const agentResult = await runAgent({
       from_name: from_name || 'Customer',
       from_email,
