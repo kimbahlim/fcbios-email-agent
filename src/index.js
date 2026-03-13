@@ -41,11 +41,23 @@ app.post('/webhook/new-email', async (req, res) => {
 
     console.log(`[AGENT] Done. Type: ${agentResult.type}`);
 
+    // Use agent's reply_to (handles forwarded emails) or fall back to from_email
+    const replyToEmail = agentResult.replyTo || from_email;
+    const dealerName = agentResult.dealerName || from_name;
+
+    console.log(`[REPLY TO] ${dealerName} <${replyToEmail}>`);
+
+    // Add agent notes as yellow banner if present
+    let finalHtml = agentResult.htmlBody;
+    if (agentResult.agentNotes) {
+      finalHtml = `<div style="background:#fff3cd;border:1px solid #ffc107;padding:12px;margin-bottom:16px;border-radius:6px;font-family:Arial,sans-serif;font-size:13px;color:#856404;">⚠️ ${agentResult.agentNotes}</div>\n${finalHtml}`;
+    }
+
     // Create Gmail draft
     const draft = await createGmailDraft({
-      to: from_email,
+      to: replyToEmail,
       subject: agentResult.subject || `Re: ${subject}`,
-      htmlBody: agentResult.htmlBody,
+      htmlBody: finalHtml,
       threadId: thread_id,
       messageId: message_id
     });

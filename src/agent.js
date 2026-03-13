@@ -92,11 +92,13 @@ const tools = [
       type: 'object',
       properties: {
         type: { type: 'string', enum: ['quotation', 'pre_quote', 'escalation'], description: 'Email type' },
+        reply_to: { type: 'string', description: 'The ACTUAL dealer email to reply to. For forwarded emails, this is the original dealer email extracted from the forwarded content. For direct emails, use the from_email.' },
+        dealer_name: { type: 'string', description: 'The ACTUAL dealer name to address in the email.' },
         subject: { type: 'string', description: 'Email subject line' },
         html_body: { type: 'string', description: 'Complete HTML email body' },
         agent_notes: { type: 'string', description: 'Internal notes for human reviewer (not sent to dealer)' }
       },
-      required: ['type', 'subject', 'html_body']
+      required: ['type', 'reply_to', 'dealer_name', 'subject', 'html_body']
     }
   }
 ];
@@ -168,6 +170,8 @@ Process this enquiry following your system prompt rules. Search pricelists, chec
         if (block.name === 'draft_email') {
           return {
             type: block.input.type,
+            replyTo: block.input.reply_to,
+            dealerName: block.input.dealer_name,
             subject: block.input.subject,
             htmlBody: block.input.html_body,
             agentNotes: block.input.agent_notes || ''
