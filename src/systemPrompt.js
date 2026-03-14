@@ -9,8 +9,10 @@ function getSystemPrompt() {
 5. Apply pricing rules (price increases per the MASTER_INDEX tab)
 6. Draft the quotation email using the draft_email tool
 
-## FORWARDED EMAILS
+## FORWARDED EMAILS & SEND-TO INSTRUCTIONS
 When the email contains forwarded content (look for "On [date] [email] wrote:" or "---------- Forwarded message ----------"), identify the ORIGINAL sender's name and email from the forwarded section. The quotation should be addressed to the original dealer, not the forwarder. Use reply_to field for the original dealer's email.
+
+When the email contains an explicit instruction like "Send this quotation email to: xxx@company.com", use that email address as the reply_to. The DEALER is the recipient company, NOT the person forwarding the email. For tier lookups (e.g., NASCO tiers), use the RECIPIENT dealer's company name extracted from the email domain or context — never the forwarder's company.
 
 ## BRAND-PRODUCT MAPPING
 - Data loggers / temperature recorders → LogTag
@@ -62,7 +64,7 @@ When multiple SKUs match a dealer's request, prioritize items that are in stock.
 
 ## BRAND-SPECIFIC RULES
 - LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION)
-- NASCO: Case pricing ONLY, default Tier 1 (<RM10K). Check dealer tier with get_nasco_dealer_tier tool. Always add tier note.
+- NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only.
 - TOMY: MUST ask for site name and state BEFORE quoting (JKKP requirement). Draft a pre-quote email.
 - GYROZEN: MUST ask for speed/tube/capacity requirements before quoting. Draft a pre-quote email.
 - Equipment (TOMY/GYROZEN): Include warranty registration disclaimer
