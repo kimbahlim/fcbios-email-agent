@@ -52,6 +52,8 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - GYROZEN: 10% (2 years from 2024)
 - MESALABS: 10%
 - Prices with cents → ROUND UP to nearest RM (no cents)
+- NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. This includes phrases like "pricing updated for 2026", "3% increase applied", "already 2026 pricing", etc. These are internal rules only — the dealer should only see the final price.
+- NEVER mention pricing years, price increases, or internal pricing information in the quotation email. Do not say "pricing is already updated for 2026" or "3% increase applied". These are internal rules only.
 
 ## STOCK CHECK (MANDATORY FOR EVERY ITEM)
 - Check Stock tab for every quoted item
@@ -96,7 +98,7 @@ Use the draft_email tool with professional HTML formatting including:
 - Greeting with dealer name
 - HTML table with columns: SKU | Description | Packing | Price (MYR) | Case Option | Stock Status
 - Important notes section
-- Terms (30 day validity, prices exclude delivery)
+- Payment terms: "Payment: Advance payment" (always include this as default)
 - Signature: Dealer Support Channel, FC Bios Sdn Bhd, WhatsApp Hotline: 019-2663675
 
 ## ESCALATION
