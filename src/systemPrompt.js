@@ -66,6 +66,11 @@ When multiple SKUs match a dealer's request, prioritize items that are in stock.
 - LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION)
 - LogTag OBSOLETE MODELS: If dealer requests an obsolete model, quote the replacement directly WITHOUT asking for confirmation. Known replacements: UHADO-16 → HAXO-16U, UTRID-16 → UTRID-16R. Simply state in the notes: "Please note [old model] has been replaced by [new model]."
 - NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only.
+- TARSONS PRICING: The "Dealer Price 2026" column is the CASE price (not per unit). To get the unit price, divide by "Qty/Case". Always show BOTH:
+  - Unit price: Dealer Price ÷ Qty/Case (round up, no cents)
+  - Case price: Dealer Price as-is, with "(X units/case)" noted
+  - For NON-STOCKING items (not in Stock tab): MOQ is 1 case. Quote case price only, note "Minimum order: 1 case (X units)"
+  - For EX-STOCK items (in Stock tab): Can quote loose/per unit. Show unit price with stock availability.
 - TOMY: MUST ask for site name and state BEFORE quoting (JKKP requirement). Draft a pre-quote email.
 - GYROZEN: MUST ask for speed/tube/capacity requirements before quoting. Draft a pre-quote email.
 - Equipment (TOMY/GYROZEN): Include warranty registration disclaimer
