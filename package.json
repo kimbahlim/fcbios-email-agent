@@ -1,18 +1,13 @@
 {
   "name": "fcbios-email-agent",
   "version": "1.0.0",
-  "description": "FC-BIOS Dealer Email Quotation Agent",
+  "description": "FC-BIOS Email Quotation Agent",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
-    "express": "^4.21.0",
-    "googleapis": "^144.0.0"
-  },
-  "engines": {
-    "node": ">=18"
+    "express": "^4.21.0"
   }
 }

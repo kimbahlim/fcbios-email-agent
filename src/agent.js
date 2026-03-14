@@ -1,66 +1,47 @@
 const Anthropic = require('@anthropic-ai/sdk');
-const getSystemPrompt = require('./systemPrompt');
-const {
-  searchProducts,
-  searchBrand,
-  checkStock,
-  getLeadTime,
-  getNascoDealerTier,
-  checkNotForExport,
-  listSheets
-} = require('./googleSheets');
+const { getSystemPrompt } = require('./systemPrompt');
+const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets } = require('./googleSheets');
 
 const client = new Anthropic();
 
 const tools = [
   {
     name: 'search_products',
-    description: 'Search across ALL brand pricelist tabs for products matching a keyword. Returns up to 20 results from any brand. Use for general product searches when unsure which brand.',
+    description: 'Search across ALL brand pricelist tabs for products matching a keyword. Use for general product searches when brand is unknown.',
     input_schema: {
       type: 'object',
       properties: {
-        keyword: { type: 'string', description: 'Search keyword(s). E.g., "petri dish 90mm", "centrifuge tube 50ml"' }
+        keyword: { type: 'string', description: 'Search keyword (product name, SKU, description)' }
       },
       required: ['keyword']
     }
   },
   {
     name: 'search_brand',
-    description: 'Search within a SPECIFIC brand pricelist tab. Use when you know which brand from the Brand-Product Mapping.',
+    description: 'Search within a specific brand tab for products. Use when you know which brand to search (e.g., from brand priority rules).',
     input_schema: {
       type: 'object',
       properties: {
-        brand_tab: { type: 'string', description: 'Exact tab name. E.g., "HIMEDIA_Microbiology", "TARSONS", "LOGTAG", "DISPOZ", "LP", "NASCO", "UGAIYA", "MESALABS", "PROGNOSIS", "NEOGEN", "SORFA", "MINMAX", "MVE", "GYROZEN", "TOMY", "MEIZHENG", "MEMBRANE_SOLUTIONS", "IUL", "ANQING_YIPAK", "HIMEDIA_Molecular_Biology", "HIMEDIA_Animal_Tissue_Culture", "HIMEDIA_RPM_Plates"' },
-        keyword: { type: 'string', description: 'Search keyword(s) within that brand tab' }
+        brand_tab: { type: 'string', description: 'Brand tab name (e.g., NASCO, LOGTAG, HIMEDIA_Microbiology, TARSONS, DISPOZ, etc.)' },
+        keyword: { type: 'string', description: 'Search keyword' }
       },
       required: ['brand_tab', 'keyword']
     }
   },
   {
     name: 'check_stock',
-    description: 'Check stock availability for a specific SKU. MUST be called for every item you quote.',
+    description: 'Check stock availability for a specific SKU from the Stock tab.',
     input_schema: {
       type: 'object',
       properties: {
-        sku: { type: 'string', description: 'SKU/item code. E.g., "MH290-500G", "L21-UTRIX-16"' }
+        sku: { type: 'string', description: 'Product SKU to check stock for' }
       },
       required: ['sku']
     }
   },
   {
-    name: 'get_lead_time',
-    description: 'Get lead time for non-stocking/indent items of a brand from LEAD_TIMES tab.',
-    input_schema: {
-      type: 'object',
-      properties: {
-        brand: { type: 'string', description: 'Brand name. E.g., "HiMedia", "TARSONS", "LogTag"' }
-      },
-      required: ['brand']
-    }
-  },
-  {
     name: 'get_nasco_dealer_tier',
-    description: 'Look up a dealer NASCO pricing tier from Nasco_Tiers tab.',
+    description: 'Look up a dealer\'s NASCO pricing tier based on their sales history.',
     input_schema: {
       type: 'object',
       properties: {
@@ -70,33 +51,36 @@ const tools = [
     }
   },
   {
-    name: 'check_not_for_export',
-    description: 'Check if a HiMedia product code is on the Not For Export list.',
+    name: 'get_lead_time',
+    description: 'Get the lead time for a brand\'s non-stocking items from the LEAD_TIMES tab.',
     input_schema: {
       type: 'object',
       properties: {
-        product_code: { type: 'string', description: 'HiMedia product code. E.g., "M091-500G"' }
+        brand: { type: 'string', description: 'Brand name' }
       },
-      required: ['product_code']
+      required: ['brand']
     }
   },
   {
     name: 'list_brands',
-    description: 'List all available pricelist tab names.',
-    input_schema: { type: 'object', properties: {} }
+    description: 'List all available brand pricelist tabs in the spreadsheet.',
+    input_schema: {
+      type: 'object',
+      properties: {},
+      required: []
+    }
   },
   {
     name: 'draft_email',
-    description: 'Finalize the quotation email. Call when you have all info. Email MUST be HTML with proper tables.',
+    description: 'Draft the final quotation email to send to the dealer. Call this when you have all the information needed.',
     input_schema: {
       type: 'object',
       properties: {
-        type: { type: 'string', enum: ['quotation', 'pre_quote', 'escalation'], description: 'Email type' },
-        reply_to: { type: 'string', description: 'The ACTUAL dealer email to reply to. For forwarded emails, this is the original dealer email extracted from the forwarded content. For direct emails, use the from_email.' },
-        dealer_name: { type: 'string', description: 'The ACTUAL dealer name to address in the email.' },
+        type: { type: 'string', enum: ['quotation', 'pre_quote', 'escalation', 'forward', 'lead_time'], description: 'Type of email' },
+        reply_to: { type: 'string', description: 'Dealer email address to reply to (use original dealer email for forwarded emails)' },
+        dealer_name: { type: 'string', description: 'Dealer contact name' },
         subject: { type: 'string', description: 'Email subject line' },
-        html_body: { type: 'string', description: 'Complete HTML email body' },
-        agent_notes: { type: 'string', description: 'Internal notes for human reviewer (not sent to dealer)' }
+        html_body: { type: 'string', description: 'Full HTML email body with quotation table, notes, and signature' }
       },
       required: ['type', 'reply_to', 'dealer_name', 'subject', 'html_body']
     }
@@ -104,100 +88,115 @@ const tools = [
 ];
 
 async function processToolCall(toolName, toolInput) {
-  switch (toolName) {
-    case 'search_products': return await searchProducts(toolInput.keyword);
-    case 'search_brand': return await searchBrand(toolInput.brand_tab, toolInput.keyword);
-    case 'check_stock': return await checkStock(toolInput.sku);
-    case 'get_lead_time': return await getLeadTime(toolInput.brand);
-    case 'get_nasco_dealer_tier': return await getNascoDealerTier(toolInput.dealer_name);
-    case 'check_not_for_export': return await checkNotForExport(toolInput.product_code);
-    case 'list_brands': return await listSheets();
-    case 'draft_email': return { success: true, ...toolInput };
-    default: return { error: `Unknown tool: ${toolName}` };
+  console.log(`[TOOL] ${toolName}: ${JSON.stringify(toolInput).substring(0, 100)}`);
+
+  try {
+    let result;
+    switch (toolName) {
+      case 'search_products':
+        result = await searchProducts(toolInput.keyword);
+        break;
+      case 'search_brand':
+        result = await searchByBrand(toolInput.brand_tab, toolInput.keyword);
+        break;
+      case 'check_stock':
+        result = await checkStock(toolInput.sku);
+        break;
+      case 'get_nasco_dealer_tier':
+        result = await getNascoDealerTier(toolInput.dealer_name);
+        break;
+      case 'get_lead_time':
+        result = await getLeadTime(toolInput.brand);
+        break;
+      case 'list_brands':
+        result = await listSheets();
+        break;
+      case 'draft_email':
+        result = { success: true, type: toolInput.type };
+        break;
+      default:
+        result = { error: `Unknown tool: ${toolName}` };
+    }
+
+    const resultStr = JSON.stringify(result).substring(0, 300);
+    console.log(`[TOOL] ${toolName} → ${resultStr}`);
+    return result;
+  } catch (error) {
+    console.error(`[ERROR] ${toolName}: ${error.message}`);
+    return { error: error.message };
   }
 }
 
-async function runAgent({ from_name, from_email, subject, body }) {
+async function runAgent(emailData) {
   const systemPrompt = getSystemPrompt();
 
-  const userMessage = `New dealer enquiry email:
+  const userMessage = `New dealer email received:
 
-FROM: ${from_name} <${from_email}>
-SUBJECT: ${subject}
-BODY:
-${body}
+FROM: ${emailData.from_name} <${emailData.from_email}>
+SUBJECT: ${emailData.subject}
+
+EMAIL BODY:
+${emailData.body}
 
 ---
-Process this enquiry following your system prompt rules. Search pricelists, check stock for every item, apply correct pricing, and draft a professional HTML quotation email. Call draft_email when done.`;
+Process this email according to your instructions. Search the pricelists, check stock, apply pricing rules, and draft the appropriate response.`;
 
-  const messages = [{ role: 'user', content: userMessage }];
-  let loopCount = 0;
-  const MAX_LOOPS = 15;
+  let messages = [{ role: 'user', content: userMessage }];
+  let draftResult = null;
 
-  while (loopCount < MAX_LOOPS) {
-    loopCount++;
-    console.log(`[AGENT] Loop ${loopCount}/${MAX_LOOPS}`);
+  for (let i = 0; i < 15; i++) {
+    console.log(`[AGENT] Loop ${i + 1}/15`);
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 8192,
+      max_tokens: 4096,
       system: systemPrompt,
-      tools,
-      messages
+      tools: tools,
+      messages: messages
     });
 
     console.log(`[AGENT] Stop reason: ${response.stop_reason}`);
 
     if (response.stop_reason === 'end_turn') {
-      const textBlock = response.content.find(b => b.type === 'text');
-      return {
-        type: 'escalation',
-        subject: `Re: ${subject}`,
-        htmlBody: textBlock ? `<p>${textBlock.text}</p>` : '<p>Unable to process. Please review manually.</p>',
-        agentNotes: 'Agent ended without draft_email'
-      };
+      console.log('[AGENT] Done (end_turn)');
+      break;
     }
 
     if (response.stop_reason === 'tool_use') {
-      messages.push({ role: 'assistant', content: response.content });
+      const toolUseBlocks = response.content.filter(b => b.type === 'tool_use');
       const toolResults = [];
 
-      for (const block of response.content) {
-        if (block.type !== 'tool_use') continue;
+      for (const toolUse of toolUseBlocks) {
+        const result = await processToolCall(toolUse.name, toolUse.input);
 
-        console.log(`[TOOL] ${block.name}: ${JSON.stringify(block.input).substring(0, 150)}`);
-
-        if (block.name === 'draft_email') {
-          return {
-            type: block.input.type,
-            replyTo: block.input.reply_to,
-            dealerName: block.input.dealer_name,
-            subject: block.input.subject,
-            htmlBody: block.input.html_body,
-            agentNotes: block.input.agent_notes || ''
+        if (toolUse.name === 'draft_email') {
+          draftResult = {
+            type: toolUse.input.type,
+            reply_to: toolUse.input.reply_to,
+            dealer_name: toolUse.input.dealer_name,
+            subject: toolUse.input.subject,
+            draft_html: toolUse.input.html_body
           };
+          console.log(`[AGENT] Done. Type: ${draftResult.type}`);
         }
-
-        const result = await processToolCall(block.name, block.input);
-        console.log(`[TOOL] ${block.name} → ${JSON.stringify(result).substring(0, 200)}`);
 
         toolResults.push({
           type: 'tool_result',
-          tool_use_id: block.id,
+          tool_use_id: toolUse.id,
           content: JSON.stringify(result)
         });
       }
 
+      messages.push({ role: 'assistant', content: response.content });
       messages.push({ role: 'user', content: toolResults });
+
+      if (draftResult) break;
+    } else {
+      break;
     }
   }
 
-  return {
-    type: 'escalation',
-    subject: `Re: ${subject}`,
-    htmlBody: `<p>Dear ${from_name},</p><p>Thank you for your enquiry. We are processing your request and will get back to you shortly.</p><p>Best regards,<br>Dealer Support Channel<br>FC Bios Sdn Bhd<br>WhatsApp Hotline: 019-2663675</p>`,
-    agentNotes: `Max loops (${MAX_LOOPS}) reached. Manual review needed.`
-  };
+  return draftResult;
 }
 
 module.exports = { runAgent };

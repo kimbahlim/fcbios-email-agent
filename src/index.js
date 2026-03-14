@@ -3,89 +3,72 @@ const { runAgent } = require('./agent');
 const { createGmailDraft } = require('./gmail');
 
 const app = express();
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json());
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  console.log('Health: GET /health');
+  res.json({ status: 'ok' });
 });
 
-// Zapier webhook endpoint
+// Webhook endpoint
 app.post('/webhook/new-email', async (req, res) => {
+  console.log('Webhook: POST /webhook/new-email');
+
   // Validate webhook secret
   const secret = req.headers['x-webhook-secret'];
   if (secret !== process.env.WEBHOOK_SECRET) {
-    console.log('[WEBHOOK] Invalid secret');
-    return res.status(401).json({ error: 'Invalid webhook secret' });
+    console.log('[ERROR] Invalid webhook secret');
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   const { from_name, from_email, subject, body, message_id, thread_id } = req.body;
 
-  if (!body || !from_email) {
-    return res.status(400).json({ error: 'Missing required fields: body, from_email' });
-  }
-
-  console.log(`\n${'='.repeat(60)}`);
-  console.log(`[NEW EMAIL] From: ${from_name} <${from_email}>`);
   console.log(`[SUBJECT] ${subject}`);
-  console.log(`[BODY] ${body.substring(0, 200)}...`);
+  console.log('============================================================');
+  console.log(`[NEW EMAIL] From: ${from_name} <${from_email}>`);
+  console.log(`[BODY] ${(body || '').substring(0, 200)}...`);
 
-  // Respond to Zapier immediately (agent processes in background)
-  res.json({ status: 'processing', message_id });
+  // Respond immediately - process in background
+  res.json({ status: 'processing', message: 'Email received, agent is working' });
 
+  // Background processing
   try {
-    // Run the agent (in background)
-    const agentResult = await runAgent({
-      from_name: from_name || 'Customer',
-      from_email,
-      subject: subject || 'Enquiry',
-      body
+    const result = await runAgent({
+      from_name: from_name || '',
+      from_email: from_email || '',
+      subject: subject || '',
+      body: body || '',
+      message_id: message_id || '',
+      thread_id: thread_id || ''
     });
 
-    console.log(`[AGENT] Done. Type: ${agentResult.type}`);
+    if (result && result.draft_html) {
+      const replyTo = result.reply_to || from_email;
+      const replyName = result.dealer_name || from_name;
+      const draftSubject = result.subject || `Re: ${subject}`;
 
-    // Use agent's reply_to (handles forwarded emails) or fall back to from_email
-    const replyToEmail = agentResult.replyTo || from_email;
-    const dealerName = agentResult.dealerName || from_name;
+      console.log(`[REPLY TO] ${replyName} <${replyTo}>`);
 
-    console.log(`[REPLY TO] ${dealerName} <${replyToEmail}>`);
+      const draftResult = await createGmailDraft({
+        to: `${replyName} <${replyTo}>`,
+        subject: draftSubject,
+        htmlBody: result.draft_html,
+        messageId: message_id,
+        threadId: thread_id
+      });
 
-    // Add agent notes as yellow banner if present
-    let finalHtml = agentResult.htmlBody;
-    if (agentResult.agentNotes) {
-      finalHtml = `<div style="background:#fff3cd;border:1px solid #ffc107;padding:12px;margin-bottom:16px;border-radius:6px;font-family:Arial,sans-serif;font-size:13px;color:#856404;">⚠️ ${agentResult.agentNotes}</div>\n${finalHtml}`;
+      console.log(`[GMAIL] Draft created: ${draftResult.id}`);
+    } else {
+      console.log('[AGENT] No draft generated');
     }
-
-    // Create Gmail draft
-    const draft = await createGmailDraft({
-      to: replyToEmail,
-      subject: agentResult.subject || `Re: ${subject}`,
-      htmlBody: finalHtml,
-      threadId: thread_id,
-      messageId: message_id
-    });
-
-    console.log(`[GMAIL] Draft created: ${draft.id}`);
-    res.json({ success: true, draftId: draft.id, type: agentResult.type });
-
-  } catch (err) {
-    console.error(`[ERROR] ${err.message}`);
-    console.error(err.stack);
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    console.error('[ERROR]', error.message);
+    console.error(error.stack);
   }
-});
-
-// Cache clear endpoint (for stock sync)
-app.post('/webhook/stock-updated', (req, res) => {
-  const { clearCache } = require('./googleSheets');
-  clearCache();
-  console.log('[STOCK] Cache cleared after stock update');
-  res.json({ success: true, message: 'Cache cleared' });
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`FC-BIOS Email Agent running on port ${PORT}`);
-  console.log(`Webhook: POST /webhook/new-email`);
-  console.log(`Health: GET /health`);
 });
