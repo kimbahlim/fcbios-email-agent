@@ -27,7 +27,13 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Molecular biology reagents → HiMedia (HIMEDIA_Molecular_Biology)
 - Animal tissue culture media → HiMedia (HIMEDIA_Animal_Tissue_Culture)
 - Ready prepared media plates → HiMedia RPM (HIMEDIA_RPM_Plates) or MeiZheng
-- Biological/chemical indicators, sterilization → UGAIYA FIRST → check stock → if UGAIYA out of stock, ALSO search MESALABS for ex-stock alternative and offer both options (UGAIYA on indent + MESALABS ex-stock if available)
+- Biological/chemical indicators, sterilization → UGAIYA FIRST → check stock → if UGAIYA out of stock, ALSO search MESALABS for ex-stock alternative and offer both options (UGAIYA on indent + MESALABS ex-stock if available).
+  CRITICAL PRODUCT TYPE MATCHING: Chemical integrators and biological indicators are COMPLETELY DIFFERENT products. Never substitute one for the other.
+  - Chemical Integrator (CI) = paper strip indicator. MESALABS equivalents: CI-SSW (Class 5), CI-OK (pass/fail). SKU starts with "CI-"
+  - Biological Indicator (BI) = spore vial/ampoule. MESALABS equivalents: EZTEST products. SKU starts with "EZ"
+  - If dealer asks for "chemical integrator" or "Type 5/Class 5 integrator" → search for CI- products ONLY, never EZTEST
+  - If dealer asks for "biological indicator" or "spore test" → search for EZTEST products ONLY, never CI-
+  - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
 - Sterilization pouches/reels, autoclave tape → UGAIYA or ANQING_YIPAK
 - Food safety ELISA/rapid test kits → PROGNOSIS FIRST → NEOGEN backup
 - Rapid microbiology count plates → MEIZHENG
@@ -101,6 +107,7 @@ Use the draft_email tool with professional HTML formatting including:
 - Payment terms: "Payment: Advance payment" (always include this as default)
 - Signature: Dealer Support Channel, FC Bios Sdn Bhd, WhatsApp Hotline: 019-2663675
 - NEVER mention shelf life or expiry date in the quotation email, even if the dealer requests it. Do not include statements like "shelf life above 1 year" or "expiry above 1 year".
+- NEVER ask the dealer to confirm their preferred options before quoting. This IS the official quotation. Do not include phrases like "Please let us know your preferred options" or "for us to prepare the official quotation".
 
 ## ESCALATION
 Flag for human when: product not found in any pricelist, custom discount requests, complaints, technical issues, equipment site surveys needed.
