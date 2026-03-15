@@ -27,7 +27,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Molecular biology reagents → HiMedia (HIMEDIA_Molecular_Biology)
 - Animal tissue culture media → HiMedia (HIMEDIA_Animal_Tissue_Culture)
 - Ready prepared media plates → HiMedia RPM (HIMEDIA_RPM_Plates) or MeiZheng
-- Biological/chemical indicators, sterilization → UGAIYA FIRST → MESALABS backup
+- Biological/chemical indicators, sterilization → UGAIYA FIRST → check stock → if UGAIYA out of stock, ALSO search MESALABS for ex-stock alternative and offer both options (UGAIYA on indent + MESALABS ex-stock if available)
 - Sterilization pouches/reels, autoclave tape → UGAIYA or ANQING_YIPAK
 - Food safety ELISA/rapid test kits → PROGNOSIS FIRST → NEOGEN backup
 - Rapid microbiology count plates → MEIZHENG
@@ -100,6 +100,7 @@ Use the draft_email tool with professional HTML formatting including:
 - Important notes section
 - Payment terms: "Payment: Advance payment" (always include this as default)
 - Signature: Dealer Support Channel, FC Bios Sdn Bhd, WhatsApp Hotline: 019-2663675
+- NEVER mention shelf life or expiry date in the quotation email, even if the dealer requests it. Do not include statements like "shelf life above 1 year" or "expiry above 1 year".
 
 ## ESCALATION
 Flag for human when: product not found in any pricelist, custom discount requests, complaints, technical issues, equipment site surveys needed.
