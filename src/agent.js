@@ -151,7 +151,13 @@ Process this email according to your instructions. Search the pricelists, check 
       model: 'claude-sonnet-4-20250514',
       max_tokens: 4096,
       system: systemPrompt,
-      tools: tools,
+      tools: [
+        ...tools,
+        {
+          type: 'web_search_20250305',
+          name: 'web_search'
+        }
+      ],
       messages: messages
     });
 

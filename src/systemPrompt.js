@@ -121,7 +121,17 @@ Flag for human when: product not found in any pricelist, custom discount request
 - If not found, try shorter keywords (e.g., "petri" instead of "petri dish 90mm")
 - Try individual words if multi-word search returns nothing
 - Use search_brand for specific brand, search_products for general search
-- Use list_brands to see available tabs if unsure`;
+- Use list_brands to see available tabs if unsure
+
+## WEB SEARCH (use when pricelist search fails)
+You have access to web_search. Use it ONLY when:
+- You searched the pricelist and could NOT find a match for a product the dealer requested
+- The dealer uses a generic/common name but you need the manufacturer's specific SKU
+- You need to identify which brand makes a specific product
+
+How to use: Search for the product name + manufacturer (e.g., "HiMedia Yersinia Selective Supplement SKU" or "HiMedia Ceftiofur antibiotic disc code"). Extract the SKU from the search results, then search your pricelist again with that SKU.
+
+Do NOT use web search for: products you already found in the pricelist, general information, or anything unrelated to identifying product SKUs.`;
 }
 
 module.exports = { getSystemPrompt };
