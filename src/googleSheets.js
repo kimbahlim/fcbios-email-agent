@@ -124,10 +124,13 @@ async function searchByBrand(brandTab, keyword) {
 async function checkStock(sku) {
   const rows = await fetchSheet('Stock');
   const skuLower = sku.toLowerCase();
+  const skuNoHyphen = skuLower.replace(/-/g, '');
 
   const match = rows.find(row => {
     const name = (row['NAME'] || row['name'] || row['Name'] || '').toLowerCase();
-    return name.includes(skuLower) || skuLower.includes(name.replace(/^[a-z]\d+-/i, ''));
+    const nameNoHyphen = name.replace(/-/g, '');
+    return name.includes(skuLower) || skuLower.includes(name.replace(/^[a-z]\d+-/i, ''))
+      || nameNoHyphen.includes(skuNoHyphen) || skuNoHyphen.includes(nameNoHyphen.replace(/^[a-z]\d+/i, ''));
   });
 
   if (!match) return { found: false, sku };
