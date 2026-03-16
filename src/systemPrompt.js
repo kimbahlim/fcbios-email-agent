@@ -18,7 +18,13 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Data loggers / temperature recorders → LogTag
 - Digital thermometers / thermohygrometers → MinMax
 - Petri dishes, loops, spreaders, specimen containers, swabs → DispoZ FIRST → LP backup
-- Pipette tips (economical/bulk) → DispoZ; Pipette tips (premium/racked/filter) → TARSONS; If unspecified or generic "pipette tips" request → offer BOTH DispoZ and TARSONS, and ALWAYS include all 3 standard volumes: 10uL, 200uL, and 1000uL bulk tips from each brand.
+- Pipette tips: If dealer makes a generic request (just "pipette tips" without specifying volume/brand), you MUST search for ALL of the following and offer what's in stock:
+  1. search_brand("DISPOZ", "tips 200uL") → DJ01-LE1N00011030 (200uL Eppendorf) or DJ01-LE2N00201030 (200uL Gilson)
+  2. search_brand("DISPOZ", "tips 1000uL") → DJ01-LE3N00100510 or DJ01-LE4N00100510
+  3. search_brand("TARSONS", "tips 10uL bulk") → T38-521000
+  4. search_brand("TARSONS", "tips 200uL bulk") → T38-521014Y
+  5. search_brand("TARSONS", "tips 1000uL bulk") → T38-521016B
+  Check stock for each and only offer what's in stock. Present as two groups: "DispoZ (Economical)" and "TARSONS (Premium)".
 - Centrifuge tubes, microtubes, cryovials, PCR tubes, lab bottles → TARSONS
 - Serological pipettes, cell culture flasks/plates → SORFA
 - Stomacher/blender bags → SORFA
