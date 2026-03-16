@@ -9,23 +9,28 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 async function fetchSheet(tabName) {
   const now = Date.now();
   if (sheetsCache[tabName] && (now - cacheTime) < CACHE_TTL) {
+    console.log(`[SHEETS] Using cache for "${tabName}" (${sheetsCache[tabName].length} rows)`);
     return sheetsCache[tabName];
   }
 
   const url = `${BASE_URL}/values/${encodeURIComponent(tabName)}?key=${API_KEY}`;
+  console.log(`[SHEETS] Fetching "${tabName}" from API...`);
   const response = await fetch(url);
 
   if (!response.ok) {
-    console.log(`[SHEETS] Tab "${tabName}" not found or error: ${response.status}`);
+    console.log(`[SHEETS] Tab "${tabName}" error: ${response.status} ${response.statusText}`);
     return [];
   }
 
   const data = await response.json();
   const rows = data.values || [];
+  console.log(`[SHEETS] Tab "${tabName}" raw rows: ${rows.length}`);
 
   if (rows.length < 2) return [];
 
   const headers = rows[0].map(h => (h || '').toString().trim());
+  console.log(`[SHEETS] Tab "${tabName}" headers: ${headers.join(' | ')}`);
+  
   const results = rows.slice(1).map(row => {
     const obj = {};
     headers.forEach((h, i) => {
@@ -33,6 +38,12 @@ async function fetchSheet(tabName) {
     });
     return obj;
   });
+
+  // Log first row for Stock tab to verify data
+  if (tabName === 'Stock' && results.length > 0) {
+    console.log(`[SHEETS] Stock tab first row: ${JSON.stringify(results[0])}`);
+    console.log(`[SHEETS] Stock tab total: ${results.length} items`);
+  }
 
   sheetsCache[tabName] = results;
   cacheTime = now;
@@ -123,39 +134,76 @@ async function searchByBrand(brandTab, keyword) {
 
 async function checkStock(sku) {
   const rows = await fetchSheet('Stock');
-  const skuLower = sku.toLowerCase();
+  console.log(`[STOCK] Checking stock for "${sku}" against ${rows.length} rows`);
+  
+  if (rows.length === 0) {
+    console.log('[STOCK] Stock tab is EMPTY or not found');
+    return { found: false, sku };
+  }
+  
+  // Log first row keys to verify column names
+  if (rows.length > 0) {
+    console.log(`[STOCK] Column headers: ${Object.keys(rows[0]).join(', ')}`);
+  }
+
+  const skuLower = sku.toLowerCase().trim();
   const skuNoHyphen = skuLower.replace(/-/g, '');
+  // Also try just the numeric/alpha part after the brand prefix
+  const skuParts = sku.match(/^[A-Z0-9]+-(.+)$/i);
+  const skuSuffix = skuParts ? skuParts[1].toLowerCase() : '';
 
   const match = rows.find(row => {
-    const name = (row['NAME'] || row['name'] || row['Name'] || '').toLowerCase();
+    const name = (row['NAME'] || row['name'] || row['Name'] || Object.values(row)[0] || '').toLowerCase().trim();
     const nameNoHyphen = name.replace(/-/g, '');
-    return name.includes(skuLower) || skuLower.includes(name.replace(/^[a-z]\d+-/i, ''))
-      || nameNoHyphen.includes(skuNoHyphen) || skuNoHyphen.includes(nameNoHyphen.replace(/^[a-z]\d+/i, ''));
+    
+    // Try multiple matching strategies
+    if (name === skuLower) return true;  // exact match
+    if (name.includes(skuLower)) return true;  // name contains full sku
+    if (skuLower.includes(name) && name.length > 5) return true;  // sku contains full name
+    if (nameNoHyphen === skuNoHyphen) return true;  // match without hyphens
+    if (nameNoHyphen.includes(skuNoHyphen)) return true;  // name (no hyphen) contains sku (no hyphen)
+    if (skuNoHyphen.includes(nameNoHyphen) && nameNoHyphen.length > 5) return true;
+    if (skuSuffix && name.includes(skuSuffix)) return true;  // match suffix after brand prefix
+    
+    return false;
   });
 
-  if (!match) return { found: false, sku };
+  if (!match) {
+    console.log(`[STOCK] NOT FOUND: "${sku}"`);
+    return { found: false, sku };
+  }
 
-  // Find the numeric availability value - check multiple possible column names and find the one with a number
-  const availKeys = ['AVAILABLE', 'Available', 'available', 'QUANTITY AVAILABLE', 'Qty Available'];
+  console.log(`[STOCK] FOUND: "${sku}" → row: ${JSON.stringify(match).substring(0, 200)}`);
+
+  // Read availability - try exact header match first
+  const availKeys = ['AVAILABLE', 'Available', 'available'];
   const uomKeys = ['PRIMARY STOCK UNIT', 'Primary Stock Unit', 'UOM', 'Uom'];
   
   let qty = '0';
   let uom = 'unit';
   
-  // First try exact column name match
   for (const key of availKeys) {
-    if (match[key] && !isNaN(parseFloat(match[key]))) { qty = match[key]; break; }
+    if (match[key] !== undefined && match[key] !== '' && !isNaN(parseFloat(match[key]))) { 
+      qty = match[key]; 
+      console.log(`[STOCK] Found qty via key "${key}": ${qty}`);
+      break; 
+    }
   }
   for (const key of uomKeys) {
-    if (match[key] && match[key].toString().trim()) { uom = match[key]; break; }
+    if (match[key] && match[key].toString().trim()) { 
+      uom = match[key]; 
+      break; 
+    }
   }
   
-  // If qty is still 0 or non-numeric, scan all values to find a number that looks like quantity
+  // Fallback: scan all values for a number
   if (qty === '0' || isNaN(parseFloat(qty))) {
+    console.log(`[STOCK] Qty not found by header, scanning all values...`);
     const values = Object.entries(match);
     for (const [key, val] of values) {
-      if (val && !isNaN(parseFloat(val)) && parseFloat(val) > 0 && !key.toLowerCase().includes('name') && !key.toLowerCase().includes('description')) {
+      if (val && !isNaN(parseFloat(val)) && parseFloat(val) > 0 && !key.toLowerCase().includes('name') && !key.toLowerCase().includes('description') && !key.toLowerCase().includes('brand')) {
         qty = val;
+        console.log(`[STOCK] Found qty via scan key "${key}": ${qty}`);
         break;
       }
     }
@@ -169,6 +217,7 @@ async function checkStock(sku) {
     qty_available: qty,
     uom: uom
   };
+}
 }
 
 async function getNascoDealerTier(dealerName) {
