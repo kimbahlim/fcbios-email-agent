@@ -28,6 +28,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Animal tissue culture media → HiMedia (HIMEDIA_Animal_Tissue_Culture)
 - Ready prepared media plates → HiMedia RPM (HIMEDIA_RPM_Plates) or MeiZheng
 - Biological/chemical indicators, sterilization → UGAIYA FIRST → check stock → if UGAIYA out of stock, ALSO search MESALABS for ex-stock alternative and offer both options (UGAIYA on indent + MESALABS ex-stock if available).
+  REVERSE: If dealer specifically asks for a MESALABS/Raven product, quote it BUT also search UGAIYA for the equivalent product and offer it as a more price-competitive alternative.
   CRITICAL PRODUCT TYPE MATCHING: Chemical integrators and biological indicators are COMPLETELY DIFFERENT products. Never substitute one for the other.
   - Chemical Integrator (CI) = paper strip indicator. MESALABS equivalents: CI-SSW (Class 5), CI-OK (pass/fail). SKU starts with "CI-"
   - Biological Indicator (BI) = spore vial/ampoule. MESALABS equivalents: EZTEST products. SKU starts with "EZ"

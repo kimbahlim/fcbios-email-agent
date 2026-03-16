@@ -189,11 +189,13 @@ async function getNascoDealerTier(dealerName) {
 
 async function getLeadTime(brand) {
   const rows = await fetchSheet('LEAD_TIMES');
-  const brandLC = brand.toLowerCase();
+  const brandLC = brand.toLowerCase().replace(/[^a-z0-9]/g, '');
 
   const match = rows.find(row => {
     const b = (row['Brand'] || row['brand'] || row['BRAND'] || '').toLowerCase();
-    return b.includes(brandLC) || brandLC.includes(b);
+    const bClean = b.replace(/[^a-z0-9]/g, '');
+    return bClean.includes(brandLC) || brandLC.includes(bClean) || 
+           b.includes(brand.toLowerCase()) || brand.toLowerCase().includes(b);
   });
 
   if (!match) return { found: false, brand };
