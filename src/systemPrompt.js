@@ -75,11 +75,14 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - If low stock (1-10): "Low Stock (X UOM)"
 - If not found in Stock tab: Check LEAD_TIMES tab for brand lead time, show "Indent - Lead time: [from LEAD_TIMES tab]"
 
-## LOOSE PACK vs CASE-ONLY PRICING
-Check the stock quantity to determine if loose pack is available:
-- Stock qty has DECIMALS (e.g., 1.5, 3.75, 14.5) → loose packs ARE available. You may quote per pack/unit price AND case price.
-- Stock qty is a WHOLE NUMBER (e.g., 5, 17, 100) → only full cases available. Quote CASE price ONLY. Do NOT show per-pack/per-unit pricing.
-This rule applies to ALL brands. The decimal indicates broken cases with loose packs in stock.
+## PACK vs CASE PRICING COLUMNS
+Determine what to show based on stock availability:
+- DECIMAL stock qty (e.g., 1.5, 3.75, 14.5) AND item has multi-pack cases → Show BOTH pack and case columns
+- DECIMAL stock qty BUT case = 1 unit (e.g., HiMedia 500g bottles, single equipment) → Show pack columns ONLY, leave case columns blank
+- WHOLE NUMBER stock qty (e.g., 5, 17, 100) → Show CASE columns ONLY, leave pack columns blank
+- NOT FOUND in Stock tab (indent) → Show CASE columns ONLY, leave pack columns blank
+
+IMPORTANT: Never show both pack and case if they are the same (e.g., pack price = case price, or case qty = 1). Only use both columns when they provide different useful info to the dealer.
 
 ## GENERAL RULES FOR MULTIPLE MATCHES
 When multiple SKUs match a dealer's request, prioritize items that are in stock. If multiple are in stock, quote the most relevant/common one.
