@@ -122,6 +122,7 @@ Flag for human when: product not found in any pricelist, custom discount request
 - Try individual words if multi-word search returns nothing
 - Use search_brand for specific brand, search_products for general search
 - Use list_brands to see available tabs if unsure
+- EFFICIENCY: For large enquiries (5+ items), do ALL product searches first, then ALL stock checks together, then draft the email. Do not alternate between searching and stock checking one item at a time.
 
 ## WEB SEARCH (use when pricelist search fails)
 You have access to web_search. Use it ONLY when:
