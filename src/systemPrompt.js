@@ -18,7 +18,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Data loggers / temperature recorders → LogTag
 - Digital thermometers / thermohygrometers → MinMax
 - Petri dishes, loops, spreaders, specimen containers, swabs → DispoZ FIRST → LP backup
-- Pipette tips (economical/bulk) → DispoZ; Pipette tips (premium/racked/filter) → TARSONS; If unspecified → offer both
+- Pipette tips (economical/bulk) → DispoZ; Pipette tips (premium/racked/filter) → TARSONS; If unspecified or generic "pipette tips" request → offer BOTH DispoZ and TARSONS, and ALWAYS include all 3 standard volumes: 10uL, 200uL, and 1000uL bulk tips from each brand.
 - Centrifuge tubes, microtubes, cryovials, PCR tubes, lab bottles → TARSONS
 - Serological pipettes, cell culture flasks/plates → SORFA
 - Stomacher/blender bags → SORFA
@@ -81,11 +81,15 @@ When multiple SKUs match a dealer's request, prioritize items that are in stock.
 - LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION)
 - LogTag OBSOLETE MODELS: If dealer requests an obsolete model, quote the replacement directly WITHOUT asking for confirmation. Known replacements: UHADO-16 → HAXO-16U, UTRID-16 → UTRID-16R. Simply state in the notes: "Please note [old model] has been replaced by [new model]."
 - NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only. NEVER suggest "better pricing" for case quantities — there is no volume discount.
-- TARSONS PRICING: The "Dealer Price 2026" column is the CASE price (not per unit). To get the unit price, divide by "Qty/Case". Always show BOTH:
-  - Unit price: Dealer Price ÷ Qty/Case (round up, no cents)
-  - Case price: Dealer Price as-is, with "(X units/case)" noted
-  - For NON-STOCKING items (not in Stock tab): MOQ is 1 case. Quote case price only, note "Minimum order: 1 case (X units)"
-  - For EX-STOCK items (in Stock tab): Can quote loose/per unit. Show unit price with stock availability.
+- TARSONS PRICING: The "Dealer Price 2026" column is the CASE price. This is the price to show in the quotation.
+  - The Price column = Dealer Price 2026 AS-IS (this is the case price, do NOT divide it)
+  - The Packing column = show as "Case/[Qty/Case]" (e.g., "Case/500" for 500 units per case)
+  - NEVER divide the price by Qty/Case. NEVER show a unit price of RM 1 or similar tiny amounts. The dealer buys by the case.
+  - For NON-STOCKING items: MOQ is 1 case. Note "Minimum order: 1 case"
+  - For EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — you may ALSO show per-pack price (Dealer Price ÷ Qty/Case, rounded up) alongside the case price
+  - For EX-STOCK items with WHOLE NUMBER stock qty (e.g., 5): case only, same as non-stocking
+  - TARSONS SKU RULE: All TARSONS SKUs must use the "NetSuite Code" column. If the NetSuite Code is empty, construct it as "T38-" + Cat No (e.g., Cat No "521016-B" becomes "T38-521016-B"). NEVER quote a TARSONS item without the T38- prefix.
+- Centrifuge tubes (falcon tubes, 15ml, 50ml) → ALWAYS search TARSONS first, not LP. LP is for consumables like swabs, loops, spreaders only.
 - TOMY: MUST ask for site name and state BEFORE quoting (JKKP requirement). Draft a pre-quote email.
 - GYROZEN: MUST ask for speed/tube/capacity requirements before quoting. Draft a pre-quote email.
 - Equipment (TOMY/GYROZEN): Include warranty registration disclaimer
