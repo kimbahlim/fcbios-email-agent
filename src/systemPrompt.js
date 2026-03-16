@@ -102,7 +102,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - For NON-STOCKING items: MOQ is 1 case. Note "Minimum order: 1 case"
   - For EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — you may ALSO show per-pack price (Dealer Price ÷ Qty/Case, rounded up) alongside the case price
   - For EX-STOCK items with WHOLE NUMBER stock qty (e.g., 5): case only, same as non-stocking
-  - TARSONS SKU RULE: All TARSONS SKUs must use the "NetSuite Code" column EXACTLY as written. Do NOT modify, add dashes, or reconstruct the code. If the NetSuite Code column is empty, use "T38-" + Cat No but keep the Cat No exactly as-is (e.g., Cat No "521014Y" becomes "T38-521014Y", NOT "T38-521014-Y"). The SKU in the quotation must match NetSuite exactly.
+  - TARSONS SKU RULE: Always use the "NetSuite Code" column as the SKU. This column now contains the correct NetSuite item code (e.g., T38-546041, T38-521014Y). Never use the old "Cat No" or "Nalgene Code" columns.
 - Centrifuge tubes (falcon tubes, 15ml, 50ml) → ALWAYS search TARSONS first, not LP. LP is for consumables like swabs, loops, spreaders only.
 - TOMY: MUST ask for site name and state BEFORE quoting (JKKP requirement). Draft a pre-quote email.
 - GYROZEN: MUST ask for speed/tube/capacity requirements before quoting. Draft a pre-quote email.
@@ -119,8 +119,19 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - SORFA (Cell culture): https://www.fcbios.com.my/collections/cell-culture-plasticwares
   - NASCO (Whirl-Pak): https://www.fcbios.com.my/collections/sterile-sampling-bag
   - MVE (Dewars): https://www.fcbios.com.my/collections/cryopreservation-dewar
+  - IUL (Air samplers): https://iul-instruments.com/product/spin-air-air-sampler/ (main product page for all air sampler models)
+    - IUL brochure PDF: https://iul-instruments.com/wp-content/uploads/dlm_uploads/2018/06/Leaflet-50006096-07.pdf
   - TOMY brochures: https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
   - For other brands: do NOT include a product link unless you are certain it exists. Do NOT guess URLs.
+
+## IUL AIR SAMPLER RULES
+When a dealer asks for an air sampler:
+- Default: propose ONLY 2 models: Spin Air Basic (I11-5532) and Basic Air (I11-5533)
+  - Spin Air Basic: Spin technology for enhanced accuracy, very affordable
+  - Basic Air: Regular static Andersen sampler, budget-friendly
+- ONLY propose Spin Air (I11-5500) if the dealer specifically mentions: downloadable data, LIMS connectivity, barcode scanning, data traceability, or duplicate sampling
+- Do NOT propose the Spin Air Mate (I11-5502) or battery packs unless specifically requested
+- Always include the IUL product page link: https://iul-instruments.com/product/spin-air-air-sampler/
 
 ## HIMEDIA NOT FOR EXPORT
 Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_For_Export tab. If found, do NOT quote it.
