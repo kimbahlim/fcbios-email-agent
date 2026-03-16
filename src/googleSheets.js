@@ -132,13 +132,39 @@ async function checkStock(sku) {
 
   if (!match) return { found: false, sku };
 
+  // Find the numeric availability value - check multiple possible column names and find the one with a number
+  const availKeys = ['AVAILABLE', 'Available', 'available', 'QUANTITY AVAILABLE', 'Qty Available'];
+  const uomKeys = ['PRIMARY STOCK UNIT', 'Primary Stock Unit', 'UOM', 'Uom'];
+  
+  let qty = '0';
+  let uom = 'unit';
+  
+  // First try exact column name match
+  for (const key of availKeys) {
+    if (match[key] && !isNaN(parseFloat(match[key]))) { qty = match[key]; break; }
+  }
+  for (const key of uomKeys) {
+    if (match[key] && match[key].toString().trim()) { uom = match[key]; break; }
+  }
+  
+  // If qty is still 0 or non-numeric, scan all values to find a number that looks like quantity
+  if (qty === '0' || isNaN(parseFloat(qty))) {
+    const values = Object.entries(match);
+    for (const [key, val] of values) {
+      if (val && !isNaN(parseFloat(val)) && parseFloat(val) > 0 && !key.toLowerCase().includes('name') && !key.toLowerCase().includes('description')) {
+        qty = val;
+        break;
+      }
+    }
+  }
+
   return {
     found: true,
     sku: match['NAME'] || match['name'] || match['Name'] || sku,
-    description: match['DISPLAY NAME'] || match['Display Name'] || '',
+    description: match['DISPLAY NAME'] || match['Display Name'] || match['DESCRIPTION'] || '',
     brand: match['BRAND'] || match['Brand'] || '',
-    qty_available: match['AVAILABLE'] || match['Available'] || '0',
-    uom: match['PRIMARY STOCK UNIT'] || match['Primary Stock Unit'] || 'unit'
+    qty_available: qty,
+    uom: uom
   };
 }
 

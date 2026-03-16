@@ -144,8 +144,8 @@ Process this email according to your instructions. Search the pricelists, check 
   let messages = [{ role: 'user', content: userMessage }];
   let draftResult = null;
 
-  for (let i = 0; i < 15; i++) {
-    console.log(`[AGENT] Loop ${i + 1}/15`);
+  for (let i = 0; i < 25; i++) {
+    console.log(`[AGENT] Loop ${i + 1}/25`);
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',
