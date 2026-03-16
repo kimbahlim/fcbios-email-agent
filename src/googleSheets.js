@@ -218,7 +218,6 @@ async function checkStock(sku) {
     uom: uom
   };
 }
-}
 
 async function getNascoDealerTier(dealerName) {
   const rows = await fetchSheet('Nasco_Tiers');
