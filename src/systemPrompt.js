@@ -77,6 +77,13 @@ This rule applies to ALL brands. The decimal indicates broken cases with loose p
 ## GENERAL RULES FOR MULTIPLE MATCHES
 When multiple SKUs match a dealer's request, prioritize items that are in stock. If multiple are in stock, quote the most relevant/common one.
 
+## EX-STOCK PRIORITY RULE (CRITICAL)
+When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes", "petri dishes") without specifying an exact SKU:
+- ALWAYS check stock FIRST before deciding which items to offer
+- ONLY offer items that are IN STOCK (ex-stock). Do NOT offer indent items when ex-stock alternatives exist.
+- Only show indent items if: (a) nothing is in stock for that product type, OR (b) the dealer specifically requested that exact product/SKU
+- This applies to ALL brands. The dealer wants what's available now, not what takes 8-12 weeks.
+
 ## BRAND-SPECIFIC RULES
 - LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION)
 - LogTag OBSOLETE MODELS: If dealer requests an obsolete model, quote the replacement directly WITHOUT asking for confirmation. Known replacements: UHADO-16 → HAXO-16U, UTRID-16 → UTRID-16R. Simply state in the notes: "Please note [old model] has been replaced by [new model]."
