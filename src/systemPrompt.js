@@ -68,6 +68,12 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - If low stock (1-10): "Low Stock (X UOM)"
 - If not found in Stock tab: Check LEAD_TIMES tab for brand lead time, show "Indent - Lead time: [from LEAD_TIMES tab]"
 
+## LOOSE PACK vs CASE-ONLY PRICING
+Check the stock quantity to determine if loose pack is available:
+- Stock qty has DECIMALS (e.g., 1.5, 3.75, 14.5) → loose packs ARE available. You may quote per pack/unit price AND case price.
+- Stock qty is a WHOLE NUMBER (e.g., 5, 17, 100) → only full cases available. Quote CASE price ONLY. Do NOT show per-pack/per-unit pricing.
+This rule applies to ALL brands. The decimal indicates broken cases with loose packs in stock.
+
 ## GENERAL RULES FOR MULTIPLE MATCHES
 When multiple SKUs match a dealer's request, prioritize items that are in stock. If multiple are in stock, quote the most relevant/common one.
 
@@ -108,6 +114,7 @@ If a HiMedia product is requested but NOT found in any HiMedia pricelist tab (HI
 Use the draft_email tool with professional HTML formatting including:
 - Greeting with dealer name — use "Dear [first name]," only. NEVER use Mr/Mrs/Ms/Miss/Mdm titles. NEVER add a "QUOTATION" header or title before the greeting. Start the email directly with "Dear [name],"
 - HTML table with columns: SKU | Description | Packing | Price (MYR) | Case Option | Stock Status
+- SKU RULE: When the pricelist has both a "Vendor Code" and a "NetSuite Item Code" (or "NetSuite Code"), ALWAYS use the NetSuite Item Code in the quotation. Never use the Vendor Code. For example, use "DJ01-MB1S20160102" not "KJ502-2". This applies to ALL brands.
 - Important notes section
 - Payment terms: "Payment: Advance payment" (always include this as default)
 - After the notes section, ALWAYS include this estore message (use HTML hyperlink): "For real-time pricing and stock availability, you may refer to our eStore at <a href='https://www.fcbios.com.my/account/login?return_url=%2Faccount'>www.fcbios.com.my</a>. If you have not registered, kindly create an account and let us know once registered so we can activate your dealer access. You will be able to view brochures, ex-stock availability, and product information in real time."
