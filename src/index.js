@@ -1,7 +1,6 @@
 const express = require('express');
 const { runAgent } = require('./agent');
 const {
-  getAgentLabelId,
   getAgentLabeledMessages,
   getFullMessage,
   getThreadMessages,
@@ -39,6 +38,58 @@ app.post('/trigger', async (req, res) => {
   console.log('[MANUAL] Trigger received');
   res.json({ status: 'triggered' });
   await pollForEmails();
+});
+
+// Debug endpoint - checks what the token can actually do
+app.get('/debug/gmail', async (req, res) => {
+  const { getAccessToken } = require('./gmail');
+  const results = {};
+  
+  try {
+    // 1. Get access token
+    const token = await getAccessToken();
+    results.token = 'OK - got access token';
+    
+    // 2. Check token info (shows actual scopes)
+    const tokenInfo = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${token}`);
+    const tokenData = await tokenInfo.json();
+    results.token_scopes = tokenData.scope || tokenData;
+    results.token_email = tokenData.email;
+    results.token_expires_in = tokenData.expires_in;
+    
+    // 3. Try listing labels
+    try {
+      const labelsRes = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/labels', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const labelsData = await labelsRes.json();
+      results.list_labels = labelsRes.ok ? `OK - ${labelsData.labels?.length} labels` : `FAILED ${labelsRes.status}: ${JSON.stringify(labelsData).substring(0, 200)}`;
+    } catch (e) { results.list_labels = `ERROR: ${e.message}`; }
+    
+    // 4. Try searching messages
+    try {
+      const msgRes = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages?q=label:agent&maxResults=1', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const msgData = await msgRes.json();
+      results.search_messages = msgRes.ok ? `OK - ${msgData.messages?.length || 0} messages` : `FAILED ${msgRes.status}: ${JSON.stringify(msgData).substring(0, 200)}`;
+    } catch (e) { results.search_messages = `ERROR: ${e.message}`; }
+    
+    // 5. Try creating draft (existing scope)
+    try {
+      const draftRes = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/drafts', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const draftData = await draftRes.json();
+      results.list_drafts = draftRes.ok ? `OK - ${draftData.drafts?.length || 0} drafts` : `FAILED ${draftRes.status}: ${JSON.stringify(draftData).substring(0, 200)}`;
+    } catch (e) { results.list_drafts = `ERROR: ${e.message}`; }
+    
+  } catch (e) {
+    results.error = e.message;
+  }
+  
+  console.log('[DEBUG] Gmail results:', JSON.stringify(results, null, 2));
+  res.json(results);
 });
 
 // ============================================================
@@ -230,12 +281,8 @@ app.listen(PORT, async () => {
 
   // Verify Gmail access on startup
   try {
-    const labelId = await getAgentLabelId();
-    if (labelId) {
-      console.log(`[STARTUP] Gmail connected. Agent label found: ${labelId}`);
-    } else {
-      console.error('[STARTUP] WARNING: "Agent" label not found in Gmail!');
-    }
+    const messages = await getAgentLabeledMessages();
+    console.log(`[STARTUP] Gmail connected. Found ${messages.length} messages with "Agent" label`);
   } catch (err) {
     console.error('[STARTUP] Gmail connection failed:', err.message);
     console.error('[STARTUP] Check your GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN');

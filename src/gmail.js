@@ -40,28 +40,10 @@ async function gmailApi(path, options = {}) {
 // POLLING: Find new emails with "Agent" label
 // ============================================================
 
-let agentLabelId = null;
-
-async function getAgentLabelId() {
-  if (agentLabelId) return agentLabelId;
-  
-  const data = await gmailApi('/labels');
-  const label = data.labels.find(l => l.name.toLowerCase() === 'agent');
-  if (!label) {
-    console.error('[GMAIL] "Agent" label not found! Available labels:', data.labels.map(l => l.name).join(', '));
-    return null;
-  }
-  agentLabelId = label.id;
-  console.log(`[GMAIL] Agent label ID: ${agentLabelId}`);
-  return agentLabelId;
-}
-
 async function getAgentLabeledMessages() {
-  const labelId = await getAgentLabelId();
-  if (!labelId) return [];
-
   try {
-    const data = await gmailApi(`/messages?labelIds=${labelId}&maxResults=10`);
+    // Use search query instead of label ID lookup — avoids needing ListLabels permission
+    const data = await gmailApi(`/messages?q=label:agent&maxResults=10`);
     return data.messages || [];
   } catch (err) {
     console.error('[GMAIL] Error fetching messages:', err.message);
@@ -271,7 +253,6 @@ async function createGmailDraft({ to, subject, htmlBody, messageId, threadId }) 
 
 module.exports = {
   getAccessToken,
-  getAgentLabelId,
   getAgentLabeledMessages,
   getFullMessage,
   getThreadMessages,
