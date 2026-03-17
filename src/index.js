@@ -204,23 +204,30 @@ async function pollForEmails() {
       console.log(`[BODY] ${(latestMsg.body || '').substring(0, 200)}...`);
       console.log(`[ATTACHMENTS] ${latestMsg.attachments.length} found`);
 
-      // Skip internal emails and auto-replies
-      const fromEmail = latestMsg.from_email.toLowerCase().trim();
-      const userEmail = (process.env.GMAIL_USER_EMAIL || '').toLowerCase().trim();
-      
-      // Skip emails FROM ourselves (sent replies)
-      if (fromEmail === userEmail || fromEmail.includes('dealer_support') || fromEmail.includes('dealer-support') || fromEmail.includes('dealersupport') || fromEmail.includes('fcbios')) {
-        console.log(`[SKIP] Email from self/internal (${fromEmail}), skipping`);
+      // Skip auto-replies
+      const subjectLower = (latestMsg.subject || '').toLowerCase();
+      if (subjectLower.includes('auto-reply') || subjectLower.includes('automatic reply') || subjectLower.includes('out of office')) {
+        console.log('[SKIP] Auto-reply, skipping');
         processedMessages.add(latestMsg.id);
         continue;
       }
 
-      // Skip if the email body contains our signature (it's our own sent reply)
+      // Skip our OWN SENT REPLIES (not self-forwarded enquiries)
+      // The key difference: sent replies contain our quotation signature, self-forwarded enquiries don't
       const bodyLower = (latestMsg.body || '').toLowerCase();
-      if (bodyLower.includes('dealer support channel') && bodyLower.includes('fc bios sdn bhd') && bodyLower.includes('019-2663675')) {
-        console.log('[SKIP] Email contains our signature, likely our sent reply');
+      const hasOurSignature = bodyLower.includes('dealer support channel') && bodyLower.includes('fc bios sdn bhd') && bodyLower.includes('019-2663675');
+      const fromEmail = latestMsg.from_email.toLowerCase().trim();
+      const userEmail = (process.env.GMAIL_USER_EMAIL || '').toLowerCase().trim();
+      const isFromSelf = (fromEmail === userEmail || fromEmail.includes('dealer_support') || fromEmail.includes('dealer-support'));
+      
+      if (isFromSelf && hasOurSignature) {
+        console.log(`[SKIP] Sent reply from self with signature, skipping`);
         processedMessages.add(latestMsg.id);
         continue;
+      }
+      
+      if (isFromSelf) {
+        console.log(`[SELF-FORWARD] Email from self but no signature — treating as forwarded dealer enquiry`);
       }
 
       const subject = (latestMsg.subject || '').toLowerCase();
