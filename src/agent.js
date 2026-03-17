@@ -130,7 +130,7 @@ async function processToolCall(toolName, toolInput) {
 async function runAgent(emailData) {
   const systemPrompt = getSystemPrompt();
 
-  const userMessage = `New dealer email received:
+  const textContent = `New dealer email received:
 
 FROM: ${emailData.from_name} <${emailData.from_email}>
 SUBJECT: ${emailData.subject}
@@ -139,9 +139,21 @@ EMAIL BODY:
 ${emailData.body}
 
 ---
-Process this email according to your instructions. Search the pricelists, check stock, apply pricing rules, and draft the appropriate response.`;
+Process this email according to your instructions. Search the pricelists, check stock, apply pricing rules, and draft the appropriate response.${emailData.visionContent && emailData.visionContent.length > 0 ? '\n\nThe email includes image/PDF attachments shown below. Extract any product requests, SKUs, quantities, or relevant information from the attachments and include them in your quotation.' : ''}`;
 
-  let messages = [{ role: 'user', content: userMessage }];
+  // Build user message content - text first, then any vision attachments
+  let userContent;
+  if (emailData.visionContent && emailData.visionContent.length > 0) {
+    userContent = [
+      { type: 'text', text: textContent },
+      ...emailData.visionContent
+    ];
+    console.log(`[AGENT] Processing email with ${emailData.visionContent.length} attachment(s)`);
+  } else {
+    userContent = textContent;
+  }
+
+  let messages = [{ role: 'user', content: userContent }];
   let draftResult = null;
 
   for (let i = 0; i < 40; i++) {
