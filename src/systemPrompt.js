@@ -135,6 +135,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - IUL (Air samplers): https://iul-instruments.com/product/spin-air-air-sampler/ (main product page for all air sampler models)
     - IUL brochure PDF: https://iul-instruments.com/wp-content/uploads/dlm_uploads/2018/06/Leaflet-50006096-07.pdf
   - TOMY brochures: https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
+  - HiMedia: When dealer requests spec sheets, COA, MSDS, or technical documents, include this note: "For HiMedia technical sheets, COA, and MSDS, please download at: https://www.himedialabs.com/us/coasdstds/"
   - For other brands: do NOT include a product link unless you are certain it exists. Do NOT guess URLs.
 
 ## IUL AIR SAMPLER RULES
