@@ -43,7 +43,8 @@ async function gmailApi(path, options = {}) {
 async function getAgentLabeledMessages() {
   try {
     // Use search query instead of label ID lookup — avoids needing ListLabels permission
-    const data = await gmailApi(`/messages?q=label:agent&maxResults=10`);
+    // Only fetch Agent-labeled emails from the last 2 hours to avoid reprocessing old emails on restart
+    const data = await gmailApi(`/messages?q=label:agent+newer_than:2h&maxResults=10`);
     return data.messages || [];
   } catch (err) {
     console.error('[GMAIL] Error fetching messages:', err.message);
