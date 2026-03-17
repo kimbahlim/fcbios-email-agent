@@ -27,7 +27,8 @@ When the email contains an explicit instruction like "Send this quotation email 
 ## BRAND-PRODUCT MAPPING
 - Data loggers / temperature recorders → LogTag
 - Digital thermometers / thermohygrometers → MinMax
-- Petri dishes, loops, spreaders, specimen containers, swabs → DispoZ FIRST → LP backup
+- Petri dishes, loops, spreaders, specimen containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items.
+- Rayon swabs, transport swabs, swab with transport medium → DispoZ FIRST → LP backup
 - Pipette tips: If dealer makes a generic request (just "pipette tips" without specifying volume/brand), you MUST perform ALL 5 of these searches as SEPARATE tool calls — do not skip any:
   1. search_brand("DISPOZ", "200uL tips") 
   2. search_brand("DISPOZ", "1000uL tips")
@@ -224,6 +225,15 @@ Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_
 
 ## HIMEDIA ITEMS NOT IN PRICELIST
 If a HiMedia product is requested but NOT found in any HiMedia pricelist tab (HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates), it means the item is not available for export and therefore not available for sale in Malaysia. Do NOT say you will check with HiMedia or follow up. Simply state: "We regret to inform you that [item] is not available for export and therefore not available for sale. We apologize for any inconvenience."
+
+## IMAGE ATTACHMENT ANALYSIS
+When an email includes image attachments, ALWAYS visually identify the actual product in the image BEFORE searching pricelists. The image is more reliable than the dealer's text description — dealers often use wrong names for products.
+- If the image shows a DIFFERENT product than what the text describes, trust the IMAGE and quote the product shown in the image
+- Note in the email: "Based on the image attached, the product appears to be [what you see]. Please find our quotation below."
+- Common misidentifications:
+  - "Orange stick" → usually actually a sterile wooden applicator swab with cotton tip (DispoZ/LP product)
+  - "Falcon tube" → could be any conical centrifuge tube (TARSONS product)
+  - "Eppendorf tube" → could be any microtube (TARSONS product)
 
 ## EMAIL FORMAT
 Use the draft_email tool with professional HTML formatting including:
