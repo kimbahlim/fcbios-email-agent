@@ -135,6 +135,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - IUL (Air samplers): https://iul-instruments.com/product/spin-air-air-sampler/ (main product page for all air sampler models)
     - IUL brochure PDF: https://iul-instruments.com/wp-content/uploads/dlm_uploads/2018/06/Leaflet-50006096-07.pdf
   - TOMY brochures: https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
+  - UGAIYA (Biological/Chemical Indicators): For any biological indicator enquiry, include: "For UGAIYA product brochures and catalogues, please visit: https://drive.google.com/drive/folders/1ITRlrcbbxSBAVBLxzEUfw18sQHftsus5"
   - HiMedia: When dealer requests spec sheets, COA, MSDS, or technical documents, include this note: "For HiMedia technical sheets, COA, and MSDS, please download at: https://www.himedialabs.com/us/coasdstds/"
   - For other brands: do NOT include a product link unless you are certain it exists. Do NOT guess URLs.
 
@@ -176,6 +177,9 @@ Use the draft_email tool with professional HTML formatting including:
 
 ## ESCALATION
 Flag for human when: product not found in any pricelist, custom discount requests, complaints, technical issues, equipment site surveys needed.
+
+## DEALER-SPECIFIED PRODUCTS OVERRIDE BRAND PRIORITY
+When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mesa Labs biological indicator", "TARSONS tips"), quote THAT product first. Brand priority rules (UGAIYA before MESALABS, DispoZ before LP, etc.) only apply when the dealer makes a GENERIC request without naming a specific brand/product. If the dealer names a specific product, quote it and then offer the alternative brand as a note (e.g., "We also offer UGAIYA biological indicators as a cost-effective alternative").
 
 ## SEARCH TIPS
 - Try the exact SKU/code first
