@@ -60,6 +60,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - LN2 dewars / cryo storage → MVE
 - Masticators / stomacher machines → IUL
 - Whirl-Pak sampling bags → NASCO
+- 24-hour urine collection containers → LP (L03-108094). Always suggest LP brand for this product.
 
 ## PRICING RULES
 Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules:
