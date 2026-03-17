@@ -17,8 +17,10 @@ app.use(express.json());
 // ============================================================
 
 const processedMessages = new Set();
+const processedThreads = new Map(); // threadId → timestamp of when we processed it
 let isProcessing = false;
 const POLL_INTERVAL = 30 * 1000; // 30 seconds
+const THREAD_COOLDOWN = 10 * 60 * 1000; // 10 minutes — ignore new messages in same thread for 10 min after processing
 
 // ============================================================
 // HEALTH CHECK
@@ -184,7 +186,15 @@ async function pollForEmails() {
     // Process each thread's latest unprocessed message
     for (const [threadId, latestMsg] of threadMap) {
       if (processedMessages.has(latestMsg.id)) {
-        continue; // Already processed
+        continue; // Already processed this exact message
+      }
+
+      // THREAD COOLDOWN: Skip if we recently processed this thread (prevents double drafts)
+      const lastProcessedTime = processedThreads.get(threadId);
+      if (lastProcessedTime && (Date.now() - lastProcessedTime) < THREAD_COOLDOWN) {
+        console.log(`[SKIP] Thread ${threadId} in cooldown (processed ${Math.round((Date.now() - lastProcessedTime) / 1000)}s ago), skipping msg ${latestMsg.id}`);
+        processedMessages.add(latestMsg.id);
+        continue;
       }
 
       console.log('============================================================');
@@ -199,8 +209,8 @@ async function pollForEmails() {
       const userEmail = (process.env.GMAIL_USER_EMAIL || '').toLowerCase().trim();
       
       // Skip emails FROM ourselves (sent replies)
-      if (fromEmail === userEmail || fromEmail.includes('dealer_support') || fromEmail.includes('dealer-support') || fromEmail.includes('dealersupport')) {
-        console.log(`[SKIP] Email from self (${fromEmail}), skipping`);
+      if (fromEmail === userEmail || fromEmail.includes('dealer_support') || fromEmail.includes('dealer-support') || fromEmail.includes('dealersupport') || fromEmail.includes('fcbios')) {
+        console.log(`[SKIP] Email from self/internal (${fromEmail}), skipping`);
         processedMessages.add(latestMsg.id);
         continue;
       }
@@ -262,6 +272,8 @@ async function pollForEmails() {
 
         // Mark as processed regardless of outcome
         processedMessages.add(latestMsg.id);
+        processedThreads.set(latestMsg.thread_id, Date.now());
+        console.log(`[THREAD] Cooldown set for thread ${latestMsg.thread_id} (10 min)`)
 
       } catch (error) {
         console.error('[AGENT ERROR]', error.message);
