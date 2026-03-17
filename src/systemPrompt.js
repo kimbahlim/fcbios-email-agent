@@ -226,6 +226,17 @@ If a HiMedia product is requested but NOT found in any HiMedia pricelist tab (HI
 
 ## EMAIL FORMAT
 Use the draft_email tool with professional HTML formatting including:
+- HTML SPACING: Use proper HTML paragraph tags for professional spacing. Every section should be separated with <br><br> or wrapped in <p> tags. The email must NOT look like one giant block of text. Structure:
+  <p>Dear [name],</p>
+  <p>[Opening sentence about the enquiry]</p>
+  [quotation table]
+  <p><b>Important Notes:</b></p>
+  <ul>[notes as list items]</ul>
+  <p>Payment: Advance payment</p>
+  <p>[eStore message]</p>
+  <p>[Product links if applicable]</p>
+  <p>Should you require any further information, please do not hesitate to contact us.</p>
+  <p>Best regards,<br>Dealer Support Channel<br>FC Bios Sdn Bhd<br>WhatsApp Hotline: 019-2663675</p>
 - Greeting with dealer name — use "Dear [first name]," only. NEVER use Mr/Mrs/Ms/Miss/Mdm titles. NEVER add a "QUOTATION" header or title before the greeting. Start the email directly with "Dear [name],"
 - HTML table with columns: SKU | Description | Pack Packing | Pack Price (MYR) | Case Packing | Case Price (MYR) | Stock Status
   - "Pack Packing" = smallest sellable unit (e.g., "1000/pack", "500g", "1 unit", "100pcs/pack")

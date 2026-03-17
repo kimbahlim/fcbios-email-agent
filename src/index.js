@@ -195,10 +195,20 @@ async function pollForEmails() {
       console.log(`[ATTACHMENTS] ${latestMsg.attachments.length} found`);
 
       // Skip internal emails and auto-replies
-      const fromEmail = latestMsg.from_email.toLowerCase();
-      const userEmail = (process.env.GMAIL_USER_EMAIL || '').toLowerCase();
-      if (fromEmail === userEmail) {
-        console.log('[SKIP] Email from self, skipping');
+      const fromEmail = latestMsg.from_email.toLowerCase().trim();
+      const userEmail = (process.env.GMAIL_USER_EMAIL || '').toLowerCase().trim();
+      
+      // Skip emails FROM ourselves (sent replies)
+      if (fromEmail === userEmail || fromEmail.includes('dealer_support') || fromEmail.includes('dealer-support') || fromEmail.includes('dealersupport')) {
+        console.log(`[SKIP] Email from self (${fromEmail}), skipping`);
+        processedMessages.add(latestMsg.id);
+        continue;
+      }
+
+      // Skip if the email body contains our signature (it's our own sent reply)
+      const bodyLower = (latestMsg.body || '').toLowerCase();
+      if (bodyLower.includes('dealer support channel') && bodyLower.includes('fc bios sdn bhd') && bodyLower.includes('019-2663675')) {
+        console.log('[SKIP] Email contains our signature, likely our sent reply');
         processedMessages.add(latestMsg.id);
         continue;
       }
