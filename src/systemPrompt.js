@@ -229,6 +229,10 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
       Product page: https://mvebio.com/our-products/life-science-aluminum/mve-cryosystem-series/
     - CryoShipper / CT-50 / CT-250:
       Product page: https://mvebio.com/our-products/life-science-aluminum/mve-vapor-shipper-series/
+    - Research Dewars (RD-0.5, RD-1, RD-1W, RD-2, RD-3, RD-6):
+      Product page: https://www.fcbios.com.my/products/research-dewars-series
+    - Accessories (Rollerbases, CryoTipper, Cryo Gloves, Measuring Sticks, Phase Separators):
+      Accessories catalog: https://mvebio.com/wp-content/uploads/sites/4/2024/04/ML-000002.pdf
     - Full MVE Asia catalog PDF: https://mvebio.com/wp-content/uploads/sites/4/2025/07/ML-000043.pdf
     - Full MVE Animal Health catalog PDF: https://mvebio.com/wp-content/uploads/sites/4/2024/04/ML-000020.pdf
     For MVE quotations, include the FC-BIOS collection link, the relevant series product page, and spec sheet/catalog PDF where available.
