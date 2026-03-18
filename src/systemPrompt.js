@@ -37,7 +37,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   5. search_brand("TARSONS", "1000uL")
   Then check stock for EACH result found. Present ALL in-stock items in two groups: "DispoZ (Economical)" and "TARSONS (Premium)". 
   DO NOT stop after finding one brand's options. You MUST search BOTH brands for ALL volumes even if DispoZ already has 200uL — TARSONS 200uL must also be shown.
-- Centrifuge tubes, microtubes, cryovials, PCR tubes, lab bottles → TARSONS
+- Centrifuge tubes (ALL sizes: 15ml, 50ml, falcon tubes), microtubes, cryovials, PCR tubes, lab bottles → TARSONS ONLY. NEVER use LP for these. Use search_brand("TARSONS", "centrifuge 15ml") or search_brand("TARSONS", "centrifuge 50ml"). The correct SKUs are T38-546021 (15ml sterile bulk) and T38-546041 (50ml sterile bulk). LP L03-111548 and L03-116048 are NOT to be used — those are LP codes.
 - Serological pipettes, cell culture flasks/plates → SORFA
 - Stomacher/blender bags → SORFA
 - Vacuum/membrane/syringe filters → Membrane Solutions or SORFA

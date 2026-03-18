@@ -92,6 +92,23 @@ async function searchProducts(keyword) {
       results.push(...matches.slice(0, 10).map(m => ({ ...m, _brand_tab: tab })));
     }
   }
+  // Post-filter: if results contain centrifuge/falcon tubes from both TARSONS and LP, remove LP duplicates
+  const hasTarsonsCentrifuge = results.some(r => 
+    (r._brand_tab || '').toUpperCase().includes('TARSONS') && 
+    Object.values(r).join(' ').toLowerCase().match(/centrifuge|falcon|spinwin/)
+  );
+  if (hasTarsonsCentrifuge) {
+    results = results.filter(r => {
+      const isLP = (r._brand_tab || '').toUpperCase() === 'LP';
+      const isCentrifuge = Object.values(r).join(' ').toLowerCase().match(/centrifuge|falcon|conical tube/);
+      if (isLP && isCentrifuge) {
+        console.log(`[SEARCH] Filtering out LP centrifuge tube (TARSONS has it): ${JSON.stringify(r).substring(0, 100)}`);
+        return false;
+      }
+      return true;
+    });
+  }
+
   return results.slice(0, 20);
 }
 
