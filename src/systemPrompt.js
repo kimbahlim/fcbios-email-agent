@@ -199,7 +199,111 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - For EX-STOCK items with WHOLE NUMBER stock qty (e.g., 5): case only, same as non-stocking
   - TARSONS SKU RULE: Always use the "NetSuite Code" column as the SKU. This column now contains the correct NetSuite item code (e.g., T38-546041, T38-521014Y). Never use the old "Cat No" or "Nalgene Code" columns.
 - Centrifuge tubes (falcon tubes, 15ml, 50ml) → ALWAYS search TARSONS first, not LP. LP is for consumables like swabs, loops, spreaders only.
-- TOMY: MUST ask for site name and state BEFORE quoting (JKKP requirement). Draft a pre-quote email.
+- TOMY AUTOCLAVE QUOTING — COMPLETE INSTRUCTIONS:
+
+  ## STEP 1: PRE-QUOTE (always send this FIRST before quoting)
+  When a dealer asks for any TOMY autoclave (SX-500 or SX-700), ALWAYS send a pre-quote email FIRST. Do NOT quote pricing without site info.
+  
+  Pre-quote email template:
+  "Thank you for your enquiry on the TOMY [model] autoclave.
+  Before we can prepare your quotation, could you please provide the following:
+  - Site/company name: (where the autoclave will be installed)
+  - State: (location state)
+  This is required as our engineer will need to perform the JKKP compulsory safety pressure test on site during installation together with the JKKP officer.
+  Looking forward to hearing from you!"
+  
+  Include these links in the pre-quote:
+  - TOMY brochures: https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
+  - Do NOT include the eStore message in TOMY pre-quote emails.
+
+  ## STEP 2: FULL QUOTATION (after dealer provides site info)
+  Once dealer provides site name and state, build the full quotation using these prices:
+
+  ### SX-500 MANDATORY ITEMS (all must be included):
+  | SKU | Description | Price (MYR) |
+  | T01-SX-500 | SX-500 Autoclave 58L (2 baskets included FOC) | 22,969 |
+  | F07-ACA-315B | Additional Standard Basket (3rd basket for full capacity) | 721 |
+  | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
+  | INSTALLATION & COMMISSIONING | Installation & Commissioning (450 + MOB*) | 450 + MOB |
+  | SV-ITJKKP | JKKP Inspection (1,300 + MOB) | 1,300 + MOB |
+  | CALIBRATION | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
+  *MOB for Installation is WAIVED if JKKP is done on the same trip (default assumption). Only ONE MOB charge in the total.
+
+  ### SX-700 MANDATORY ITEMS (all must be included):
+  | SKU | Description | Price (MYR) |
+  | T01-SX-700 | SX-700 Autoclave 79L (2 baskets included FOC) | 36,050 |
+  | F07-ACA-700B | Additional Standard Basket (3rd basket for full capacity) | 933 |
+  | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
+  | INSTALLATION & COMMISSIONING | Installation & Commissioning (450 + MOB*) | 450 + MOB |
+  | SV-ITJKKP | JKKP Inspection (1,300 + MOB) | 1,300 + MOB |
+  | CALIBRATION | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
+
+  ### MOBILIZATION (MOB) FEES BY STATE (NO 3% increase — fixed charges):
+  KL/Klang Valley/Selangor: RM 100 | Negeri Sembilan: RM 160 | Melaka: RM 300 | Perak: RM 450
+  Pahang: RM 1,050 | Terengganu: RM 1,150 | Kelantan: RM 1,250 | Johor: RM 850
+  Langkawi: RM 900 | P. Pinang: RM 850 | Kedah: RM 1,050 | Perlis: RM 1,150
+  Sabah (KK, Labuan, Sandakan, Tawau): RM 1,500 | Labuan (combined with KK): RM 1,300
+  Sarawak (Kuching, Bintulu, Miri, Sibu): RM 1,500 | Sarawak (Limbang): RM 2,500
+
+  ### TOTAL CALCULATION:
+  Total = Autoclave price + Basket price + 450 (installation, MOB waived) + 1,300 + MOB (JKKP)
+  Example SX-500 KL: 22,969 + 721 + 450 + 1,300 + 100 = RM 25,540
+  Example SX-700 KL: 36,050 + 933 + 450 + 1,300 + 100 = RM 38,833
+
+  ### PRICING RULE: 3% increase applies ONLY to autoclave unit and accessories (items with F07/T01 prefix). Services (installation, JKKP, calibration, delivery, MOB) have NO increase — use prices as-is.
+
+  ### OPTIONAL ACCESSORIES — show as separate "Optional Accessories (Add-on)" table:
+  SX-500 accessories:
+  | F07-ACA-315B | Additional Standard Basket | 721 |
+  | F07-SBSS-325 | Basket Support Stand | 217 |
+  | F07-ACA-315T | Long Basket for Waste | 1,226 |
+  | T01-599907 | Printer Module (ships separately) | 9,682 |
+  | Delivery | Delivery charge (if required) | 250 |
+
+  SX-700 accessories:
+  | F07-ACA-700B | Additional Standard Basket | 933 |
+  | F07-SBSS-345 | Basket Support Stand | 217 |
+  | F07-ACA-700T | Long Basket for Waste | 1,339 |
+  | T01-599907 | Printer Module (ships separately) | 9,682 |
+  | Delivery | Delivery charge (if required) | 250 |
+
+  ### KEY FEATURES — include "Why TOMY?" section in every TOMY quotation:
+  - Made in Japan — superior build quality, 300+ satisfied users in Malaysia including major F&B, universities, and research institutions. DOSH/JKKP approved.
+  - Top-Open Lid Design — easy one-handed operation with foot pedal, mechanically-assisted lid opening/closing, perfect height for easy loading/unloading and cleaning
+  - Fast Cooling Down — built-in cooling fan saves up to 60 minutes cooling time and up to 45% power savings compared to competitors
+  - Compact Design — no side clearance needed for lid, can be installed side-by-side. SX-500 fits 3 stackable baskets, 8 bottles (500mL) per basket. SX-700 fits 3 stackable baskets, 11 bottles (500mL) per basket.
+  - 5 Sterilizing Courses — liquid sterilizing (prevents boiling), standard, sterilizing-warming (prevents culture media coagulation), heating-warming (dissolving media), and memory recall
+  - Safety Features — water level detector, lid interlock, pressure fine adjustment, auto-variable exhaust speed (6 levels), timer function
+
+  ### NOTES TO INCLUDE:
+  - 2 standard baskets included FOC with the autoclave
+  - Calibration on Pressure Gauge and Safety Valve is included as per JKKP requirements
+  - MOB for installation is waived as JKKP inspection is performed on the same trip
+  - Delivery is NOT included in the quotation total — add RM 250 if required
+  - Printer Module must be ordered with a separate shipment
+
+  ### PRODUCT LINKS — include ALL of these in every TOMY quotation:
+  - See the advantages of TOMY autoclave: https://www.youtube.com/watch?v=3KkahfffrOk
+  - FC-BIOS TOMY collection: https://www.fcbios.com.my/collections/tomy-autoclave
+  - Available Collateral (download from Google Drive): https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
+    List these documents:
+    - TOMY SX-Series Brochure — Product features and specifications
+    - TOMY Autoclave Product & Accessories Brochure — Complete accessory catalog
+    - Choosing The Right Autoclave — Selection guide for customers
+    - TOMY Autoclave Credentials — 300+ satisfied users reference list
+    - Electricity Saving & Increased Capacity Sheet — Power savings comparison
+
+  ### IQOQPQ — ONLY quote if dealer specifically requests. If IQOQPQ is ordered, MUST include Full Calibration (CAL-2).
+  IQOQPQ: RM 500 (SV-T01-AUTOCLAVE-IQOQPQ)
+  CAL-2 by region: Central (KL/Sel/NS/Melaka) RM 595 | North (Penang/Kedah/Perlis/Perak) RM 895 | South (Johor) RM 895 | East (Pahang/Terengganu/Kelantan) RM 895 | Sabah RM 1,195 | Sarawak RM 1,195 | Sarawak Limbang: Upon request
+
+  ### COMMON MISTAKES TO AVOID:
+  - Do NOT quote without asking for site name/state first
+  - Do NOT apply 3% increase to services (installation, JKKP, MOB, delivery)
+  - Do NOT quote IQOQPQ without Full Calibration (CAL-2)
+  - Do NOT forget to mention delivery is NOT included
+  - Do NOT forget the 3rd basket as a mandatory line item
+  - Do NOT forget to include the "Why TOMY?" features section
 - GYROZEN: MUST ask for speed/tube/capacity requirements before quoting. Draft a pre-quote email.
 - Equipment (TOMY/GYROZEN): Include warranty registration disclaimer
 - Include the relevant brand product links in quotation emails (only use these verified links):
