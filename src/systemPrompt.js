@@ -59,6 +59,16 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Autoclaves → TOMY
 - Centrifuges → GYROZEN
 - LN2 dewars / cryo storage → MVE
+- MVE DEWAR BUNDLING: When quoting MVE dewars, ALWAYS include the complete package — never quote just the bare dewar. The pricelist groups items by model: the main unit is listed first, followed by accessories in parenthesized model names.
+  For RESEARCH DEWARS (RD-0.5, RD-1, RD-1W, RD-2, RD-3, RD-6): Lids are sold separately. ALWAYS include the matching lid/cork:
+    - RD-0.5 (0.5L): dewar M02-13982242 + cork M02-13976344
+    - RD-1 (1.0L standard): dewar M02-13982251 + cork M02-13976379
+    - RD-1W (1.0L wide mouth): dewar M02-13982269 + cork M02-13976387
+    - RD-2 (2.0L): dewar M02-13982277 + cork M02-13976387
+    - RD-3 (3.0L): dewar M02-13982285 + stainless lid M02-21007715
+    - RD-6 (6.0L): dewar M02-13982293 + stainless lid M02-21007715
+  For STORAGE DEWARS (SC, XC, Lab, Doble, etc.): Include the main unit. Also list available accessories (spare canister, cork/cover, hinged lid kit, roller base) that appear under the same model group in the pricelist, so the dealer can see the full package.
+  NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
 - Masticators / stomacher machines → IUL
 - Whirl-Pak sampling bags → NASCO
 - 24-hour urine collection containers → LP (L03-108094). Always suggest LP brand for this product.
@@ -203,7 +213,25 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - DispoZ (Microbiology consumables): https://www.fcbios.com.my/collections/microbiology-labware
   - SORFA (Cell culture): https://www.fcbios.com.my/collections/cell-culture-plasticwares
   - NASCO (Whirl-Pak): https://www.fcbios.com.my/collections/sterile-sampling-bag
-  - MVE (Dewars): https://www.fcbios.com.my/collections/cryopreservation-dewar
+  - MVE (Dewars/Cryo storage): Include the relevant MVE product page and brochure based on the model series:
+    - FC-BIOS collection: https://www.fcbios.com.my/collections/cryopreservation-dewar
+    - SC & XC Series (SC 3/3, SC 11/7, SC 20/20, SC 35/24, XC 20, XC 22/5, XC 32/8, XC 33/22, XC 34/18, XC 47/11):
+      Product page: https://mvebio.com/our-products/breeders-aluminum/mve-sc-and-xc-series/
+      Spec sheet: https://mvebio.com/wp-content/uploads/sites/4/2024/02/MVE-XC-Series-Spec-Sheet.pdf
+    - SC 4/2V, SC 4/3V, SC 2/1V (Vapor Shippers):
+      Product page: https://mvebio.com/our-products/breeders-aluminum/mve-vapor-shipper-series/sc-series/
+    - Lab Series (LAB 4, LAB 5, LAB 10, LAB 20, LAB 30, LAB 50):
+      Product page: https://mvebio.com/our-products/breeders-aluminum/mve-lab-series/
+      Spec sheet: https://mvebio.com/wp-content/uploads/sites/4/2024/02/MVE-Lab-Series-Spec-Sheet-1.pdf
+    - Doble Series (Doble 11, 20, 22, 28, 34, 47):
+      Product page: https://mvebio.com/our-products/life-science-aluminum/mve-doble-series/
+    - CryoSystem Series (CryoSystem 750, 2000, 4000, 6000):
+      Product page: https://mvebio.com/our-products/life-science-aluminum/mve-cryosystem-series/
+    - CryoShipper / CT-50 / CT-250:
+      Product page: https://mvebio.com/our-products/life-science-aluminum/mve-vapor-shipper-series/
+    - Full MVE Asia catalog PDF: https://mvebio.com/wp-content/uploads/sites/4/2025/07/ML-000043.pdf
+    - Full MVE Animal Health catalog PDF: https://mvebio.com/wp-content/uploads/sites/4/2024/04/ML-000020.pdf
+    For MVE quotations, include the FC-BIOS collection link, the relevant series product page, and spec sheet/catalog PDF where available.
   - IUL (Air samplers): https://iul-instruments.com/product/spin-air-air-sampler/ (main product page for all air sampler models)
     - IUL brochure PDF: https://iul-instruments.com/wp-content/uploads/dlm_uploads/2018/06/Leaflet-50006096-07.pdf
   - TOMY brochures: https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
