@@ -81,6 +81,23 @@ async function searchProducts(keyword) {
       const text = Object.values(row).join(' ').toLowerCase();
       return keywords.every(k => text.includes(k));
     });
+    // Try dotted abbreviation (CLED → C.L.E.D., EMB → E.M.B.)
+    if (matches.length === 0) {
+      const dottedVariants = keywords.map(k => {
+        if (/^[a-z]{2,5}$/i.test(k)) {
+          return [k, k.split('').join('.') + '.', k.split('').join('.')];
+        }
+        return [k];
+      }).flat();
+      const uniqueDotted = [...new Set(dottedVariants.map(v => v.toLowerCase()))];
+      matches = rows.filter(row => {
+        const text = Object.values(row).join(' ').toLowerCase();
+        return uniqueDotted.some(v => text.includes(v));
+      });
+      if (matches.length > 0) {
+        console.log(`[SEARCH] Found ${matches.length} results in "${tab}" using dotted abbreviation`);
+      }
+    }
     // Fallback: try any keyword or code variant
     if (matches.length === 0) {
       matches = rows.filter(row => {
