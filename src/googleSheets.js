@@ -123,6 +123,25 @@ async function searchByBrand(brandTab, keyword) {
     return keywords.every(k => text.includes(k));
   });
 
+  // Try 1.5: If no results, try dotted abbreviation (CLED → C.L.E.D, EMB → E.M.B)
+  if (matches.length === 0) {
+    const dottedVariants = keywords.map(k => {
+      // If keyword is 2-5 uppercase-like letters, try dotted version
+      if (/^[a-z]{2,5}$/i.test(k)) {
+        return [k, k.split('').join('.') + '.', k.split('').join('.')];
+      }
+      return [k];
+    }).flat();
+    const uniqueDotted = [...new Set(dottedVariants)];
+    matches = rows.filter(row => {
+      const text = Object.values(row).join(' ').toLowerCase();
+      return uniqueDotted.some(v => text.includes(v.toLowerCase()));
+    });
+    if (matches.length > 0) {
+      console.log(`[SEARCH] Found ${matches.length} results using dotted abbreviation variant`);
+    }
+  }
+
   // Try 2: If no results, try partial code match (strip trailing letters from codes like B01065WA → B01065)
   if (matches.length === 0) {
     const codeVariants = keywords.map(k => {
