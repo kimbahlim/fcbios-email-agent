@@ -259,6 +259,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   | F07-ACA-315T | Long Basket for Waste | 1,226 |
   | T01-599907 | Printer Module (ships separately) | 9,682 |
   | Delivery | Delivery charge (if required) | 250 |
+  | EST Charge | For government sites (if applicable) | 150 |
 
   SX-700 accessories:
   | F07-ACA-700B | Additional Standard Basket | 933 |
@@ -266,6 +267,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   | F07-ACA-700T | Long Basket for Waste | 1,339 |
   | T01-599907 | Printer Module (ships separately) | 9,682 |
   | Delivery | Delivery charge (if required) | 250 |
+  | EST Charge | For government sites (if applicable) | 150 |
 
   ### KEY FEATURES — include "Why TOMY?" section in every TOMY quotation:
   - Made in Japan — superior build quality, 300+ satisfied users in Malaysia including major F&B, universities, and research institutions. DOSH/JKKP approved.
