@@ -199,7 +199,13 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - The Packing column = show as "Case/[Qty/Case]" (e.g., "Case/500" for 500 units per case)
   - NEVER divide the price by Qty/Case. NEVER show a unit price of RM 1 or similar tiny amounts. The dealer buys by the case.
   - For NON-STOCKING items: MOQ is 1 case. Note "Minimum order: 1 case"
-  - For EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — you may ALSO show per-pack price (Dealer Price ÷ Qty/Case, rounded up) alongside the case price
+  - For EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — show BOTH pack and case pricing:
+    - Pack Price = Dealer Price 2026 ÷ (Qty/Case ÷ Qty/Pk), rounded UP to nearest RM
+    - Example: Centrifuge tube 50ml → Dealer Price 366, Qty/Case 500, Qty/Pk 25 → Packs per case = 500 ÷ 25 = 20 → Pack Price = 366 ÷ 20 = RM 19 (rounded up)
+    - Pack Packing = show as "[Qty/Pk]/pack" (e.g., "25/pack")
+    - Case Price = Dealer Price 2026 as-is (e.g., RM 366)
+    - Case Packing = "Case/[Qty/Case]" (e.g., "Case/500")
+    - NEVER divide Dealer Price by Qty/Pk directly — that gives per-unit price which is wrong. Always divide by NUMBER OF PACKS PER CASE.
   - For EX-STOCK items with WHOLE NUMBER stock qty (e.g., 5): case only, same as non-stocking
   - TARSONS SKU RULE: Always use the "NetSuite Code" column as the SKU. This column now contains the correct NetSuite item code (e.g., T38-546041, T38-521014Y). Never use the old "Cat No" or "Nalgene Code" columns.
 - Centrifuge tubes (falcon tubes, 15ml, 50ml) → ALWAYS search TARSONS first, not LP. LP is for consumables like swabs, loops, spreaders only.
