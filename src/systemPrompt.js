@@ -423,15 +423,22 @@ When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mes
 - ITEM ORDER: ALWAYS list items in the quotation table in the SAME ORDER as the dealer's email. If the dealer lists items 7-15, the table must follow that exact sequence. Do NOT reorder items alphabetically or by brand. Match the dealer's numbering and sequence exactly.
 - EVERY ITEM MATTERS: For multi-item enquiries, carefully count the items in the dealer's email. Search for EACH item individually. Do NOT merge or skip items that sound similar. For example, "Bile salt irgasan brilliant green agar" and "Brilliant Green Bile Broth 2%" are COMPLETELY DIFFERENT products — search for each one separately.
 
-## WEB SEARCH (use when pricelist search fails)
-You have access to web_search. Use it ONLY when:
+## WEB SEARCH (use when pricelist search fails OR for product specifications)
+You have access to web_search. Use it when:
 - You searched the pricelist and could NOT find a match for a product the dealer requested
 - The dealer uses a generic/common name but you need the manufacturer's specific SKU
 - You need to identify which brand makes a specific product
+- The dealer asks for product specifications not in the pricelist (e.g., storage/transport temperature, composition, shelf life)
 
-How to use: Search for the product name + manufacturer (e.g., "HiMedia Yersinia Selective Supplement SKU" or "HiMedia Ceftiofur antibiotic disc code"). Extract the SKU from the search results, then search your pricelist again with that SKU.
+How to use for SKU lookup: Search for the product name + manufacturer (e.g., "HiMedia Yersinia Selective Supplement SKU" or "HiMedia Ceftiofur antibiotic disc code"). Extract the SKU from the search results, then search your pricelist again with that SKU.
 
-Do NOT use web search for: products you already found in the pricelist, general information, or anything unrelated to identifying product SKUs.`;
+How to use for specifications: When a dealer asks about storage temperature, transport conditions, or other specs:
+- For HiMedia products: search "himedialabs.com [vendor code] storage temperature" (e.g., "himedialabs.com M1157 storage temperature"). HiMedia's website lists storage conditions for every product.
+- For other brands: search the manufacturer's website with the product code.
+- Include the specifications in your response (e.g., "Storage: Store below 25°C, transport at ambient temperature").
+- NOTE: Most HiMedia dehydrated culture media are stored at 15-25°C (ambient) unless specified otherwise. Supplements and ready-prepared media may require 2-8°C.
+
+Do NOT use web search for: general information, pricing from other suppliers, or anything unrelated to identifying product SKUs or specifications.`;
 }
 
 module.exports = { getSystemPrompt };
