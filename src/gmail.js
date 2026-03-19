@@ -252,6 +252,82 @@ async function createGmailDraft({ to, subject, htmlBody, messageId, threadId }) 
   return result;
 }
 
+// ============================================================
+// LABEL MANAGEMENT: Swap "Agent" → "Agent Replied" after processing
+// ============================================================
+
+let labelCache = {}; // cache label name → ID mapping
+
+async function getLabelId(labelName) {
+  if (labelCache[labelName]) return labelCache[labelName];
+  
+  try {
+    const data = await gmailApi('/labels');
+    const labels = data.labels || [];
+    for (const label of labels) {
+      labelCache[label.name.toLowerCase()] = label.id;
+    }
+    return labelCache[labelName.toLowerCase()] || null;
+  } catch (err) {
+    console.error('[GMAIL] Error fetching labels:', err.message);
+    return null;
+  }
+}
+
+async function createLabel(labelName) {
+  try {
+    const data = await gmailApi('/labels', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: labelName,
+        labelListVisibility: 'labelShow',
+        messageListVisibility: 'show'
+      })
+    });
+    console.log(`[GMAIL] Created label "${labelName}" with ID: ${data.id}`);
+    labelCache[labelName.toLowerCase()] = data.id;
+    return data.id;
+  } catch (err) {
+    // Label might already exist
+    console.log(`[GMAIL] Label "${labelName}" may already exist: ${err.message}`);
+    return await getLabelId(labelName);
+  }
+}
+
+async function swapAgentLabel(messageId) {
+  try {
+    // Get the "Agent" label ID
+    const agentLabelId = await getLabelId('agent');
+    if (!agentLabelId) {
+      console.log('[GMAIL] Could not find "Agent" label ID');
+      return;
+    }
+
+    // Get or create the "Agent Replied" label ID
+    let repliedLabelId = await getLabelId('agent replied');
+    if (!repliedLabelId) {
+      repliedLabelId = await createLabel('Agent Replied');
+    }
+    if (!repliedLabelId) {
+      console.log('[GMAIL] Could not get/create "Agent Replied" label');
+      return;
+    }
+
+    // Swap labels: remove "Agent", add "Agent Replied"
+    await gmailApi(`/messages/${messageId}/modify`, {
+      method: 'POST',
+      body: JSON.stringify({
+        addLabelIds: [repliedLabelId],
+        removeLabelIds: [agentLabelId]
+      })
+    });
+
+    console.log(`[GMAIL] Label swapped: "Agent" → "Agent Replied" for message ${messageId}`);
+  } catch (err) {
+    console.error(`[GMAIL] Error swapping labels: ${err.message}`);
+  }
+}
+
 module.exports = {
   getAccessToken,
   getAgentLabeledMessages,
@@ -260,5 +336,6 @@ module.exports = {
   parseMessage,
   processAttachments,
   downloadAttachment,
-  createGmailDraft
+  createGmailDraft,
+  swapAgentLabel
 };

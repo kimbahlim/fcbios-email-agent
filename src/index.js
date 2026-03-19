@@ -6,7 +6,8 @@ const {
   getThreadMessages,
   parseMessage,
   processAttachments,
-  createGmailDraft
+  createGmailDraft,
+  swapAgentLabel
 } = require('./gmail');
 
 const app = express();
@@ -273,6 +274,9 @@ async function pollForEmails() {
           });
 
           console.log(`[GMAIL] Draft created: ${draftResult.id}`);
+
+          // Swap label: "Agent" → "Agent Replied" to prevent reprocessing
+          await swapAgentLabel(latestMsg.id);
         } else {
           console.log('[AGENT] No draft generated');
         }
