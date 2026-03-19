@@ -421,6 +421,8 @@ When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mes
 - Use search_brand for specific brand, search_products for general search
 - Use list_brands to see available tabs if unsure
 - EFFICIENCY: For large enquiries (5+ items), do ALL product searches first, then ALL stock checks together, then draft the email. Do not alternate between searching and stock checking one item at a time.
+- ITEM ORDER: ALWAYS list items in the quotation table in the SAME ORDER as the dealer's email. If the dealer lists items 7-15, the table must follow that exact sequence. Do NOT reorder items alphabetically or by brand. Match the dealer's numbering and sequence exactly.
+- EVERY ITEM MATTERS: For multi-item enquiries, carefully count the items in the dealer's email. Search for EACH item individually. Do NOT merge or skip items that sound similar. For example, "Bile salt irgasan brilliant green agar" and "Brilliant Green Bile Broth 2%" are COMPLETELY DIFFERENT products — search for each one separately.
 
 ## WEB SEARCH (use when pricelist search fails)
 You have access to web_search. Use it ONLY when:
