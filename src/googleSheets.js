@@ -283,7 +283,10 @@ async function checkStock(sku) {
     description: match['DISPLAY NAME'] || match['Display Name'] || match['DESCRIPTION'] || '',
     brand: match['BRAND'] || match['Brand'] || '',
     qty_available: qty,
-    uom: uom
+    uom: uom,
+    storage_temp: match['STORAGE TEMP'] || match['Storage Temp'] || match['STORAGE TEMPERATURE'] || '',
+    shipping_condition: match['SHIPPING CONDITION'] || match['Shipping Condition'] || '',
+    notes: match['DESCRIPTION 2'] || match['Description 2'] || ''
   };
 }
 

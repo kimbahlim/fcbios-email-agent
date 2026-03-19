@@ -95,6 +95,10 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - If in stock (qty > 10): "In Stock (X UOM)"
 - If low stock (1-10): "Low Stock (X UOM)"
 - If not found in Stock tab: Check LEAD_TIMES tab for brand lead time, show "Indent - Lead time: [from LEAD_TIMES tab]"
+- The check_stock tool also returns: storage_temp, shipping_condition, and notes (Description 2) fields. Use these when:
+  - Dealer asks about storage/transport temperature → include storage_temp and shipping_condition in the reply
+  - The notes field contains "Perishable" → the item requires cold chain handling, mention this if dealer asks about shipping
+  - Do NOT include storage temp/shipping condition in regular quotations unless the dealer specifically asks about it
 
 ## PACK vs CASE PRICING COLUMNS
 Determine what to show based on stock availability:
@@ -433,8 +437,10 @@ You have access to web_search. Use it when:
 How to use for SKU lookup: Search for the product name + manufacturer (e.g., "HiMedia Yersinia Selective Supplement SKU" or "HiMedia Ceftiofur antibiotic disc code"). Extract the SKU from the search results, then search your pricelist again with that SKU.
 
 How to use for specifications: When a dealer asks about storage temperature, transport conditions, or other specs:
-- For HiMedia products: search "himedialabs.com [vendor code] storage temperature" (e.g., "himedialabs.com M1157 storage temperature"). HiMedia's website lists storage conditions for every product.
-- For other brands: search the manufacturer's website with the product code.
+- FIRST: Check the stock data — the check_stock tool returns storage_temp and shipping_condition fields from NetSuite. If these fields have values, use them directly (free, no web search needed).
+- FALLBACK: If storage_temp is empty/blank, use web_search:
+  - For HiMedia products: search "himedialabs.com [vendor code] storage temperature" (e.g., "himedialabs.com M1157 storage temperature"). HiMedia's website lists storage conditions for every product.
+  - For other brands: search the manufacturer's website with the product code.
 - Include the specifications in your response (e.g., "Storage: Store below 25°C, transport at ambient temperature").
 - NOTE: Most HiMedia dehydrated culture media are stored at 15-25°C (ambient) unless specified otherwise. Supplements and ready-prepared media may require 2-8°C.
 
