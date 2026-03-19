@@ -69,6 +69,7 @@ When the email contains an explicit instruction like "Send this quotation email 
     - RD-6 (6.0L): dewar M02-13982293 + stainless lid M02-21007715
   For STORAGE DEWARS (SC, XC, Lab, Doble, etc.): Include the main unit. Also list available accessories (spare canister, cork/cover, hinged lid kit, roller base) that appear under the same model group in the pricelist, so the dealer can see the full package.
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
+  MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
 - Masticators / stomacher machines → IUL
 - Whirl-Pak sampling bags → NASCO
 - 24-hour urine collection containers → LP (L03-108094). Always suggest LP brand for this product.
