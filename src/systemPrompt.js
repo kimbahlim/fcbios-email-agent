@@ -108,6 +108,10 @@ Determine what to show based on stock availability:
 - WHOLE NUMBER stock qty (e.g., 5, 17, 100) → Show CASE columns ONLY, leave pack columns blank
 - NOT FOUND in Stock tab (indent) → Show CASE columns ONLY, leave pack columns blank
 
+PACK PRICE MARKUP RULE (applies to ALL brands): When showing pack pricing alongside case pricing, the pack price is ALWAYS 10% higher than the pro-rated case price. Formula:
+  Pack Price = (Case Price ÷ number of packs per case) × 1.10, rounded UP to nearest RM
+  Example: Case Price RM 500, Case/100 pcs, 10 pcs/pack → 10 packs per case → Base = 500 ÷ 10 = RM 50 → Pack Price = RM 55 (50 × 1.10)
+
 IMPORTANT: Never show both pack and case if they are the same (e.g., pack price = case price, or case qty = 1). Only use both columns when they provide different useful info to the dealer.
 
 ## GENERAL RULES FOR MULTIPLE MATCHES
@@ -199,13 +203,20 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - The Packing column = show as "Case/[Qty/Case]" (e.g., "Case/500" for 500 units per case)
   - NEVER divide the price by Qty/Case. NEVER show a unit price of RM 1 or similar tiny amounts. The dealer buys by the case.
   - For NON-STOCKING items: MOQ is 1 case. Note "Minimum order: 1 case"
-  - For EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — show BOTH pack and case pricing:
-    - Pack Price = Dealer Price 2026 ÷ (Qty/Case ÷ Qty/Pk), rounded UP to nearest RM
-    - Example: Centrifuge tube 50ml → Dealer Price 366, Qty/Case 500, Qty/Pk 25 → Packs per case = 500 ÷ 25 = 20 → Pack Price = 366 ÷ 20 = RM 19 (rounded up)
-    - Pack Packing = show as "[Qty/Pk]/pack" (e.g., "25/pack")
-    - Case Price = Dealer Price 2026 as-is (e.g., RM 366)
-    - Case Packing = "Case/[Qty/Case]" (e.g., "Case/500")
-    - NEVER divide Dealer Price by Qty/Pk directly — that gives per-unit price which is wrong. Always divide by NUMBER OF PACKS PER CASE.
+  - CENTRIFUGE TUBES CASE-ONLY RULE: The following TARSONS items are ALWAYS case pricing only — NEVER show pack pricing even if decimal stock:
+    - T38-546021 (15ml Centrifuge Tube Sterile Bulk)
+    - T38-546041 (50ml Centrifuge Tube Sterile Bulk)
+    - T38-500031 (15ml Centrifuge Tube Non-Sterile Bulk)
+    - T38-500041 (50ml Centrifuge Tube Non-Sterile Bulk)
+    - And ALL other 15ml/50ml centrifuge tube variants from TARSONS
+  - For ALL OTHER EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — show BOTH pack and case pricing:
+    - Pack Price = (Case Price ÷ number of packs per case) × 1.10 (10% markup for loose pack), rounded UP to nearest RM
+    - Number of packs per case = Qty/Case ÷ Qty/Pk
+    - Example: Tips → Case Price RM 500, Qty/Case 10000, Qty/Pk 1000 → 10 packs per case → Base pack price = 500 ÷ 10 = RM 50 → With 10% markup = RM 55
+    - Pack Packing = show as "[Qty/Pk]/pack" (e.g., "1000/pack")
+    - Case Price = Dealer Price 2026 as-is
+    - Case Packing = "Case/[Qty/Case]"
+    - NEVER divide Dealer Price by Qty/Pk directly — that gives per-unit price which is wrong. Always divide by NUMBER OF PACKS PER CASE, then add 10%.
   - For EX-STOCK items with WHOLE NUMBER stock qty (e.g., 5): case only, same as non-stocking
   - TARSONS SKU RULE: Always use the "NetSuite Code" column as the SKU. This column now contains the correct NetSuite item code (e.g., T38-546041, T38-521014Y). Never use the old "Cat No" or "Nalgene Code" columns.
 - Centrifuge tubes (falcon tubes, 15ml, 50ml) → ALWAYS search TARSONS first, not LP. LP is for consumables like swabs, loops, spreaders only.
