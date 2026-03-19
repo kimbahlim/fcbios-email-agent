@@ -214,9 +214,30 @@ async function pollForEmails() {
       }
 
       // Skip our OWN SENT REPLIES (not self-forwarded enquiries)
-      // The key difference: sent replies contain our quotation signature, self-forwarded enquiries don't
-      const bodyLower = (latestMsg.body || '').toLowerCase();
-      const hasOurSignature = bodyLower.includes('dealer support channel') && bodyLower.includes('fc bios sdn bhd') && bodyLower.includes('019-2663675');
+      // The key difference: sent replies contain our quotation signature in the NEW content
+      // We only check the part BEFORE any quoted thread (before "On ... wrote:" or "---------- Forwarded")
+      const fullBody = (latestMsg.body || '');
+      const bodyLower = fullBody.toLowerCase();
+      
+      // Extract only the NEW content (before quoted thread history)
+      let newContentOnly = fullBody;
+      const quoteMarkers = [
+        /\nOn .{10,80} wrote:/i,
+        /\n-{5,}\s*Forwarded message/i,
+        /\nFrom:.*\nSent:.*\nTo:/i,
+        /\n_{5,}\s*\nFrom:/i
+      ];
+      for (const marker of quoteMarkers) {
+        const match = newContentOnly.match(marker);
+        if (match) {
+          newContentOnly = newContentOnly.substring(0, match.index);
+          break;
+        }
+      }
+      const newContentLower = newContentOnly.toLowerCase();
+      
+      // Check signature only in the NEW content, not the quoted thread
+      const hasOurSignature = newContentLower.includes('dealer support channel') && newContentLower.includes('fc bios sdn bhd') && newContentLower.includes('019-2663675');
       const fromEmail = latestMsg.from_email.toLowerCase().trim();
       const userEmail = (process.env.GMAIL_USER_EMAIL || '').toLowerCase().trim();
       const isFromSelf = (fromEmail === userEmail || fromEmail.includes('dealer_support') || fromEmail.includes('dealer-support'));
