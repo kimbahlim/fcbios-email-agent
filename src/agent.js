@@ -6,19 +6,8 @@ const client = new Anthropic();
 
 const tools = [
   {
-    name: 'search_products',
-    description: 'Search across ALL brand pricelist tabs for products matching a keyword. Use for general product searches when brand is unknown.',
-    input_schema: {
-      type: 'object',
-      properties: {
-        keyword: { type: 'string', description: 'Search keyword (product name, SKU, description)' }
-      },
-      required: ['keyword']
-    }
-  },
-  {
     name: 'search_brand',
-    description: 'Search within a specific brand tab for products. Use when you know which brand to search (e.g., from brand priority rules).',
+    description: 'Search within a specific brand tab for products. ALWAYS use this tool — refer to the BRAND-PRODUCT MAPPING in your instructions to determine which brand tab to search. Available tabs include: NASCO, LOGTAG, MINMAX, HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates, MEIZHENG, TARSONS, UGAIYA, ANQING_YIPAK, SORFA, IUL, MVE, PROGNOSIS, NEOGEN, GYROZEN, TOMY, DISPOZ, LP, MEMBRANE_SOLUTIONS, MESALABS.',
     input_schema: {
       type: 'object',
       properties: {
@@ -93,9 +82,6 @@ async function processToolCall(toolName, toolInput) {
   try {
     let result;
     switch (toolName) {
-      case 'search_products':
-        result = await searchProducts(toolInput.keyword);
-        break;
       case 'search_brand':
         result = await searchByBrand(toolInput.brand_tab, toolInput.keyword);
         break;

@@ -417,14 +417,8 @@ When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mes
 - If not found, try shorter keywords (e.g., "petri" instead of "petri dish 90mm")
 - Try individual words if multi-word search returns nothing
 - For ABBREVIATED product names (e.g., CLED, EMB, XLD, TSA, PCA, MRS), the pricelist may use the FULL NAME or a DOTTED ABBREVIATION (e.g., "C.L.E.D." instead of "CLED"). Try BOTH the abbreviation AND the full expanded name. Use web_search to find the HiMedia catalogue code if needed.
-- Use search_brand for specific brand, search_products for general search
-- COST SAVING — CRITICAL: ALWAYS use search_brand instead of search_products when you know the brand. search_products searches ALL 22+ tabs which wastes API tokens. Only use search_products when you genuinely don't know which brand to search. Examples:
-  - Dealer asks for "MinMax thermometer" → use search_brand("MINMAX", "thermometer"), NOT search_products
-  - Dealer asks for "SAMM calibration" for MinMax → use search_brand("MINMAX", "calibration"), NOT search_products
-  - Dealer asks for "HiMedia MacConkey agar" → use search_brand("HIMEDIA_Microbiology", "MacConkey"), NOT search_products
-  - Dealer asks for "petri dish" → use search_brand("DISPOZ", "petri dish") per brand mapping, NOT search_products
-  - Only use search_products when dealer asks for something generic with no brand clue (e.g., "do you have any filters?")
-- Use list_brands to see available tabs if unsure
+- COST SAVING — CRITICAL: ALWAYS use search_brand. You do NOT have a search_products tool. Refer to the BRAND-PRODUCT MAPPING above to determine which brand tab to search. If you don't know the brand, use web_search to identify it first, then search_brand.
+- Use list_brands to see available tabs if unsure which tab name to use
 - EFFICIENCY: For large enquiries (5+ items), do ALL product searches first, then ALL stock checks together, then draft the email. Do not alternate between searching and stock checking one item at a time.
 - ITEM ORDER: ALWAYS list items in the quotation table in the SAME ORDER as the dealer's email. If the dealer lists items 7-15, the table must follow that exact sequence. Do NOT reorder items alphabetically or by brand. Match the dealer's numbering and sequence exactly.
 - EVERY ITEM MATTERS: For multi-item enquiries, carefully count the items in the dealer's email. Search for EACH item individually. Do NOT merge or skip items that sound similar. For example, "Bile salt irgasan brilliant green agar" and "Brilliant Green Bile Broth 2%" are COMPLETELY DIFFERENT products — search for each one separately.
