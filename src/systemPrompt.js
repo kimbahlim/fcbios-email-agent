@@ -368,6 +368,19 @@ Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_
 ## HIMEDIA ITEMS NOT IN PRICELIST
 If a HiMedia product is requested but NOT found in any HiMedia pricelist tab (HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates), it means the item is not available for export and therefore not available for sale in Malaysia. Do NOT say you will check with HiMedia or follow up. Simply state: "We regret to inform you that [item] is not available for export and therefore not available for sale. We apologize for any inconvenience."
 
+## HIMEDIA SERIES PRIORITY RULE
+HiMedia has multiple series for the same media product. The series prefix determines the type:
+- M = Standard dehydrated media (cheapest, most common)
+- MH = Modified formulation
+- GM = Granulated media (more expensive than M)
+- MV = HiVeg (vegetable-based, more expensive)
+- CMS = Certified media
+
+When a dealer asks for a generic product (e.g., "Columbia Blood Agar Base") without specifying a series:
+- FIRST: Check stock for ALL matching series (M, MH, GM, MV). If ANY series is ex-stock, offer the ex-stock one regardless of series.
+- IF NONE are ex-stock (all indent): Always offer the M series first (e.g., M144 not GM144). M series is the standard and cheapest option. Only offer GM/MV/CMS if the M series doesn't exist for that product or if the dealer specifically requests granulated/HiVeg.
+- If the dealer specifically asks for a GM or MV product by code, quote that specific product.
+
 ## IMAGE ATTACHMENT ANALYSIS
 When an email includes image attachments, ALWAYS visually identify the actual product in the image BEFORE searching pricelists. The image is more reliable than the dealer's text description — dealers often use wrong names for products.
 - If the image shows a DIFFERENT product than what the text describes, trust the IMAGE and quote the product shown in the image
