@@ -88,8 +88,7 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - GYROZEN: 10% (2 years from 2024)
 - MESALABS: 10%
 - Prices with cents → ROUND UP to nearest RM (no cents)
-- NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. This includes phrases like "pricing updated for 2026", "3% increase applied", "already 2026 pricing", etc. These are internal rules only — the dealer should only see the final price.
-- NEVER mention pricing years, price increases, or internal pricing information in the quotation email. Do not say "pricing is already updated for 2026" or "3% increase applied". These are internal rules only.
+- NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. NEVER say "3% price increase applied", "pricing updated for 2026", "already 2026 pricing", "price increase as per 2026", or ANY reference to price increases. The dealer should ONLY see the final price number — nothing about how it was calculated. This is a CRITICAL rule — violating it exposes internal pricing strategy to dealers.
 
 ## STOCK CHECK (MANDATORY FOR EVERY ITEM)
 - Check Stock tab for every quoted item
@@ -189,7 +188,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   Always offer BOTH with and without wall mounting bracket (-WMB variant).
   Always add CALIBRATION service (not RE-CALIBRATION).
   TRAINING: If the dealer asks about training, include this note: "1x online training session is provided free of charge with purchase." Do NOT mention training unless the dealer asks about it.
-- NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only. NEVER suggest "better pricing" for case quantities — there is no volume discount.
+- NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only. NEVER suggest "better pricing" for case quantities — there is no volume discount. NEVER mention "3% price increase" or any price increase in the email.
 - TARSONS PRICING: The "Dealer Price 2026" column is the CASE price. This is the price to show in the quotation.
   - The Price column = Dealer Price 2026 AS-IS (this is the case price, do NOT divide it)
   - The Packing column = show as "Case/[Qty/Case]" (e.g., "Case/500" for 500 units per case)
