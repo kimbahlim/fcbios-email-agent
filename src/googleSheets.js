@@ -228,37 +228,52 @@ async function checkStock(sku) {
 
   console.log(`[STOCK] FOUND: "${sku}" → row: ${JSON.stringify(match).substring(0, 200)}`);
 
-  // Read availability - try exact header match first
-  const availKeys = ['AVAILABLE', 'Available', 'available'];
-  const uomKeys = ['PRIMARY STOCK UNIT', 'Primary Stock Unit', 'UOM', 'Uom'];
-  
+  // Read availability - ROBUST: scan all values to find the numeric quantity
+  // This handles cases where columns are shifted (e.g., description text in AVAILABLE column)
+  const allValues = Object.entries(match);
   let qty = '0';
   let uom = 'unit';
   
+  // Strategy 1: Try AVAILABLE header first (if it's actually a number)
+  const availKeys = ['AVAILABLE', 'Available', 'available'];
   for (const key of availKeys) {
-    if (match[key] !== undefined && match[key] !== '' && !isNaN(parseFloat(match[key]))) { 
+    if (match[key] !== undefined && match[key] !== '' && !isNaN(parseFloat(match[key])) && parseFloat(match[key]).toString() === match[key].toString().trim()) { 
       qty = match[key]; 
-      console.log(`[STOCK] Found qty via key "${key}": ${qty}`);
-      break; 
-    }
-  }
-  for (const key of uomKeys) {
-    if (match[key] && match[key].toString().trim()) { 
-      uom = match[key]; 
+      console.log(`[STOCK] Found qty via header "${key}": ${qty}`);
       break; 
     }
   }
   
-  // Fallback: scan all values for a number
+  // Strategy 2: If AVAILABLE wasn't a number, scan ALL values for a number that looks like a quantity
   if (qty === '0' || isNaN(parseFloat(qty))) {
-    console.log(`[STOCK] Qty not found by header, scanning all values...`);
-    const values = Object.entries(match);
-    for (const [key, val] of values) {
-      if (val && !isNaN(parseFloat(val)) && parseFloat(val) > 0 && !key.toLowerCase().includes('name') && !key.toLowerCase().includes('description') && !key.toLowerCase().includes('brand')) {
-        qty = val;
-        console.log(`[STOCK] Found qty via scan key "${key}": ${qty}`);
+    console.log(`[STOCK] AVAILABLE header has non-numeric value, scanning all columns...`);
+    for (const [key, val] of allValues) {
+      const valStr = (val || '').toString().trim();
+      // Skip if empty, skip NAME column, skip if it looks like a description (long text)
+      if (!valStr) continue;
+      if (key.toLowerCase().includes('name')) continue;
+      if (key.toLowerCase().includes('brand')) continue;
+      if (valStr.length > 20) continue; // descriptions are long, quantities are short
+      
+      const num = parseFloat(valStr);
+      if (!isNaN(num) && num >= 0) {
+        qty = valStr;
+        console.log(`[STOCK] Found qty via scan column "${key}": ${qty}`);
         break;
       }
+    }
+  }
+  
+  // Strategy 3: Find UOM - look for values containing "/" or common unit words
+  for (const [key, val] of allValues) {
+    const valStr = (val || '').toString().trim();
+    if (valStr && (valStr.includes('/') || valStr.toLowerCase().includes('unit') || valStr.toLowerCase().includes('case') || valStr.toLowerCase().includes('pack') || valStr.toLowerCase().includes('bottle'))) {
+      // Make sure it's not the NAME or a description
+      if (key.toLowerCase().includes('name') || key.toLowerCase().includes('brand')) continue;
+      if (valStr.length > 30) continue;
+      uom = valStr;
+      console.log(`[STOCK] Found UOM: ${uom}`);
+      break;
     }
   }
 
