@@ -436,7 +436,8 @@ Use the draft_email tool with professional HTML formatting including:
   2. "Payment: Advance payment" — ALWAYS include this
   
   CONDITIONAL notes (include ONLY when applicable):
-  - If ANY items are indent: "For indent items, kindly send purchase order by [date] for [delivery date] delivery" (only if lead time mentions a PO deadline)
+  - If ANY items are indent AND the lead time data from get_lead_time contains a specific PO deadline date (e.g., "send PO by 25th March"): include that exact text. Do NOT invent or calculate PO deadline dates yourself.
+  - If items are indent but the lead time only says something like "6-8 weeks" with NO specific PO date: do NOT add any PO deadline note. The lead time is already shown in the Stock Status column.
   - If quoting TOMY: include the TOMY-specific notes from the TOMY section
   - If dealer asked about training for LogTag: "1x online training session is provided free of charge with purchase"
   
