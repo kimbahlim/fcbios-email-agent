@@ -468,7 +468,12 @@ When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mes
 - Try the exact SKU/code first
 - If not found, try shorter keywords (e.g., "petri" instead of "petri dish 90mm")
 - Try individual words if multi-word search returns nothing
-- For ABBREVIATED product names (e.g., CLED, EMB, XLD, TSA, PCA, MRS), the pricelist may use the FULL NAME or a DOTTED ABBREVIATION (e.g., "C.L.E.D." instead of "CLED"). Try BOTH the abbreviation AND the full expanded name. Use web_search to find the HiMedia catalogue code if needed.
+- For ABBREVIATED product names (e.g., CLED, EMB, XLD, TSA, PCA, MRS, mFC), the pricelist may use DIFFERENT PUNCTUATION:
+  - DOTTED: "C.L.E.D." instead of "CLED", "X.L.D." instead of "XLD"
+  - HYPHENATED: "M-FC" instead of "mFC", "M-Endo" instead of "mEndo"
+  - When searching, try the abbreviation as-is first, then try with dots/hyphens. The search code handles this automatically.
+  - When multiple results match (e.g., "M-FC Agar Base" M1122 and "MFC Basal Medium" M1812), prefer the one whose description most closely matches the dealer's request. "mFC Agar" = M-FC Agar Base (M1122), NOT MFC Basal Medium (M1812).
+  - Use web_search to find the HiMedia catalogue code if needed.
 - COST SAVING — CRITICAL: ALWAYS use search_brand. You do NOT have a search_products tool. Refer to the BRAND-PRODUCT MAPPING above to determine which brand tab to search. If you don't know the brand, use web_search to identify it first, then search_brand.
 - Use list_brands to see available tabs if unsure which tab name to use
 - EFFICIENCY: For large enquiries (5+ items), do ALL product searches first, then ALL stock checks together, then draft the email. Do not alternate between searching and stock checking one item at a time.

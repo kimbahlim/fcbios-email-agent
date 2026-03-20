@@ -140,22 +140,31 @@ async function searchByBrand(brandTab, keyword) {
     return keywords.every(k => text.includes(k));
   });
 
-  // Try 1.5: If no results, try dotted abbreviation (CLED → C.L.E.D, EMB → E.M.B)
+  // Try 1.5: If no results, try hyphen-insensitive match (mFC matches M-FC, XLD matches X.L.D.)
   if (matches.length === 0) {
-    const dottedVariants = keywords.map(k => {
-      // If keyword is 2-5 uppercase-like letters, try dotted version
+    const variants = keywords.map(k => {
+      const result = [k];
+      // Add dotted version for short abbreviations (CLED → C.L.E.D.)
       if (/^[a-z]{2,5}$/i.test(k)) {
-        return [k, k.split('').join('.') + '.', k.split('').join('.')];
+        result.push(k.split('').join('.') + '.');
+        result.push(k.split('').join('.'));
       }
-      return [k];
+      // Add hyphenated version (mFC → m-FC, MFC → M-F-C)
+      if (/^[a-z]{2,5}$/i.test(k)) {
+        result.push(k.split('').join('-'));
+      }
+      return result;
     }).flat();
-    const uniqueDotted = [...new Set(dottedVariants)];
+    const uniqueVariants = [...new Set(variants.map(v => v.toLowerCase()))];
+    
+    // Also try matching with hyphens stripped from BOTH search term and pricelist text
     matches = rows.filter(row => {
       const text = Object.values(row).join(' ').toLowerCase();
-      return uniqueDotted.some(v => text.includes(v.toLowerCase()));
+      const textNoHyphen = text.replace(/-/g, '');
+      return uniqueVariants.some(v => text.includes(v) || textNoHyphen.includes(v.replace(/-/g, '')));
     });
     if (matches.length > 0) {
-      console.log(`[SEARCH] Found ${matches.length} results using dotted abbreviation variant`);
+      console.log(`[SEARCH] Found ${matches.length} results using abbreviation/hyphen variant`);
     }
   }
 
