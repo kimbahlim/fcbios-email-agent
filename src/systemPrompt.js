@@ -142,7 +142,7 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - IUL: 3% common, 5% battery
 - NEOGEN: 5%
 - LP: 5%
-- GYROZEN: 10% (2 years from 2024)
+- GYROZEN: 0% (maintain 2024 prices as-is)
 - MESALABS: 10%
 - Prices with cents → ROUND UP to nearest RM (no cents)
 - NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. NEVER say "3% price increase applied", "pricing updated for 2026", "already 2026 pricing", "price increase as per 2026", or ANY reference to price increases. The dealer should ONLY see the final price number — nothing about how it was calculated. This is a CRITICAL rule — violating it exposes internal pricing strategy to dealers.
@@ -402,7 +402,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   4. If the rotor requires buckets (Bucket Cat No is not empty), also quote the buckets
   5. Include relevant adaptors/sleeves if needed for their specific tube sizes
   6. Include delivery charge from the policy (by state) and TnC charge if applicable
-  7. All prices are 2024 base — apply 3% increase for 2026
+  7. Gyrozen prices are maintained at 2024 levels — do NOT apply any price increase
   
   ## DELIVERY & TnC CHARGES (from Gyrozen Policy):
   Delivery charges vary by state and model weight. TnC (Testing & Commissioning) is optional if done by the dealer's service personnel.
