@@ -413,6 +413,25 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   Note: Delivery charge depends on model weight and courier type. Quote delivery separately — "delivery charges to be confirmed based on model and location."
 - Equipment (TOMY/GYROZEN): Include warranty registration disclaimer
 - Include the relevant brand product links in quotation emails (only use these verified links):
+  - GYROZEN Centrifuges: Include the relevant model product page when quoting:
+    - Product catalog PDF: https://gyrozen.com/theme/gyrozen/assets/down/01.pdf
+    - Centrifuge overview PDF: https://gyrozen.com/theme/gyrozen/assets/down/02.pdf
+    - Rotor selection guide PDF: https://gyrozen.com/theme/gyrozen/assets/down/03.pdf
+    - Mini 6: https://gyrozen.com/detail.php?idx=40
+    - Mini (1312): https://gyrozen.com/detail.php?idx=42
+    - 1524: https://gyrozen.com/detail.php?idx=43
+    - 1536: https://gyrozen.com/detail.php?idx=45
+    - 1730R: https://gyrozen.com/detail.php?idx=44
+    - 1848R: https://gyrozen.com/detail.php?idx=46
+    - 406: https://gyrozen.com/detail.php?idx=57
+    - 416: https://gyrozen.com/detail.php?idx=58
+    - 624R: https://gyrozen.com/detail.php?idx=59
+    - 1248/1248R/1236R: https://gyrozen.com/detail.php?idx=60
+    - 1580/1580R: https://gyrozen.com/detail.php?idx=63
+    - 1696R: https://gyrozen.com/detail.php?idx=65
+    - 1736R: https://gyrozen.com/detail.php?idx=66
+    - 2236R: https://gyrozen.com/detail.php?idx=67
+    Include the model-specific page + the rotor selection guide PDF in every Gyrozen quotation.
   - LogTag: Include ALL of these:
     - FC-BIOS collection: https://www.fcbios.com.my/collections/data-logger
     - Official product page: https://logtagrecorders.com/product/[model-lowercase]/ (e.g., https://logtagrecorders.com/product/utrix-16/)
