@@ -54,9 +54,10 @@ When the email contains an explicit instruction like "Send this quotation email 
   - If dealer asks for "biological indicator" or "spore test" → search for EZTEST products ONLY, never CI-
   - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
 - Sterilization pouches/reels, autoclave tape → UGAIYA or ANQING_YIPAK
-- Food safety ELISA/rapid test kits → PROGNOSIS FIRST → NEOGEN backup
+- Food safety ELISA/rapid test kits → PROGNOSIS FIRST → NEOGEN backup. For pathogen detection test kits (Salmonella, Listeria, E. coli, etc.) used in F&B/food industries: always offer PROGNOSIS first, then MEIZHENG for rapid count plates. NEOGEN is only the backup if Prognosis doesn't have the specific test.
 - Rapid microbiology count plates → MEIZHENG
-- Autoclaves → TOMY
+- Autoclaves → TOMY (SX-500 = 58L, SX-700 = 79L). For autoclave enquiries above 80L capacity, follow the same TOMY pre-quote process (ask for site name, state, explain JKKP) — we will be adding larger capacity models soon. In the meantime, inform the dealer that our current range covers up to 79L and ask if they would like a quotation for the SX-700.
+- Autoclave deodorizer / odour control → HiMedia (search HIMEDIA_Microbiology for "deodoris" or "odour"). Products include Fresh Deodorising Pearls (LA008A Citrus, LA008B Rose) and BioWizard Odour Controlling Kit (CO233).
 - Centrifuges → GYROZEN
 - LN2 dewars / cryo storage → MVE
 - MVE DEWAR BUNDLING: When quoting MVE dewars, ALWAYS include the complete package — never quote just the bare dewar. The pricelist groups items by model: the main unit is listed first, followed by accessories in parenthesized model names.
