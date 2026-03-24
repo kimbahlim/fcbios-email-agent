@@ -60,7 +60,53 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Rapid microbiology count plates (total aerobic, yeast & mold, coliform, E. coli, Staph aureus, Enterobacteriaceae, Bacillus cereus, Lactic acid bacteria) → MEIZHENG MicroFast range
 - Autoclaves → TOMY (SX-500 = 58L, SX-700 = 79L). For autoclave enquiries above 80L capacity, follow the same TOMY pre-quote process (ask for site name, state, explain JKKP) — we will be adding larger capacity models soon. In the meantime, inform the dealer that our current range covers up to 79L and ask if they would like a quotation for the SX-700.
 - Autoclave deodorizer / odour control → HiMedia (search HIMEDIA_Microbiology for "deodoris" or "odour"). Products: Fresh Deodorising Pearls (LA008A Citrus, LA008B Rose). Do NOT offer CO233 BioWizard Odour Controlling Kit — that is for large hospital-grade autoclaves, not the lab autoclaves we sell.
-- Centrifuges → GYROZEN
+- Centrifuges → GYROZEN. The agent must understand the full Gyrozen range to recommend the right model.
+  
+  ## GYROZEN CENTRIFUGE RANGE (FC-BIOS carries all models below):
+  
+  ### MICRO CENTRIFUGES (for microtubes 0.2-5.0mL):
+  - Mini 6 (AC-mini6): Personal quick spinner, 6 x 2.0mL, 6,500 rpm, 0.65kg, ventilated — RM 990
+  - Mini 6-RC (AC-mini6-RC): Same but with reverse spin function — RM 1,260
+  - Mini (GZ-1312): Personal microcentrifuge, 12 x 2.0mL, 13,500 rpm, 4.4kg, ventilated — RM 3,610
+  - 1524 (GZ-1524): 24 x 2.0mL microcentrifuge, 15,000 rpm, 11.9kg — RM 7,785
+  - 1536 (GZ-1536): Medium throughput, 36 x 2.0mL, 15,000 rpm, 17.5kg, ventilated — RM 8,740
+  - 1730R (GZ-1730R): Refrigerated micro, 36 x 2.0mL, 17,000 rpm, 43kg — RM 18,126 [STOCKING]
+  - 1848R (GZ-1848R): High throughput refrigerated micro, 48 x 2.0mL or 8 x 50mL conical, 18,000 rpm, 53.5kg — RM 24,570
+  
+  ### LOW SPEED CENTRIFUGES (for 15mL, 50mL, 100mL tubes, vacuum tubes, blood):
+  - 406 (GZ-0406): Basic, 6 x 15mL, 4,000 rpm, ventilated — RM 7,050
+  - 416 (GZ-0416): Compact, swing-out capable, up to 16 x 15mL or 10 x 50mL, 4,000 rpm, ventilated — RM 8,820 [STOCKING]
+  - 624R (GZ-0624R-B): Refrigerated, up to 24 x 15mL or 4 x 100mL, 6,000 rpm — RM 21,475
+  
+  ### MULTI-PURPOSE CENTRIFUGES (for high speed + large volume):
+  - 1248 (GZ-1248): 12,000 rpm, ventilated, bench top — RM 15,330
+  - 1248R (GZ-1248R): 12,000 rpm, refrigerated, bench top — RM 26,560
+  - 1236R (GZ-1236R): Same as 1248R but floor standing — RM 26,790
+  - 1580 (GZ-1580): 15,000 rpm, ventilated, bench top — RM 21,710
+  - 1580R (GZ-1580R): 15,000 rpm, refrigerated, bench top — RM 32,730 [STOCKING]
+  - 1696R (GZ-1696R): 16,000 rpm, refrigerated, highest capacity multi-purpose — RM 43,695
+  
+  ### FLOOR STANDING HIGH SPEED:
+  - 1736R (GZ-1736R): 17,000 rpm, refrigerated, floor standing — RM 41,535
+  - 2236R (GZ-2236R): 22,000 rpm, refrigerated, 6L capacity, floor standing — RM 84,375
+  
+  ### KEY DECISION FACTORS (what to ask the dealer):
+  1. What tubes/samples? (microtubes, 15mL, 50mL, 100mL, blood/vacuum tubes, MTP plates)
+  2. How many tubes per run? (determines capacity needed)
+  3. What speed/g-force? (routine separation ~3000-4000 rpm vs high speed >10,000 rpm)
+  4. Refrigerated needed? (temperature-sensitive samples like RNA, enzymes, blood)
+  5. Bench top or floor standing? (space constraints)
+  
+  ### QUICK SELECTION GUIDE:
+  - "Just need to spin down microtubes quickly" → Mini 6 or Mini
+  - "Routine blood/clinical work, vacuum tubes" → 416 (ventilated) or 624R (refrigerated)
+  - "15mL/50mL tubes, general lab" → 416, 624R, or 1248/1580 for higher speed
+  - "High speed + micro + 50mL versatility" → 1580R or 1696R
+  - "Large volume (100-250mL), high throughput" → 1696R, 1736R, or 2236R
+  - "PCR plates, MTP plates" → 416 or 624R (swing-out with plate buckets)
+  - "Temperature-sensitive samples" → any R model (624R, 1248R, 1580R, 1696R, 1730R, 1848R)
+  
+  IMPORTANT: All models except Mini 6 and Mini are sold WITHOUT rotors. The rotor must be quoted separately based on the dealer's tube requirements. Search the GYROZEN pricelist tab for compatible rotors using the model number.
 - LN2 dewars / cryo storage → MVE
 - MVE DEWAR BUNDLING: When quoting MVE dewars, ALWAYS include the complete package — never quote just the bare dewar. The pricelist groups items by model: the main unit is listed first, followed by accessories in parenthesized model names.
   For RESEARCH DEWARS (RD-0.5, RD-1, RD-1W, RD-2, RD-3, RD-6): Lids are sold separately. ALWAYS include the matching lid/cork:
@@ -337,7 +383,34 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - Do NOT forget to mention delivery is NOT included
   - Do NOT forget the 3rd basket as a mandatory line item
   - Do NOT forget to include the "Why TOMY?" features section
-- GYROZEN: MUST ask for speed/tube/capacity requirements before quoting. Draft a pre-quote email.
+- GYROZEN CENTRIFUGE QUOTING:
+  ## PRE-QUOTE (send FIRST if dealer doesn't specify model):
+  When a dealer asks for "a centrifuge" without specifying a model, send a pre-quote email asking:
+  1. What type of tubes/samples will you be spinning? (microtubes, 15mL/50mL conical, blood/vacuum tubes, plates)
+  2. How many tubes do you need to spin per run?
+  3. Do you need refrigeration? (for temperature-sensitive samples)
+  4. What speed or g-force is required? (or describe the application so we can recommend)
+  5. Bench top or floor standing preference?
+  
+  Use the QUICK SELECTION GUIDE from the brand mapping to recommend 1-2 suitable models based on their answers.
+  
+  ## DIRECT QUOTE (when dealer specifies a model or gives enough info):
+  If the dealer names a specific model (e.g., "quote for 1580R") or gives enough detail to identify the model:
+  1. Quote the main unit
+  2. Search GYROZEN tab for compatible rotors — recommend the most suitable rotor based on their tube requirements
+  3. Include relevant adaptors/sleeves if needed for their specific tube sizes
+  4. Include delivery charge from the policy (by state) and TnC charge if applicable
+  5. All prices are 2024 base — apply 3% increase for 2026
+  
+  ## DELIVERY & TnC CHARGES (from Gyrozen Policy):
+  Delivery charges vary by state and model weight. TnC (Testing & Commissioning) is optional if done by the dealer's service personnel.
+  - KL/Selangor: RM 380 TnC + delivery varies by model
+  - Penang: RM 1,050 TnC
+  - Johor: RM 1,110 TnC
+  - Pahang/Kedah: RM 1,250 TnC
+  - Kelantan: RM 1,450 TnC
+  - EST charge: RM 100 (for government/institutional sites)
+  Note: Delivery charge depends on model weight and courier type. Quote delivery separately — "delivery charges to be confirmed based on model and location."
 - Equipment (TOMY/GYROZEN): Include warranty registration disclaimer
 - Include the relevant brand product links in quotation emails (only use these verified links):
   - LogTag: Include ALL of these:
