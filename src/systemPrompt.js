@@ -350,6 +350,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - DispoZ (Microbiology consumables): https://www.fcbios.com.my/collections/microbiology-labware
   - SORFA (Cell culture): https://www.fcbios.com.my/collections/cell-culture-plasticwares
   - NASCO (Whirl-Pak): https://www.fcbios.com.my/collections/sterile-sampling-bag
+  - MeiZheng / Perkin Elmer (MicroFast pathogen test plates): https://www.perkinelmer.com/library/microbiology-product-and-safety-manuals.html
   - MVE (Dewars/Cryo storage): Include the relevant MVE product page and brochure based on the model series:
     - FC-BIOS collection: https://www.fcbios.com.my/collections/cryopreservation-dewar
     - SC & XC Series (SC 3/3, SC 11/7, SC 20/20, SC 35/24, XC 20, XC 22/5, XC 32/8, XC 33/22, XC 34/18, XC 47/11):
