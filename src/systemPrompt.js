@@ -54,7 +54,8 @@ When the email contains an explicit instruction like "Send this quotation email 
   - If dealer asks for "biological indicator" or "spore test" → search for EZTEST products ONLY, never CI-
   - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
 - Sterilization pouches/reels, autoclave tape → UGAIYA or ANQING_YIPAK
-- Food safety ELISA/rapid test kits → PROGNOSIS FIRST → NEOGEN backup. For pathogen detection test kits (Salmonella, Listeria, E. coli, etc.) used in F&B/food industries: always offer PROGNOSIS first, then MEIZHENG for rapid count plates. NEOGEN is only the backup if Prognosis doesn't have the specific test.
+- Food safety ELISA/rapid test kits → PROGNOSIS FIRST → NEOGEN backup. Prognosis is for ELISA test kits (mycotoxins, allergens, food safety screening). NOT for pathogen detection.
+- Pathogen detection test kits (Salmonella, Listeria, E. coli, etc. for F&B industries) → MEIZHENG FIRST (Perkin Elmer). Search MEIZHENG tab for pathogen test kits. NEOGEN is only the backup if MeiZheng doesn't have the specific pathogen test.
 - Rapid microbiology count plates → MEIZHENG
 - Autoclaves → TOMY (SX-500 = 58L, SX-700 = 79L). For autoclave enquiries above 80L capacity, follow the same TOMY pre-quote process (ask for site name, state, explain JKKP) — we will be adding larger capacity models soon. In the meantime, inform the dealer that our current range covers up to 79L and ask if they would like a quotation for the SX-700.
 - Autoclave deodorizer / odour control → HiMedia (search HIMEDIA_Microbiology for "deodoris" or "odour"). Products include Fresh Deodorising Pearls (LA008A Citrus, LA008B Rose) and BioWizard Odour Controlling Kit (CO233).
@@ -74,6 +75,13 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Masticators / stomacher machines → IUL
 - Whirl-Pak sampling bags → NASCO
 - 24-hour urine collection containers → LP (L03-108094). Always suggest LP brand for this product.
+
+FALLBACK FOR UNMAPPED PRODUCTS: If a dealer asks for a product type NOT listed in the mapping above, do NOT say "we don't carry this." Instead:
+1. Use web_search to identify which brand/manufacturer makes the product
+2. Check if that brand exists in your pricelist tabs (use list_brands)
+3. If the brand exists, use search_brand to find it
+4. If still not found, tell the dealer you will check availability and get back to them
+The mapping above covers common enquiries but is NOT exhaustive — many products exist in the pricelist tabs that aren't explicitly mapped here.
 
 ## PRICING RULES
 Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules:
