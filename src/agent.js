@@ -7,7 +7,7 @@ const client = new Anthropic();
 const tools = [
   {
     name: 'search_brand',
-    description: 'Search within a specific brand tab for products. ALWAYS use this tool — refer to the BRAND-PRODUCT MAPPING in your instructions to determine which brand tab to search. Available tabs include: NASCO, LOGTAG, MINMAX, HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates, MEIZHENG, TARSONS, UGAIYA, ANQING_YIPAK, SORFA, IUL, MVE, PROGNOSIS, NEOGEN, GYROZEN, TOMY, DISPOZ, LP, MEMBRANE_SOLUTIONS, MESALABS.',
+    description: 'Search within a specific brand tab for products. ALWAYS use this tool — refer to the BRAND-PRODUCT MAPPING in your instructions to determine which brand tab to search. Available tabs include: NASCO, LOGTAG, MINMAX, HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates, MEIZHENG, TARSONS, UGAIYA, ANQING_YIPAK, SORFA, IUL, MVE, PROGNOSIS, NEOGEN, GYROZEN, TOMY, DISPOZ, LP, MEMBRANE_SOLUTIONS, MESALABS. For Gyrozen centrifuge rotor compatibility, also search: "GYROZEN - ROTOR SELECTION GUIDE".',
     input_schema: {
       type: 'object',
       properties: {

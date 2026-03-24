@@ -396,11 +396,13 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   
   ## DIRECT QUOTE (when dealer specifies a model or gives enough info):
   If the dealer names a specific model (e.g., "quote for 1580R") or gives enough detail to identify the model:
-  1. Quote the main unit
-  2. Search GYROZEN tab for compatible rotors — recommend the most suitable rotor based on their tube requirements
-  3. Include relevant adaptors/sleeves if needed for their specific tube sizes
-  4. Include delivery charge from the policy (by state) and TnC charge if applicable
-  5. All prices are 2024 base — apply 3% increase for 2026
+  1. Quote the main unit from the GYROZEN pricelist tab
+  2. Search the "GYROZEN - ROTOR SELECTION GUIDE" tab using the model name to find ALL compatible rotors. Recommend the most suitable rotor based on the dealer's tube requirements (e.g., if dealer needs to spin 50mL conical tubes, find the rotor with "50 mL conical" in the Max Capacity column for that model)
+  3. Search the GYROZEN pricelist tab for the recommended rotor's price using the Rotor Cat No
+  4. If the rotor requires buckets (Bucket Cat No is not empty), also quote the buckets
+  5. Include relevant adaptors/sleeves if needed for their specific tube sizes
+  6. Include delivery charge from the policy (by state) and TnC charge if applicable
+  7. All prices are 2024 base — apply 3% increase for 2026
   
   ## DELIVERY & TnC CHARGES (from Gyrozen Policy):
   Delivery charges vary by state and model weight. TnC (Testing & Commissioning) is optional if done by the dealer's service personnel.
