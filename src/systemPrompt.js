@@ -612,7 +612,30 @@ When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mes
   - Use web_search to find the HiMedia catalogue code if needed.
 - COST SAVING — CRITICAL: ALWAYS use search_brand. You do NOT have a search_products tool. Refer to the BRAND-PRODUCT MAPPING above to determine which brand tab to search. If you don't know the brand, use web_search to identify it first, then search_brand.
 - Use list_brands to see available tabs if unsure which tab name to use
-- EFFICIENCY: For large enquiries (5+ items), do ALL product searches first, then ALL stock checks together, then draft the email. Do not alternate between searching and stock checking one item at a time.
+- EFFICIENCY — CRITICAL FOR COST CONTROL:
+  You have batch tools available. ALWAYS use them for multi-item enquiries:
+  
+  1. search_brand_batch: Search for MULTIPLE products in one call. Instead of calling search_brand 6 times for 6 items, call search_brand_batch ONCE with all 6 searches.
+     Example: search_brand_batch({searches: [
+       {brand_tab: "HIMEDIA_Microbiology", keyword: "XLD agar"},
+       {brand_tab: "HIMEDIA_Microbiology", keyword: "MacConkey"},
+       {brand_tab: "HIMEDIA_Microbiology", keyword: "nutrient broth"},
+       {brand_tab: "HIMEDIA_Microbiology", keyword: "TCBS agar"}
+     ]})
+  
+  2. check_stock_batch: Check stock for ALL found SKUs in one call. Instead of calling check_stock 6 times, call check_stock_batch ONCE.
+     Example: check_stock_batch({skus: ["H05-M031-500G", "H05-M002-500G", "H05-M001-500G", "H05-M189-500G"]})
+  
+  3. get_lead_time: Call ONCE per brand (not per item). All items from the same brand share the same lead time.
+  
+  IDEAL FLOW for a 6-item HiMedia enquiry:
+  - Loop 1: search_brand_batch (all 6 items) → get all results
+  - Loop 2: check_stock_batch (all found SKUs) → get all stock data
+  - Loop 3: get_lead_time("HIMEDIA") → get lead time
+  - Loop 4: Draft the quotation email
+  Total: 4 loops instead of 19+. This saves significant API costs.
+  
+  You may still use single search_brand and check_stock for simple 1-2 item enquiries.
 - ITEM ORDER: ALWAYS list items in the quotation table in the SAME ORDER as the dealer's email. If the dealer lists items 7-15, the table must follow that exact sequence. Do NOT reorder items alphabetically or by brand. Match the dealer's numbering and sequence exactly.
 - EVERY ITEM MATTERS: For multi-item enquiries, carefully count the items in the dealer's email. Search for EACH item individually. Do NOT merge or skip items that sound similar. For example, "Bile salt irgasan brilliant green agar" and "Brilliant Green Bile Broth 2%" are COMPLETELY DIFFERENT products — search for each one separately.
 

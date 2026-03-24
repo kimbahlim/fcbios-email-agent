@@ -18,6 +18,28 @@ const tools = [
     }
   },
   {
+    name: 'search_brand_batch',
+    description: 'Search for MULTIPLE products in one or more brand tabs in a single call. Use this instead of calling search_brand multiple times. MUCH more efficient for multi-item enquiries.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        searches: {
+          type: 'array',
+          description: 'Array of search requests, each with brand_tab and keyword',
+          items: {
+            type: 'object',
+            properties: {
+              brand_tab: { type: 'string', description: 'Brand tab name' },
+              keyword: { type: 'string', description: 'Search keyword' }
+            },
+            required: ['brand_tab', 'keyword']
+          }
+        }
+      },
+      required: ['searches']
+    }
+  },
+  {
     name: 'check_stock',
     description: 'Check stock availability for a specific SKU from the Stock tab.',
     input_schema: {
@@ -26,6 +48,21 @@ const tools = [
         sku: { type: 'string', description: 'Product SKU to check stock for' }
       },
       required: ['sku']
+    }
+  },
+  {
+    name: 'check_stock_batch',
+    description: 'Check stock for MULTIPLE SKUs in a single call. Use this instead of calling check_stock multiple times. Returns stock data for all requested SKUs at once.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        skus: {
+          type: 'array',
+          description: 'Array of SKU strings to check stock for',
+          items: { type: 'string' }
+        }
+      },
+      required: ['skus']
     }
   },
   {
@@ -85,9 +122,28 @@ async function processToolCall(toolName, toolInput) {
       case 'search_brand':
         result = await searchByBrand(toolInput.brand_tab, toolInput.keyword);
         break;
+      case 'search_brand_batch': {
+        const batchResults = {};
+        for (const search of toolInput.searches) {
+          const key = `${search.brand_tab}:${search.keyword}`;
+          console.log(`[BATCH SEARCH] ${search.brand_tab} → "${search.keyword}"`);
+          batchResults[key] = await searchByBrand(search.brand_tab, search.keyword);
+        }
+        result = batchResults;
+        break;
+      }
       case 'check_stock':
         result = await checkStock(toolInput.sku);
         break;
+      case 'check_stock_batch': {
+        const stockResults = {};
+        for (const sku of toolInput.skus) {
+          console.log(`[BATCH STOCK] Checking: ${sku}`);
+          stockResults[sku] = await checkStock(sku);
+        }
+        result = stockResults;
+        break;
+      }
       case 'get_nasco_dealer_tier':
         result = await getNascoDealerTier(toolInput.dealer_name);
         break;
