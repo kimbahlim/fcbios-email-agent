@@ -54,11 +54,12 @@ When the email contains an explicit instruction like "Send this quotation email 
   - If dealer asks for "biological indicator" or "spore test" → search for EZTEST products ONLY, never CI-
   - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
 - Sterilization pouches/reels, autoclave tape → UGAIYA or ANQING_YIPAK
-- Food safety ELISA/rapid test kits → PROGNOSIS FIRST → NEOGEN backup. Prognosis is for ELISA test kits (mycotoxins, allergens, food safety screening). NOT for pathogen detection.
-- Pathogen detection test kits (Salmonella, Listeria, E. coli, etc. for F&B industries) → MEIZHENG FIRST (Perkin Elmer). Search MEIZHENG tab for pathogen test kits. NEOGEN is only the backup if MeiZheng doesn't have the specific pathogen test.
-- Rapid microbiology count plates → MEIZHENG
+- Food safety ELISA test kits (mycotoxins: aflatoxin, ochratoxin, zearalenone, deoxynivalenol, allergens) → PROGNOSIS FIRST → NEOGEN backup. These are chemical contaminant tests, NOT pathogen tests.
+- Pathogen detection / microbiology testing for F&B industries (Salmonella, Listeria, E. coli, Staphylococcus, Coliform, Vibrio, etc.) → MEIZHENG MicroFast rapid count plates FIRST (search MEIZHENG for the specific organism). These are P08-LR series products. NEOGEN is the backup for pathogen-specific ELISA/molecular tests.
+  CRITICAL: Pathogens and mycotoxins are COMPLETELY DIFFERENT. Do NOT offer mycotoxin test kits (aflatoxin, ochratoxin, zearalenone, DON) when a dealer asks for pathogen test kits. Pathogens = living organisms (bacteria). Mycotoxins = chemical toxins from fungi.
+- Rapid microbiology count plates (total aerobic, yeast & mold, coliform, E. coli, Staph aureus, Enterobacteriaceae, Bacillus cereus, Lactic acid bacteria) → MEIZHENG MicroFast range
 - Autoclaves → TOMY (SX-500 = 58L, SX-700 = 79L). For autoclave enquiries above 80L capacity, follow the same TOMY pre-quote process (ask for site name, state, explain JKKP) — we will be adding larger capacity models soon. In the meantime, inform the dealer that our current range covers up to 79L and ask if they would like a quotation for the SX-700.
-- Autoclave deodorizer / odour control → HiMedia (search HIMEDIA_Microbiology for "deodoris" or "odour"). Products include Fresh Deodorising Pearls (LA008A Citrus, LA008B Rose) and BioWizard Odour Controlling Kit (CO233).
+- Autoclave deodorizer / odour control → HiMedia (search HIMEDIA_Microbiology for "deodoris" or "odour"). Products: Fresh Deodorising Pearls (LA008A Citrus, LA008B Rose). Do NOT offer CO233 BioWizard Odour Controlling Kit — that is for large hospital-grade autoclaves, not the lab autoclaves we sell.
 - Centrifuges → GYROZEN
 - LN2 dewars / cryo storage → MVE
 - MVE DEWAR BUNDLING: When quoting MVE dewars, ALWAYS include the complete package — never quote just the bare dewar. The pricelist groups items by model: the main unit is listed first, followed by accessories in parenthesized model names.
