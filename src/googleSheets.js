@@ -225,7 +225,9 @@ async function checkStock(sku) {
     if (nameNoHyphen === skuNoHyphen) return true;  // match without hyphens
     if (nameNoHyphen.includes(skuNoHyphen)) return true;  // name (no hyphen) contains sku (no hyphen)
     if (skuNoHyphen.includes(nameNoHyphen) && nameNoHyphen.length > 5) return true;
-    if (skuSuffix && name.includes(skuSuffix)) return true;  // match suffix after brand prefix
+    // Match suffix after brand prefix ONLY if suffix contains the product code (not just pack size like 500G)
+    // Suffix must be at least 6 chars and NOT be just a pack size
+    if (skuSuffix && skuSuffix.length >= 6 && !/^\d+[a-z]*$/i.test(skuSuffix) && name.includes(skuSuffix)) return true;
     
     return false;
   });
