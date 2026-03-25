@@ -213,18 +213,36 @@ async function checkStock(sku) {
   // Also try just the numeric/alpha part after the brand prefix
   const skuParts = sku.match(/^[A-Z0-9]+-(.+)$/i);
   const skuSuffix = skuParts ? skuParts[1].toLowerCase() : '';
+  
+  // Generate all SKU variants to try (vendor code ↔ NetSuite code)
+  const skuVariants = [skuLower];
+  // If SKU doesn't start with a brand prefix like H05-, try adding common prefixes
+  if (!/^[a-z]\d{2}-/i.test(sku)) {
+    // Vendor code like SD153-5CT → try H05-SD153-5CT
+    const prefixes = ['h05-', 'n13-', 't38-', 'r20-', 'l03-', 'm02-', 'p08-', 'b14-', 'a72-', 'c62-', 'dj01-', 'f07-'];
+    for (const prefix of prefixes) {
+      skuVariants.push(prefix + skuLower);
+    }
+  } else {
+    // NetSuite code like H05-SD153-5CT → also try SD153-5CT (without prefix)
+    const withoutPrefix = skuLower.replace(/^[a-z]\d{2}-/i, '');
+    skuVariants.push(withoutPrefix);
+  }
 
   const match = rows.find(row => {
     const name = (row['NAME'] || row['name'] || row['Name'] || Object.values(row)[0] || '').toLowerCase().trim();
     const nameNoHyphen = name.replace(/-/g, '');
     
-    // Try multiple matching strategies
-    if (name === skuLower) return true;  // exact match
-    if (name.includes(skuLower)) return true;  // name contains full sku
-    if (skuLower.includes(name) && name.length > 5) return true;  // sku contains full name
-    if (nameNoHyphen === skuNoHyphen) return true;  // match without hyphens
-    if (nameNoHyphen.includes(skuNoHyphen)) return true;  // name (no hyphen) contains sku (no hyphen)
-    if (skuNoHyphen.includes(nameNoHyphen) && nameNoHyphen.length > 5) return true;
+    // Try all SKU variants against this row
+    for (const variant of skuVariants) {
+      const variantNoHyphen = variant.replace(/-/g, '');
+      if (name === variant) return true;  // exact match
+      if (name.includes(variant)) return true;  // name contains full sku
+      if (variant.includes(name) && name.length > 5) return true;  // sku contains full name
+      if (nameNoHyphen === variantNoHyphen) return true;  // match without hyphens
+      if (nameNoHyphen.includes(variantNoHyphen)) return true;  // name (no hyphen) contains sku (no hyphen)
+      if (variantNoHyphen.includes(nameNoHyphen) && nameNoHyphen.length > 5) return true;
+    }
     // Match suffix after brand prefix ONLY if suffix contains the product code (not just pack size like 500G)
     // Suffix must be at least 6 chars and NOT be just a pack size
     if (skuSuffix && skuSuffix.length >= 6 && !/^\d+[a-z]*$/i.test(skuSuffix) && name.includes(skuSuffix)) return true;
