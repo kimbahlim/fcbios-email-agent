@@ -46,6 +46,15 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Molecular biology reagents → HiMedia (HIMEDIA_Molecular_Biology)
 - Animal tissue culture media → HiMedia (HIMEDIA_Animal_Tissue_Culture)
 - Ready prepared media plates → HiMedia RPM (HIMEDIA_RPM_Plates) or MeiZheng
+- Fine chemicals, biochemicals, pharmaceutical excipients, reagent-grade chemicals (e.g., Tween 80, Methylparaben, Propylparaben, Carbopol, PEG, Triethanolamine, EDTA, Ethanol, solvents, buffers) → HiMedia GRM/RM series → search HIMEDIA_Microbiology tab. These have H05-GRM or H05-RM prefix codes.
+- CHEMICAL SYNONYMS — always try both names when searching:
+  - Tween 80 = Polysorbate 80 = Polyoxyethylene Sorbitan Monooleate → search "GRM159" or "Tween 80" or "Polysorbate"
+  - Tween 20 = Polysorbate 20 → search "GRM156" or "Tween 20"
+  - Methyl Paraben = Methylparaben → search "GRM1899" or "Methylparaben"
+  - Propyl Paraben = Propylparaben → search "propylparaben" or "propyl paraben"
+  - PEG = Polyethylene Glycol → search "PEG" or "polyethylene glycol" — note: we carry PEG 6000 (GRM401), NOT PEG 400
+  - Triethanolamine (TEA) → search "triethanolamine" — may not be available
+  - Carbopol 974P → search "Carbopol" — we carry Carbopol-940 (GRM2033) and Carbopol 934 (GRM6761), NOT 974P
 - Biological/chemical indicators, sterilization → UGAIYA FIRST → check stock → if UGAIYA out of stock, ALSO search MESALABS for ex-stock alternative and offer both options (UGAIYA on indent + MESALABS ex-stock if available).
   REVERSE: If dealer specifically asks for a MESALABS/Raven product, quote it BUT also search UGAIYA for the equivalent product and offer it as a more price-competitive alternative.
   CRITICAL PRODUCT TYPE MATCHING: Chemical integrators and biological indicators are COMPLETELY DIFFERENT products. Never substitute one for the other.
@@ -501,7 +510,11 @@ When a dealer asks for an air sampler:
 Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_For_Export tab. If found, do NOT quote it.
 
 ## HIMEDIA ITEMS NOT IN PRICELIST
-If a HiMedia product is requested but NOT found in any HiMedia pricelist tab (HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates), it means the item is not available for export and therefore not available for sale in Malaysia. Do NOT say you will check with HiMedia or follow up. Simply state: "We regret to inform you that [item] is not available for export and therefore not available for sale. We apologize for any inconvenience."
+If a HiMedia product is requested but NOT found in any HiMedia pricelist tab (HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates), FIRST try:
+1. Search with synonyms (e.g., Tween 80 → also try "Polysorbate", "GRM159", "Monooleate")
+2. Search using the HiMedia product code if the dealer provided one (e.g., GRM1899, RM159)
+3. Use web_search("himedialabs.com [product name] SKU") to find the correct code, then search the pricelist
+Only after all these attempts fail, state: "We regret to inform you that [item] is not available for export and therefore not available for sale in Malaysia."
 
 ## HIMEDIA SERIES PRIORITY RULE
 HiMedia has multiple series for the same media product. The series prefix determines the type:
