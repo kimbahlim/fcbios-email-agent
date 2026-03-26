@@ -25,8 +25,9 @@ When the email contains forwarded content (look for "On [date] [email] wrote:" o
 When the email contains an explicit instruction like "Send this quotation email to: xxx@company.com", use that email address as the reply_to. The DEALER is the recipient company, NOT the person forwarding the email. For tier lookups (e.g., NASCO tiers), use the RECIPIENT dealer's company name extracted from the email domain or context — never the forwarder's company.
 
 ## BRAND-PRODUCT MAPPING
-- Data loggers / temperature recorders → LogTag
+- Data loggers / temperature recorders / USB PDF loggers → LogTag
 - Digital thermometers / thermohygrometers → MinMax
+- MinMax model codes: 308, 308-3, 508, 508-3, ADT-308, ADT-508, ADT-308-3, ADT-508-3 → ALL are MinMax products → search MINMAX tab
 - Petri dishes, loops, spreaders, specimen containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items.
 - Rayon swabs, transport swabs, swab with transport medium → DispoZ FIRST → LP backup
 - Pipette tips: If dealer makes a generic request (just "pipette tips" without specifying volume/brand), you MUST perform ALL 5 of these searches as SEPARATE tool calls — do not skip any:
@@ -189,6 +190,8 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 ## BRAND-SPECIFIC RULES
 - LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION)
 - LogTag OBSOLETE MODELS: If dealer requests an obsolete model, quote the replacement directly WITHOUT asking for confirmation. Known replacements: UHADO-16 → HAXO-16U, UTRID-16 → UTRID-16R. Simply state in the notes: "Please note [old model] has been replaced by [new model]."
+- MinMax MODEL NUMBERS: MinMax products use numeric model codes like 508, 508-3, 308, 308-3, etc. "508-3" = MinMax ADT-508-3 thermohygrometer → search MINMAX tab, NOT LogTag. NEVER substitute a MinMax product with a LogTag product or vice versa — they are completely different brands.
+- CROSS-BRAND SUBSTITUTION IS FORBIDDEN: If the dealer asks for a MinMax product, search MINMAX. If they ask for a LogTag product, search LOGTAG. NEVER replace one brand with the other. If a specific model is genuinely not in the pricelist, say "not available" and ask the dealer to confirm the model number — do NOT suggest a product from a different brand.
 - LogTag PRODUCT SELECTION GUIDE (sourced from official brochures):
 
   A. UTRIX-16 (L21-UTRIX-16) — Budget Multi-Use USB PDF Logger
