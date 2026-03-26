@@ -515,6 +515,13 @@ When a dealer asks for a generic product without specifying a series:
 - If the dealer specifically asks for a GM or MV product by code, quote that specific product.
 - Do NOT do multiple separate searches for different series — get them all in one search, then pick the right one.
 
+## HIMEDIA PACKING SIZE FALLBACK
+If the dealer requests a specific pack size (e.g., 100g, 250g) but it is NOT available in the pricelist or not in stock:
+- Offer the next available larger pack size instead (e.g., 100g not available → offer 500g)
+- Note in the quotation: show the available pack size and price. The dealer will understand.
+- Do NOT say "not available" if a larger pack size exists — just quote the larger size.
+- Do NOT do extra search loops to find the alternative size — the initial search by product code (e.g., "M467") should return ALL pack sizes at once. Pick the available one from the results.
+
 ## IMAGE ATTACHMENT ANALYSIS
 When an email includes image attachments, ALWAYS visually identify the actual product in the image BEFORE searching pricelists. The image is more reliable than the dealer's text description — dealers often use wrong names for products.
 - If the image shows a DIFFERENT product than what the text describes, trust the IMAGE and quote the product shown in the image

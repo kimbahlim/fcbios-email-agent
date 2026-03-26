@@ -174,20 +174,23 @@ async function processAttachments(attachments) {
   
   for (const att of attachments) {
     try {
-      // Skip small images (likely email signature icons/logos) — under 100KB
+      // Skip email signature/branding images — these are NOT product images
       const filenameLower = (att.filename || '').toLowerCase();
-      const isLikelySignatureImage = att.size < 100000 && 
-        (filenameLower.includes('outlook') || filenameLower.includes('logo') || 
-         filenameLower.includes('icon') || filenameLower.includes('signature') ||
-         filenameLower.includes('banner') || filenameLower.includes('footer'));
+      const isSignatureImage = 
+        filenameLower.includes('outlook') || filenameLower.includes('logo') || 
+        filenameLower.includes('icon') || filenameLower.includes('signature') ||
+        filenameLower.includes('banner') || filenameLower.includes('footer') ||
+        filenameLower.includes('header') || filenameLower.includes('email-bg') ||
+        filenameLower.startsWith('image00') || // Gmail inline images like image001.jpg
+        (filenameLower.startsWith('outlook-') && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase()));
       
-      if (isLikelySignatureImage) {
-        console.log(`[ATTACHMENT] Skipping signature image: ${att.filename} (${att.size} bytes)`);
+      if (isSignatureImage) {
+        console.log(`[ATTACHMENT] Skipping signature/branding image: ${att.filename} (${att.size} bytes)`);
         continue;
       }
       
-      // Skip very small images (under 20KB) regardless of name — almost always icons
-      if (att.size < 20000 && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase())) {
+      // Skip very small images (under 30KB) regardless of name — almost always icons/avatars
+      if (att.size < 30000 && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase())) {
         console.log(`[ATTACHMENT] Skipping tiny image: ${att.filename} (${att.size} bytes)`);
         continue;
       }
