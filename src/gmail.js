@@ -174,6 +174,24 @@ async function processAttachments(attachments) {
   
   for (const att of attachments) {
     try {
+      // Skip small images (likely email signature icons/logos) — under 100KB
+      const filenameLower = (att.filename || '').toLowerCase();
+      const isLikelySignatureImage = att.size < 100000 && 
+        (filenameLower.includes('outlook') || filenameLower.includes('logo') || 
+         filenameLower.includes('icon') || filenameLower.includes('signature') ||
+         filenameLower.includes('banner') || filenameLower.includes('footer'));
+      
+      if (isLikelySignatureImage) {
+        console.log(`[ATTACHMENT] Skipping signature image: ${att.filename} (${att.size} bytes)`);
+        continue;
+      }
+      
+      // Skip very small images (under 20KB) regardless of name — almost always icons
+      if (att.size < 20000 && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase())) {
+        console.log(`[ATTACHMENT] Skipping tiny image: ${att.filename} (${att.size} bytes)`);
+        continue;
+      }
+      
       console.log(`[ATTACHMENT] Downloading: ${att.filename} (${att.mimeType}, ${att.size} bytes)`);
       const base64Data = await downloadAttachment(att.messageId, att.attachmentId);
       const standardBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');

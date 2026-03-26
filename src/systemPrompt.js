@@ -122,6 +122,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Masticators / stomacher machines → IUL
 - Whirl-Pak sampling bags → NASCO
 - 24-hour urine collection containers → LP (L03-108094). Always suggest LP brand for this product.
+- ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
 
 FALLBACK FOR UNMAPPED PRODUCTS: If a dealer asks for a product type NOT listed in the mapping above, do NOT say "we don't carry this." Instead:
 1. Use web_search to identify which brand/manufacturer makes the product
