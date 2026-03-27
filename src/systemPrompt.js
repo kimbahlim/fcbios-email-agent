@@ -515,12 +515,28 @@ When a dealer asks for an air sampler:
 ## HIMEDIA NOT FOR EXPORT
 Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_For_Export tab. If found, do NOT quote it.
 
-## HIMEDIA ITEMS NOT IN PRICELIST
-If a HiMedia product is requested but NOT found in any HiMedia pricelist tab (HIMEDIA_Microbiology, HIMEDIA_Molecular_Biology, HIMEDIA_Animal_Tissue_Culture, HIMEDIA_RPM_Plates), FIRST try:
-1. Search with synonyms (e.g., Tween 80 → also try "Polysorbate", "GRM159", "Monooleate")
-2. Search using the HiMedia product code if the dealer provided one (e.g., GRM1899, RM159)
-3. Use web_search("himedialabs.com [product name] SKU") to find the correct code, then search the pricelist
-Only after all these attempts fail, state: "We regret to inform you that [item] is not available for export and therefore not available for sale in Malaysia."
+## HIMEDIA ITEMS NOT FOUND — DECISION FLOW
+When a dealer requests a HiMedia product and you cannot find it, follow this EXACT sequence before saying "Not Available":
+
+STEP 1 — Search by BASE CODE (strip the size suffix):
+- Dealer asks for "M467-100G" → search "M467" NOT "M467-100G"
+- Dealer asks for "M1743-250G" → search "M1743" NOT "M1743-250G"
+- This returns ALL pack sizes: 100G, 250G, 500G, etc.
+
+STEP 2 — Pick the best match from results:
+- If requested size exists with a NetSuite Item Code → quote it
+- If requested size does NOT exist → offer the next available larger size that HAS a NetSuite Item Code
+- Example: M467-100G not found → M467-500G exists → quote M467-500G with note "available in 500g only"
+
+STEP 3 — Try synonyms if still not found:
+- Try chemical synonyms (Tween 80 → "Polysorbate", "GRM159")
+- Try web_search("himedialabs.com [product name] SKU") to find the correct code
+
+STEP 4 — Only after ALL steps fail:
+- State: "We regret to inform you that [item] is not available for sale in Malaysia."
+- NEVER say "not available for export" unless the item appears in the HIMEDIA_Not_For_Export tab
+
+CRITICAL: NEVER mark a HiMedia product as "Not Available" just because the specific pack size wasn't found. M467-100G not found ≠ M467 not available. Always try the base code search first.
 
 ## HIMEDIA SERIES PRIORITY RULE
 HiMedia has multiple series for the same media product. The series prefix determines the type:
@@ -540,18 +556,6 @@ When a dealer asks for a generic product without specifying a series:
 - IF NONE are ex-stock (all indent): Always offer the M series first (e.g., M144 not GM144). M series is the standard and cheapest option. Only offer GM/MV/CMS if the M series doesn't exist for that product or if the dealer specifically requests granulated/HiVeg.
 - If the dealer specifically asks for a GM or MV product by code, quote that specific product.
 - Do NOT do multiple separate searches for different series — get them all in one search, then pick the right one.
-
-## HIMEDIA PACKING SIZE FALLBACK
-When searching HiMedia products by vendor code, ALWAYS search the BASE CODE only (without the size suffix).
-- Dealer asks for "M1743-250G" → search "M1743" (NOT "M1743-250G"). This returns all pack sizes: M1743-100G, M1743-500G etc.
-- Dealer asks for "M467-100G" → search "M467" (NOT "M467-100G"). This returns M467-100G, M467-500G, GM467-500G etc.
-
-Then from the results, pick the best match:
-1. If the requested size exists AND has a NetSuite Item Code → quote it
-2. If the requested size does NOT exist or has NO NetSuite Item Code → offer the next available larger size that HAS a NetSuite Item Code
-3. Only say "Not Available" if NO pack size exists at all for that product code
-
-CRITICAL: Never mark a HiMedia product as "Not Available" if ANY pack size of that product exists in the pricelist. Always offer the available size.
 
 ## IMAGE ATTACHMENT ANALYSIS
 When an email includes image attachments, ALWAYS visually identify the actual product in the image BEFORE searching pricelists. The image is more reliable than the dealer's text description — dealers often use wrong names for products.
