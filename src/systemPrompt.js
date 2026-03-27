@@ -727,6 +727,12 @@ How to use for specifications: When a dealer asks about storage temperature, tra
 - Include the specifications in your response (e.g., "Storage: Store below 25°C, transport at ambient temperature").
 - NOTE: Most HiMedia dehydrated culture media are stored at 15-25°C (ambient) unless specified otherwise. Supplements and ready-prepared media may require 2-8°C.
 
+For POISON/HAZARD questions: Malaysian dealers often ask if items are "poison" meaning scheduled under the Poisons Act 1952.
+- FIRST: Check stock tab DESCRIPTION 2 field — if it says "Perishable Item" or has hazard notes, include that.
+- FALLBACK: use web_search "himedialabs.com [vendor code] safety MSDS" to find the safety data sheet, then extract any hazard/poison classification.
+- If web search doesn't clearly confirm poison schedule: do NOT guess. Instead say: "For poison classification and safety data, please download the MSDS for [product code] at: https://www.himedialabs.com/us/coasdstds/"
+- NEVER state a product is or isn't a poison based on your training knowledge alone.
+
 Do NOT use web search for: general information, pricing from other suppliers, or anything unrelated to identifying product SKUs or specifications.`;
 }
 
