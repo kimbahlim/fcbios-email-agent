@@ -3,12 +3,14 @@ const SPREADSHEET_ID = process.env.GOOGLE_SPREADSHEET_ID;
 const BASE_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}`;
 
 let sheetsCache = {};
-let cacheTime = 0;
+let cacheTimes = {}; // per-tab cache timestamps
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const LEAD_TIMES_TTL = 60 * 1000; // 1 minute for LEAD_TIMES so updates are picked up quickly
 
 async function fetchSheet(tabName) {
   const now = Date.now();
-  if (sheetsCache[tabName] && (now - cacheTime) < CACHE_TTL) {
+  const ttl = tabName === 'LEAD_TIMES' ? LEAD_TIMES_TTL : CACHE_TTL;
+  if (sheetsCache[tabName] && (now - (cacheTimes[tabName] || 0)) < ttl) {
     console.log(`[SHEETS] Using cache for "${tabName}" (${sheetsCache[tabName].length} rows)`);
     return sheetsCache[tabName];
   }
@@ -46,7 +48,7 @@ async function fetchSheet(tabName) {
   }
 
   sheetsCache[tabName] = results;
-  cacheTime = now;
+  cacheTimes[tabName] = now;
   return results;
 }
 
