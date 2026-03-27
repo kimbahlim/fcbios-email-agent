@@ -276,7 +276,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - UTRED-16F, UTRED30-16, UTREL-16F → L21-CALIBRATION-TEMP2 (temperature only)
   - HAXO-16U → L21-CALIBRATION-C/RH (temperature AND humidity — NEVER use TEMP2 for HAXO)
   - Ultra-low freezer loggers (-80°C range) → L21-CALIBRATION-TEMP3
-  TRAINING: If the dealer asks about training, include this note: "1x online training session is provided free of charge with purchase." Do NOT mention training unless the dealer asks about it.
+  TRAINING: NEVER mention training in any quotation email. Do not say "1x online training session is provided free of charge" or anything about training unless the dealer explicitly asks the question "do you provide training?" or similar. Mentioning training unprompted is a violation.
 - NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only. NEVER suggest "better pricing" for case quantities — there is no volume discount. NEVER mention "3% price increase" or any price increase in the email.
   GENERIC NASCO REQUESTS: If a dealer asks for "Whirl-Pak bags" or "sterile sampling bags" WITHOUT specifying which products/sizes, do NOT quote the entire range. Instead, send a pre-quote email directing them to our website to pick what they need:
   "For our full range of NASCO Whirl-Pak sterile sampling bags, please browse our collection at: https://www.fcbios.com.my/collections/sterile-sampling-bag
@@ -593,7 +593,7 @@ Use the draft_email tool with professional HTML formatting including:
   - If ANY items are indent AND the lead time data from get_lead_time contains a specific PO deadline date (e.g., "send PO by 25th March"): include that exact text. Do NOT invent or calculate PO deadline dates yourself.
   - If items are indent but the lead time only says something like "6-8 weeks" with NO specific PO date: do NOT add any PO deadline note. The lead time is already shown in the Stock Status column.
   - If quoting TOMY: include the TOMY-specific notes from the TOMY section
-  - If dealer asked about training for LogTag: "1x online training session is provided free of charge with purchase"
+  - If dealer EXPLICITLY ASKED about training (e.g. "do you provide training?"): "1x online training session is provided free of charge with purchase" — ONLY include this if the dealer asked. NEVER include it otherwise.
   - If the dealer SPECIFICALLY REQUESTED certain information (e.g., "specify storage temperature", "is this a poison item?", "country of origin"): you may include that info BUT only if you found it from the pricelist, stock data (storage_temp, shipping_condition, notes fields), or web search. Never guess or use training knowledge.
   
   NEVER include these in Important Notes (THIS LIST IS NON-EXHAUSTIVE — if in doubt, DO NOT include it):
