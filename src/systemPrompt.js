@@ -271,7 +271,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 
   All multi-use models: can be stopped/restarted, generate PDF reports via USB, 5+ year usable life.
   Always offer BOTH with and without wall mounting bracket (-WMB variant).
-  Always add CALIBRATION service (not RE-CALIBRATION).
+  Always add CALIBRATION service (not RE-CALIBRATION). Use the correct calibration code based on the model:
+  - UTRIX-16, UTRID-16R → L21-CALIBRATION-TEMP2 (temperature only, -30°C to +40°C)
+  - UTRED-16F, UTRED30-16, UTREL-16F → L21-CALIBRATION-TEMP2 (temperature only)
+  - HAXO-16U → L21-CALIBRATION-C/RH (temperature AND humidity — NEVER use TEMP2 for HAXO)
+  - Ultra-low freezer loggers (-80°C range) → L21-CALIBRATION-TEMP3
   TRAINING: If the dealer asks about training, include this note: "1x online training session is provided free of charge with purchase." Do NOT mention training unless the dealer asks about it.
 - NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only. NEVER suggest "better pricing" for case quantities — there is no volume discount. NEVER mention "3% price increase" or any price increase in the email.
   GENERIC NASCO REQUESTS: If a dealer asks for "Whirl-Pak bags" or "sterile sampling bags" WITHOUT specifying which products/sizes, do NOT quote the entire range. Instead, send a pre-quote email directing them to our website to pick what they need:
