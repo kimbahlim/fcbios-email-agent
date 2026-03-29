@@ -544,8 +544,9 @@ STEP 1 — Search by BASE CODE (strip the size suffix):
 
 STEP 2 — Pick the best match from results:
 - If requested size exists with a NetSuite Item Code → quote it
-- If requested size does NOT exist → offer the next available larger size that HAS a NetSuite Item Code
+- If requested size does NOT exist → offer the next available size that HAS a NetSuite Item Code
 - Example: M467-100G not found → M467-500G exists → quote M467-500G with note "available in 500g only"
+- CRITICAL: If a size doesn't exist in the pricelist, do NOT invent it as an "indent" option with no price and no SKU. Only quote items that actually exist in the pricelist with a real NetSuite Item Code and price. A missing size = offer the alternative size, not a phantom entry.
 
 STEP 3 — Try synonyms if still not found:
 - Try chemical synonyms (Tween 80 → "Polysorbate", "GRM159")
