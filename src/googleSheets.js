@@ -136,9 +136,35 @@ async function searchByBrand(brandTab, keyword) {
   const kw = keyword.toLowerCase();
   const keywords = kw.split(/\s+/).filter(k => k.length > 1);
 
-  // Try 1: ALL keywords match (strictest)
+  // For HiMedia tabs: if keyword looks like a series code (e.g. "M290", "M144"),
+  // also search by the numeric part alone so MH290, GM290, GMH290 etc. are all found
+  let expandedKeywords = [...keywords];
+  if (brandTab.toLowerCase().includes('himedia')) {
+    keywords.forEach(k => {
+      // Match HiMedia series prefixes: M, MH, GM, GMH, MV, MM, CMS, FD, SD, LQ, RM, GRM
+      const seriesMatch = k.match(/^(gmh|grm|cms|mh|gm|mv|mm|lq|fd|sd|rm|m)(\d+.*)$/i);
+      if (seriesMatch) {
+        const numericPart = seriesMatch[2].toLowerCase();
+        if (!expandedKeywords.includes(numericPart)) {
+          expandedKeywords.push(numericPart);
+          console.log(`[SEARCH] HiMedia series strip: "${k}" → also searching "${numericPart}"`);
+        }
+      }
+    });
+  }
+
+  // Try 1: ALL keywords match (strictest) — use expandedKeywords to catch all HiMedia series
   let matches = rows.filter(row => {
     const text = Object.values(row).join(' ').toLowerCase();
+    // For HiMedia with expanded keywords: match if ANY expanded keyword variant matches ALL original keywords
+    // OR if the expanded numeric part alone matches
+    if (expandedKeywords.length > keywords.length) {
+      // Try original keywords first
+      if (keywords.every(k => text.includes(k))) return true;
+      // Try with numeric part — matches MH290, GM290 etc. when searching M290
+      const numericKeys = expandedKeywords.filter(k => !keywords.includes(k));
+      return numericKeys.some(nk => text.includes(nk));
+    }
     return keywords.every(k => text.includes(k));
   });
 
