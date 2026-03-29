@@ -561,19 +561,23 @@ CRITICAL: NEVER mark a HiMedia product as "Not Available" just because the speci
 ## HIMEDIA SERIES PRIORITY RULE
 HiMedia has multiple series for the same media product. The series prefix determines the type:
 - M = Standard dehydrated media (cheapest, most common)
-- MH = Modified formulation
+- MH = Harmonised Media (EP/USP/BP harmonised formulation — commonly required for pharmaceutical/QC labs)
 - GM = Granulated media (more expensive than M)
 - MV = HiVeg (vegetable-based, more expensive)
+- GMH = Granulated Harmonised Media
 - CMS = Certified media
+- MM = Modified formulation
 
 SEARCH STRATEGY: When searching for a HiMedia product, use a SHORT keyword that will match ALL series at once. Do NOT include series prefix in the search — just search the product name.
 - Example: For "Kings Medium B Base" → search "King" (returns M1544, GM1544, MV1235 etc. all at once)
+- Example: For "Tryptone Soya Agar" → search "Tryptone Soya" or "290" (returns M290, MH290, GM290, GMH290 etc. all at once)
 - Example: For "Columbia Blood Agar" → search "Columbia Blood" (returns M144, GM144 etc.)
 - This avoids needing multiple search loops to find different series.
 
 When a dealer asks for a generic product without specifying a series:
 - FIRST: From the search results, check stock for ALL matching series in ONE check_stock_batch call. If ANY series is ex-stock, offer the ex-stock one regardless of series.
-- IF NONE are ex-stock (all indent): Always offer the M series first (e.g., M144 not GM144). M series is the standard and cheapest option. Only offer GM/MV/CMS if the M series doesn't exist for that product or if the dealer specifically requests granulated/HiVeg.
+- IF NONE are ex-stock (all indent): Always offer the M series first (e.g., M144 not GM144). M series is the standard and cheapest option. Also offer MH series if it exists (pharmaceutical labs often need it). Only offer GM/MV/CMS if the M series doesn't exist or dealer requests it.
+- If the dealer specifically asks for MH (Harmonised) by code, quote that specific product — do NOT substitute with M series.
 - If the dealer specifically asks for a GM or MV product by code, quote that specific product.
 - Do NOT do multiple separate searches for different series — get them all in one search, then pick the right one.
 
