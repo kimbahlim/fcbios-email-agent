@@ -80,14 +80,15 @@ When the email contains an explicit instruction like "Send this quotation email 
   - If dealer asks for "biological indicator" or "spore test" → search for EZTEST products ONLY, never CI-
   CRITICAL ORGANISM-STERILIZATION MATCHING — Biological indicators use DIFFERENT organisms for DIFFERENT sterilization methods. You MUST match the organism to the correct sterilization type:
   - Geobacillus stearothermophilus (G. stearothermophilus) = STEAM sterilization BIs → UGAIYA: UGBI0501 (Log5/Log6), UGBI0506B | MESALABS: EZS/5, EZS/6 (EZTest Steam)
-  - Bacillus atrophaeus (B. atrophaeus, formerly B. subtilis var. niger) = EO (Ethylene Oxide) sterilization BIs → UGAIYA: UGBI0503 (EO) | MESALABS: EZG/6 (EZTest EO)
-  - Bacillus atrophaeus = also used for DRY HEAT sterilization BIs → UGAIYA: UGBI0504 (Dry Heat, 160-250°C)
+  - Bacillus atrophaeus (B. atrophaeus, formerly B. subtilis var. niger) = EO (Ethylene Oxide) sterilization BIs → UGAIYA: UGBI0503 (EO, 24-48hr, 50/box) | MESALABS: EZG/6, EZG/625 (EZTest EO) | Also available: F07-1264 (EO Indicators, Bacillus Subtilis, 100/box, 4box/case)
+  - Bacillus atrophaeus = also used for DRY HEAT sterilization BIs → UGAIYA: UGBI0504 (Dry Heat, B. atrophaeus ATCC9372, 160-250°C, 50/box)
   - Geobacillus stearothermophilus = also used for VHP (Hydrogen Peroxide Plasma) BIs → UGAIYA: UGBI0502 (VHP) | MESALABS: EZH/6I (EZTest H2O2)
   WHEN DEALER MENTIONS AN ORGANISM NAME:
   - "Bacillus subtilis" or "B. subtilis" → they want EO or Dry Heat BIs (NOT steam). Search for UGBI0503 (EO) and UGBI0504 (Dry Heat). Ask dealer to confirm which sterilization method (EO or dry heat) if not specified.
   - "Geobacillus stearothermophilus" or "G. stearothermophilus" → they want Steam or VHP BIs. Search for UGBI0501 (Steam). Default to steam unless they mention VHP/H2O2.
   - "Bacillus atrophaeus" or "B. atrophaeus" → same as B. subtilis → EO or Dry Heat BIs.
   NEVER assume steam sterilization by default when the dealer specifies an organism. Match the organism FIRST, then offer the correct product.
+  NOTE: We do NOT carry UGAIYA rapid-readout BI models (UGBI0201 20min, UGBI0101 3hr, UGBI0301 1hr, UGBI0401 4hr EO, UGBI0102 VHP rapid). Only the standard 24-48hr versions (UGBI0501, UGBI0502, UGBI0503, UGBI0504, UGBI0506B) are in our pricelist. If dealer asks for rapid-readout BIs, quote what we have and note that rapid versions are not currently available.
   - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
   EXACT SKUs to use — NEVER say "Contact for SKU" for these:
   - UGAIYA Class 5 chemical integrator: U11-UGCI0105 (500pcs/case)
