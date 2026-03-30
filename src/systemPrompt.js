@@ -80,7 +80,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   - If dealer asks for "biological indicator" or "spore test" → search for EZTEST products ONLY, never CI-
   CRITICAL ORGANISM-STERILIZATION MATCHING — Biological indicators use DIFFERENT organisms for DIFFERENT sterilization methods. You MUST match the organism to the correct sterilization type:
   - Geobacillus stearothermophilus (G. stearothermophilus) = STEAM sterilization BIs → UGAIYA: UGBI0501 (Log5/Log6), UGBI0506B | MESALABS: EZS/5, EZS/6 (EZTest Steam)
-  - Bacillus atrophaeus (B. atrophaeus, formerly B. subtilis var. niger) = EO (Ethylene Oxide) sterilization BIs → UGAIYA: UGBI0503 (EO, 24-48hr, 50/box) | MESALABS: EZG/6, EZG/625 (EZTest EO) | Also available: F07-1264 (EO Indicators, Bacillus Subtilis, 100/box, 4box/case)
+  - Bacillus atrophaeus (B. atrophaeus, formerly B. subtilis var. niger) = EO (Ethylene Oxide) sterilization BIs → UGAIYA: UGBI0503 (EO, 24-48hr, 50/box) | MESALABS: EZG/6, EZG/625 (EZTest EO)
   - Bacillus atrophaeus = also used for DRY HEAT sterilization BIs → UGAIYA: UGBI0504 (Dry Heat, B. atrophaeus ATCC9372, 160-250°C, 50/box)
   - Geobacillus stearothermophilus = also used for VHP (Hydrogen Peroxide Plasma) BIs → UGAIYA: UGBI0502 (VHP) | MESALABS: EZH/6I (EZTest H2O2)
   WHEN DEALER MENTIONS AN ORGANISM NAME:
