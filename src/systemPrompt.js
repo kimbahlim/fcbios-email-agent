@@ -87,7 +87,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   - "Bacillus subtilis" or "B. subtilis" → EO (Ethylene Oxide) sterilization BIs. Search for UGBI0503 (EO). NOT steam, NOT dry heat.
   - "Bacillus atrophaeus" or "B. atrophaeus" → DRY HEAT sterilization BIs. Search for UGBI0504 (Dry Heat, ATCC9372). Also offer UGBI0503 (EO) as B. atrophaeus is used for EO as well.
   - "Geobacillus stearothermophilus" or "G. stearothermophilus" → STEAM or VHP BIs. Search for UGBI0501 (Steam). Default to steam unless they mention VHP/H2O2.
-  - If dealer just says "biological indicator" without specifying organism or sterilization type → ask which sterilization method they use (steam, EO, dry heat, VHP) before quoting.
+  - If dealer just says "biological indicator" without specifying organism or sterilization type → default to STEAM: offer UGBI0501 (Log5/Log6) as this is the most common BI request.
   NEVER assume steam sterilization by default when the dealer specifies an organism. Match the organism FIRST, then offer the correct product.
   NOTE: We do NOT carry UGAIYA rapid-readout BI models (UGBI0201 20min, UGBI0101 3hr, UGBI0301 1hr, UGBI0401 4hr EO, UGBI0102 VHP rapid). Only the standard 24-48hr versions (UGBI0501, UGBI0502, UGBI0503, UGBI0504, UGBI0506B) are in our pricelist. If dealer asks for rapid-readout BIs, quote what we have and note that rapid versions are not currently available.
   - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
