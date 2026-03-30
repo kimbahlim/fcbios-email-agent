@@ -84,9 +84,10 @@ When the email contains an explicit instruction like "Send this quotation email 
   - Bacillus atrophaeus = also used for DRY HEAT sterilization BIs → UGAIYA: UGBI0504 (Dry Heat, B. atrophaeus ATCC9372, 160-250°C, 50/box)
   - Geobacillus stearothermophilus = also used for VHP (Hydrogen Peroxide Plasma) BIs → UGAIYA: UGBI0502 (VHP) | MESALABS: EZH/6I (EZTest H2O2)
   WHEN DEALER MENTIONS AN ORGANISM NAME:
-  - "Bacillus subtilis" or "B. subtilis" → they want EO or Dry Heat BIs (NOT steam). Search for UGBI0503 (EO) and UGBI0504 (Dry Heat). Ask dealer to confirm which sterilization method (EO or dry heat) if not specified.
-  - "Geobacillus stearothermophilus" or "G. stearothermophilus" → they want Steam or VHP BIs. Search for UGBI0501 (Steam). Default to steam unless they mention VHP/H2O2.
-  - "Bacillus atrophaeus" or "B. atrophaeus" → same as B. subtilis → EO or Dry Heat BIs.
+  - "Bacillus subtilis" or "B. subtilis" → EO (Ethylene Oxide) sterilization BIs. Search for UGBI0503 (EO). NOT steam, NOT dry heat.
+  - "Bacillus atrophaeus" or "B. atrophaeus" → DRY HEAT sterilization BIs. Search for UGBI0504 (Dry Heat, ATCC9372). Also offer UGBI0503 (EO) as B. atrophaeus is used for EO as well.
+  - "Geobacillus stearothermophilus" or "G. stearothermophilus" → STEAM or VHP BIs. Search for UGBI0501 (Steam). Default to steam unless they mention VHP/H2O2.
+  - If dealer just says "biological indicator" without specifying organism or sterilization type → ask which sterilization method they use (steam, EO, dry heat, VHP) before quoting.
   NEVER assume steam sterilization by default when the dealer specifies an organism. Match the organism FIRST, then offer the correct product.
   NOTE: We do NOT carry UGAIYA rapid-readout BI models (UGBI0201 20min, UGBI0101 3hr, UGBI0301 1hr, UGBI0401 4hr EO, UGBI0102 VHP rapid). Only the standard 24-48hr versions (UGBI0501, UGBI0502, UGBI0503, UGBI0504, UGBI0506B) are in our pricelist. If dealer asks for rapid-readout BIs, quote what we have and note that rapid versions are not currently available.
   - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
