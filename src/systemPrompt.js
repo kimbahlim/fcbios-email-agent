@@ -44,7 +44,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Data loggers / temperature recorders / USB PDF loggers → LogTag
 - Digital thermometers / thermohygrometers → MinMax
 - MinMax model codes: 308, 308-3, 508, 508-3, ADT-308, ADT-508, ADT-308-3, ADT-508-3 → ALL are MinMax products → search MINMAX tab
-- Petri dishes, loops, spreaders, specimen containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items.
+- Petri dishes, loops, spreaders, specimen containers, urine containers, stool containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items. When dealer says "urine container" search DispoZ for "specimen container" — DispoZ calls them "Specimen Container" not "Urine Container". The 60ml sterile yellow cap version is DZ02-CA2S10600205.
 - Rayon swabs, transport swabs, swab with transport medium → DispoZ FIRST → LP backup
 - Pipette tips: If dealer makes a generic request (just "pipette tips" without specifying volume/brand), you MUST perform ALL 5 of these searches as SEPARATE tool calls — do not skip any:
   1. search_brand("DISPOZ", "200uL tips") 
@@ -164,7 +164,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
 - Masticators / stomacher machines → IUL
 - Whirl-Pak sampling bags → NASCO
-- 24-hour urine collection containers → LP (L03-108094). Always suggest LP brand for this product.
+- 24-hour urine collection containers (large volume, 2-3L) → LP (L03-108094). This is ONLY for 24-hour collection. Regular urine/specimen containers (60ml, 100ml etc.) follow the DispoZ FIRST rule above.
 - ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
 
 FALLBACK FOR UNMAPPED PRODUCTS: If a dealer asks for a product type NOT listed in the mapping above, do NOT say "we don't carry this." Instead:
