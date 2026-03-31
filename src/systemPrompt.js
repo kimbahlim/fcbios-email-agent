@@ -232,7 +232,16 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 - This applies to ALL brands. The dealer wants what's available now, not what takes 8-12 weeks.
 
 ## BRAND-SPECIFIC RULES
-- LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION)
+- LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION). CRITICAL: Use the CORRECT BRAND's calibration SKU — NEVER mix brands:
+  MinMax calibration SKUs (R20- prefix):
+  - Model 308/308-3/408 (temperature only) → R20-CALIBRATION-TEMP (3-point) or R20-CALIBRATION-TEMP-5 (5-point)
+  - Model 308-W (wireless) → R20-CALIBRATION-TEMP-3W
+  - Model 508/508-3 (temp + humidity) → R20-CALIBRATION TEMP-RH (3-point) or R20-CALIBRATION TEMP-RH5 (5-point)
+  LogTag calibration SKUs (L21- prefix):
+  - UTRIX-16, UTRID-16R, UTRED-16F, UTRED30-16 (temperature only) → L21-CALIBRATION-TEMP2
+  - HAXO-16U (temperature + humidity) → L21-CALIBRATION-C/RH
+  - Ultra-low (-80°C) loggers → L21-CALIBRATION-TEMP3
+  NEVER use L21- calibration for MinMax products. NEVER use R20- calibration for LogTag products.
 - LogTag OBSOLETE MODELS: If dealer requests an obsolete model, quote the replacement directly WITHOUT asking for confirmation. Known replacements: UHADO-16 → HAXO-16U, UTRID-16 → UTRID-16R. Simply state in the notes: "Please note [old model] has been replaced by [new model]."
 - MinMax MODEL NUMBERS: MinMax products use numeric model codes like 508, 508-3, 308, 308-3, etc. "508-3" = MinMax ADT-508-3 thermohygrometer → search MINMAX tab, NOT LogTag. NEVER substitute a MinMax product with a LogTag product or vice versa — they are completely different brands.
 - CROSS-BRAND SUBSTITUTION IS FORBIDDEN: If the dealer asks for a MinMax product, search MINMAX. If they ask for a LogTag product, search LOGTAG. NEVER replace one brand with the other. If a specific model is genuinely not in the pricelist, say "not available" and ask the dealer to confirm the model number — do NOT suggest a product from a different brand.
