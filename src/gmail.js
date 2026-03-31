@@ -115,11 +115,14 @@ function findAttachments(payload, messageId) {
   const supportedTypes = [...imageTypes, pdfType, ...excelTypes];
   
   function traverse(part) {
-    if (part.filename && part.body && part.body.attachmentId) {
-      const mimeType = (part.mimeType || '').toLowerCase();
-      if (supportedTypes.includes(mimeType)) {
+    const mimeType = (part.mimeType || '').toLowerCase();
+    const hasAttachmentId = part.body && part.body.attachmentId;
+    
+    if (hasAttachmentId && supportedTypes.includes(mimeType)) {
+      // Accept if has filename OR if it's an inline image (no filename but has attachmentId)
+      if (part.filename || imageTypes.includes(mimeType)) {
         attachments.push({
-          filename: part.filename,
+          filename: part.filename || `inline-image-${attachments.length + 1}.${mimeType.split('/')[1] || 'png'}`,
           mimeType: part.mimeType,
           attachmentId: part.body.attachmentId,
           size: part.body.size || 0,
@@ -181,16 +184,23 @@ async function processAttachments(attachments) {
         filenameLower.includes('icon') || filenameLower.includes('signature') ||
         filenameLower.includes('banner') || filenameLower.includes('footer') ||
         filenameLower.includes('header') || filenameLower.includes('email-bg') ||
-        filenameLower.startsWith('image00') || // Gmail inline images like image001.jpg
         (filenameLower.startsWith('outlook-') && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase()));
+      
+      // image00x files: skip ONLY if small (likely Gmail signature), keep if large (likely pasted screenshot/table)
+      const isGenericInlineImage = filenameLower.startsWith('image00');
       
       if (isSignatureImage) {
         console.log(`[ATTACHMENT] Skipping signature/branding image: ${att.filename} (${att.size} bytes)`);
         continue;
       }
       
-      // Skip very small images (under 30KB) regardless of name — almost always icons/avatars
-      if (att.size < 30000 && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase())) {
+      if (isGenericInlineImage && att.size < 50000) {
+        console.log(`[ATTACHMENT] Skipping small inline image (likely signature): ${att.filename} (${att.size} bytes)`);
+        continue;
+      }
+      
+      // Skip very small images (under 10KB) regardless of name — almost always icons/avatars
+      if (att.size < 10000 && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase())) {
         console.log(`[ATTACHMENT] Skipping tiny image: ${att.filename} (${att.size} bytes)`);
         continue;
       }
