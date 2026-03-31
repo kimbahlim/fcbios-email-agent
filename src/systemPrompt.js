@@ -46,6 +46,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - MinMax model codes: 308, 308-3, 508, 508-3, ADT-308, ADT-508, ADT-308-3, ADT-508-3 → ALL are MinMax products → search MINMAX tab
 - Petri dishes, loops, spreaders, specimen containers, urine containers, stool containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items. When dealer says "urine container" search DispoZ for "specimen container" — DispoZ calls them "Specimen Container" not "Urine Container". The 60ml sterile yellow cap version is DZ02-CA2S10600205.
 - Rayon swabs, transport swabs, swab with transport medium → DispoZ FIRST → LP backup
+- Tube racks, test tube racks, multi-tube racks, PCR racks, microcentrifuge racks → TARSONS FIRST → LP backup. Search TARSONS for "rack" before searching LP.
 - Pipette tips: If dealer makes a generic request (just "pipette tips" without specifying volume/brand), you MUST perform ALL 5 of these searches as SEPARATE tool calls — do not skip any:
   1. search_brand("DISPOZ", "200uL tips") 
   2. search_brand("DISPOZ", "1000uL tips")
@@ -631,7 +632,7 @@ Use the draft_email tool with professional HTML formatting including:
   1. "All prices quoted are excluding delivery" — ALWAYS include this
   
   CONDITIONAL notes (include ONLY when applicable):
-  - If ANY items are indent AND the lead time data from get_lead_time contains a specific PO deadline date (e.g., "send PO by 25th March"): include that exact text. Do NOT invent or calculate PO deadline dates yourself.
+  - If ANY items are indent AND the lead time data from get_lead_time contains an explicit PO deadline phrase with the words "send PO by" or "PO deadline" followed by a specific date: include that exact text. Do NOT invent PO deadline dates. Do NOT rephrase lead times as PO deadlines — "End of May" is a lead time, NOT a PO deadline. WRONG: "Send PO by End of May". RIGHT: the lead time is already shown in the Stock Status column as "Indent - Lead time: End of May".
   - If items are indent but the lead time only says something like "6-8 weeks" with NO specific PO date: do NOT add any PO deadline note. The lead time is already shown in the Stock Status column.
   - If quoting TOMY: include the TOMY-specific notes from the TOMY section
   - If dealer EXPLICITLY ASKED about training (e.g. "do you provide training?"): "1x online training session is provided free of charge with purchase" — ONLY include this if the dealer asked. NEVER include it otherwise.
