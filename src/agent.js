@@ -124,7 +124,16 @@ async function processToolCall(toolName, toolInput) {
         break;
       case 'search_brand_batch': {
         const batchResults = {};
-        for (const search of toolInput.searches) {
+        let searches = toolInput.searches;
+        // Safety: if agent sent searches as a JSON string instead of array, parse it
+        if (typeof searches === 'string') {
+          try { searches = JSON.parse(searches); } catch (e) {
+            console.log('[BATCH SEARCH] Failed to parse searches string:', e.message);
+            result = { error: 'Invalid searches format' };
+            break;
+          }
+        }
+        for (const search of searches) {
           const key = `${search.brand_tab}:${search.keyword}`;
           console.log(`[BATCH SEARCH] ${search.brand_tab} → "${search.keyword}"`);
           batchResults[key] = await searchByBrand(search.brand_tab, search.keyword);
@@ -137,7 +146,15 @@ async function processToolCall(toolName, toolInput) {
         break;
       case 'check_stock_batch': {
         const stockResults = {};
-        for (const sku of toolInput.skus) {
+        let skus = toolInput.skus;
+        if (typeof skus === 'string') {
+          try { skus = JSON.parse(skus); } catch (e) {
+            console.log('[BATCH STOCK] Failed to parse skus string:', e.message);
+            result = { error: 'Invalid skus format' };
+            break;
+          }
+        }
+        for (const sku of skus) {
           console.log(`[BATCH STOCK] Checking: ${sku}`);
           stockResults[sku] = await checkStock(sku);
         }
@@ -198,8 +215,8 @@ Process this email according to your instructions. Search the pricelists, check 
   let messages = [{ role: 'user', content: userContent }];
   let draftResult = null;
 
-  for (let i = 0; i < 15; i++) {
-    console.log(`[AGENT] Loop ${i + 1}/15`);
+  for (let i = 0; i < 20; i++) {
+    console.log(`[AGENT] Loop ${i + 1}/20`);
 
     const response = await client.messages.create({
       model: 'claude-sonnet-4-20250514',

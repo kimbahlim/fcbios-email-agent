@@ -166,6 +166,7 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Whirl-Pak sampling bags → NASCO
 - 24-hour urine collection containers (large volume, 2-3L) → LP (L03-108094). This is ONLY for 24-hour collection. Regular urine/specimen containers (60ml, 100ml etc.) follow the DispoZ FIRST rule above.
 - ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
+- Sigma Aldrich / Merck / Roche / Epredia / Thermo Fisher / Gibco branded products (identified by Sigma cat numbers like T6416, D4902, A7906, S-8750, L6420, P0130 etc., or brand names like "Liberase", "Histopaque") → We do NOT carry these brands. For items where we have a HiMedia equivalent (e.g., DMEM, FBS, Trypsin-EDTA, PBS, Gentamicin, Penicillin-Streptomycin, Amphotericin B), search HiMedia Animal_Tissue_Culture tab and offer our equivalent with a note: "HiMedia equivalent offered". For items with no HiMedia equivalent (e.g., Histopaque-1077, Liberase, Dexamethasone, specific antibodies, standards), mark as "Not Available" — do NOT waste search loops looking for these in HiMedia tabs.
 
 FALLBACK FOR UNMAPPED PRODUCTS: If a dealer asks for a product type NOT listed in the mapping above, do NOT say "we don't carry this." Instead:
 1. Use web_search to identify which brand/manufacturer makes the product
