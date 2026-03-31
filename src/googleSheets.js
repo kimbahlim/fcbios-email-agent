@@ -2,6 +2,28 @@ const API_KEY = process.env.GOOGLE_SHEETS_API_KEY;
 const SPREADSHEET_ID = process.env.GOOGLE_SPREADSHEET_ID;
 const BASE_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}`;
 
+// Chemical/media synonym mapping — automatically expands search terms
+// Key = what dealers commonly say, Value = what's in the pricelist
+const SEARCH_SYNONYMS = {
+  'polysorbate 80': ['tween 80', 'GRM159'],
+  'polysorbate 20': ['tween 20', 'GRM156', 'MB067', 'PCT1310', 'TC287'],
+  'methylparaben': ['methyl 4-hydroxybenzoate', 'GRM1899'],
+  'methyl paraben': ['methyl 4-hydroxybenzoate', 'GRM1899'],
+  'propylparaben': ['propyl 4-hydroxybenzoate', 'GRM1900'],
+  'propyl paraben': ['propyl 4-hydroxybenzoate', 'GRM1900'],
+  'polyethylene glycol': ['PEG'],
+  'tryptone sodium chloride': ['tryptone salt', 'M1500'],
+  'tryptone nacl': ['tryptone salt', 'M1500'],
+  'meat extract': ['HM extract', 'RM003'],
+  'bacteriological agar': ['agar powder', 'GRM026', 'M1375'],
+  'casein digest': ['tryptone', 'casitose'],
+  'pancreatic digest of casein': ['tryptone', 'casitose', 'RM014'],
+  'scdlp': ['casein digest soy lecithin polysorbate', 'M2059', 'MAP117'],
+  'phosphate buffered saline': ['PBS', 'TL1031', 'M1866'],
+  'thioglycolic acid': ['mercaptoacetic acid', 'GRM617'],
+  'carbopol 974': ['carbopol', 'GRM2033'],
+};
+
 let sheetsCache = {};
 let cacheTimes = {}; // per-tab cache timestamps
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
@@ -136,6 +158,15 @@ async function searchByBrand(brandTab, keyword) {
   const kw = keyword.toLowerCase();
   const keywords = kw.split(/\s+/).filter(k => k.length > 1);
 
+  // Auto-expand synonyms: check if the full keyword or any partial matches a known synonym
+  let synonymKeywords = [];
+  for (const [term, alternatives] of Object.entries(SEARCH_SYNONYMS)) {
+    if (kw.includes(term) || term.includes(kw)) {
+      synonymKeywords.push(...alternatives.map(a => a.toLowerCase()));
+      console.log(`[SEARCH] Synonym expansion: "${kw}" → also trying: ${alternatives.join(', ')}`);
+    }
+  }
+
   // For HiMedia tabs: if keyword looks like a series code (e.g. "M290", "M144"),
   // also search by the numeric part alone so MH290, GM290, GMH290 etc. are all found
   let expandedKeywords = [...keywords];
@@ -217,6 +248,17 @@ async function searchByBrand(brandTab, keyword) {
       const text = Object.values(row).join(' ').toLowerCase();
       return keywords.some(k => text.includes(k));
     });
+  }
+
+  // Try 4: If still no results, try synonym keywords
+  if (matches.length === 0 && synonymKeywords.length > 0) {
+    matches = rows.filter(row => {
+      const text = Object.values(row).join(' ').toLowerCase();
+      return synonymKeywords.some(sk => text.includes(sk));
+    });
+    if (matches.length > 0) {
+      console.log(`[SEARCH] Found ${matches.length} results using synonym expansion`);
+    }
   }
 
   return matches.slice(0, 20);
