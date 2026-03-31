@@ -587,6 +587,7 @@ STEP 4 — Only after ALL steps fail:
 - NEVER say "not available for export" unless the item appears in the HIMEDIA_Not_For_Export tab
 
 CRITICAL: NEVER mark a HiMedia product as "Not Available" just because the specific pack size wasn't found. M467-100G not found ≠ M467 not available. Always try the base code search first.
+CRITICAL: Before marking ANY HiMedia item as "Not Available", you MUST try web_search("himedialabs.com [product name] SKU") to find the correct HiMedia catalogue code. Only mark "Not Available" AFTER web search also fails to find a match. The dealer may use a common/generic name that doesn't match our pricelist description — web search on himedialabs.com will translate it to the correct SKU.
 
 ## HIMEDIA SERIES PRIORITY RULE
 HiMedia has multiple series for the same media product. The series prefix determines the type:
