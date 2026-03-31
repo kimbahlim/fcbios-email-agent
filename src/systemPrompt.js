@@ -284,6 +284,13 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
      - MOST EXPENSIVE model
      - CANNOT: use built-in sensor (must buy probe separately)
 
+  EXTERNAL PROBE MODELS (UTRED-16F, UTRED30-16, UTREL-16F): When quoting these models, ALWAYS also quote the most common probe options so the dealer sees the full cost:
+  - L21-ST100T-15 (1.5M tipped without handle) — general purpose, most popular
+  - L21-ST100H-15 (1.5M tipped with handle) — for easy insertion/removal
+  - L21-ST100B-15 (1.5M bare probe) — for custom mounting
+  Include a note: "External sensor/probe is required and sold separately. The options above are the most common — please contact us if you need a different probe length (3.0M available) or type."
+  For UTREL-16F (ultra-low), use L21-ST10S-30 or L21-ST10M-30 instead.
+
   E. UTREL-16F (L21-UTREL-16F) — Ultra-Low Temperature Logger
      - LCD display
      - EXTERNAL sensor, range -90°C to +40°C
