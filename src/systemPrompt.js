@@ -284,11 +284,12 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
      - MOST EXPENSIVE model
      - CANNOT: use built-in sensor (must buy probe separately)
 
-  EXTERNAL PROBE MODELS (UTRED-16F, UTRED30-16, UTREL-16F): When quoting these models, ALWAYS also quote the standard external probe so the dealer sees the full cost:
-  - UTRED-16F and UTRED30-16: L21-ST100K-15 (1.5M 65mm Tipped W/out Handle, for TREX/TRED/UTRED) — this is the STANDARD probe bundled in LogTag's official packages. Also offer L21-ST100K-30 (3.0M version) as an option.
-  - UTREL-16F (ultra-low): L21-ST10S-30 (3.0M External Temp Sensor for UTREL)
-  Include a note: "External sensor/probe is required. The ST100K-15 (1.5M) is the standard probe for this model."
-  DO NOT recommend ST100T, ST100H, ST100B, or ST100S — these are for older TREX/TRED models. The ST100K is the correct probe for UTRED-16F and UTRED30-16.
+  EXTERNAL PROBE MODELS (UTRED-16F, UTRED30-16, UTREL-16F): The standard external probe L21-ST100K-15 is ALREADY INCLUDED in the quoted price for UTRED-16F and UTRED30-16 (both WMB and non-WMB versions). Do NOT quote the probe as a separate line item — it comes as a set.
+  - UTRED-16F (RM 510) and UTRED30-16 (RM 895): price INCLUDES L21-ST100K-15 probe. Note in quotation: "Includes ST100K-15 external temperature sensor (1.5M)"
+  - WMB versions (UTRED-16F-WMB RM 540, UTRED30-16-WMB RM 950): price includes probe + wall mount bracket
+  - UTREL-16F (RM 745): price INCLUDES L21-ST10S-30 probe. WMB version (RM 780) includes probe + bracket.
+  - If dealer asks for a DIFFERENT or ADDITIONAL probe (e.g., longer 3.0M cable L21-ST100K-30), then quote that probe separately at its own price.
+  DO NOT say "external sensor not included" or "sold separately" — the probe IS included in the package price.
 
   E. UTREL-16F (L21-UTREL-16F) — Ultra-Low Temperature Logger
      - LCD display
