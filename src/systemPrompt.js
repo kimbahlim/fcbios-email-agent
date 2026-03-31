@@ -182,7 +182,7 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - TARSONS: 0% (already 2026)
 - UGAIYA, MeiZheng, AnQing, MinMax, SORFA, DispoZ, Membrane Solutions: 0%
 - TOMY: 0% (until July 2026)
-- LogTag: 3%
+- LogTag: 0% (already 2026 dealer prices)
 - NASCO: 3%
 - PROGNOSIS: 3%
 - IUL: 3% common, 5% battery
