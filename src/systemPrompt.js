@@ -284,12 +284,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
      - MOST EXPENSIVE model
      - CANNOT: use built-in sensor (must buy probe separately)
 
-  EXTERNAL PROBE MODELS (UTRED-16F, UTRED30-16, UTREL-16F): When quoting these models, ALWAYS also quote the most common probe options so the dealer sees the full cost:
-  - L21-ST100T-15 (1.5M tipped without handle) — general purpose, most popular
-  - L21-ST100H-15 (1.5M tipped with handle) — for easy insertion/removal
-  - L21-ST100B-15 (1.5M bare probe) — for custom mounting
-  Include a note: "External sensor/probe is required and sold separately. The options above are the most common — please contact us if you need a different probe length (3.0M available) or type."
-  For UTREL-16F (ultra-low), use L21-ST10S-30 or L21-ST10M-30 instead.
+  EXTERNAL PROBE MODELS (UTRED-16F, UTRED30-16, UTREL-16F): When quoting these models, ALWAYS also quote the standard external probe so the dealer sees the full cost:
+  - UTRED-16F and UTRED30-16: L21-ST100K-15 (1.5M 65mm Tipped W/out Handle, for TREX/TRED/UTRED) — this is the STANDARD probe bundled in LogTag's official packages. Also offer L21-ST100K-30 (3.0M version) as an option.
+  - UTREL-16F (ultra-low): L21-ST10S-30 (3.0M External Temp Sensor for UTREL)
+  Include a note: "External sensor/probe is required. The ST100K-15 (1.5M) is the standard probe for this model."
+  DO NOT recommend ST100T, ST100H, ST100B, or ST100S — these are for older TREX/TRED models. The ST100K is the correct probe for UTRED-16F and UTRED30-16.
 
   E. UTREL-16F (L21-UTREL-16F) — Ultra-Low Temperature Logger
      - LCD display
