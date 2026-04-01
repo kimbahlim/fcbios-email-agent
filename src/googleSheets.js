@@ -295,6 +295,17 @@ async function checkStock(sku) {
   
   // Generate all SKU variants to try (vendor code ↔ NetSuite code)
   const skuVariants = [skuLower];
+  
+  // TOMY accessories: F07 and T01 are interchangeable prefixes for same products
+  // Stock tab may use T01 while pricelist uses F07, or vice versa
+  if (skuLower.startsWith('f07-')) {
+    skuVariants.push('t01-' + skuLower.substring(4));
+    console.log(`[STOCK] TOMY cross-ref: also checking T01-${skuLower.substring(4)}`);
+  } else if (skuLower.startsWith('t01-')) {
+    skuVariants.push('f07-' + skuLower.substring(4));
+    console.log(`[STOCK] TOMY cross-ref: also checking F07-${skuLower.substring(4)}`);
+  }
+  
   // If SKU doesn't start with a brand prefix like H05-, try adding common prefixes
   if (!/^[a-z]\d{2}-/i.test(sku)) {
     // Vendor code like SD153-5CT → try H05-SD153-5CT
