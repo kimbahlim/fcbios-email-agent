@@ -414,7 +414,6 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   | F07-SBSS-325 | Basket Support Stand | 217 |
   | F07-ACA-315T | Long Basket for Waste | 1,226 |
   | T01-599907 | Printer Module (ships separately) | 9,682 |
-  | Delivery | Delivery charge (if required) | 250 |
   | EST Charge | For government sites (if applicable) | 150 |
 
   SX-700 accessories:
@@ -422,8 +421,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   | F07-SBSS-345 | Basket Support Stand | 217 |
   | F07-ACA-700T | Long Basket for Waste | 1,339 |
   | T01-599907 | Printer Module (ships separately) | 9,682 |
-  | Delivery | Delivery charge (if required) | 250 |
   | EST Charge | For government sites (if applicable) | 150 |
+
+  ### DELIVERY CHARGES (for both SX-500 and SX-700):
+  Peninsular Malaysia (ALL states): RM 260
+  Sabah / Labuan / Sarawak: Dealer to arrange their own Collection & Delivery (do NOT quote a delivery charge — state this clearly in the quotation)
 
   ### KEY FEATURES — include "Why TOMY?" section in every TOMY quotation:
   - Made in Japan — superior build quality, 300+ satisfied users in Malaysia including major F&B, universities, and research institutions. DOSH/JKKP approved.
@@ -437,8 +439,9 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - 2 standard baskets included FOC with the autoclave
   - Calibration on Pressure Gauge and Safety Valve is included as per JKKP requirements
   - MOB for installation is waived as JKKP inspection is performed on the same trip
-  - Delivery is NOT included in the quotation total — add RM 250 if required
+  - Delivery is NOT included in the quotation total — for Peninsular Malaysia add RM 260. For Sabah/Labuan/Sarawak: state "Dealer to arrange their own Collection & Delivery"
   - Printer Module must be ordered with a separate shipment
+  - Do NOT add any PO deadline for TOMY (no "Send PO by..." note). TOMY lead time comes from the LEAD_TIMES tab and is shown in the Stock Status column only.
 
   ### PRODUCT LINKS — include ALL of these in every TOMY quotation:
   - See the advantages of TOMY autoclave: https://www.youtube.com/watch?v=3KkahfffrOk
