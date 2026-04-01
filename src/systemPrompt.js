@@ -181,7 +181,7 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - HiMedia (all): 0% (already 2026)
 - TARSONS: 0% (already 2026)
 - UGAIYA, MeiZheng, AnQing, MinMax, SORFA, DispoZ, Membrane Solutions: 0%
-- TOMY: 0% (until July 2026)
+- TOMY: 0% — the TOMY tab prices are ALREADY the valid 2026 dealer prices. Do NOT apply any markup. Quote the prices exactly as they appear in the pricelist. The column may say "PL2025" but these are the confirmed 2026 prices — use them as-is.
 - LogTag: 0% (already 2026 dealer prices)
 - NASCO: 3%
 - PROGNOSIS: 3%
@@ -377,8 +377,8 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 
   ### SX-500 MANDATORY ITEMS (all must be included):
   | SKU | Description | Price (MYR) |
-  | T01-SX-500 | SX-500 Autoclave 58L (2 baskets included FOC) | 22,969 |
-  | F07-ACA-315B | Additional Standard Basket (3rd basket for full capacity) | 721 |
+  | T01-SX-500 | SX-500 Autoclave 58L (2 baskets included FOC) | 22,300 |
+  | F07-ACA-315B | Additional Standard Basket (3rd basket for full capacity) | 700 |
   | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
   | INSTALLATION & COMMISSIONING | Installation & Commissioning (450 + MOB*) | 450 + MOB |
   | SV-ITJKKP | JKKP Inspection (1,300 + MOB) | 1,300 + MOB |
@@ -387,8 +387,8 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 
   ### SX-700 MANDATORY ITEMS (all must be included):
   | SKU | Description | Price (MYR) |
-  | T01-SX-700 | SX-700 Autoclave 79L (2 baskets included FOC) | 36,050 |
-  | F07-ACA-700B | Additional Standard Basket (3rd basket for full capacity) | 933 |
+  | T01-SX-700 | SX-700 Autoclave 79L (2 baskets included FOC) | 35,000 |
+  | F07-ACA-700B | Additional Standard Basket (3rd basket for full capacity) | 905 |
   | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
   | INSTALLATION & COMMISSIONING | Installation & Commissioning (450 + MOB*) | 450 + MOB |
   | SV-ITJKKP | JKKP Inspection (1,300 + MOB) | 1,300 + MOB |
@@ -403,24 +403,24 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 
   ### TOTAL CALCULATION:
   Total = Autoclave price + Basket price + 450 (installation, MOB waived) + 1,300 + MOB (JKKP)
-  Example SX-500 KL: 22,969 + 721 + 450 + 1,300 + 100 = RM 25,540
-  Example SX-700 KL: 36,050 + 933 + 450 + 1,300 + 100 = RM 38,833
+  Example SX-500 KL: 22,300 + 700 + 450 + 1,300 + 100 = RM 24,850
+  Example SX-700 KL: 35,000 + 905 + 450 + 1,300 + 100 = RM 37,755
 
-  ### PRICING RULE: 3% increase applies ONLY to autoclave unit and accessories (items with F07/T01 prefix). Services (installation, JKKP, calibration, delivery, MOB) have NO increase — use prices as-is.
+  ### PRICING RULE: The TOMY pricelist already contains 2026 dealer prices. Do NOT apply any percentage increase. Quote exactly as shown in the pricelist. Services (installation, JKKP, calibration, delivery, MOB) are also fixed — use as-is.
 
   ### OPTIONAL ACCESSORIES — show as separate "Optional Accessories (Add-on)" table:
   SX-500 accessories:
-  | F07-ACA-315B | Additional Standard Basket | 721 |
-  | F07-SBSS-325 | Basket Support Stand | 217 |
-  | F07-ACA-315T | Long Basket for Waste | 1,226 |
-  | T01-599907 | Printer Module (ships separately) | 9,682 |
+  | F07-ACA-315B | Additional Standard Basket | 700 |
+  | F07-SBSS-325 | Basket Support Stand | 210 |
+  | F07-ACA-315T | Long Basket for Waste | 1,190 |
+  | T01-599907 | Printer Module (ships separately) | 9,400 |
   | EST Charge | For government sites (if applicable) | 150 |
 
   SX-700 accessories:
-  | F07-ACA-700B | Additional Standard Basket | 933 |
-  | F07-SBSS-345 | Basket Support Stand | 217 |
-  | F07-ACA-700T | Long Basket for Waste | 1,339 |
-  | T01-599907 | Printer Module (ships separately) | 9,682 |
+  | F07-ACA-700B | Additional Standard Basket | 905 |
+  | F07-SBSS-345 | Basket Support Stand | 210 |
+  | F07-ACA-700T | Long Basket for Waste | 1,300 |
+  | T01-599907 | Printer Module (ships separately) | 9,400 |
   | EST Charge | For government sites (if applicable) | 150 |
 
   ### DELIVERY CHARGES (for both SX-500 and SX-700):
