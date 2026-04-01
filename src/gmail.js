@@ -206,6 +206,14 @@ async function processAttachments(attachments) {
       }
       
       console.log(`[ATTACHMENT] Downloading: ${att.filename} (${att.mimeType}, ${att.size} bytes)`);
+      
+      // Skip images over 5MB — Claude API limit is 5MB for base64 images
+      // base64 encoding adds ~33% overhead, so raw file limit is ~3.75MB
+      if (att.size > 3750000 && ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'].includes(att.mimeType.toLowerCase())) {
+        console.log(`[ATTACHMENT] Skipping oversized image: ${att.filename} (${att.size} bytes > 3.75MB raw / 5MB base64 limit)`);
+        continue;
+      }
+      
       const base64Data = await downloadAttachment(att.messageId, att.attachmentId);
       const standardBase64 = base64Data.replace(/-/g, '+').replace(/_/g, '/');
       

@@ -262,9 +262,33 @@ async function pollForEmails() {
       // Process attachments (images, PDFs)
       let visionContent = [];
       if (latestMsg.attachments.length > 0) {
-        console.log(`[ATTACHMENTS] Processing ${latestMsg.attachments.length} attachment(s)...`);
-        visionContent = await processAttachments(latestMsg.attachments);
-        console.log(`[ATTACHMENTS] ${visionContent.length} ready for Vision`);
+        // Smart filter: check if email body already contains product info (SKUs, product names)
+        // If body has clear product requests, skip image processing to save costs
+        // (signature banners, social media icons etc. waste Vision credits)
+        const bodyText = (latestMsg.body || '').toLowerCase();
+        const hasProductInfo = /[a-z]\d{2}-[a-z]/i.test(latestMsg.body) || // SKU pattern like H05-M1881
+          /\d{3,}[a-z]*-\d/i.test(latestMsg.body) || // SKU pattern like 521016B
+          (bodyText.split('\n').filter(l => /^\s*\d+[\.\)]\s+\S/.test(l)).length >= 1); // Numbered product list
+        
+        const hasPDFAttachment = latestMsg.attachments.some(a => 
+          (a.mimeType || '').toLowerCase() === 'application/pdf');
+        const hasExcelAttachment = latestMsg.attachments.some(a => 
+          (a.mimeType || '').toLowerCase().includes('spreadsheet') || 
+          (a.mimeType || '').toLowerCase().includes('excel'));
+        const hasNamedImageAttachment = latestMsg.attachments.some(a => {
+          const fn = (a.filename || '').toLowerCase();
+          const isImage = ['image/png', 'image/jpeg', 'image/jpg'].includes((a.mimeType || '').toLowerCase());
+          // Named image (not image00x pattern) = likely intentional attachment, not signature
+          return isImage && fn && !fn.match(/^image\d+\./) && !fn.startsWith('outlook');
+        });
+        
+        if (hasProductInfo && !hasPDFAttachment && !hasExcelAttachment && !hasNamedImageAttachment) {
+          console.log(`[ATTACHMENTS] Body already has product info — skipping ${latestMsg.attachments.length} image(s) to save Vision costs`);
+        } else {
+          console.log(`[ATTACHMENTS] Processing ${latestMsg.attachments.length} attachment(s)...`);
+          visionContent = await processAttachments(latestMsg.attachments);
+          console.log(`[ATTACHMENTS] ${visionContent.length} ready for Vision`);
+        }
       }
 
       // Run the agent

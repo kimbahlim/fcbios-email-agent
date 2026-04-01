@@ -218,19 +218,40 @@ Process this email according to your instructions. Search the pricelists, check 
   for (let i = 0; i < 20; i++) {
     console.log(`[AGENT] Loop ${i + 1}/20`);
 
-    const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4096,
-      system: systemPrompt,
-      tools: [
-        ...tools,
-        {
-          type: 'web_search_20250305',
-          name: 'web_search'
-        }
-      ],
-      messages: messages
-    });
+    let response;
+    try {
+      response = await client.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4096,
+        system: systemPrompt,
+        tools: [
+          ...tools,
+          {
+            type: 'web_search_20250305',
+            name: 'web_search'
+          }
+        ],
+        messages: messages
+      });
+    } catch (apiError) {
+      const errMsg = apiError.message || String(apiError);
+      console.log(`[AGENT ERROR] ${apiError.status || 'unknown'} ${errMsg}`);
+      
+      // If image too large, retry without images
+      if (errMsg.includes('image exceeds') || errMsg.includes('5 MB maximum')) {
+        console.log('[AGENT] Retrying without images (too large for API)...');
+        messages = messages.map(m => ({
+          ...m,
+          content: Array.isArray(m.content) 
+            ? m.content.filter(c => c.type !== 'image')
+            : m.content
+        }));
+        continue; // retry the loop without images
+      }
+      
+      // For other API errors, throw to be handled upstream
+      throw apiError;
+    }
 
     console.log(`[AGENT] Stop reason: ${response.stop_reason}`);
 
