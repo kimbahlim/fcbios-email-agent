@@ -356,9 +356,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 - TOMY AUTOCLAVE QUOTING — COMPLETE INSTRUCTIONS:
 
   ## STEP 1: PRE-QUOTE (always send this FIRST before quoting)
-  When a dealer asks for any TOMY autoclave (SX-500 or SX-700), ALWAYS send a pre-quote email FIRST. Do NOT quote pricing without site info.
+  When a dealer asks for any TOMY autoclave (SX-500 or SX-700), you need the site name and state for JKKP compliance. BUT CHECK THE EMAIL FIRST — the dealer may have already provided this info (e.g., "end user: Hospital ABC, Sabah" or company name + address with state visible). If the site name AND state are already in the email, proceed directly to the full quotation (Step 2) without asking again.
   
-  Pre-quote email template:
+  Only send the pre-quote email if the site name or state is genuinely NOT provided:
+  
+  Pre-quote email template (ONLY if site info is missing):
   "Thank you for your enquiry on the TOMY [model] autoclave.
   Before we can prepare your quotation, could you please provide the following:
   - Site/company name: (where the autoclave will be installed)
