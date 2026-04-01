@@ -373,28 +373,39 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - Do NOT include the eStore message in TOMY pre-quote emails.
 
   ## STEP 2: FULL QUOTATION (after dealer provides site info)
-  Once dealer provides site name and state, build the full quotation using these prices:
+  Once dealer provides site name and state, look up the MOB fee for that state (see table below), then build the quotation.
 
-  ### SX-500 MANDATORY ITEMS (all must be included):
+  IMPORTANT — SINGLE TRIP: The engineer mobilizes to site ONCE. This single trip covers BOTH:
+  - JKKP inspection (mandatory safety pressure test with JKKP officer)
+  - Installation, commissioning & training
+  Include this note in every TOMY quotation: "Engineer mobilization to site is a single trip covering both JKKP inspection and installation/commissioning/training."
+
+  HOW TO PRESENT PRICES TO DEALER:
+  - Installation & Commissioning = RM 450 (MOB waived since engineer is already on site for JKKP)
+  - JKKP Inspection = 1,300 + MOB for their state = show the COMBINED TOTAL only
+    Example Sabah: show "2,800" NOT "1,300 + 1,500" or "1,300 + MOB"
+    Example KL: show "1,400" NOT "1,300 + 100"
+  - The dealer should NEVER see the word "MOB", "+ MOB", or any MOB breakdown — just clean final prices
+
+  ### SX-500 MANDATORY ITEMS:
   | SKU | Description | Price (MYR) |
   | T01-SX-500 | SX-500 Autoclave 58L (2 baskets included FOC) | 22,300 |
   | F07-ACA-315B | Additional Standard Basket (3rd basket for full capacity) | 700 |
   | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
-  | INSTALLATION & COMMISSIONING | Installation & Commissioning (450 + MOB*) | 450 + MOB |
-  | SV-ITJKKP | JKKP Inspection (1,300 + MOB) | 1,300 + MOB |
+  | INSTALLATION & COMMISSIONING | Installation & Commissioning | 450 |
+  | SV-ITJKKP | JKKP Inspection | [calculate: 1,300 + MOB for state] |
   | CALIBRATION | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
-  *MOB for Installation is WAIVED if JKKP is done on the same trip (default assumption). Only ONE MOB charge in the total.
 
-  ### SX-700 MANDATORY ITEMS (all must be included):
+  ### SX-700 MANDATORY ITEMS:
   | SKU | Description | Price (MYR) |
   | T01-SX-700 | SX-700 Autoclave 79L (2 baskets included FOC) | 35,000 |
   | F07-ACA-700B | Additional Standard Basket (3rd basket for full capacity) | 905 |
   | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
-  | INSTALLATION & COMMISSIONING | Installation & Commissioning (450 + MOB*) | 450 + MOB |
-  | SV-ITJKKP | JKKP Inspection (1,300 + MOB) | 1,300 + MOB |
+  | INSTALLATION & COMMISSIONING | Installation & Commissioning | 450 |
+  | SV-ITJKKP | JKKP Inspection | [calculate: 1,300 + MOB for state] |
   | CALIBRATION | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
 
-  ### MOBILIZATION (MOB) FEES BY STATE (NO 3% increase — fixed charges):
+  ### MOBILIZATION (MOB) FEES BY STATE (internal reference — NEVER show to dealer):
   KL/Klang Valley/Selangor: RM 100 | Negeri Sembilan: RM 160 | Melaka: RM 300 | Perak: RM 450
   Pahang: RM 1,050 | Terengganu: RM 1,150 | Kelantan: RM 1,250 | Johor: RM 850
   Langkawi: RM 900 | P. Pinang: RM 850 | Kedah: RM 1,050 | Perlis: RM 1,150
@@ -402,9 +413,9 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   Sarawak (Kuching, Bintulu, Miri, Sibu): RM 1,500 | Sarawak (Limbang): RM 2,500
 
   ### TOTAL CALCULATION:
-  Total = Autoclave price + Basket price + 450 (installation, MOB waived) + 1,300 + MOB (JKKP)
-  Example SX-500 KL: 22,300 + 700 + 450 + 1,300 + 100 = RM 24,850
-  Example SX-700 KL: 35,000 + 905 + 450 + 1,300 + 100 = RM 37,755
+  Total = Autoclave + Basket + 450 (installation) + (1,300 + MOB) for JKKP
+  Example SX-500 KL: 22,300 + 700 + 450 + 1,400 = RM 24,850
+  Example SX-700 Sabah: 35,000 + 905 + 450 + 2,800 = RM 39,155
 
   ### PRICING RULE: The TOMY pricelist already contains 2026 dealer prices. Do NOT apply any percentage increase. Quote exactly as shown in the pricelist. Services (installation, JKKP, calibration, delivery, MOB) are also fixed — use as-is.
 
@@ -438,7 +449,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   ### NOTES TO INCLUDE:
   - 2 standard baskets included FOC with the autoclave
   - Calibration on Pressure Gauge and Safety Valve is included as per JKKP requirements
-  - MOB for installation is waived as JKKP inspection is performed on the same trip
+  - Engineer mobilization to site is a single trip covering both JKKP inspection and installation/commissioning/training
   - Delivery is NOT included in the quotation total — for Peninsular Malaysia add RM 260. For Sabah/Labuan/Sarawak: state "Dealer to arrange their own Collection & Delivery"
   - Printer Module must be ordered with a separate shipment
   - Do NOT add any PO deadline for TOMY (no "Send PO by..." note). TOMY lead time comes from the LEAD_TIMES tab and is shown in the Stock Status column only.
