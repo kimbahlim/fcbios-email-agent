@@ -85,23 +85,59 @@ function decodeBase64Url(data) {
 }
 
 function extractTextBody(payload) {
-  if (payload.mimeType === 'text/plain' && payload.body && payload.body.data) {
-    return decodeBase64Url(payload.body.data).toString('utf-8');
-  }
+  // Try text/plain first
+  let plainText = '';
+  let htmlText = '';
   
-  if (payload.parts) {
-    for (const part of payload.parts) {
-      if (part.mimeType === 'text/plain' && part.body && part.body.data) {
-        return decodeBase64Url(part.body.data).toString('utf-8');
+  function findParts(part) {
+    if (part.mimeType === 'text/plain' && part.body && part.body.data) {
+      plainText = decodeBase64Url(part.body.data).toString('utf-8');
+    }
+    if (part.mimeType === 'text/html' && part.body && part.body.data) {
+      htmlText = decodeBase64Url(part.body.data).toString('utf-8');
+    }
+    if (part.parts) {
+      for (const subpart of part.parts) {
+        findParts(subpart);
       }
     }
-    for (const part of payload.parts) {
-      const text = extractTextBody(part);
-      if (text) return text;
+  }
+  
+  findParts(payload);
+  
+  // If plain text is good enough (has real content), use it
+  if (plainText && plainText.trim().length > 100) {
+    return plainText;
+  }
+  
+  // If plain text is short/truncated but HTML exists, extract text from HTML
+  if (htmlText) {
+    // Strip HTML tags to get readable text
+    const stripped = htmlText
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '') // remove style blocks
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '') // remove script blocks
+      .replace(/<br\s*\/?>/gi, '\n') // br to newline
+      .replace(/<\/p>/gi, '\n') // closing p to newline
+      .replace(/<\/tr>/gi, '\n') // table row to newline
+      .replace(/<\/td>/gi, ' | ') // table cell to separator
+      .replace(/<\/th>/gi, ' | ') // table header to separator
+      .replace(/<[^>]+>/g, '') // strip remaining tags
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/\n{3,}/g, '\n\n') // collapse multiple newlines
+      .trim();
+    
+    if (stripped.length > plainText.length) {
+      console.log(`[EMAIL] Plain text was short (${plainText.length} chars), using HTML body instead (${stripped.length} chars)`);
+      return stripped;
     }
   }
   
-  return '';
+  return plainText || '';
 }
 
 function findAttachments(payload, messageId) {
