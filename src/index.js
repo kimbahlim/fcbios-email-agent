@@ -202,7 +202,7 @@ async function pollForEmails() {
       console.log(`[NEW EMAIL] From: ${latestMsg.from_name} <${latestMsg.from_email}>`);
       console.log(`[SUBJECT] ${latestMsg.subject}`);
       console.log(`[MSG ID] ${latestMsg.id}`);
-      console.log(`[BODY] ${(latestMsg.body || '').substring(0, 200)}...`);
+      console.log(`[BODY] ${(latestMsg.body || '').substring(0, 500)}...`);
       console.log(`[ATTACHMENTS] ${latestMsg.attachments.length} found`);
 
       // Skip auto-replies

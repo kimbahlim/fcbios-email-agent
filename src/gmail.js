@@ -85,16 +85,15 @@ function decodeBase64Url(data) {
 }
 
 function extractTextBody(payload) {
-  // Try text/plain first
-  let plainText = '';
-  let htmlText = '';
+  let plainTexts = [];
+  let htmlTexts = [];
   
   function findParts(part) {
     if (part.mimeType === 'text/plain' && part.body && part.body.data) {
-      plainText = decodeBase64Url(part.body.data).toString('utf-8');
+      plainTexts.push(decodeBase64Url(part.body.data).toString('utf-8'));
     }
     if (part.mimeType === 'text/html' && part.body && part.body.data) {
-      htmlText = decodeBase64Url(part.body.data).toString('utf-8');
+      htmlTexts.push(decodeBase64Url(part.body.data).toString('utf-8'));
     }
     if (part.parts) {
       for (const subpart of part.parts) {
@@ -105,10 +104,14 @@ function extractTextBody(payload) {
   
   findParts(payload);
   
-  // If we have HTML, extract text from it and compare with plain text
-  // Use whichever has MORE content (HTML tables often don't appear in plain text)
-  if (htmlText) {
-    const stripped = htmlText
+  const plainText = plainTexts.join('\n');
+  const htmlRaw = htmlTexts.join('\n');
+  
+  console.log(`[EMAIL] Found ${plainTexts.length} text/plain part(s) (${plainText.length} chars), ${htmlTexts.length} text/html part(s) (${htmlRaw.length} chars)`);
+  
+  // Always extract text from HTML and compare with plain text
+  if (htmlRaw) {
+    const stripped = htmlRaw
       .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
       .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
       .replace(/<br\s*\/?>/gi, '\n')
