@@ -129,9 +129,20 @@ function extractTextBody(payload) {
       .replace(/\n{3,}/g, '\n\n')
       .trim();
     
+    // Check if HTML has product info that plain text is missing
+    const htmlHasSkus = /B\d{4,5}/i.test(stripped) || /[A-Z]\d{2}-[A-Z]/i.test(stripped);
+    const plainHasSkus = /B\d{4,5}/i.test(plainText) || /[A-Z]\d{2}-[A-Z]/i.test(plainText);
+    
+    if (htmlHasSkus && !plainHasSkus) {
+      console.log(`[EMAIL] HTML body contains SKUs not found in plain text — using HTML (${stripped.length} chars)`);
+      return stripped;
+    }
+    
     if (stripped.length > plainText.length + 50) {
       console.log(`[EMAIL] HTML body has more content (${stripped.length} chars) than plain text (${plainText.length} chars) — using HTML`);
       return stripped;
+    } else {
+      console.log(`[EMAIL] HTML stripped to ${stripped.length} chars vs plain text ${plainText.length} chars — using plain text`);
     }
   }
   
