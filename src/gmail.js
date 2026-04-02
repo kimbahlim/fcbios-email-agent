@@ -234,7 +234,7 @@ function parseMessage(msg) {
 // ATTACHMENT PROCESSING: Download and prepare for Claude Vision
 // ============================================================
 
-async function processAttachments(attachments) {
+async function processAttachments(attachments, emailBody = '') {
   const visionContent = [];
   
   for (const att of attachments) {
@@ -248,17 +248,25 @@ async function processAttachments(attachments) {
         filenameLower.includes('header') || filenameLower.includes('email-bg') ||
         (filenameLower.startsWith('outlook-') && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase()));
       
-      // image00x files: skip ONLY if small (likely Gmail signature), keep if large (likely pasted screenshot/table)
-      const isGenericInlineImage = filenameLower.startsWith('image00');
+      // image00x files (Gmail inline): usually signature/branding images
+      // BUT if the email body says "below" or "as per below", the image might BE the content
+      const isGenericInlineImage = filenameLower.startsWith('image00') || filenameLower.match(/^image\d+\./);
       
       if (isSignatureImage) {
         console.log(`[ATTACHMENT] Skipping signature/branding image: ${att.filename} (${att.size} bytes)`);
         continue;
       }
       
-      if (isGenericInlineImage && att.size < 50000) {
+      // Check if body references content that might be in this image
+      const bodyRefsBelow = /below|attached|as per|item code|item list|see image/i.test(emailBody);
+      
+      if (isGenericInlineImage && att.size < 50000 && !bodyRefsBelow) {
         console.log(`[ATTACHMENT] Skipping small inline image (likely signature): ${att.filename} (${att.size} bytes)`);
         continue;
+      }
+      
+      if (isGenericInlineImage && att.size < 50000 && bodyRefsBelow) {
+        console.log(`[ATTACHMENT] Keeping small inline image — body references 'below' content: ${att.filename} (${att.size} bytes)`);
       }
       
       // Skip very small images (under 10KB) regardless of name — almost always icons/avatars
