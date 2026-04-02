@@ -48,6 +48,10 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Rayon swabs, transport swabs, swab with transport medium → DispoZ FIRST → LP backup
 - Tube racks, test tube racks, multi-tube racks, PCR racks, microcentrifuge racks → TARSONS FIRST → LP backup. Search TARSONS for "rack" before searching LP.
 - Cylindrical test tubes, sample tubes, PP/PS tubes with stoppers/caps → search BOTH DispoZ AND LP, offer both options. These are NOT the same as tube racks. Search DispoZ for "test tube" or "cylindrical" AND search LP for "cylindrical" or the specific dimensions (e.g., "12x56"). Present both brands so the dealer can choose.
+  IMPORTANT: Tubes and stoppers/caps are SEPARATE items sold separately. When a dealer asks for tubes "with stopper" or "with cap", you MUST search for BOTH:
+  1. The tube itself (e.g., search "12x56" or "cylindrical tube")
+  2. The matching stopper/cap (e.g., search "12mm stopper" or "12mm red stopper" — match the tube diameter)
+  Quote both as separate line items. LP stopper SKUs: L03-118xxx (12mm stoppers), L03-116xxx (16mm stoppers). Colours available: red, blue, yellow, green, white, etc.
 - Pipette tips: If dealer makes a generic request (just "pipette tips" without specifying volume/brand), you MUST perform ALL 5 of these searches as SEPARATE tool calls — do not skip any:
   1. search_brand("DISPOZ", "200uL tips") 
   2. search_brand("DISPOZ", "1000uL tips")
