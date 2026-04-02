@@ -205,6 +205,35 @@ async function pollForEmails() {
       console.log(`[BODY] ${(latestMsg.body || '').substring(0, 500)}...`);
       console.log(`[ATTACHMENTS] ${latestMsg.attachments.length} found`);
 
+      // THREAD CONTEXT: If the latest message body is short and references "below" content,
+      // the actual product info might be in an earlier message in the thread.
+      // Fetch the full thread and append earlier message bodies as context.
+      const bodyLen = (latestMsg.body || '').length;
+      const refsBelow = /below|as per|above|previous|earlier|attached|refer to/i.test(latestMsg.body || '');
+      if (bodyLen < 500 && refsBelow) {
+        try {
+          console.log(`[THREAD] Short body (${bodyLen} chars) references earlier content — fetching thread context`);
+          const threadMsgs = await getThreadMessages(latestMsg.thread_id);
+          // Get bodies of OTHER messages in the thread (not the latest one)
+          const otherBodies = [];
+          for (const tmsg of threadMsgs) {
+            if (tmsg.id !== latestMsg.id) {
+              const parsed = parseMessage(tmsg);
+              if (parsed.body && parsed.body.length > 50) {
+                otherBodies.push(parsed.body);
+              }
+            }
+          }
+          if (otherBodies.length > 0) {
+            const threadContext = otherBodies.join('\n\n---\n\n');
+            latestMsg.body = latestMsg.body + '\n\n--- PREVIOUS MESSAGES IN THREAD ---\n\n' + threadContext;
+            console.log(`[THREAD] Added ${otherBodies.length} earlier message(s) as context (${threadContext.length} chars)`);
+          }
+        } catch (e) {
+          console.log(`[THREAD] Error fetching thread context: ${e.message}`);
+        }
+      }
+
       // Skip auto-replies
       const subjectLower = (latestMsg.subject || '').toLowerCase();
       if (subjectLower.includes('auto-reply') || subjectLower.includes('automatic reply') || subjectLower.includes('out of office')) {
