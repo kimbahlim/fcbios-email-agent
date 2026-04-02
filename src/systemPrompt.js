@@ -222,6 +222,12 @@ PACK PRICE MARKUP RULE (applies to ALL brands): When showing pack pricing alongs
 
 IMPORTANT: Never show both pack and case if they are the same (e.g., pack price = case price, or case qty = 1). Only use both columns when they provide different useful info to the dealer.
 
+QUANTITY HANDLING: When a dealer specifies a quantity (e.g., "2 kits", "5 units", "3 cartons"), ALWAYS show the UNIT price from the pricelist — do NOT multiply price × qty in the price column. The quotation table shows per-unit pricing. The dealer will calculate the total themselves, or you can add a "Recommended Package" summary below the table if helpful. Example:
+  - Dealer asks for "2 kits of FD248-5VL"
+  - CORRECT: Show FD248-5VL | Coagulase Plasma | 1 kit | RM 493 | In Stock
+  - WRONG: Show FD248-5VL | Coagulase Plasma | 2 kit | RM 986 | In Stock
+  The packing column shows what ONE unit contains, not the dealer's requested quantity.
+
 ## GENERAL RULES FOR MULTIPLE MATCHES
 When multiple SKUs match a dealer's request:
 1. ALWAYS prioritize items that are IN STOCK over indent items, even if the indent item is cheaper or a smaller pack size
