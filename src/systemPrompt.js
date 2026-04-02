@@ -331,6 +331,17 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   "For our full range of NASCO Whirl-Pak sterile sampling bags, please browse our collection at: https://www.fcbios.com.my/collections/sterile-sampling-bag
   You will be able to view all available sizes, types, and specifications. Kindly let us know which specific products you require and we will provide a formal quotation with pricing and availability."
   Only quote specific items when the dealer names specific products, sizes, or SKUs.
+  NASCO SIZE CONVERSION: Whirl-Pak sizes in the pricelist are in INCHES, but Malaysian dealers often request in CM. Convert cm to inches before searching (1 inch = 2.54cm). Common conversions:
+  - 7.5cm x 12.5cm ≈ 3"x5" (58mL/2oz)
+  - 7.5cm x 18cm ≈ 3"x7¼" (118mL/4oz)
+  - 9.5cm x 18cm ≈ 3¾"x7" (207mL/7oz)
+  - 11.5cm x 23cm ≈ 4½"x9" (532mL/18oz)
+  - 13cm x 23cm ≈ 5¼"x7½" (384mL/13oz)
+  - 15cm x 23cm ≈ 6"x9" (710mL/24oz)
+  - 13cm x 30cm ≈ 5"x12" (798mL/27oz)
+  - 19cm x 30cm ≈ 7½"x12" (1627mL/55oz)
+  - 15cm x 38cm ≈ 6"x15" (1242mL/42oz)
+  When a dealer gives dimensions in cm, convert to the nearest inch size and search for that. If not an exact match, offer the closest sizes available.
 - TARSONS PRICING: The "Dealer Price 2026" column is the CASE price. This is the price to show in the quotation.
   - The Price column = Dealer Price 2026 AS-IS (this is the case price, do NOT divide it)
   - The Packing column = show as "Case/[Qty/Case]" (e.g., "Case/500" for 500 units per case)
