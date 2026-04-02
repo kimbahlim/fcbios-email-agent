@@ -130,14 +130,19 @@ function extractTextBody(payload) {
       .trim();
     
     // Check if HTML has product info that plain text is missing
-    const htmlHasSkus = /B\d{4,5}/i.test(stripped) || /[A-Z]\d{2}-[A-Z]/i.test(stripped);
-    const plainHasSkus = /B\d{4,5}/i.test(plainText) || /[A-Z]\d{2}-[A-Z]/i.test(plainText);
+    const htmlHasSkus = /B\d{4,5}/i.test(stripped) || /[A-Z]\d{2}-[A-Z]\d{2,}/i.test(stripped);
+    const plainHasSkus = /B\d{4,5}/i.test(plainText) || /[A-Z]\d{2}-[A-Z]\d{2,}/i.test(plainText);
+    
+    console.log(`[EMAIL] SKU check — plain: ${plainHasSkus}, html: ${htmlHasSkus}`);
+    console.log(`[EMAIL] Plain text preview: ${plainText.substring(0, 300)}`);
+    console.log(`[EMAIL] HTML stripped preview: ${stripped.substring(0, 300)}`);
     
     if (htmlHasSkus && !plainHasSkus) {
       console.log(`[EMAIL] HTML body contains SKUs not found in plain text — using HTML (${stripped.length} chars)`);
       return stripped;
     }
     
+    // If both have SKUs or neither has, use whichever is longer
     if (stripped.length > plainText.length + 50) {
       console.log(`[EMAIL] HTML body has more content (${stripped.length} chars) than plain text (${plainText.length} chars) — using HTML`);
       return stripped;
