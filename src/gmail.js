@@ -88,7 +88,12 @@ function extractTextBody(payload) {
   let plainTexts = [];
   let htmlTexts = [];
   
-  function findParts(part) {
+  function findParts(part, depth = 0) {
+    const indent = '  '.repeat(depth);
+    const size = part.body && part.body.data ? Math.round(part.body.data.length * 0.75) : (part.body && part.body.size ? part.body.size : 0);
+    const fname = part.filename ? ` [${part.filename}]` : '';
+    console.log(`[MIME] ${indent}${part.mimeType}${fname} (${size} bytes)`);
+    
     if (part.mimeType === 'text/plain' && part.body && part.body.data) {
       plainTexts.push(decodeBase64Url(part.body.data).toString('utf-8'));
     }
@@ -97,14 +102,14 @@ function extractTextBody(payload) {
     }
     // Handle forwarded emails embedded as message/rfc822
     if (part.mimeType === 'message/rfc822' && part.parts) {
-      console.log('[EMAIL] Found embedded message/rfc822 — extracting forwarded content');
+      console.log('[MIME] Found embedded message/rfc822 — extracting forwarded content');
       for (const subpart of part.parts) {
-        findParts(subpart);
+        findParts(subpart, depth + 1);
       }
     }
     if (part.parts) {
       for (const subpart of part.parts) {
-        findParts(subpart);
+        findParts(subpart, depth + 1);
       }
     }
   }
