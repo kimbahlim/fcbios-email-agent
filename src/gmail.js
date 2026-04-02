@@ -95,6 +95,13 @@ function extractTextBody(payload) {
     if (part.mimeType === 'text/html' && part.body && part.body.data) {
       htmlTexts.push(decodeBase64Url(part.body.data).toString('utf-8'));
     }
+    // Handle forwarded emails embedded as message/rfc822
+    if (part.mimeType === 'message/rfc822' && part.parts) {
+      console.log('[EMAIL] Found embedded message/rfc822 — extracting forwarded content');
+      for (const subpart of part.parts) {
+        findParts(subpart);
+      }
+    }
     if (part.parts) {
       for (const subpart of part.parts) {
         findParts(subpart);
