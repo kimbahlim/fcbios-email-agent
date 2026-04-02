@@ -105,34 +105,29 @@ function extractTextBody(payload) {
   
   findParts(payload);
   
-  // If plain text is good enough (has real content), use it
-  if (plainText && plainText.trim().length > 100) {
-    return plainText;
-  }
-  
-  // If plain text is short/truncated but HTML exists, extract text from HTML
+  // If we have HTML, extract text from it and compare with plain text
+  // Use whichever has MORE content (HTML tables often don't appear in plain text)
   if (htmlText) {
-    // Strip HTML tags to get readable text
     const stripped = htmlText
-      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '') // remove style blocks
-      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '') // remove script blocks
-      .replace(/<br\s*\/?>/gi, '\n') // br to newline
-      .replace(/<\/p>/gi, '\n') // closing p to newline
-      .replace(/<\/tr>/gi, '\n') // table row to newline
-      .replace(/<\/td>/gi, ' | ') // table cell to separator
-      .replace(/<\/th>/gi, ' | ') // table header to separator
-      .replace(/<[^>]+>/g, '') // strip remaining tags
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<\/p>/gi, '\n')
+      .replace(/<\/tr>/gi, '\n')
+      .replace(/<\/td>/gi, ' | ')
+      .replace(/<\/th>/gi, ' | ')
+      .replace(/<[^>]+>/g, '')
       .replace(/&nbsp;/g, ' ')
       .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&#39;/g, "'")
-      .replace(/\n{3,}/g, '\n\n') // collapse multiple newlines
+      .replace(/\n{3,}/g, '\n\n')
       .trim();
     
-    if (stripped.length > plainText.length) {
-      console.log(`[EMAIL] Plain text was short (${plainText.length} chars), using HTML body instead (${stripped.length} chars)`);
+    if (stripped.length > plainText.length + 50) {
+      console.log(`[EMAIL] HTML body has more content (${stripped.length} chars) than plain text (${plainText.length} chars) — using HTML`);
       return stripped;
     }
   }
