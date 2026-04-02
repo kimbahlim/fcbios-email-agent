@@ -266,9 +266,15 @@ async function pollForEmails() {
         // If body has clear product requests, skip image processing to save costs
         // (signature banners, social media icons etc. waste Vision credits)
         const bodyText = (latestMsg.body || '').toLowerCase();
-        const hasProductInfo = /[a-z]\d{2}-[a-z]/i.test(latestMsg.body) || // SKU pattern like H05-M1881
-          /\d{3,}[a-z]*-\d/i.test(latestMsg.body) || // SKU pattern like 521016B
-          (bodyText.split('\n').filter(l => /^\s*\d+[\.\)]\s+\S/.test(l)).length >= 1); // Numbered product list
+        
+        // Check if body references content that might be in images/attachments
+        const bodyReferencesAttachment = /below|attached|see image|as per|item code|item list|following item/i.test(latestMsg.body);
+        const bodyIsTruncated = bodyText.includes('...') || bodyText.length < 200;
+        
+        const hasProductInfo = !bodyIsTruncated && !bodyReferencesAttachment && (
+          /[a-z]\d{2}-[a-z]\d{2,}/i.test(latestMsg.body) || // SKU pattern like H05-M1881 (tighter match)
+          (bodyText.split('\n').filter(l => /^\s*\d+[\.\)]\s+\S{5,}/.test(l)).length >= 2) // At least 2 numbered items with real content
+        );
         
         const hasPDFAttachment = latestMsg.attachments.some(a => 
           (a.mimeType || '').toLowerCase() === 'application/pdf');
