@@ -193,6 +193,7 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - IUL: 3% common, 5% battery
 - NEOGEN: 5%
 - LP: 5%
+  LP PRICING FORMAT: LP pricelist has ONE price per item (Dealer Price) and ONE quantity (Box Quantity). The Box Quantity IS the case quantity. Show CASE pricing ONLY for LP items — do NOT create a separate pack price. There is no loose pack option for LP items unless the stock data shows decimal quantities (e.g., 0.5 case = loose packs available).
 - GYROZEN: 0% (maintain 2024 prices as-is)
 - MESALABS: 10%
 - Prices with cents → ROUND UP to nearest RM (no cents)
