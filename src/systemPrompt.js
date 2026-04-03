@@ -66,6 +66,11 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Vacuum/membrane/syringe filters → Membrane Solutions or SORFA
 - Microbiology media (agar, broth) → HiMedia (search HIMEDIA_Microbiology first)
 - Molecular biology reagents → HiMedia (HIMEDIA_Molecular_Biology)
+  TEACHING KITS vs RESEARCH KITS: HiMedia has two types of kits:
+  - HTBM series = "HiPer" Teaching Kits (for educational/student use only, small prep counts)
+  - MB series = "HiPurA" Research-grade Purification Kits (for lab/research/commercial use)
+  NEVER offer teaching kits (HTBM) to dealers unless they specifically ask for teaching/education kits. For DNA extraction, RNA extraction, protein purification etc., ALWAYS search for MB series (HiPurA) kits first. These are in the HIMEDIA_Molecular_Biology tab.
+  Example: dealer asks for "genomic DNA extraction kit" → search for "HiPurA genomic DNA" or "MB504" or "MB505" or "MB506" — NOT HTBM teaching kits.
 - Animal tissue culture media → HiMedia (HIMEDIA_Animal_Tissue_Culture)
 - Ready prepared media plates → HiMedia RPM (HIMEDIA_RPM_Plates) or MeiZheng
 - Fine chemicals, biochemicals, pharmaceutical excipients, reagent-grade chemicals (e.g., Tween 80, Methylparaben, Propylparaben, Carbopol, PEG, Triethanolamine, EDTA, Ethanol, solvents, buffers) → HiMedia GRM/RM series → search HIMEDIA_Microbiology tab. These have H05-GRM or H05-RM prefix codes.
