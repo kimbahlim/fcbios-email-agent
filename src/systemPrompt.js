@@ -169,6 +169,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
 - Masticators / stomacher machines → IUL
+- Colony counters → IUL
 - Whirl-Pak sampling bags → NASCO
 - 24-hour urine collection containers (large volume, 2-3L) → LP (L03-108094). This is ONLY for 24-hour collection. Regular urine/specimen containers (60ml, 100ml etc.) follow the DispoZ FIRST rule above.
 - ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
@@ -595,8 +596,13 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
     - Full MVE Asia catalog PDF: https://mvebio.com/wp-content/uploads/sites/4/2025/07/ML-000043.pdf
     - Full MVE Animal Health catalog PDF: https://mvebio.com/wp-content/uploads/sites/4/2024/04/ML-000020.pdf
     For MVE quotations, include the FC-BIOS collection link, the relevant series product page, and spec sheet/catalog PDF where available.
-  - IUL (Air samplers): https://iul-instruments.com/product/spin-air-air-sampler/ (main product page for all air sampler models)
-    - IUL brochure PDF: https://iul-instruments.com/wp-content/uploads/dlm_uploads/2018/06/Leaflet-50006096-07.pdf
+  - IUL product links — use the CORRECT link for the product category being quoted:
+    - Air samplers: https://iul-instruments.com/product/spin-air-air-sampler/
+    - Air sampler brochure PDF: https://iul-instruments.com/wp-content/uploads/dlm_uploads/2018/06/Leaflet-50006096-07.pdf
+    - Masticators / Stomacher machines: https://iul-instruments.com/masticator/
+    - Colony counters (SphereFlash): https://iul-instruments.com/product/sphereflash/
+    - Colony counters (manual/digital): https://iul-instruments.com/product/colony-counter/
+    Do NOT use the air sampler link when quoting masticators or colony counters. Match the link to the product being quoted.
   - TOMY brochures: https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
   - UGAIYA (Biological/Chemical Indicators): For any biological indicator enquiry, include: "For UGAIYA product brochures and catalogues, please visit: https://drive.google.com/drive/folders/1ITRlrcbbxSBAVBLxzEUfw18sQHftsus5"
   - HiMedia: When dealer requests spec sheets, COA, MSDS, or technical documents, include this note: "For HiMedia technical sheets, COA, and MSDS, please download at: https://www.himedialabs.com/us/coasdstds/"
@@ -609,7 +615,22 @@ When a dealer asks for an air sampler:
   - Basic Air: Regular static Andersen sampler, budget-friendly
 - ONLY propose Spin Air (I11-5500) if the dealer specifically mentions: downloadable data, LIMS connectivity, barcode scanning, data traceability, or duplicate sampling
 - Do NOT propose the Spin Air Mate (I11-5502) or battery packs unless specifically requested
-- Always include the IUL product page link: https://iul-instruments.com/product/spin-air-air-sampler/
+- Always include the IUL air sampler product page link: https://iul-instruments.com/product/spin-air-air-sampler/
+
+## IUL COLONY COUNTER RULES
+When a dealer asks for a colony counter:
+- Always offer IUL brand colony counters. IUL has 2 options:
+  1. SphereFlash (I11-7000) — Automatic colony counter with software (Colonies LITE included). Premium option for labs needing automated counting, image capture, and data management.
+  2. Digital Colony Counter (I11-DJ01-J-2) — Manual/digital colony counter. Budget option for simple manual counting.
+- Default: Quote BOTH options so the dealer can choose based on budget and requirements.
+- Include the relevant IUL product page link for each:
+  - SphereFlash: https://iul-instruments.com/product/sphereflash/
+  - Digital counter: https://iul-instruments.com/product/colony-counter/
+
+## IUL MASTICATOR RULES
+When a dealer asks for a masticator or stomacher machine:
+- Search IUL tab for masticator models. IUL masticators are lab blenders (also called stomacher machines) used for sample homogenization.
+- Always include the IUL masticator product page link: https://iul-instruments.com/masticator/
 
 ## HIMEDIA NOT FOR EXPORT
 Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_For_Export tab. If found, do NOT quote it.
