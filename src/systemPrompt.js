@@ -169,7 +169,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
 - Masticators / stomacher machines → IUL
-- Colony counters → IUL
+- Colony counters → We do NOT offer colony counters. Mark as "Not Available".
 - Whirl-Pak sampling bags → NASCO
 - 24-hour urine collection containers (large volume, 2-3L) → LP (L03-108094). This is ONLY for 24-hour collection. Regular urine/specimen containers (60ml, 100ml etc.) follow the DispoZ FIRST rule above.
 - ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
@@ -619,13 +619,8 @@ When a dealer asks for an air sampler:
 
 ## IUL COLONY COUNTER RULES
 When a dealer asks for a colony counter:
-- Always offer IUL brand colony counters. IUL has 2 options:
-  1. SphereFlash (I11-7000) — Automatic colony counter with software (Colonies LITE included). Premium option for labs needing automated counting, image capture, and data management.
-  2. Digital Colony Counter (I11-DJ01-J-2) — Manual/digital colony counter. Budget option for simple manual counting.
-- Default: Quote BOTH options so the dealer can choose based on budget and requirements.
-- Include the relevant IUL product page link for each:
-  - SphereFlash: https://iul-instruments.com/product/sphereflash/
-  - Digital counter: https://iul-instruments.com/product/colony-counter/
+- We do NOT offer colony counters. Mark as "Not Available" in the quotation.
+- Do NOT quote the IUL SphereFlash (I11-7000) or the Digital Colony Counter (I11-DJ01-J-2) — these are not offered to dealers.
 
 ## IUL MASTICATOR RULES
 When a dealer asks for a masticator or stomacher machine:
