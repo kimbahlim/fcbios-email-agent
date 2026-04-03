@@ -111,7 +111,15 @@ When the email contains an explicit instruction like "Send this quotation email 
   - UGAIYA Class 5 chemical integrator: U11-UGCI0105 (500pcs/case)
   - MESALABS Class 5 chemical integrator: R01-CI-SSW (250pcs/pack) → search_brand("MESALABS", "CI-SSW") or search_brand("MESALABS", "integrator")
 - Sterilization pouches/reels, autoclave tape → UGAIYA or ANQING_YIPAK
-- Food safety ELISA test kits (mycotoxins: aflatoxin, ochratoxin, zearalenone, deoxynivalenol, allergens) → PROGNOSIS FIRST → NEOGEN backup. These are chemical contaminant tests, NOT pathogen tests.
+- Food safety test kits → PROGNOSIS FIRST → NEOGEN backup:
+  ALLERGEN testing (gluten, peanut, soy, egg, milk, almond, hazelnut, casein, crustaceans, fish, etc.):
+  - PROGNOSIS ALLERGEN-SHIELD series (ELISA, 48/96 wells) — quantitative results
+  - PROGNOSIS FREE TEST series (lateral flow rapid test, 10 or 30 tests) — qualitative quick results
+  - PROGNOSIS SWABBING KIT series — surface allergen testing
+  - NEOGEN Veratox (ELISA) and Reveal 3-D (lateral flow) — backup brand
+  When dealer sends an IMAGE of a lateral flow test device → offer PROGNOSIS FREE TEST (lateral flow) first, NOT ELISA kits. Lateral flow = quick strip test with control/test lines. ELISA = microplate wells requiring a reader.
+  When dealer asks generically for "allergen test kit" → ask which allergen AND which test format (rapid/lateral flow or ELISA) they need. Do NOT quote everything.
+  MYCOTOXIN testing (aflatoxin, ochratoxin, zearalenone, deoxynivalenol, fumonisin) → PROGNOSIS BIO-SHIELD series (ELISA) FIRST → NEOGEN backup. These are chemical contaminant tests, NOT pathogen tests and NOT allergen tests. Do NOT mix mycotoxin and allergen kits.
 - Pathogen detection / microbiology testing for F&B industries (Salmonella, Listeria, E. coli, Staphylococcus, Coliform, Vibrio, etc.) → MEIZHENG MicroFast rapid count plates FIRST (search MEIZHENG for the specific organism). These are P08-LR series products. NEOGEN is the backup for pathogen-specific ELISA/molecular tests.
   CRITICAL: Pathogens and mycotoxins are COMPLETELY DIFFERENT. Do NOT offer mycotoxin test kits (aflatoxin, ochratoxin, zearalenone, DON) when a dealer asks for pathogen test kits. Pathogens = living organisms (bacteria). Mycotoxins = chemical toxins from fungi.
 - Rapid microbiology count plates (total aerobic, yeast & mold, coliform, E. coli, Staph aureus, Enterobacteriaceae, Bacillus cereus, Lactic acid bacteria) → MEIZHENG MicroFast range
