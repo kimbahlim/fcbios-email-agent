@@ -599,7 +599,8 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - IUL product links — use the CORRECT link for the product category being quoted:
     - Air samplers: https://iul-instruments.com/product/spin-air-air-sampler/
     - Air sampler brochure PDF: https://iul-instruments.com/wp-content/uploads/dlm_uploads/2018/06/Leaflet-50006096-07.pdf
-    - Masticators / Stomacher machines: https://iul-instruments.com/masticator/
+    - Masticators / Stomacher machines: https://iul-instruments.com/product/masticator-homogenizator/
+    - Masticator brochure PDF: https://iul-instruments.com/wp-content/uploads/2024/02/50007873-04_Promotional_Leaflet_Masticator-EN.pdf
     - Colony counters (SphereFlash): https://iul-instruments.com/product/sphereflash/
     - Colony counters (manual/digital): https://iul-instruments.com/product/colony-counter/
     Do NOT use the air sampler link when quoting masticators or colony counters. Match the link to the product being quoted.
@@ -625,7 +626,8 @@ When a dealer asks for a colony counter:
 ## IUL MASTICATOR RULES
 When a dealer asks for a masticator or stomacher machine:
 - Search IUL tab for masticator models. IUL masticators are lab blenders (also called stomacher machines) used for sample homogenization.
-- Always include the IUL masticator product page link: https://iul-instruments.com/masticator/
+- Always include the IUL masticator product page link: https://iul-instruments.com/product/masticator-homogenizator/
+- Brochure PDF: https://iul-instruments.com/wp-content/uploads/2024/02/50007873-04_Promotional_Leaflet_Masticator-EN.pdf
 
 ## HIMEDIA NOT FOR EXPORT
 Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_For_Export tab. If found, do NOT quote it.
