@@ -370,6 +370,13 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - References to previous quotations or prices to confirm (e.g., "please confirm if below price still valid")
   If ANY of these are found → search_brand("NASCO", "[SKU or keyword]") → check stock → quote with current pricing. Do NOT redirect to website.
   PRICE CONFIRMATION REQUESTS: When a dealer asks "is this price still valid" or "please confirm pricing", quote the CURRENT price from the pricelist. If the current price differs from what the dealer quoted, note the updated price clearly.
+  NASCO EX-STOCK ALTERNATIVE: When a NASCO bag is NOT ex-stock (indent), ALWAYS also check which NASCO bags ARE ex-stock and include the closest size match as an alternative option. Steps:
+  1. Quote the requested item with indent lead time
+  2. Search the NASCO tab + check_stock for bags that ARE in stock
+  3. Find the closest size to what the dealer requested (same or nearest volume/dimensions)
+  4. Include the ex-stock option(s) as "Ex-Stock Alternative" with a note like: "The following is available ex-stock as an alternative in a similar size"
+  5. Write-on or non-write-on doesn't matter for alternatives — offer whatever is in stock
+  This helps the dealer get product faster if they're flexible on exact size/type.
   NASCO STEP 2 — GENERIC REDIRECT (ONLY if Step 1 found NOTHING specific):
   If the dealer asks for "Whirl-Pak bags" or "sterile sampling bags" with NO specific products, sizes, dimensions, or SKUs anywhere in the email, THEN send the generic redirect:
   "For our full range of NASCO Whirl-Pak sterile sampling bags, please browse our collection at: https://www.fcbios.com.my/collections/sterile-sampling-bag
