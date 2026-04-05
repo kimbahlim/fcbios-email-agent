@@ -297,13 +297,22 @@ async function checkStock(sku) {
   const skuVariants = [skuLower];
   
   // TOMY accessories: F07 and T01 are interchangeable prefixes for same products
-  // Stock tab may use T01 while pricelist uses F07, or vice versa
   if (skuLower.startsWith('f07-')) {
     skuVariants.push('t01-' + skuLower.substring(4));
     console.log(`[STOCK] TOMY cross-ref: also checking T01-${skuLower.substring(4)}`);
   } else if (skuLower.startsWith('t01-')) {
     skuVariants.push('f07-' + skuLower.substring(4));
     console.log(`[STOCK] TOMY cross-ref: also checking F07-${skuLower.substring(4)}`);
+  }
+  
+  // NASCO: pricelist has "WA" suffix (e.g., N02-B01065WA) but Stock tab doesn't (N02-B01065)
+  if (skuLower.startsWith('n02-') && skuLower.endsWith('wa')) {
+    const withoutWA = skuLower.slice(0, -2);
+    skuVariants.push(withoutWA);
+    console.log(`[STOCK] NASCO: also checking without WA suffix: ${withoutWA}`);
+  } else if (skuLower.startsWith('n02-') && !skuLower.endsWith('wa')) {
+    skuVariants.push(skuLower + 'wa');
+    console.log(`[STOCK] NASCO: also checking with WA suffix: ${skuLower}wa`);
   }
   
   // If SKU doesn't start with a brand prefix like H05-, try adding common prefixes

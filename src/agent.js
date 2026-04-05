@@ -157,9 +157,13 @@ async function processToolCall(toolName, toolInput) {
               if (!itemCode || itemCode === toolInput.sku) continue;
               
               // Check if this item is in stock
+              // NASCO: strip WA suffix for stock matching
+              const itemCodeLower = itemCode.toLowerCase();
+              const itemCodeNoWA = itemCodeLower.endsWith('wa') ? itemCodeLower.slice(0, -2) : itemCodeLower;
+              
               const stockMatch = stockTab.find(s => {
                 const name = (s['NAME'] || s['name'] || Object.values(s)[0] || '').toLowerCase();
-                return name.includes(itemCode.toLowerCase());
+                return name.includes(itemCodeLower) || name.includes(itemCodeNoWA) || itemCodeLower.includes(name) || itemCodeNoWA.includes(name);
               });
               
               if (stockMatch) {
