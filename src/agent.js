@@ -1,6 +1,6 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const { getSystemPrompt } = require('./systemPrompt');
-const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets } = require('./googleSheets');
+const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets, fetchSheet } = require('./googleSheets');
 
 const client = new Anthropic();
 
@@ -143,6 +143,48 @@ async function processToolCall(toolName, toolInput) {
       }
       case 'check_stock':
         result = await checkStock(toolInput.sku);
+        
+        // NASCO AUTO-ALTERNATIVE: If a NASCO item is not in stock, find ex-stock alternatives
+        if (toolInput.sku.toLowerCase().startsWith('n02-') && (!result.found || parseFloat(result.qty || '0') === 0)) {
+          try {
+            console.log(`[NASCO ALT] ${toolInput.sku} not ex-stock — searching for ex-stock alternatives`);
+            const nascoRows = await searchByBrand('NASCO', 'whirl');
+            const stockTab = await fetchSheet('Stock');
+            const exStockAlts = [];
+            
+            for (const row of nascoRows) {
+              const itemCode = row['NetSuite Item Code'] || row['NetSuite Code'] || '';
+              if (!itemCode || itemCode === toolInput.sku) continue;
+              
+              // Check if this item is in stock
+              const stockMatch = stockTab.find(s => {
+                const name = (s['NAME'] || s['name'] || Object.values(s)[0] || '').toLowerCase();
+                return name.includes(itemCode.toLowerCase());
+              });
+              
+              if (stockMatch) {
+                const qty = stockMatch['AVAILABLE'] || stockMatch['Available'] || stockMatch['QTY AVAILABLE'] || '0';
+                if (parseFloat(qty) > 0) {
+                  exStockAlts.push({
+                    sku: itemCode,
+                    description: row['Description'] || '',
+                    qty_available: qty,
+                    uom: stockMatch['UOM'] || stockMatch['Uom'] || 'unit'
+                  });
+                }
+              }
+            }
+            
+            if (exStockAlts.length > 0) {
+              console.log(`[NASCO ALT] Found ${exStockAlts.length} ex-stock alternatives`);
+              result.ex_stock_alternatives = exStockAlts.slice(0, 8); // limit to 8 options
+              result.note = 'This item is indent. Ex-stock alternatives in similar sizes are listed in ex_stock_alternatives. Offer the closest size match to the dealer.';
+            }
+          } catch (e) {
+            console.log(`[NASCO ALT] Error searching alternatives: ${e.message}`);
+          }
+        }
+        
         break;
       case 'check_stock_batch': {
         const stockResults = {};
