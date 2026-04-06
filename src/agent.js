@@ -148,13 +148,16 @@ async function processToolCall(toolName, toolInput) {
         if (toolInput.sku.toLowerCase().startsWith('n02-') && (!result.found || parseFloat(result.qty || '0') === 0)) {
           try {
             console.log(`[NASCO ALT] ${toolInput.sku} not ex-stock — searching for ex-stock alternatives`);
-            const nascoRows = await searchByBrand('NASCO', 'whirl');
+            // Get ALL NASCO products from pricelist (not limited to 20 like searchByBrand)
+            const nascoRows = await fetchSheet('NASCO');
             const stockTab = await fetchSheet('Stock');
             const exStockAlts = [];
             
             for (const row of nascoRows) {
               const itemCode = row['NetSuite Item Code'] || row['NetSuite Code'] || '';
+              const stockingStatus = (row['Stocking Status'] || '').toUpperCase();
               if (!itemCode || itemCode === toolInput.sku) continue;
+              if (stockingStatus !== 'S') continue; // Only consider stocking items
               
               // Check if this item is in stock
               // NASCO: strip WA suffix for stock matching
@@ -173,7 +176,9 @@ async function processToolCall(toolName, toolInput) {
                     sku: itemCode,
                     description: row['Description'] || '',
                     qty_available: qty,
-                    uom: stockMatch['UOM'] || stockMatch['Uom'] || 'unit'
+                    uom: stockMatch['PRIMARY STOCK UNIT'] || stockMatch['UOM'] || 'unit',
+                    price_tier1: row['Tier1 <RM10K'] || '',
+                  });
                   });
                 }
               }
