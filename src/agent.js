@@ -179,7 +179,6 @@ async function processToolCall(toolName, toolInput) {
                     uom: stockMatch['PRIMARY STOCK UNIT'] || stockMatch['UOM'] || 'unit',
                     price_tier1: row['Tier1 <RM10K'] || '',
                   });
-                  });
                 }
               }
             }
