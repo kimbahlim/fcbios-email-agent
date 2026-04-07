@@ -599,7 +599,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
     - Brochure PDF: https://logtagrecorders.com/download/products/brochures/LogTag_[MODEL]_Brochure.pdf (e.g., https://logtagrecorders.com/download/products/brochures/LogTag_UTRIX-16_Brochure.pdf)
   - MinMax Thermometer: https://www.fcbios.com.my/collections/minmax-thermometer
   - MinMax Thermo Hygrometer: https://www.fcbios.com.my/collections/thermo-hygrometer
-  - TARSONS Pipette Tips: https://www.fcbios.com.my/collections/pipette-tips
+  - TARSONS — use the correct link based on what was quoted:
+    - Pipette tips only: https://www.fcbios.com.my/collections/pipette-tips
+    - Tubes, racks, boxes, cryovials, lab plasticware: https://www.fcbios.com.my/collections/tarsons
+    - If quoting BOTH tips and other items: include both links
+    - NEVER use the pipette-tips link when quoting non-tip items like racks, tubes, or boxes
   - DispoZ (Microbiology consumables): https://www.fcbios.com.my/collections/microbiology-labware
   - SORFA (Cell culture): https://www.fcbios.com.my/collections/cell-culture-plasticwares
   - NASCO (Whirl-Pak): https://www.fcbios.com.my/collections/sterile-sampling-bag
