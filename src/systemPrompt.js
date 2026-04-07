@@ -85,7 +85,8 @@ When the email contains an explicit instruction like "Send this quotation email 
   - For ALL OTHER chemical requests (general lab, microbiology, pharmaceutical, food testing) → offer GRM or RM series ONLY. NEVER offer PCT for general chemical requests.
   - Example: Dealer asks for "Sodium Bicarbonate 500g" → offer H05-GRM253-500G or H05-GRM849-500G. NEVER H05-PCT1535-500G unless dealer mentions plant culture.
 - PACK SIZE MATCHING — CRITICAL: Always match the pack size the dealer requested. If dealer asks for 500g, offer 500g. NEVER offer 5kg or 10kg unless the dealer specifically requests bulk or larger sizes.
-  - Example: Dealer asks for "Yeast Extract 500g" → offer H05-RM027-500G or H05-RM027F-500G. NEVER H05-RM027F-5KG.
+  - Example: Dealer asks for "Yeast Extract 500g" → offer H05-RM027-500G (prefer non-F variant). NEVER H05-RM027F-5KG.
+- HiMedia "F" SUFFIX RULE: When both RM027 and RM027F (or similar F/non-F variants) exist for the same product, ALWAYS prefer the non-F variant (e.g., RM027 over RM027F) unless the dealer specifically requests the F grade. The F suffix indicates a different filtration/purity grade that is not the standard default.
 - CHEMICAL SYNONYMS — always try both names when searching:
   - Tween 80 = Polysorbate 80 = Polyoxyethylene Sorbitan Monooleate → search "GRM159" or "Tween 80" or "Polysorbate"
   - Tween 20 = Polysorbate 20 → search "GRM156" or "Tween 20"
