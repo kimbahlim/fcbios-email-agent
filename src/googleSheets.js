@@ -270,6 +270,18 @@ async function searchByBrand(brandTab, keyword) {
     }
   }
 
+  // Post-filter for HiMedia: remove PCT (Plant Cell/Tissue Culture) results
+  // when non-PCT alternatives exist, unless context explicitly mentions plant culture
+  if (brandTab.toLowerCase().includes('himedia') && matches.length > 0) {
+    const hasPCT = matches.some(r => Object.values(r).join(' ').toLowerCase().includes('pct'));
+    const hasNonPCT = matches.some(r => !Object.values(r).join(' ').toLowerCase().includes('pct'));
+    if (hasPCT && hasNonPCT) {
+      const filtered = matches.filter(r => !Object.values(r).join(' ').toLowerCase().includes('pct'));
+      console.log(`[SEARCH] Filtered out ${matches.length - filtered.length} PCT (plant tissue culture) result(s) — non-PCT alternatives exist`);
+      matches = filtered;
+    }
+  }
+
   return matches.slice(0, 20);
 }
 
