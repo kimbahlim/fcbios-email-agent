@@ -215,6 +215,9 @@ function parseMessage(msg) {
   const body = extractTextBody(msg.payload);
   const attachments = findAttachments(msg.payload, msg.id);
   
+  // Also extract raw HTML to find inline images embedded as external URLs
+  const htmlBody = extractHtmlBody(msg.payload);
+  
   return {
     id: msg.id,
     threadId: msg.threadId,
@@ -222,6 +225,7 @@ function parseMessage(msg) {
     from_email: extractEmailAddress(from),
     subject,
     body,
+    htmlBody,
     message_id: messageId,
     thread_id: msg.threadId,
     date,
@@ -230,12 +234,62 @@ function parseMessage(msg) {
   };
 }
 
+function extractHtmlBody(payload) {
+  let html = '';
+  function find(part) {
+    if (part.mimeType === 'text/html' && part.body && part.body.data) {
+      html += decodeBase64Url(part.body.data).toString('utf-8');
+    }
+    if (part.parts) part.parts.forEach(find);
+  }
+  find(payload);
+  return html;
+}
+
 // ============================================================
 // ATTACHMENT PROCESSING: Download and prepare for Claude Vision
 // ============================================================
 
-async function processAttachments(attachments, emailBody = '') {
+async function processAttachments(attachments, emailBody = '', htmlBody = '') {
   const visionContent = [];
+  
+  // Also check for external inline images embedded in HTML body
+  // (e.g. ci3.googleusercontent.com URLs — these are NOT Gmail attachment parts)
+  if (htmlBody) {
+    const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+    let match;
+    while ((match = imgRegex.exec(htmlBody)) !== null) {
+      const src = match[1];
+      // Skip tracking pixels, logos, icons — only fetch substantial external images
+      if (src.startsWith('http') && 
+          !src.includes('gstatic.com') && 
+          !src.includes('google.com/images') &&
+          !src.includes('googleusercontent.com/proxy') &&
+          src.includes('googleusercontent.com')) {
+        try {
+          console.log(`[ATTACHMENT] Fetching external inline image: ${src.substring(0, 80)}...`);
+          const imgResponse = await fetch(src);
+          if (imgResponse.ok) {
+            const buffer = await imgResponse.arrayBuffer();
+            const base64 = Buffer.from(buffer).toString('base64');
+            const contentType = imgResponse.headers.get('content-type') || 'image/jpeg';
+            const sizeKB = Math.round(buffer.byteLength / 1024);
+            if (buffer.byteLength > 5000) { // skip tiny tracking pixels
+              console.log(`[ATTACHMENT] External inline image fetched: ${sizeKB}KB, ${contentType}`);
+              visionContent.push({
+                type: 'image',
+                source: { type: 'base64', media_type: contentType, data: base64 }
+              });
+            } else {
+              console.log(`[ATTACHMENT] Skipping tiny external image (${sizeKB}KB) — likely tracking pixel`);
+            }
+          }
+        } catch (err) {
+          console.log(`[ATTACHMENT] Failed to fetch external inline image: ${err.message}`);
+        }
+      }
+    }
+  }
   
   for (const att of attachments) {
     try {

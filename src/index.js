@@ -321,7 +321,7 @@ async function pollForEmails() {
           console.log(`[ATTACHMENTS] Body already has product info — skipping ${latestMsg.attachments.length} image(s) to save Vision costs`);
         } else {
           console.log(`[ATTACHMENTS] Processing ${latestMsg.attachments.length} attachment(s)...`);
-          visionContent = await processAttachments(latestMsg.attachments, latestMsg.body);
+          visionContent = await processAttachments(latestMsg.attachments, latestMsg.body, latestMsg.htmlBody);
           console.log(`[ATTACHMENTS] ${visionContent.length} ready for Vision`);
         }
       }
