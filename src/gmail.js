@@ -258,15 +258,14 @@ async function processAttachments(attachments, emailBody = '') {
       }
       
       // Check if body references content that might be in this image
-      const bodyRefsBelow = /below|attached|as per|item code|item list|see image/i.test(emailBody);
+      const bodyRefsBelow = /below|attached|as per|item code|item list|see image|please.*quote|kindly.*quote|quote.*following|offer.*price/i.test(emailBody);
       
-      if (isGenericInlineImage && att.size < 50000 && !bodyRefsBelow) {
+      // If body references "below" content, KEEP the image regardless of size — it's likely the product list
+      if (isGenericInlineImage && bodyRefsBelow) {
+        console.log(`[ATTACHMENT] Keeping inline image — body references content below: ${att.filename} (${att.size} bytes)`);
+      } else if (isGenericInlineImage && att.size < 50000) {
         console.log(`[ATTACHMENT] Skipping small inline image (likely signature): ${att.filename} (${att.size} bytes)`);
         continue;
-      }
-      
-      if (isGenericInlineImage && att.size < 50000 && bodyRefsBelow) {
-        console.log(`[ATTACHMENT] Keeping small inline image — body references 'below' content: ${att.filename} (${att.size} bytes)`);
       }
       
       // Skip very small images (under 10KB) regardless of name — almost always icons/avatars

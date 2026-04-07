@@ -297,7 +297,7 @@ async function pollForEmails() {
         const bodyText = (latestMsg.body || '').toLowerCase();
         
         // Check if body references content that might be in images/attachments
-        const bodyReferencesAttachment = /below|attached|see image|as per|item code|item list|following item/i.test(latestMsg.body);
+        const bodyReferencesAttachment = /below|attached|see image|as per|item code|item list|following item|please.*quote|kindly.*quote|offer.*price|price.*below/i.test(latestMsg.body);
         const bodyIsTruncated = bodyText.includes('...') || bodyText.length < 200;
         
         const hasProductInfo = !bodyIsTruncated && !bodyReferencesAttachment && (
