@@ -83,14 +83,18 @@ When the email contains an explicit instruction like "Send this quotation email 
 - PCT vs GRM RULE — CRITICAL:
   - PCT series (e.g., PCT1535) = Plant Cell/Tissue Culture grade chemicals. ONLY offer PCT when the dealer explicitly mentions plant tissue culture, plant growth media, Murashige & Skoog, MS medium, or plant culture applications.
   - For ALL OTHER chemical requests (general lab, microbiology, pharmaceutical, food testing) → offer GRM or RM series ONLY. NEVER offer PCT for general chemical requests.
-  - Example: Dealer asks for "Sodium Bicarbonate 500g" → offer H05-GRM253-500G or H05-GRM849-500G. NEVER H05-PCT1535-500G unless dealer mentions plant culture.
+  - Example: Dealer asks for "Sodium Bicarbonate 500g" → search "GRM253" or "GRM849" directly. NEVER H05-PCT1535-500G unless dealer mentions plant culture.
+  - When searching for chemicals, if PCT results appear alongside GRM/RM results, ALWAYS choose GRM/RM. PCT is a last resort only for plant culture applications.
+- TRYPTIC SOYA AGAR (TSA) NOTE: M290, MH290, GM290, GMH290, and M1968 are ALL forms of TSA/Tryptone Soya Agar/Soybean Casein Digest Agar. When dealer asks for TSA or Tryptic Soya Agar, search "290" to find all variants — MH290-500G is rank 1 stocking item (RM 251). Do NOT use M1968 unless specifically requested by code.
 - PACK SIZE MATCHING — CRITICAL: Always match the pack size the dealer requested. If dealer asks for 500g, offer 500g. NEVER offer 5kg or 10kg unless the dealer specifically requests bulk or larger sizes.
-  - Example: Dealer asks for "Yeast Extract 500g" → offer H05-RM027-500G (stocking, RM 218). NEVER RM027F-5KG.
+  - Example: Dealer asks for "Yeast Extract 500g" → offer H05-RM027-500G (stocking, RM 218). NEVER RM027F-5KG. The correct SKU is RM027, NOT RMG027 — there is no "RMG027" in the pricelist.
 - HiMedia VARIANT SELECTION RULE — when multiple variants exist for the same product, pick in this order:
   1. FIRST: whichever is ex-stock (stocking item) — check the "Stocking Status" column (S = stocking)
   2. If both non-stocking: prefer the variant WITHOUT suffix letters after the number (RM027 over RM027F, RM027P)
   3. CRITICAL: ALWAYS match the price to the exact pack size. RM027F-500G (RM 229) and RM027F-5KG (RM 1,900) are DIFFERENT items — never mix up their prices. The price shown must match the pack size being quoted.
 - CHEMICAL SYNONYMS — always try both names when searching:
+  - Sodium Bicarbonate = Sodium hydrogen carbonate = Baking soda → search "GRM253" (Extra pure, RM 36) or "GRM849" (AR grade). NEVER PCT1535.
+  - Yeast Extract Powder → search "RM027" → correct SKU is H05-RM027-500G (RM 218, stocking). NOT RMG027, NOT RM027F-5KG.
   - Tween 80 = Polysorbate 80 = Polyoxyethylene Sorbitan Monooleate → search "GRM159" or "Tween 80" or "Polysorbate"
   - Tween 20 = Polysorbate 20 → search "GRM156" or "Tween 20"
   - Methyl Paraben = Methylparaben → search "GRM1899" or "Methylparaben"
