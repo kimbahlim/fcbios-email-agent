@@ -323,7 +323,8 @@ async function processAttachments(attachments, emailBody = '', htmlBody = '') {
       }
       
       // Skip very small images (under 10KB) regardless of name — almost always icons/avatars
-      if (att.size < 10000 && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase())) {
+      // EXCEPTION: if body references "below" content, keep even small images — they might be product lists
+      if (att.size < 10000 && ['image/png', 'image/jpeg', 'image/gif'].includes(att.mimeType.toLowerCase()) && !bodyRefsBelow) {
         console.log(`[ATTACHMENT] Skipping tiny image: ${att.filename} (${att.size} bytes)`);
         continue;
       }
