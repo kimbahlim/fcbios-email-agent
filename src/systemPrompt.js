@@ -407,6 +407,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
     - T38-500031 (15ml Centrifuge Tube Non-Sterile Bulk)
     - T38-500041 (50ml Centrifuge Tube Non-Sterile Bulk)
     - And ALL other 15ml/50ml centrifuge tube variants from TARSONS
+  - DISPOZ PACK PRICING RULE: The DispoZ pricelist has "Bag Price" and "Bag Qty" columns. IGNORE these columns unless stock qty is DECIMAL (e.g., 3.5 cases). If stock is a WHOLE NUMBER (e.g., 10 cases), show CASE pricing only — do NOT show bag/pack pricing even if the pricelist has a Bag Price column.
   - For ALL OTHER EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — show BOTH pack and case pricing:
     - Pack Price = (Case Price ÷ number of packs per case) × 1.10 (10% markup for loose pack), rounded UP to nearest RM
     - Number of packs per case = Qty/Case ÷ Qty/Pk
