@@ -394,10 +394,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - 19cm x 30cm ≈ 7½"x12" (1627mL/55oz)
   - 15cm x 38cm ≈ 6"x15" (1242mL/42oz)
   When a dealer gives dimensions in cm, convert to the nearest inch size and search for that. If not an exact match, offer the closest sizes available.
-- TARSONS PRICING: The "Dealer Price 2026" column is the CASE price. This is the price to show in the quotation.
+- TARSONS PRICING: The "Dealer Price 2026" column is the CASE price. Show CASE columns ONLY — leave Pack Packing and Pack Price columns BLANK for all TARSONS items. There is no separate pack price for TARSONS.
   - The Price column = Dealer Price 2026 AS-IS (this is the case price, do NOT divide it)
-  - The Packing column = show as "Case/[Qty/Case]" (e.g., "Case/500" for 500 units per case)
+  - The Packing column = show as "Case/[Qty/Case]" (e.g., "Case/10" for 10 units per case)
   - NEVER divide the price by Qty/Case. NEVER show a unit price of RM 1 or similar tiny amounts. The dealer buys by the case.
+  - NEVER show the same price in both Pack and Case columns — this is always wrong for TARSONS.
   - For NON-STOCKING items: MOQ is 1 case. Note "Minimum order: 1 case"
   - CENTRIFUGE TUBES CASE-ONLY RULE: The following TARSONS items are ALWAYS case pricing only — NEVER show pack pricing even if decimal stock:
     - T38-546021 (15ml Centrifuge Tube Sterile Bulk)
