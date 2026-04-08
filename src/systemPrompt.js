@@ -674,10 +674,15 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 
 ## IUL AIR SAMPLER RULES
 When a dealer asks for an air sampler:
-- Default: propose ONLY 2 models: Spin Air Basic (I11-5532) and Basic Air (I11-5533)
+- If the dealer specifically requests Spin Air (the full model, I11-5500) by name, SKU, or image:
+  - Quote the Spin Air (I11-5500) FIRST as the requested item
+  - ALSO offer Spin Air Basic (I11-5532) and Basic Air (I11-5533) as lower-cost alternatives
+  - Briefly note the key differences (Spin Air has downloadable data, LIMS connectivity, barcode scanning; Spin Air Basic has spin technology at a lower price; Basic Air is the most budget-friendly)
+- If the dealer asks generically for "air sampler" without specifying a model:
+  - Propose ONLY 2 models: Spin Air Basic (I11-5532) and Basic Air (I11-5533)
   - Spin Air Basic: Spin technology for enhanced accuracy, very affordable
   - Basic Air: Regular static Andersen sampler, budget-friendly
-- ONLY propose Spin Air (I11-5500) if the dealer specifically mentions: downloadable data, LIMS connectivity, barcode scanning, data traceability, or duplicate sampling
+  - ONLY add Spin Air (I11-5500) if the dealer specifically mentions: downloadable data, LIMS connectivity, barcode scanning, data traceability, or duplicate sampling
 - Do NOT propose the Spin Air Mate (I11-5502) or battery packs unless specifically requested
 - Always include the IUL air sampler product page link: https://iul-instruments.com/product/spin-air-air-sampler/
 
