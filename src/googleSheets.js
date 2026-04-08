@@ -348,10 +348,10 @@ async function checkStock(sku) {
     for (const variant of skuVariants) {
       const variantNoHyphen = variant.replace(/-/g, '');
       if (name === variant) return true;  // exact match
-      if (name.includes(variant)) return true;  // name contains full sku
+      if (name.includes(variant) && variant.length >= 6) return true;  // name contains full sku (min 6 chars to avoid false matches)
       if (variant.includes(name) && name.length > 5) return true;  // sku contains full name
       if (nameNoHyphen === variantNoHyphen) return true;  // match without hyphens
-      if (nameNoHyphen.includes(variantNoHyphen)) return true;  // name (no hyphen) contains sku (no hyphen)
+      if (nameNoHyphen.includes(variantNoHyphen) && variantNoHyphen.length >= 6) return true;  // name (no hyphen) contains sku (min 6 chars)
       if (variantNoHyphen.includes(nameNoHyphen) && nameNoHyphen.length > 5) return true;
     }
     // Match suffix after brand prefix ONLY if suffix contains the product code (not just pack size like 500G)
