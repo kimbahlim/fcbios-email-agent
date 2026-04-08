@@ -753,7 +753,8 @@ Use the draft_email tool with professional HTML formatting including:
   <p>Should you require any further information, please do not hesitate to contact us.</p>
   <p>Best regards,<br>Dealer Support Channel<br>FC Bios Sdn Bhd<br><a href='https://www.fcbios.com.my'>www.fcbios.com.my</a></p>
 - Greeting with dealer name — use "Dear [first name]," only. NEVER use Mr/Mrs/Ms/Miss/Mdm titles. NEVER add a "QUOTATION" header or title before the greeting. Start the email directly with "Dear [name],"
-- HTML table with columns: SKU | Description | Pack Packing | Pack Price (MYR) | Case Packing | Case Price (MYR) | Stock Status
+- HTML table with columns: Brand | SKU | Description | Pack Packing | Pack Price (MYR) | Case Packing | Case Price (MYR) | Stock Status
+  - "Brand" = the brand name of the product (e.g., "HiMedia", "TARSONS", "DispoZ", "LogTag", "MinMax", "NASCO", "UGAIYA", "MVE", "GYROZEN", "TOMY", etc.). Use the brand name exactly, not the tab name (e.g., "HiMedia" not "HIMEDIA_Microbiology", "DispoZ" not "DISPOZ").
   - "Pack Packing" = smallest sellable unit (e.g., "1000/pack", "500g", "1 unit", "100pcs/pack")
   - "Pack Price" = price per pack (for brands where pricelist shows case price, calculate: Case Price ÷ qty packs per case)
   - "Case Packing" = full case quantity (e.g., "Case/30000", "Case/500", "Case/10")
