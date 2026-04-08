@@ -627,11 +627,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
     - Brochure PDF: https://logtagrecorders.com/download/products/brochures/LogTag_[MODEL]_Brochure.pdf (e.g., https://logtagrecorders.com/download/products/brochures/LogTag_UTRIX-16_Brochure.pdf)
   - MinMax Thermometer: https://www.fcbios.com.my/collections/minmax-thermometer
   - MinMax Thermo Hygrometer: https://www.fcbios.com.my/collections/thermo-hygrometer
-  - TARSONS — use the correct link based on what was quoted:
-    - Pipette tips only: https://www.fcbios.com.my/collections/pipette-tips
-    - Tubes, racks, boxes, cryovials, lab plasticware: https://www.fcbios.com.my/collections/tarsons
+  - TARSONS — CRITICAL: you MUST pick the correct link based on the product category quoted:
+    - https://www.fcbios.com.my/collections/pipette-tips → ONLY if every Tarsons item quoted is a pipette tip (T38-44* series, tip boxes, tip refills)
+    - https://www.fcbios.com.my/collections/tarsons → for ALL other Tarsons products (bottles, tubes, racks, boxes, cryovials, beakers, flasks, wash bottles, measuring cylinders, funnels, carboys, desiccators, or any lab plasticware that is NOT a pipette tip)
     - If quoting BOTH tips and other items: include both links
-    - NEVER use the pipette-tips link when quoting non-tip items like racks, tubes, or boxes
+    - WRONG LINK IS A CRITICAL ERROR: bottles, tubes, racks, cryovials etc. must NEVER get the pipette-tips link. When in doubt, use the /collections/tarsons link.
   - DispoZ (Microbiology consumables): https://www.fcbios.com.my/collections/microbiology-labware
   - SORFA (Cell culture): https://www.fcbios.com.my/collections/cell-culture-plasticwares
   - NASCO (Whirl-Pak): https://www.fcbios.com.my/collections/sterile-sampling-bag
