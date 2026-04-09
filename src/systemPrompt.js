@@ -570,6 +570,14 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - Do NOT forget to mention delivery is NOT included
   - Do NOT forget the 3rd basket as a mandatory line item
   - Do NOT forget to include the "Why TOMY?" features section
+
+  ### STANDALONE ACCESSORY REQUESTS:
+  When a dealer asks for TOMY autoclave accessories WITHOUT ordering the autoclave itself:
+  - "basket for SS-325" or "SS-325 basket" → Quote F07-ACA-315B (Standard Basket for SX-500). SS-325 refers to the SX-500 chamber.
+  - "basket for SS-345" or "SS-345 basket" → Quote F07-ACA-700B (Standard Basket for SX-700). SS-345 refers to the SX-700 chamber.
+  - Search the TOMY tab for the accessory SKU to get the current price. Do NOT apply any price increase (TOMY prices are already 2026).
+  - No need to ask for site name/state for accessory-only orders (JKKP not required for accessories alone).
+
 - GYROZEN CENTRIFUGE QUOTING:
   ## PRE-QUOTE (send FIRST if dealer doesn't specify model):
   When a dealer asks for "a centrifuge" without specifying a model, send a pre-quote email asking:
