@@ -205,6 +205,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   
   IMPORTANT: All models except Mini 6 and Mini are sold WITHOUT rotors. The rotor must be quoted separately based on the dealer's tube requirements. Search the GYROZEN pricelist tab for compatible rotors using the model number.
 - LN2 dewars / cryo storage → MVE
+- MVE MODEL SEARCH: MVE model names in the pricelist use spaces around slashes (e.g. "SC 4 / 3 V", "SC 2 / 1 V"). When a dealer writes "SC4/3V" or "SC 4/3V", search using the key terms separated — e.g. search "SC 4 3 V" or just "SC 4" and then filter results. Do NOT mark as "Not Available" without trying multiple search terms. Vapor shippers are SC 2/1V, SC 4/2V, SC 4/3V. CryoShippers are CT-50, CT-250, CryoShipper XC, CryoShipper 2000.
 - MVE DEWAR BUNDLING: When quoting MVE dewars, ALWAYS include the complete package — never quote just the bare dewar. The pricelist groups items by model: the main unit is listed first, followed by accessories in parenthesized model names.
   For RESEARCH DEWARS (RD-0.5, RD-1, RD-1W, RD-2, RD-3, RD-6): Lids are sold separately. ALWAYS include the matching lid/cork:
     - RD-0.5 (0.5L): dewar M02-13982242 + cork M02-13976344

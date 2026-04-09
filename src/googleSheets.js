@@ -194,8 +194,13 @@ async function searchByBrand(brandTab, keyword) {
   }
 
   // Try 1: ALL keywords match (strictest) — use expandedKeywords to catch all HiMedia series
+  // Also create slash/space-normalized versions for MVE-style models (SC4/3V → sc 4 / 3 v, sc4/3v, sc 4/3 v etc.)
+  const kwNormalized = kw.replace(/[\/\s]+/g, '');  // strip all slashes and spaces
   let matches = rows.filter(row => {
     const text = Object.values(row).join(' ').toLowerCase();
+    const textNormalized = text.replace(/[\/\s]+/g, '');  // normalize pricelist text too
+    // Quick check: if slash-normalized keyword matches slash-normalized text, it's a hit
+    if (kwNormalized.length >= 3 && textNormalized.includes(kwNormalized)) return true;
     // For HiMedia with expanded keywords: match if ANY expanded keyword variant matches ALL original keywords
     // OR if the expanded numeric part alone matches
     if (expandedKeywords.length > keywords.length) {
