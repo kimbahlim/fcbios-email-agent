@@ -450,9 +450,15 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 - TOMY AUTOCLAVE QUOTING — COMPLETE INSTRUCTIONS:
 
   ## STEP 1: PRE-QUOTE (always send this FIRST before quoting)
-  When a dealer asks for any TOMY autoclave (SX-500 or SX-700), you need the site name and state for JKKP compliance. BUT CHECK THE EMAIL FIRST — the dealer may have already provided this info (e.g., "end user: Hospital ABC, Sabah" or company name + address with state visible). If the site name AND state are already in the email, proceed directly to the full quotation (Step 2) without asking again.
+  When a dealer asks for any TOMY autoclave (SX-500 or SX-700), you need the INSTALLATION SITE name and STATE for JKKP compliance. You MUST have BOTH pieces of info explicitly stated in the email before quoting.
   
-  Only send the pre-quote email if the site name or state is genuinely NOT provided:
+  CHECK THE EMAIL — only skip the pre-quote if:
+  - The dealer explicitly provides a site/end-user name AND a Malaysian state (e.g., "end user: Hospital ABC, Sabah" or a full address with state visible like "Universiti Malaya, Kuala Lumpur")
+  - The dealer's COMPANY NAME alone is NOT sufficient as the site name — the autoclave may be installed at a different end-user location
+  - A company domain (e.g., "ebsperfectlab.com") or email signature without a state does NOT count
+  - If in doubt, ALWAYS send the pre-quote to ask — it is better to ask than to quote without site info
+  
+  Send the pre-quote email if EITHER the installation site name OR state is missing:
   
   Pre-quote email template (ONLY if site info is missing):
   "Thank you for your enquiry on the TOMY [model] autoclave.
