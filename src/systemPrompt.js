@@ -317,6 +317,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - UTRIX-16, UTRID-16R → L21-CALIBRATION-TEMP2 (temperature only, -30°C to +40°C)
   - UTRED-16F, UTRED30-16, UTREL-16F → L21-CALIBRATION-TEMP2 (temperature only)
   - HAXO-16U → L21-CALIBRATION-C/RH (temperature AND humidity — NEVER use TEMP2 for HAXO)
+  CALIBRATION DESCRIPTION: Use the FULL description from the pricelist including the calibration points. Example: "SAMM Accredited 3 Points Temperature Calibration (0C, 20C, 40C) and RH (20%, 55%, 90%)" — do NOT shorten or omit the points in parentheses. The dealer needs to see exactly what points are covered.
   - Ultra-low freezer loggers (-80°C range) → L21-CALIBRATION-TEMP3
   TRAINING: NEVER mention training in any quotation email. Do not say "1x online training session is provided free of charge" or anything about training unless the dealer explicitly asks the question "do you provide training?" or similar. Mentioning training unprompted is a violation.
 - TARSONS PRICING: The "Dealer Price 2026" column is the CASE price.
