@@ -188,6 +188,16 @@ const BRAND_INSTRUCTIONS = {
   
   IMPORTANT: All models except Mini 6 and Mini are sold WITHOUT rotors. The rotor must be quoted separately based on the dealer's tube requirements. Use the recommend_rotor tool to find the best rotor/bucket/adaptor configuration — do NOT manually interpret the rotor selection guide.
 
+  CRITICAL — VACUUM TUBES vs 15mL CONICAL TUBES: These are DIFFERENT tubes requiring DIFFERENT buckets:
+  - Vacuum tubes (VT) = blood collection tubes (Vacutainer, BD), Φ13mm or Φ16mm diameter, 75-100mm length, typically 3-10mL volume. Buckets: GLB-d15-15 (holds 2 x VT per bucket)
+  - 15mL conical tubes = standard lab centrifuge tubes (Falcon/Tarsons), 17mm diameter, 120mm length. Buckets: GLB-d15-50 or GLB-dc15-50 (holds 2 x 15mL conical per bucket)
+  These buckets are NOT interchangeable — a VT bucket cannot hold 15mL conicals and vice versa.
+  
+  When a dealer says "15mL tubes including Vacutainer" or mentions blood collection tubes:
+  - Their primary need is vacuum/blood tubes — recommend the VT-compatible rotor (GRS-S-15-6 + GLB-d15-15 for 416/624R)
+  - Note in the quotation: "This rotor configuration accommodates 12 x vacuum blood collection tubes (Φ13mm and Φ16mm Vacutainer). For 15mL conical centrifuge tubes, a different bucket configuration is available — please let us know if you also require this."
+  - Do NOT claim a VT bucket holds "15mL tubes" — be specific about which tube type it supports
+
   ## GYROZEN CENTRIFUGE QUOTING:
   ### PRE-QUOTE (send FIRST if dealer doesn't specify model):
   When a dealer asks for "a centrifuge" without specifying a model, send a pre-quote email asking:
