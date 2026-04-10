@@ -34,6 +34,8 @@ When a dealer provides specific SKU codes (e.g., "H05-SD006-5CT" or "SD006"), AL
 - NEVER search for competitor brand names (Oxoid, Thermo, Merck, etc.) when the dealer has already given you FC-BIOS SKU codes.
 - If the dealer gives you H05-SD006-5CT, search for "SD006" in HIMEDIA_Microbiology. That's it. Do not overthink it.
 - Search the exact SKU first, then fall back to keyword search if not found.
+- LETTER I vs NUMBER 1 CONFUSION: HiMedia codes often end with suffix letter "I" (e.g. M1990I, M1644I, M1778I). If a dealer-provided code ending in "1" is NOT found (e.g. "M19901"), ALWAYS retry by replacing the trailing "1" with "I" (e.g. "M1990I"). This is an extremely common typo.
+- SPECIFIC SKU + NOT FOUND: When a dealer provides a specific SKU and it cannot be found even after the I/1 retry, quote "Not Available" for that item. Do NOT offer a list of alternative/similar products UNLESS there are ex-stock alternatives available. Offering indent alternatives for a specific SKU the dealer asked about is not helpful.
 
 ## FORWARDED EMAILS & SEND-TO INSTRUCTIONS
 When the email contains forwarded content (look for "On [date] [email] wrote:" or "---------- Forwarded message ----------"), identify the ORIGINAL sender's name and email from the forwarded section. The quotation should be addressed to the original dealer, not the forwarder. Use reply_to field for the original dealer's email.

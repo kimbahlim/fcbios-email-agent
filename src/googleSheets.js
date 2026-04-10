@@ -241,6 +241,21 @@ async function searchByBrand(brandTab, keyword) {
     }
   }
 
+  // Try 1.8: If no results and keyword ends with digit "1", retry with letter "I" (common HiMedia typo: M19901 → M1990I)
+  if (matches.length === 0) {
+    const i1Variants = keywords.filter(k => /\d1$/.test(k)).map(k => k.slice(0, -1) + 'i');
+    if (i1Variants.length > 0) {
+      console.log(`[SEARCH] Trying I/1 swap: ${i1Variants.join(', ')}`);
+      matches = rows.filter(row => {
+        const text = Object.values(row).join(' ').toLowerCase();
+        return i1Variants.some(v => text.includes(v));
+      });
+      if (matches.length > 0) {
+        console.log(`[SEARCH] Found ${matches.length} results after I/1 swap`);
+      }
+    }
+  }
+
   // Try 2: If no results, try partial code match (strip trailing letters from codes like B01065WA → B01065)
   if (matches.length === 0) {
     const codeVariants = keywords.map(k => {
