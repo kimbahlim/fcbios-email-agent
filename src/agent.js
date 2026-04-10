@@ -1,6 +1,7 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const { getSystemPrompt } = require('./systemPrompt');
 const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets, fetchSheet } = require('./googleSheets');
+const { getBrandInstructions } = require('./brandInstructions');
 
 const client = new Anthropic();
 
@@ -109,6 +110,17 @@ const tools = [
         html_body: { type: 'string', description: 'Full HTML email body with quotation table, notes, and signature' }
       },
       required: ['type', 'reply_to', 'dealer_name', 'subject', 'html_body']
+    }
+  },
+  {
+    name: 'get_brand_instructions',
+    description: 'Get detailed quoting instructions for equipment/specialty brands: TOMY (autoclave MOB fees, JKKP rules, accessories), GYROZEN (centrifuge model range, rotor selection, delivery/TnC charges), MVE (dewar bundling rules, research dewar lid pairings, product links), NASCO (tier pricing, size conversions cm→inches, ex-stock alternatives), IUL (air sampler/masticator/colony counter rules). Call this BEFORE quoting these brands.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        brand: { type: 'string', description: 'Brand name: TOMY, GYROZEN, MVE, NASCO, or IUL' }
+      },
+      required: ['brand']
     }
   }
 ];
@@ -219,6 +231,10 @@ async function processToolCall(toolName, toolInput) {
         break;
       case 'list_brands':
         result = await listSheets();
+        break;
+      case 'get_brand_instructions':
+        result = getBrandInstructions(toolInput.brand);
+        console.log(`[BRAND_INSTRUCTIONS] Loaded instructions for "${toolInput.brand}" (${result.length} chars)`);
         break;
       case 'draft_email':
         result = { success: true, type: toolInput.type };
