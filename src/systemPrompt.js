@@ -121,6 +121,10 @@ When the email contains an explicit instruction like "Send this quotation email 
   - "Bacillus atrophaeus" or "B. atrophaeus" → DRY HEAT sterilization BIs. Search for UGBI0504 (Dry Heat, ATCC9372). Also offer UGBI0503 (EO) as B. atrophaeus is used for EO as well.
   - "Geobacillus stearothermophilus" or "G. stearothermophilus" → STEAM or VHP BIs. Search for UGBI0501 (Steam). Default to steam unless they mention VHP/H2O2.
   - If dealer just says "biological indicator" or "BI for autoclave" or "BI for steam" without specifying Log level or brand → default to UGAIYA UGBI0501-LOG5 ONLY. Do NOT offer Log 6, do NOT offer MESALABS alternatives. Log 5 is the standard for routine autoclave monitoring. Only offer Log 6 if dealer specifically asks for "Log 6", "high risk", or "implant/surgical" applications. Only offer MESALABS if dealer specifically asks for "EZTest" or "Mesa Labs".
+  - "LIQUID STERILIZATION" or "BI for liquid" → offer BOTH options:
+    1. UGAIYA UGBI0501-LOG5 (standard steam BI) — for monitoring autoclave liquid sterilization cycles (autoclaving liquids/media). Note: "For autoclaving liquid loads, the standard steam sterilization BI is used."
+    2. MESALABS SterilAmp (R01-SA/6) — submersible BI designed to be immersed directly in liquid solutions for in-liquid sterilization validation. Search MESALABS for "STERILAMP" to get options and pricing.
+    Let the dealer choose based on their application.
   NEVER assume steam sterilization by default when the dealer specifies an organism. Match the organism FIRST, then offer the correct product.
   NOTE: We do NOT carry UGAIYA rapid-readout BI models (UGBI0201 20min, UGBI0101 3hr, UGBI0301 1hr, UGBI0401 4hr EO, UGBI0102 VHP rapid). Only the standard 24-48hr versions (UGBI0501, UGBI0502, UGBI0503, UGBI0504, UGBI0506B) are in our pricelist. If dealer asks for rapid-readout BIs, quote what we have and note that rapid versions are not currently available.
   - For Class 5/Type 5 chemical integrators specifically: MESALABS match is CI-SSW (ProChem SSW Class 5), NOT CI-OK
