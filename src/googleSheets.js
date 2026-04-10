@@ -496,5 +496,168 @@ module.exports = {
   getNascoDealerTier,
   getLeadTime,
   listSheets,
-  fetchSheet
+  fetchSheet,
+  recommendRotor
 };
+
+// Rotor recommendation tool for Gyrozen centrifuges
+async function recommendRotor(model, tubeType, tubeSize, quantity) {
+  const rows = await fetchSheet('GYROZEN - ROTOR SELECTION GUIDE');
+  
+  // Normalize inputs
+  const modelStr = String(model).toLowerCase().replace(/[^a-z0-9]/g, '');
+  const tubeTypeStr = (tubeType || '').toLowerCase();
+  const tubeSizeStr = (tubeSize || '').toLowerCase();
+  const qty = parseInt(quantity) || 0;
+  
+  console.log(`[ROTOR] Searching for model=${model}, tube=${tubeType}, size=${tubeSize}, qty=${quantity}`);
+  
+  // Step 1: Find all main rotor entries for this centrifuge model
+  const mainEntries = rows.filter(row => {
+    const cm = String(row['Centrifuge Model'] || '').toLowerCase().replace(/[^a-z0-9\/]/g, '');
+    return cm.includes(modelStr) || cm === modelStr;
+  });
+  
+  if (mainEntries.length === 0) {
+    return { found: false, message: `No rotors found for centrifuge model "${model}". Available models: Mini (1312), 1524, 1536, 1730R, 1848R, 406, 416, 624R, 1248/1248R/1236R, 1580/1580R, 1696R, 1736R, 2236R` };
+  }
+  
+  // Step 2: Parse capacity strings to calculate total tube count
+  function parseCapacity(capStr) {
+    if (!capStr) return { total: 0, perBucket: 0, buckets: 0, tubeML: '', desc: '' };
+    const s = String(capStr).trim();
+    
+    // Pattern: "4 x 2 x 15 mL" = 4 buckets × 2 tubes = 8 tubes of 15mL
+    let match = s.match(/(\d+)\s*x\s*(\d+)\s*x\s*([\d.]+)\s*(mL|ml)/i);
+    if (match) {
+      const buckets = parseInt(match[1]);
+      const perBucket = parseInt(match[2]);
+      return { total: buckets * perBucket, perBucket, buckets, tubeML: match[3], desc: s };
+    }
+    
+    // Pattern: "6 x 2 x vacuum tube" = 6 buckets × 2 tubes
+    match = s.match(/(\d+)\s*x\s*(\d+)\s*x\s*(.*)/i);
+    if (match) {
+      const buckets = parseInt(match[1]);
+      const perBucket = parseInt(match[2]);
+      return { total: buckets * perBucket, perBucket, buckets, tubeML: match[3].trim(), desc: s };
+    }
+    
+    // Pattern: "4 x 50 mL" = 4 tubes of 50mL  
+    match = s.match(/(\d+)\s*x\s*([\d.]+)\s*(mL|ml)/i);
+    if (match) {
+      return { total: parseInt(match[1]), perBucket: 1, buckets: parseInt(match[1]), tubeML: match[2], desc: s };
+    }
+    
+    // Pattern: "4 x 100 mL"
+    match = s.match(/(\d+)\s*x\s*(.*)/i);
+    if (match) {
+      return { total: parseInt(match[1]), perBucket: 1, buckets: parseInt(match[1]), tubeML: match[2].trim(), desc: s };
+    }
+    
+    // Pattern: "16 x 15 mL / 16 x vacuum tube"
+    match = s.match(/(\d+)\s*x\s*([\d.]+)\s*(mL|ml)/i);
+    if (match) {
+      return { total: parseInt(match[1]), perBucket: 0, buckets: 0, tubeML: match[2], desc: s };
+    }
+    
+    return { total: 0, perBucket: 0, buckets: 0, tubeML: '', desc: s };
+  }
+  
+  // Step 3: Score each rotor entry for relevance
+  const scored = mainEntries.map(entry => {
+    const cap = parseCapacity(entry['Max Capacity']);
+    const rotorType = String(entry['Rotor Type'] || '').toLowerCase();
+    const bucketStr = String(entry['Bucket Cat No'] || '').toLowerCase();
+    const capStr = String(entry['Max Capacity'] || '').toLowerCase();
+    
+    let score = 0;
+    let reasons = [];
+    
+    // Match tube size (15ml, 50ml, etc.)
+    if (tubeSizeStr && (capStr.includes(tubeSizeStr) || capStr.includes(tubeSizeStr.replace('ml', ' ml')))) {
+      score += 10;
+      reasons.push('tube size match');
+    }
+    
+    // Match tube type keywords (conical, vacuum, round, microplate)
+    if (tubeTypeStr) {
+      if (tubeTypeStr.includes('conical') && capStr.includes('conical')) { score += 5; reasons.push('conical match'); }
+      if (tubeTypeStr.includes('vacuum') && capStr.includes('vacuum')) { score += 5; reasons.push('vacuum tube match'); }
+      if (tubeTypeStr.includes('round') && !capStr.includes('conical')) { score += 3; reasons.push('round bottom'); }
+      if (tubeTypeStr.includes('plate') && capStr.includes('plate')) { score += 5; reasons.push('plate match'); }
+      if (tubeTypeStr.includes('blood') && capStr.includes('vacuum')) { score += 5; reasons.push('blood/vacuum match'); }
+    }
+    
+    // Match swing-out preference
+    if (tubeTypeStr.includes('swing') && (rotorType.includes('swing') || rotorType.includes('wing'))) {
+      score += 3;
+      reasons.push('swing-out match');
+    }
+    
+    // Capacity meets requirement
+    if (qty > 0 && cap.total >= qty) {
+      score += 8;
+      reasons.push(`capacity ${cap.total} >= ${qty} required`);
+    } else if (qty > 0 && cap.total > 0 && cap.total < qty) {
+      score -= 5;
+      reasons.push(`capacity ${cap.total} < ${qty} required — INSUFFICIENT`);
+    }
+    
+    // Prefer exact capacity match over oversized
+    if (qty > 0 && cap.total === qty) {
+      score += 3;
+      reasons.push('exact capacity match');
+    }
+    
+    return {
+      rotor: entry['Rotor Cat No'],
+      rotorType: entry['Rotor Type'],
+      bucket: entry['Bucket Cat No'],
+      capacity: entry['Max Capacity'],
+      parsedCapacity: cap,
+      maxRPM: entry['Max RPM'],
+      maxRCF: entry['Max RCF (xg)'],
+      holeDiameter: entry['Hole Diameter (mm)'],
+      maxTubeHeight: entry['Max Tube Height (mm)'],
+      notes: entry['Notes'],
+      score,
+      reasons
+    };
+  });
+  
+  // Sort by score descending
+  scored.sort((a, b) => b.score - a.score);
+  
+  // Step 4: Find accessory rows (adapters, extra buckets) for the top recommendations
+  const topRotors = scored.slice(0, 5);
+  const accessories = [];
+  for (const rotor of topRotors) {
+    const rotorName = rotor.rotor;
+    if (!rotorName) continue;
+    const accRows = rows.filter(row => {
+      const bucketDesc = String(row['Bucket Cat No'] || '');
+      const rotorRef = String(row['Rotor Cat No'] || '');
+      return !row['Centrifuge Model'] && (bucketDesc.includes(rotorName) || rotorRef.includes(rotorName));
+    });
+    for (const acc of accRows) {
+      accessories.push({
+        forRotor: rotorName,
+        type: acc['Rotor Type'],
+        catNo: acc['Rotor Cat No'],
+        description: acc['Bucket Cat No'],
+        capacity: acc['Max Capacity'],
+        notes: acc['Notes']
+      });
+    }
+  }
+  
+  return {
+    found: true,
+    model: model,
+    query: { tubeType, tubeSize, quantity: qty },
+    recommendations: topRotors,
+    accessories,
+    totalOptions: mainEntries.length
+  };
+}

@@ -186,7 +186,7 @@ const BRAND_INSTRUCTIONS = {
   - "PCR plates, MTP plates" → 416 or 624R (swing-out with plate buckets)
   - "Temperature-sensitive samples" → any R model (624R, 1248R, 1580R, 1696R, 1730R, 1848R)
   
-  IMPORTANT: All models except Mini 6 and Mini are sold WITHOUT rotors. The rotor must be quoted separately based on the dealer's tube requirements. Search the GYROZEN pricelist tab for compatible rotors using the model number.
+  IMPORTANT: All models except Mini 6 and Mini are sold WITHOUT rotors. The rotor must be quoted separately based on the dealer's tube requirements. Use the recommend_rotor tool to find the best rotor/bucket/adaptor configuration — do NOT manually interpret the rotor selection guide.
 
   ## GYROZEN CENTRIFUGE QUOTING:
   ### PRE-QUOTE (send FIRST if dealer doesn't specify model):
@@ -202,7 +202,7 @@ const BRAND_INSTRUCTIONS = {
   ### DIRECT QUOTE (when dealer specifies a model or gives enough info):
   If the dealer names a specific model (e.g., "quote for 1580R") or gives enough detail to identify the model:
   1. Quote the main unit from the GYROZEN pricelist tab
-  2. Search the "GYROZEN - ROTOR SELECTION GUIDE" tab using the model name to find ALL compatible rotors. Recommend the most suitable rotor based on the dealer's tube requirements
+  2. Use the recommend_rotor tool with the centrifuge model, dealer's tube type/size, and quantity needed. The tool will return the best rotor/bucket configuration with calculated capacity.
   3. Search the GYROZEN pricelist tab for the recommended rotor's price using the Rotor Cat No
   4. If the rotor requires buckets (Bucket Cat No is not empty), also quote the buckets
   5. Include relevant adaptors/sleeves if needed for their specific tube sizes

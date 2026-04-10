@@ -1,6 +1,6 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const { getSystemPrompt } = require('./systemPrompt');
-const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets, fetchSheet } = require('./googleSheets');
+const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets, fetchSheet, recommendRotor } = require('./googleSheets');
 const { getBrandInstructions } = require('./brandInstructions');
 
 const client = new Anthropic();
@@ -122,6 +122,20 @@ const tools = [
       },
       required: ['brand']
     }
+  },
+  {
+    name: 'recommend_rotor',
+    description: 'Recommend the best Gyrozen centrifuge rotor, bucket, and adaptor configuration based on the dealer\'s requirements. Returns scored recommendations from the GYROZEN ROTOR SELECTION GUIDE with calculated total tube capacity. ALWAYS use this tool for Gyrozen centrifuge quotes instead of manually interpreting the rotor guide.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        model: { type: 'string', description: 'Centrifuge model (e.g., "416", "1580R", "1696R", "624R")' },
+        tube_type: { type: 'string', description: 'Tube type (e.g., "15mL conical", "50mL conical", "vacuum tube", "microplate", "blood tube", "swing-out")' },
+        tube_size: { type: 'string', description: 'Tube size (e.g., "15mL", "50mL", "2.0mL", "100mL")' },
+        quantity: { type: 'integer', description: 'Number of tubes the dealer needs to spin per run' }
+      },
+      required: ['model']
+    }
   }
 ];
 
@@ -235,6 +249,10 @@ async function processToolCall(toolName, toolInput) {
       case 'get_brand_instructions':
         result = getBrandInstructions(toolInput.brand);
         console.log(`[BRAND_INSTRUCTIONS] Loaded instructions for "${toolInput.brand}" (${result.length} chars)`);
+        break;
+      case 'recommend_rotor':
+        result = await recommendRotor(toolInput.model, toolInput.tube_type, toolInput.tube_size, toolInput.quantity);
+        console.log(`[ROTOR] Recommendations for ${toolInput.model}: ${JSON.stringify(result).substring(0, 200)}`);
         break;
       case 'draft_email':
         result = { success: true, type: toolInput.type };
