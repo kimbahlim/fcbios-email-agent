@@ -114,11 +114,11 @@ const tools = [
   },
   {
     name: 'get_brand_instructions',
-    description: 'Get detailed quoting instructions for equipment/specialty brands: TOMY (autoclave MOB fees, JKKP rules, accessories), GYROZEN (centrifuge model range, rotor selection, delivery/TnC charges), MVE (dewar bundling rules, research dewar lid pairings, product links), NASCO (tier pricing, size conversions cm→inches, ex-stock alternatives), IUL (air sampler/masticator/colony counter rules). Call this BEFORE quoting these brands.',
+    description: 'Get detailed quoting instructions for equipment/specialty brands: TOMY (autoclave MOB fees, JKKP rules, accessories), GYROZEN (centrifuge model range, rotor selection, delivery/TnC charges), MVE (dewar bundling rules, research dewar lid pairings, product links), IUL (air sampler/masticator/colony counter rules). Call this BEFORE quoting these brands.',
     input_schema: {
       type: 'object',
       properties: {
-        brand: { type: 'string', description: 'Brand name: TOMY, GYROZEN, MVE, NASCO, or IUL' }
+        brand: { type: 'string', description: 'Brand name: TOMY, GYROZEN, MVE, or IUL' }
       },
       required: ['brand']
     }
