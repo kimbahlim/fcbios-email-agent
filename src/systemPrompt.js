@@ -252,6 +252,11 @@ When multiple SKUs match a dealer's request:
 3. Only quote indent items if NO matching items are in stock
 4. When offering pack size variants (e.g., 5x50 vs 10x50), check stock for ALL variants and quote the one that is in stock. Do NOT default to the smaller/cheaper pack if it's indent when a larger pack is available ex-stock.
 
+AMBIGUOUS PRODUCT NAMES: When a dealer's description could match multiple DIFFERENT products (not just colour/size variants of the same product), present ALL matching options and let the dealer confirm. This is common with HiMedia chromogenic media where similar names refer to different formulations:
+- Example: "HiCrome ECC Selective Agar" could match M1293 (HiCrome ECC Agar), M1294 (HiCrome ECC Selective Agar Base), M2056 (HiCrome ECC Selective Agar Base Modified) — quote all three with a note: "Multiple formulations match your description. Please confirm which product you require."
+- Example: "EC O157" could match M1574A (EC O157:H7 Agar) or M1575A (EC O157:H7 Selective Agar Base) — quote both.
+Do NOT guess which one the dealer wants — offering all options costs nothing extra and prevents quoting the wrong product.
+
 ## EX-STOCK PRIORITY RULE (CRITICAL)
 When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes", "petri dishes", "autoclave deodorizer") without specifying an exact SKU:
 - ALWAYS check stock for ALL matching products/sizes/colours FIRST before deciding which to offer
