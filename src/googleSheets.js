@@ -185,7 +185,8 @@ async function searchByBrand(brandTab, keyword) {
       const seriesMatch = k.match(/^(gmh|grm|cms|mh|gm|mv|mm|lq|fd|sd|rm|m)(\d+.*)$/i);
       if (seriesMatch) {
         const numericPart = seriesMatch[2].toLowerCase();
-        if (!expandedKeywords.includes(numericPart)) {
+        // Only expand if numeric part is 4+ chars to avoid overly generic matches (e.g., "007" from "rm007" matches too many)
+        if (numericPart.length >= 4 && !expandedKeywords.includes(numericPart)) {
           expandedKeywords.push(numericPart);
           console.log(`[SEARCH] HiMedia series strip: "${k}" → also searching "${numericPart}"`);
         }
