@@ -189,7 +189,16 @@ When the email contains an explicit instruction like "Send this quotation email 
   When a dealer gives dimensions in cm, convert to the nearest inch size and search for that. If not an exact match, offer the closest sizes available.
 - 24-hour urine collection containers (large volume, 2-3L) → LP (L03-108094). This is ONLY for 24-hour collection. Regular urine/specimen containers (60ml, 100ml etc.) follow the DispoZ FIRST rule above.
 - ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
-- Sigma Aldrich / Merck / Roche / Epredia / Thermo Fisher / Gibco branded products (identified by Sigma cat numbers like T6416, D4902, A7906, S-8750, L6420, P0130 etc., or brand names like "Liberase", "Histopaque") → We do NOT carry these brands. For items where we have a HiMedia equivalent (e.g., DMEM, FBS, Trypsin-EDTA, PBS, Gentamicin, Penicillin-Streptomycin, Amphotericin B), search HiMedia Animal_Tissue_Culture tab and offer our equivalent with a note: "HiMedia equivalent offered". For items with no HiMedia equivalent (e.g., Histopaque-1077, Liberase, Dexamethasone, specific antibodies, standards), mark as "Not Available" — do NOT waste search loops looking for these in HiMedia tabs.
+- Sigma Aldrich / Merck / Roche / Epredia / Thermo Fisher / Gibco / Oxoid / BD Difco branded products:
+  We do NOT carry these brands directly. However, HiMedia manufactures equivalent products for most standard culture media, supplements, and reagents.
+  
+  RULE 1 — "ATAU SETARA" / "OR EQUIVALENT": When the dealer writes "atau setara", "or equivalent", "atau persamaan", or any phrase indicating they accept alternatives, you MUST search HiMedia for the equivalent product by its generic name (e.g., "Brilliant Green Bile Broth", "TSC Agar", "Plate Count Agar", "Buffered Peptone Water", "MYP Agar", "MRVP Broth"). Quote the HiMedia equivalent with a note: "HiMedia equivalent offered for [original brand] [cat no]".
+  
+  RULE 2 — "MANDATORY": When the dealer writes "Mandatory" or explicitly states a specific brand is required with no equivalent accepted, mark as "Not Available — specified brand mandatory, we do not carry [brand]".
+  
+  RULE 3 — NO EQUIVALENT MARKER: If the dealer lists a competitor brand product without saying "atau setara" OR "mandatory", default to searching for the HiMedia equivalent anyway. Offer it with a note: "We do not carry [brand]. HiMedia equivalent offered." The dealer can decide.
+  
+  RULE 4 — TISSUE CULTURE: For animal tissue culture products (DMEM, FBS, Trypsin-EDTA, PBS, Gentamicin, etc.), search HiMedia HIMEDIA_Animal_Tissue_Culture tab. For items with no HiMedia equivalent (e.g., Histopaque-1077, Liberase, specific antibodies), mark as "Not Available".
 
 FALLBACK FOR UNMAPPED PRODUCTS: If a dealer asks for a product type NOT listed in the mapping above, do NOT say "we don't carry this." Instead:
 1. Use web_search to identify which brand/manufacturer makes the product
