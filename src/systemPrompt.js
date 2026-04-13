@@ -254,9 +254,10 @@ When multiple SKUs match a dealer's request:
 
 ## EX-STOCK PRIORITY RULE (CRITICAL)
 When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes", "petri dishes", "autoclave deodorizer") without specifying an exact SKU:
-- ALWAYS check stock for ALL matching products/sizes FIRST before deciding which to offer
+- ALWAYS check stock for ALL matching products/sizes/colours FIRST before deciding which to offer
 - ONLY offer items that are IN STOCK (ex-stock). Do NOT offer indent items when ex-stock alternatives exist.
 - If multiple pack sizes exist (e.g., 5x50 and 10x50), check stock for ALL sizes and offer the one that is in stock
+- COLOUR VARIANTS: When a product comes in multiple colours (e.g., racks, tips), check stock for ALL colours using check_stock_batch. If only one colour is in stock, offer that one — don't list 10 indent colours when one colour is available now.
 - Only show indent items if: (a) nothing is in stock for that product type, OR (b) the dealer specifically requested that exact product/SKU
 - This applies to ALL brands. The dealer wants what's available now, not what takes 8-12 weeks.
 
