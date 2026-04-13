@@ -257,7 +257,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 - ALWAYS check stock for ALL matching products/sizes/colours FIRST before deciding which to offer
 - ONLY offer items that are IN STOCK (ex-stock). Do NOT offer indent items when ex-stock alternatives exist.
 - If multiple pack sizes exist (e.g., 5x50 and 10x50), check stock for ALL sizes and offer the one that is in stock
-- COLOUR VARIANTS: When a product comes in multiple colours (e.g., racks, tips), check stock for ALL colours using check_stock_batch. If only one colour is in stock, offer that one — don't list 10 indent colours when one colour is available now.
+- COLOUR VARIANTS: When a product comes in multiple colours (e.g., racks in G/Y/B/W/M/R/O), you MUST check stock for EVERY SINGLE colour SKU returned by the search — no exceptions. Use ONE check_stock_batch call with ALL colour SKUs. Do NOT pick a subset of colours to check. If search returns 14 SKUs, check all 14. The Red or Orange variant might be the only one in stock.
 - Only show indent items if: (a) nothing is in stock for that product type, OR (b) the dealer specifically requested that exact product/SKU
 - This applies to ALL brands. The dealer wants what's available now, not what takes 8-12 weeks.
 
