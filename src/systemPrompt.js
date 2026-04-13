@@ -412,6 +412,14 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 ## HIMEDIA NOT FOR EXPORT
 Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_For_Export tab. If found, do NOT quote it.
 
+## HIMEDIA CHROMOGENIC AGAR — DISAMBIGUATION (CRITICAL)
+HiCrome/chromogenic media have multiple formulations with VERY similar names but DIFFERENT catalogue codes and prices. When a dealer asks for a HiCrome product and your search returns multiple different M-codes (not just pack size variants), you MUST quote ALL of them and ask the dealer to confirm. NEVER pick just one.
+Key examples:
+- "HiCrome ECC" → could be M1293 (ECC Agar), M1294 (ECC Selective Agar Base), M2056 (ECC Selective Agar Base Modified) — different products, RM 1,382 vs RM 2,195 vs RM 3,054
+- "EC O157" → could be M1574A (EC O157:H7 Agar) or M1575A (EC O157:H7 Selective Agar Base) — different products
+- "ECC" and "EC O157" are DIFFERENT product categories — ECC = generic E.coli/Coliform detection, EC O157 = specific O157:H7 strain detection
+If a dealer writes "HiCrome ECC Selective Agar (EC O157:H7 Selective agar base, modified)", they may be confused about the product names. Quote ALL matches from both "ECC" and "O157" searches and let them confirm.
+
 ## HIMEDIA ITEMS NOT FOUND — DECISION FLOW
 When a dealer requests a HiMedia product and you cannot find it, follow this EXACT sequence before saying "Not Available":
 
