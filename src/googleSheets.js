@@ -361,17 +361,29 @@ async function checkStock(sku) {
     skuVariants.push(withoutPrefix);
   }
 
-  const match = rows.find(row => {
+  // First pass: try EXACT match only
+  let match = rows.find(row => {
+    const name = (row['NAME'] || row['name'] || row['Name'] || Object.values(row)[0] || '').toLowerCase().trim();
+    const nameNoHyphen = name.replace(/-/g, '');
+    for (const variant of skuVariants) {
+      const variantNoHyphen = variant.replace(/-/g, '');
+      if (name === variant) return true;
+      if (nameNoHyphen === variantNoHyphen) return true;
+    }
+    return false;
+  });
+
+  // Second pass: try substring match (only if exact match failed)
+  if (!match) {
+    match = rows.find(row => {
     const name = (row['NAME'] || row['name'] || row['Name'] || Object.values(row)[0] || '').toLowerCase().trim();
     const nameNoHyphen = name.replace(/-/g, '');
     
     // Try all SKU variants against this row
     for (const variant of skuVariants) {
       const variantNoHyphen = variant.replace(/-/g, '');
-      if (name === variant) return true;  // exact match
       if (name.includes(variant) && variant.length >= 6) return true;  // name contains full sku (min 6 chars to avoid false matches)
       if (variant.includes(name) && name.length > 5) return true;  // sku contains full name
-      if (nameNoHyphen === variantNoHyphen) return true;  // match without hyphens
       if (nameNoHyphen.includes(variantNoHyphen) && variantNoHyphen.length >= 6) return true;  // name (no hyphen) contains sku (min 6 chars)
       if (variantNoHyphen.includes(nameNoHyphen) && nameNoHyphen.length > 5) return true;
     }
@@ -381,6 +393,7 @@ async function checkStock(sku) {
     
     return false;
   });
+  }
 
   if (!match) {
     console.log(`[STOCK] NOT FOUND: "${sku}"`);
