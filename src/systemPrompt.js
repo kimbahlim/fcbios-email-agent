@@ -517,6 +517,8 @@ Use the draft_email tool with professional HTML formatting including:
 - IMPORTANT NOTES SECTION — THIS IS A STRICT TEMPLATE. You may ONLY include notes from the lists below. Adding ANY note not listed here is a CRITICAL ERROR.
   MANDATORY notes (include in EVERY quotation):
   1. "All prices quoted are excluding delivery" — ALWAYS include this
+  - If dealer asks about delivery cost/charges: add this note: "Delivery charges are based on the confirmed order quantity and delivery location. Kindly confirm your final order quantity so we can provide the delivery charges."
+    Do NOT say "contact our logistics team" or "delivery charges vary" — just ask them to confirm qty.
   
   CONDITIONAL notes (include ONLY when applicable):
   - If ANY items are indent AND the lead time data from get_lead_time contains an explicit PO deadline phrase with the words "send PO by" or "PO deadline" followed by a specific date: include that exact text. Do NOT invent PO deadline dates. Do NOT rephrase lead times as PO deadlines — "End of May" is a lead time, NOT a PO deadline. WRONG: "Send PO by End of May". RIGHT: the lead time is already shown in the Stock Status column as "Indent - Lead time: End of May".
