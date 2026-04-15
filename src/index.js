@@ -356,7 +356,7 @@ async function pollForEmails() {
           console.log(`[GMAIL] Draft created: ${draftResult.id}`);
 
           // Swap label: "Agent" → "Agent Replied" to prevent reprocessing
-          await swapAgentLabel(latestMsg.id);
+          await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
         } else {
           console.log('[AGENT] No draft generated');
         }

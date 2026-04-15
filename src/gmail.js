@@ -457,7 +457,7 @@ async function createLabel(labelName) {
   }
 }
 
-async function swapAgentLabel(messageId) {
+async function swapAgentLabel(messageId, threadId) {
   try {
     // Get the "Agent" label ID
     const agentLabelId = await getLabelId('agent');
@@ -476,7 +476,7 @@ async function swapAgentLabel(messageId) {
       return;
     }
 
-    // Swap labels: remove "Agent", add "Agent Replied"
+    // Swap labels on the specific message first
     await gmailApi(`/messages/${messageId}/modify`, {
       method: 'POST',
       body: JSON.stringify({
@@ -484,8 +484,23 @@ async function swapAgentLabel(messageId) {
         removeLabelIds: [agentLabelId]
       })
     });
-
     console.log(`[GMAIL] Label swapped: "Agent" → "Agent Replied" for message ${messageId}`);
+
+    // Also swap on the thread level to catch thread-level label application
+    if (threadId) {
+      try {
+        await gmailApi(`/threads/${threadId}/modify`, {
+          method: 'POST',
+          body: JSON.stringify({
+            addLabelIds: [repliedLabelId],
+            removeLabelIds: [agentLabelId]
+          })
+        });
+        console.log(`[GMAIL] Label also swapped at thread level for thread ${threadId}`);
+      } catch (threadErr) {
+        console.log(`[GMAIL] Thread-level label swap failed (non-critical): ${threadErr.message}`);
+      }
+    }
   } catch (err) {
     console.error(`[GMAIL] Error swapping labels: ${err.message}`);
   }
