@@ -422,6 +422,7 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
   - MeiZheng / Perkin Elmer (MicroFast pathogen test plates): https://www.perkinelmer.com/library/microbiology-product-and-safety-manuals.html
   - UGAIYA (Biological/Chemical Indicators): For any biological indicator enquiry, include: "For UGAIYA product brochures and catalogues, please visit: https://drive.google.com/drive/folders/1ITRlrcbbxSBAVBLxzEUfw18sQHftsus5"
   - HiMedia: When dealer requests spec sheets, COA, MSDS, or technical documents, include this note: "For HiMedia technical sheets, COA, and MSDS, please download at: https://www.himedialabs.com/us/coasdstds/"
+  - LP (L03- prefix, LP Italiana): For any LP product enquiry, include: "For the full LP Italiana product range and catalogue, please visit: https://www.lpitaliana.com/en/products.html"
   - For other brands: do NOT include a product link unless you are certain it exists. Do NOT guess URLs.
 
 ## HIMEDIA NOT FOR EXPORT
