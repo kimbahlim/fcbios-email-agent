@@ -48,6 +48,10 @@ When the email contains an explicit instruction like "Send this quotation email 
 - Digital thermometers / thermohygrometers → MinMax
 - MinMax model codes: 308, 308-3, 508, 508-3, ADT-308, ADT-508, ADT-308-3, ADT-508-3 → ALL are MinMax products → search MINMAX tab
 - Petri dishes, loops, spreaders, specimen containers, urine containers, stool containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items. When dealer says "urine container" search DispoZ for "specimen container" — DispoZ calls them "Specimen Container" not "Urine Container". The 60ml sterile yellow cap version is DZ02-CA2S10600205.
+  PETRI DISH SIZE GUIDE:
+  - 90mm petri dish → DZ02-MP1S00900105 (standard size, Case/500)
+  - 45mm-60mm petri dish (small diameter) → DZ02-MP3S00600101 (60x15mm EO Sterile, Case/1000, 10pcs/bag × 100 bags)
+  - For dealers asking for small petri dishes (anywhere between 45mm-60mm diameter), offer the 60mm option as the closest available match.
 - Rayon swabs, transport swabs, swab with transport medium → DispoZ FIRST → LP backup
   LP INDENT → DISPOZ ALTERNATIVE: When an LP item (L03- prefix) for swabs, tubes, containers, or other consumables is NOT in stock (indent), ALWAYS also search DispoZ for the equivalent product. If DispoZ has it ex-stock, include it as an alternative option in the quotation with a note like: "Ex-stock alternative from DispoZ available for immediate delivery". This applies to all shared product categories between LP and DispoZ (swabs, transport tubes, specimen containers, loops, spreaders, etc.).
 - Tube racks, test tube racks, multi-tube racks, PCR racks, microcentrifuge racks → TARSONS FIRST → LP backup. Search TARSONS for "rack" before searching LP.
