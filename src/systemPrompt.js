@@ -472,6 +472,7 @@ HiMedia has multiple series for the same media product. The series prefix determ
 - GMH = Granulated Harmonised Media
 - CMS = Certified media
 - MM = Modified formulation
+- NOTE: Both GM and GMH series are granulated. When quoting both GM and GMH variants together, make clear that both are granulated — GMH is the granulated harmonised version. Do not describe only the GM as "Granulated" while omitting it from GMH, as this is misleading.
 
 SEARCH STRATEGY: When searching for a HiMedia product, use a SHORT keyword that will match ALL series at once. Do NOT include series prefix in the search — just search the product name.
 - Example: For "Kings Medium B Base" → search "King" (returns M1544, GM1544, MV1235 etc. all at once)
