@@ -303,6 +303,7 @@ const BRAND_INSTRUCTIONS = {
   ## IUL MASTICATOR RULES
   When a dealer asks for a masticator or stomacher machine:
   - Search IUL tab for masticator models. IUL masticators are lab blenders (also called stomacher machines) used for sample homogenization.
+  - The "50 bags" in the IUL masticator pricelist description refers to the machine's capacity rating — stomacher bags are NOT included with the machine. Do NOT say bags are included.
   - Always include the IUL masticator product page link: https://iul-instruments.com/product/masticator-homogenizator/
   - Masticator brochure PDF: https://iul-instruments.com/wp-content/uploads/2024/02/50007873-04_Promotional_Leaflet_Masticator-EN.pdf
   
