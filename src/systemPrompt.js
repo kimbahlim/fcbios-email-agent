@@ -164,6 +164,7 @@ When the email contains an explicit instruction like "Send this quotation email 
   - Do NOT proactively offer Gosselin as an alternative when dealer asks generically for petri dishes, bags, tubes, containers, etc. — use DispoZ/LP/TARSONS/SORFA as per normal brand priority rules.
   - Gosselin NetSuite codes use G22- prefix (e.g., G22-SB93-101).
   - Gosselin prices are already 2026 dealer prices — do NOT apply any percentage increase.
+  - CASE PRICING ONLY: Gosselin items are sold by the case only — do NOT offer loose pack pricing. Show one price per item (the case price).
 - Whirl-Pak sampling bags → NASCO
 - NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only. NEVER suggest "better pricing" for case quantities — there is no volume discount. NEVER mention "3% price increase" or any price increase in the email.
   NASCO STEP 1 — CHECK FOR SPECIFIC ITEMS FIRST (do this BEFORE anything else):
