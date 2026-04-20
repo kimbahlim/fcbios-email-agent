@@ -71,11 +71,11 @@ When the email contains an explicit instruction like "Send this quotation email 
   DO NOT stop after finding one brand's options. You MUST search BOTH brands for ALL volumes even if DispoZ already has 200uL — TARSONS 200uL must also be shown.
 - Centrifuge tubes (ALL sizes: 15ml, 50ml, falcon tubes), microtubes, cryovials, PCR tubes, lab bottles → TARSONS ONLY. NEVER use LP for these. Use search_brand("TARSONS", "centrifuge 15ml") or search_brand("TARSONS", "centrifuge 50ml"). The correct SKUs are T38-546021 (15ml sterile bulk) and T38-546041 (50ml sterile bulk). LP L03-111548 and L03-116048 are NOT to be used — those are LP codes.
 - Serological pipettes, cell culture flasks/plates → SORFA
-- Stomacher/blender bags, homogenizer bags, sample processing bags, frosted autoclavable bags (clear/frosted PP bags for lab homogenizers) → SORFA (S21) FIRST. These are used in food microbiology testing with stomacher/blender machines. Default to PLAIN (non-filter) bags unless dealer specifically asks for filter bags.
+- Stomacher/blender bags, homogenizer bags, sample processing bags, frosted autoclavable bags (clear/frosted PP bags for lab homogenizers) → SORFA ONLY. Do NOT offer LP, NASCO, or any other brand for stomacher bags. These are used in food microbiology testing with stomacher/blender machines. Default to PLAIN (non-filter) bags unless dealer specifically asks for filter bags.
   - S21-SOR2021: 400mL plain stomacher bag, 180x300mm, Sterile, 50pcs/bag, 500/case (STANDARD — offer this by default)
   - S21-SOR2041: 3500mL plain stomacher bag, 380x510mm, Sterile (large size)
   - S21-SOR2061: 400mL LATERAL FILTER stomacher bag, 190x300mm (ONLY offer if dealer asks for filter bag)
-  Also available from LP (L03-174538 etc.) and IUL (G22). Do NOT confuse with NASCO Whirl-Pak — Whirl-Pak are sampling bags with wire tab closures, stomacher bags are plain open-top bags for homogenizers.
+  Do NOT confuse with NASCO Whirl-Pak — Whirl-Pak are sampling bags with wire tab closures, stomacher bags are plain open-top bags for homogenizers. If dealer asks for "stomacher bag", offer SORFA only. If dealer asks for "Whirl-Pak" or "sampling bag", offer NASCO.
 - Autoclavable waste bags (biohazard bags, red/yellow bags for autoclaving waste) → SORFA (S28-AB series) or LP (L03-131xxx/132xxx/134xxx/135xxx)
 - Vacuum/membrane/syringe filters → Membrane Solutions or SORFA
 - Microbiology media (agar, broth) → HiMedia (search HIMEDIA_Microbiology first)
