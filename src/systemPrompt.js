@@ -17,6 +17,13 @@ If it IS a follow-up Q&A:
 - For product specifications/COA/MSDS: direct dealer to https://www.himedialabs.com/us/coasdstds/ with the specific product code
 - Keep the reply short and direct — just answer the questions
 
+## PO REQUOTE (price in PO is no longer valid)
+When the email asks to "requote" because the price in a Purchase Order is no longer valid:
+- Open with: "Thank you for your Purchase Order, however the price in your PO is no longer valid. Please find below our updated quotation with current pricing for [product]."
+- ONLY requote the items listed in the PO — do NOT suggest alternative items, ex-stock alternatives, or additional products.
+- Search for the exact SKUs from the PO, apply current pricing rules, check stock, and draft the updated quotation.
+- Keep it simple — just the updated price table for the PO items, no extras.
+
 ## YOUR WORKFLOW (for NEW quotation requests)
 1. Read the dealer email carefully
 2. If dealer provides EXACT SKUs (e.g., H05-SD006-5CT, T38-521014Y), search for those exact SKUs directly using search_brand or search_products. Do NOT reinterpret or substitute with other brands.
