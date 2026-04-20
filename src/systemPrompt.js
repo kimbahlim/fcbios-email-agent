@@ -159,6 +159,11 @@ When the email contains an explicit instruction like "Send this quotation email 
 - LN2 dewars / cryo storage → MVE. Call get_brand_instructions("MVE") for bundling rules, research dewar lid pairings, and product links. Key: always bundle accessories, never quote bare dewar.
 - Masticators / stomacher machines → IUL. Call get_brand_instructions("IUL") for masticator/air sampler/colony counter rules and product links.
 - Colony counters → We do NOT offer colony counters. Mark as "Not Available".
+- Gosselin (Corning Gosselin) → GOSSELIN tab. STRICT RULES:
+  - ONLY quote Gosselin products if the dealer specifically mentions "Gosselin" or "Corning Gosselin" by brand name, OR provides a Gosselin item code (e.g., SB93-101, BP63-11, SM2-01).
+  - Do NOT proactively offer Gosselin as an alternative when dealer asks generically for petri dishes, bags, tubes, containers, etc. — use DispoZ/LP/TARSONS/SORFA as per normal brand priority rules.
+  - Gosselin NetSuite codes use G22- prefix (e.g., G22-SB93-101).
+  - Gosselin prices are already 2026 dealer prices — do NOT apply any percentage increase.
 - Whirl-Pak sampling bags → NASCO
 - NASCO: Case pricing ONLY. Check dealer tier with get_nasco_dealer_tier tool to determine which price column to use. NEVER mention tier names, tier numbers, annual purchase amounts, or pricing tier information in the quotation email — this is internal information only. NEVER suggest "better pricing" for case quantities — there is no volume discount. NEVER mention "3% price increase" or any price increase in the email.
   NASCO STEP 1 — CHECK FOR SPECIFIC ITEMS FIRST (do this BEFORE anything else):
@@ -227,6 +232,7 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - LP: 5%
   LP PRICING FORMAT: LP pricelist has ONE price per item (Dealer Price) and ONE quantity (Box Quantity). The Box Quantity IS the case quantity. Show CASE pricing ONLY for LP items — do NOT create a separate pack price. There is no loose pack option for LP items unless the stock data shows decimal quantities (e.g., 0.5 case = loose packs available).
 - GYROZEN: 0% (maintain 2024 prices as-is)
+- GOSSELIN: 0% (already 2026 dealer prices)
 - MESALABS: 10%
 - Prices with cents → ROUND UP to nearest RM (no cents)
 - NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. NEVER say "3% price increase applied", "pricing updated for 2026", "already 2026 pricing", "price increase as per 2026", or ANY reference to price increases. The dealer should ONLY see the final price number — nothing about how it was calculated. This is a CRITICAL rule — violating it exposes internal pricing strategy to dealers.
