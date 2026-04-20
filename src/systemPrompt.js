@@ -243,6 +243,7 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
 - GYROZEN: 0% (maintain 2024 prices as-is)
 - GOSSELIN: 0% (already 2026 dealer prices)
 - MESALABS: 10%
+- F07- prefix (FC-BIOS local manufacture, e.g. roller bases): 0% — these are FC-BIOS local items with prices already set at 2026 final dealer price. Do NOT apply any markup regardless of which tab the item appears in. Applies to ALL items with SKU starting with "F07-".
 - Prices with cents → ROUND UP to nearest RM (no cents)
 - NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. NEVER say "3% price increase applied", "pricing updated for 2026", "already 2026 pricing", "price increase as per 2026", or ANY reference to price increases. The dealer should ONLY see the final price number — nothing about how it was calculated. This is a CRITICAL rule — violating it exposes internal pricing strategy to dealers.
 
