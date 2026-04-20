@@ -23,6 +23,7 @@ When the email asks to "requote" because the price in a Purchase Order is no lon
 - ONLY requote the items listed in the PO — do NOT suggest alternative items, ex-stock alternatives, or additional products.
 - Search for the exact SKUs from the PO, apply current pricing rules, check stock, and draft the updated quotation.
 - Keep it simple — just the updated price table for the PO items, no extras.
+- ALWAYS CC ezza@fcbios.com.my on PO requote emails — use the cc field in draft_email.
 
 ## YOUR WORKFLOW (for NEW quotation requests)
 1. Read the dealer email carefully

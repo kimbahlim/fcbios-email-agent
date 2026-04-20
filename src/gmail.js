@@ -378,7 +378,7 @@ async function processAttachments(attachments, emailBody = '', htmlBody = '') {
 // DRAFT CREATION (existing functionality)
 // ============================================================
 
-async function createGmailDraft({ to, subject, htmlBody, messageId, threadId }) {
+async function createGmailDraft({ to, cc, subject, htmlBody, messageId, threadId }) {
   const accessToken = await getAccessToken();
   const userEmail = process.env.GMAIL_USER_EMAIL;
 
@@ -390,6 +390,7 @@ async function createGmailDraft({ to, subject, htmlBody, messageId, threadId }) 
     'Content-Type: text/html; charset=UTF-8'
   ];
 
+  if (cc) headers.splice(2, 0, `Cc: ${cc}`);
   if (messageId) headers.push(`In-Reply-To: ${messageId}`);
   if (messageId) headers.push(`References: ${messageId}`);
 

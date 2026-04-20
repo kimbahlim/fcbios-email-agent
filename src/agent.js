@@ -105,6 +105,7 @@ const tools = [
       properties: {
         type: { type: 'string', enum: ['quotation', 'pre_quote', 'escalation', 'forward', 'lead_time'], description: 'Type of email' },
         reply_to: { type: 'string', description: 'Dealer email address to reply to (use original dealer email for forwarded emails)' },
+        cc: { type: 'string', description: 'CC email address (optional). Use for PO requotes with invalid pricing — CC ezza@fcbios.com.my' },
         dealer_name: { type: 'string', description: 'Dealer contact name' },
         subject: { type: 'string', description: 'Email subject line' },
         html_body: { type: 'string', description: 'Full HTML email body with quotation table, notes, and signature' }
@@ -355,6 +356,7 @@ Process this email according to your instructions. Search the pricelists, check 
           draftResult = {
             type: toolUse.input.type,
             reply_to: toolUse.input.reply_to,
+            cc: toolUse.input.cc || null,
             dealer_name: toolUse.input.dealer_name,
             subject: toolUse.input.subject,
             draft_html: toolUse.input.html_body

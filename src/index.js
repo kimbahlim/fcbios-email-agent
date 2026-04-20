@@ -130,9 +130,11 @@ app.post('/webhook/new-email', async (req, res) => {
       const draftSubject = result.subject || `Re: ${subject}`;
 
       console.log(`[REPLY TO] ${replyName} <${replyTo}>`);
+      if (result.cc) console.log(`[CC] ${result.cc}`);
 
       const draftResult = await createGmailDraft({
         to: `${replyName} <${replyTo}>`,
+        cc: result.cc || null,
         subject: draftSubject,
         htmlBody: result.draft_html,
         messageId: message_id,
@@ -344,9 +346,11 @@ async function pollForEmails() {
           const draftSubject = result.subject || `Re: ${latestMsg.subject}`;
 
           console.log(`[REPLY TO] ${replyName} <${replyTo}>`);
+          if (result.cc) console.log(`[CC] ${result.cc}`);
 
           const draftResult = await createGmailDraft({
             to: `${replyName} <${replyTo}>`,
+            cc: result.cc || null,
             subject: draftSubject,
             htmlBody: result.draft_html,
             messageId: latestMsg.message_id,
