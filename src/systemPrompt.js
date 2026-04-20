@@ -146,6 +146,9 @@ When the email contains an explicit instruction like "Send this quotation email 
   - UGAIYA Class 5 chemical integrator: U11-UGCI0105 (500pcs/case)
   - MESALABS Class 5 chemical integrator: R01-CI-SSW (250pcs/pack) → search_brand("MESALABS", "CI-SSW") or search_brand("MESALABS", "integrator")
 - Sterilization pouches/reels, autoclave tape → UGAIYA or ANQING_YIPAK
+- BI INCUBATOR QUOTING: When quoting UGAIYA or MESALABS biological indicator incubators (UG-AI400, UG-AR200, UG-AR400, EZTest incubators etc.):
+  - Always note: "This quotation is for the incubator unit only and does not include the compatible biological indicators (BIs)."
+  - Ask the dealer: "If you also require biological indicators, please let us know your application (e.g., steam sterilization/autoclave, EO sterilization, dry heat) and whether Log 5 or Log 6 is required, so we can recommend the correct BI for your incubator."
 - Food safety test kits → search BOTH PROGNOSIS and NEOGEN, offer both options:
   ALLERGEN testing (gluten, peanut, soy, egg, milk, almond, hazelnut, casein, crustaceans, fish, etc.):
   - PROGNOSIS ALLERGEN-SHIELD series (ELISA, 48/96 wells) — quantitative results
