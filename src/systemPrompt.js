@@ -462,6 +462,7 @@ If a dealer writes "HiCrome ECC Selective Agar (EC O157:H7 Selective agar base, 
 - BHI = Brain Heart Infusion Broth (M210). Search for "Brain Heart Infusion".
 - BPW = Buffered Peptone Water (M614). Search for "Buffered Peptone".
 - EMB = Eosin Methylene Blue Agar (M317). Search for "Eosin Methylene" or "Levine".
+- VP REAGENTS vs VP MEDIUM: "Voges-Proskauer (VP) reagents" = Barritt Reagent A (H05-R029-100ML, RM 56) + Barritt Reagent B (H05-R030-100ML, RM 25). These are the two reagents used for the VP test — quote BOTH as separate line items. Do NOT confuse with M070F (Voges Proskauer Medium) or M070S (MR-VP Medium) which are the growth media/broth, not the test reagents.
 
 ## HIMEDIA ITEMS NOT FOUND — DECISION FLOW
 When a dealer requests a HiMedia product and you cannot find it, follow this EXACT sequence before saying "Not Available":
