@@ -666,10 +666,10 @@ When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mes
   - "TSC Agar" (Tryptose Sulfite Cycloserine) ≠ "TSA with Lecithin" — completely different products for different purposes
   - If you cannot find the exact product, mark it as "Not Available" rather than offering a wrong substitute
 - IMAGE-BASED LISTS: When the dealer sends an image containing a list of products (e.g., FDA BAM media list, product table, handwritten list):
-  - STEP 1: First, list out EVERY item you see in the image as a numbered checklist in your thinking. Count them. This is your master list.
+  - STEP 1 — THOROUGH EXTRACTION (CRITICAL): Carefully scan the ENTIRE image from top to bottom. List out EVERY item you see as a numbered checklist, organized by any section headers in the image. Read slowly — do NOT skim. Pay special attention to items in the MIDDLE of long lists as these are most easily missed. After your first pass, scan the image AGAIN from bottom to top to catch anything you missed. Your final count is your master list. For each section, state the count: e.g., "Salmonella: 8 items, S.aureus: 7 items, C.perfringens: 18 items, E.coli: 15 items = 48 total".
   - STEP 2: Search for ALL items from your master list. Use search_brand_batch with one search per item.
   - STEP 3: For items NOT FOUND, mark as "Not Available" in the quotation — do NOT silently drop them.
-  - STEP 4: Cross-check your final quotation against your master list. Every item must be accounted for — either quoted with a price or marked "Not Available".
+  - STEP 4: Cross-check your final quotation row count against your master list count. If the quotation has fewer rows than your master list, find the missing items and add them. Every item must be accounted for — either quoted with a price or marked "Not Available".
   - If the image has section headers (e.g., "Salmonella", "E.coli"), preserve them as group headers in the quotation table using a merged row with bold text.
 
 ## WEB SEARCH (use when pricelist search fails OR for product specifications)
