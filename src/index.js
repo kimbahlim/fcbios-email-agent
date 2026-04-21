@@ -172,23 +172,32 @@ async function pollForEmails() {
     // Group messages by thread to find the latest message in each thread
     const threadMap = new Map();
     for (const msg of messages) {
-      const full = await getFullMessage(msg.id);
-      const parsed = parseMessage(full);
-      
-      if (!threadMap.has(parsed.threadId)) {
-        threadMap.set(parsed.threadId, parsed);
-      } else {
-        // Keep the latest message in the thread
-        const existing = threadMap.get(parsed.threadId);
-        if (parsed.internalDate > existing.internalDate) {
+      try {
+        const full = await getFullMessage(msg.id);
+        const parsed = parseMessage(full);
+        
+        if (!threadMap.has(parsed.threadId)) {
           threadMap.set(parsed.threadId, parsed);
+        } else {
+          // Keep the latest message in the thread
+          const existing = threadMap.get(parsed.threadId);
+          if (parsed.internalDate > existing.internalDate) {
+            threadMap.set(parsed.threadId, parsed);
+          }
         }
+      } catch (parseErr) {
+        console.error(`[PARSE ERROR] Failed to parse message ${msg.id}: ${parseErr.message}`);
       }
     }
 
+    console.log(`[POLL] ${threadMap.size} thread(s) to process`);
+
     // Process each thread's latest unprocessed message
     for (const [threadId, latestMsg] of threadMap) {
+      console.log(`[POLL] Checking thread ${threadId}, msg ${latestMsg.id}, from: ${latestMsg.from_email}`);
+      
       if (processedMessages.has(latestMsg.id)) {
+        console.log(`[SKIP] Already processed msg ${latestMsg.id}`);
         continue; // Already processed this exact message
       }
 
