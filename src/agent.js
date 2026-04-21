@@ -307,7 +307,7 @@ Process this email according to your instructions. Search the pricelists, check 
     try {
       response = await client.messages.create({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 8192,
+        max_tokens: 16384,
         system: systemPrompt,
         tools: [
           ...tools,
@@ -339,6 +339,10 @@ Process this email according to your instructions. Search the pricelists, check 
     }
 
     console.log(`[AGENT] Stop reason: ${response.stop_reason}`);
+
+    if (response.stop_reason === 'max_tokens') {
+      console.log('[AGENT WARNING] ⚠️  Response was truncated — output exceeded max_tokens (16384). Draft may be incomplete or missing.');
+    }
 
     if (response.stop_reason === 'end_turn') {
       console.log('[AGENT] Done (end_turn)');
