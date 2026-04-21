@@ -370,21 +370,40 @@ async function pollForEmails() {
 
           // Swap label: "Agent" → "Agent Replied" to prevent reprocessing
           await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
+          
+          // Mark as processed ONLY on success
+          processedMessages.add(latestMsg.id);
+          processedThreads.set(latestMsg.thread_id, Date.now());
+          console.log(`[THREAD] Cooldown set for thread ${latestMsg.thread_id} (10 min)`);
         } else {
           console.log('[AGENT] No draft generated');
+          // Track retry count — give up after 3 attempts
+          const retryKey = `retry_${latestMsg.id}`;
+          const retries = processedThreads.get(retryKey) || 0;
+          if (retries >= 2) {
+            console.log(`[AGENT] Giving up after ${retries + 1} attempts — marking as processed`);
+            processedMessages.add(latestMsg.id);
+          } else {
+            processedThreads.set(retryKey, retries + 1);
+            console.log(`[AGENT] Will retry (attempt ${retries + 1}/3)`);
+          }
+          processedThreads.set(latestMsg.thread_id, Date.now());
+          console.log(`[THREAD] Cooldown set for thread ${latestMsg.thread_id} (10 min)`);
         }
-
-        // Mark as processed regardless of outcome
-        processedMessages.add(latestMsg.id);
-        processedThreads.set(latestMsg.thread_id, Date.now());
-        console.log(`[THREAD] Cooldown set for thread ${latestMsg.thread_id} (10 min)`)
 
       } catch (error) {
         console.error('[AGENT ERROR]', error.message);
         console.error(error.stack);
-        // Still mark as processed to avoid infinite retry loop
-        // The error is logged for manual review
-        processedMessages.add(latestMsg.id);
+        // Track retry count on error too
+        const retryKey = `retry_${latestMsg.id}`;
+        const retries = processedThreads.get(retryKey) || 0;
+        if (retries >= 2) {
+          console.log(`[AGENT] Giving up after ${retries + 1} failed attempts — marking as processed`);
+          processedMessages.add(latestMsg.id);
+        } else {
+          processedThreads.set(retryKey, retries + 1);
+          console.log(`[AGENT] Error — will retry (attempt ${retries + 1}/3)`);
+        }
       }
     }
 
