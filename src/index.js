@@ -383,12 +383,13 @@ async function pollForEmails() {
           if (retries >= 2) {
             console.log(`[AGENT] Giving up after ${retries + 1} attempts — marking as processed`);
             processedMessages.add(latestMsg.id);
+            processedThreads.set(latestMsg.thread_id, Date.now());
+            console.log(`[THREAD] Cooldown set for thread ${latestMsg.thread_id} (10 min)`);
           } else {
             processedThreads.set(retryKey, retries + 1);
-            console.log(`[AGENT] Will retry (attempt ${retries + 1}/3)`);
+            console.log(`[AGENT] Will retry (attempt ${retries + 1}/3) on next poll`);
+            // NO cooldown on failure — let retry happen on next poll (30s)
           }
-          processedThreads.set(latestMsg.thread_id, Date.now());
-          console.log(`[THREAD] Cooldown set for thread ${latestMsg.thread_id} (10 min)`);
         }
 
       } catch (error) {
