@@ -657,13 +657,20 @@ When a dealer asks for a SPECIFIC product by name or brand (e.g., "EZTest", "Mes
   Total: 4 loops. Using 10+ loops for a multi-item enquiry is a CRITICAL COST VIOLATION.
   
   Only use individual search_brand and check_stock for single-item enquiries.
-- ITEM ORDER: ALWAYS list items in the quotation table in the SAME ORDER as the dealer's email. If the dealer lists items 7-15, the table must follow that exact sequence. Do NOT reorder items alphabetically or by brand. Match the dealer's numbering and sequence exactly.
+- ITEM ORDER: ALWAYS list items in the quotation table in the SAME ORDER as the dealer's email or image. If the dealer lists items 7-15, the table must follow that exact sequence. Do NOT reorder items alphabetically or by brand. Match the dealer's numbering and sequence exactly.
+- NO DUPLICATES: Never list the same SKU twice in a quotation. Before adding any item to the table, check if that SKU is already listed. If the dealer's list has the same product appearing in multiple categories (e.g., "Koser Citrate Broth" appears under both C.perfringens and E.coli sections), list it ONCE under the first category where it appears, and do NOT repeat it in subsequent categories.
 - EVERY ITEM MATTERS: For multi-item enquiries, carefully count the items in the dealer's email. Search for EACH item individually. Do NOT merge or skip items that sound similar. For example, "Bile salt irgasan brilliant green agar" and "Brilliant Green Bile Broth 2%" are COMPLETELY DIFFERENT products — search for each one separately.
+- EXACT PRODUCT MATCHING: Quote the EXACT product the dealer requested. Do NOT substitute with a similar or related product unless the exact product is not found.
+  - "Nutrient agar slant" = nutrient agar prepared in a slant tube — quote Nutrient Agar (M001) once, not twice with "(stant)" suffix
+  - "Sodium chloride broth" ≠ "Buffered Sodium chloride Peptone solution" — these are different products, search for each specifically
+  - "TSC Agar" (Tryptose Sulfite Cycloserine) ≠ "TSA with Lecithin" — completely different products for different purposes
+  - If you cannot find the exact product, mark it as "Not Available" rather than offering a wrong substitute
 - IMAGE-BASED LISTS: When the dealer sends an image containing a list of products (e.g., FDA BAM media list, product table, handwritten list):
-  - You MUST extract EVERY item from the image — count them carefully. If the image has 40 items, the quotation must have 40 rows.
-  - If a product is NOT FOUND in the pricelist after searching, include it in the quotation table as "Not Available" — do NOT silently drop it.
-  - Maintain the EXACT same order and category groupings as shown in the image.
-  - If the image has section headers (e.g., "Salmonella", "E.coli"), preserve them as group headers in the quotation table.
+  - STEP 1: First, list out EVERY item you see in the image as a numbered checklist in your thinking. Count them. This is your master list.
+  - STEP 2: Search for ALL items from your master list. Use search_brand_batch with one search per item.
+  - STEP 3: For items NOT FOUND, mark as "Not Available" in the quotation — do NOT silently drop them.
+  - STEP 4: Cross-check your final quotation against your master list. Every item must be accounted for — either quoted with a price or marked "Not Available".
+  - If the image has section headers (e.g., "Salmonella", "E.coli"), preserve them as group headers in the quotation table using a merged row with bold text.
 
 ## WEB SEARCH (use when pricelist search fails OR for product specifications)
 You have access to web_search. Use it when:
