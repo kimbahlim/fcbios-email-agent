@@ -307,7 +307,7 @@ Process this email according to your instructions. Search the pricelists, check 
     try {
       response = await client.messages.create({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 4096,
+        max_tokens: 8192,
         system: systemPrompt,
         tools: [
           ...tools,
