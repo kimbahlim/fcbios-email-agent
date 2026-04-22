@@ -425,10 +425,18 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 - Centrifuge tubes (falcon tubes, 15ml, 50ml) → ALWAYS search TARSONS first, not LP. LP is for consumables like swabs, loops, spreaders only.
 - Equipment (TOMY/GYROZEN): Include warranty registration disclaimer
 - Include the relevant brand product links in quotation emails (only use these verified links):
-  - LogTag: Include ALL of these:
+  - LogTag: Include FC-BIOS collection link + the correct official product page for the model quoted. Use the EXACT URLs below — do NOT guess or pattern-match from other models:
     - FC-BIOS collection: https://www.fcbios.com.my/collections/data-logger
-    - Official product page: https://logtagrecorders.com/product/[model-lowercase]/ (e.g., https://logtagrecorders.com/product/utrix-16/)
-    - Brochure PDF: https://logtagrecorders.com/download/products/brochures/LogTag_[MODEL]_Brochure.pdf (e.g., https://logtagrecorders.com/download/products/brochures/LogTag_UTRIX-16_Brochure.pdf)
+    - UTRIX-16 → https://logtagrecorders.com/product/utrix-16/ + Brochure: https://logtagrecorders.com/download/products/brochures/LogTag_UTRIX-16_Brochure.pdf
+    - UTRID-16R → https://logtagrecorders.com/product/utrid-16r/
+    - UTRED-16F → https://logtagrecorders.com/product/utred-16f/
+    - UTRED30-16 → https://logtagrecorders.com/product/utred30-16/
+    - UTREL-16F → https://logtagrecorders.com/product/utrel-16f/
+    - HAXO-16U → https://logtagrecorders.com/product/haxo-16u/ (NO brochure PDF available — use product page only)
+    - HAXO-8 → https://logtagrecorders.com/product/haxo-8/ + Brochure: https://logtagrecorders.com/download/products/brochures/LogTag_HAXO-8_Brochure.pdf (note: obsolete, usually replaced by HAXO-16U)
+    - USRIC-16 → https://logtagrecorders.com/product/usric-16/
+    - LT5GEO → https://logtagrecorders.com/product/lt5geo/
+    - For any other LogTag model: use ONLY the FC-BIOS collection link above. Do NOT construct a logtagrecorders.com URL from a pattern — broken links damage credibility.
   - MinMax Thermometer: https://www.fcbios.com.my/collections/minmax-thermometer
   - MinMax Thermo Hygrometer: https://www.fcbios.com.my/collections/thermo-hygrometer
   - TARSONS — CRITICAL: you MUST pick the correct link based on the product category quoted:
