@@ -249,7 +249,20 @@ const BRAND_INSTRUCTIONS = {
   Include the model-specific page + the rotor selection guide PDF in every Gyrozen quotation.`,
 
   MVE: `## MVE DEWAR DETAILED RULES
-  
+
+  MVE INTENT DISAMBIGUATION (do this FIRST, before choosing a series or searching):
+  MVE dewars split into two very different categories. Classify the dealer's intent BEFORE picking a series — do NOT pattern-match on the word "storage" alone.
+
+  (A) LN2 SUPPLY DEWARS — Lab series (Lab 4, Lab 10, Lab 20, Lab 30, Lab 50). These hold and dispense liquid nitrogen itself. Signals: "LN2 storage", "liquid nitrogen container/tank/dewar", "to top up", "to refill", "supply", "dispensing", capacity stated in litres of LN2, no mention of samples/vials/canisters. Lab capacities: 4L, 10L, 20L, 30L, 50L.
+
+  (B) SAMPLE STORAGE DEWARS — SC, XC, CryoSystem, Doble series. These store biological samples (vials, straws, semen, cells) submerged in LN2. Signals: "sample storage", "vial storage", "cryopreservation", "semen tank", "straw storage", mentions of canisters/racks/vial capacity, or specific model numbers like SC 35/24, XC 32/8, XC 33/22, XC 34/18.
+
+  If the dealer asks for "LN2 storage X litres" (or similar) with NO sample-related context, this is category (A) — quote Lab series, NOT SC/XC. Match the requested capacity to the closest Lab model at or above that size (e.g. "min 25L" → Lab 30; "40L" → Lab 50; "min 15L" → Lab 20). Optionally offer the next size as an alternative.
+
+  If the request is genuinely ambiguous (e.g. bare "cryogenic container 30L" with no other context), do NOT guess — ask the dealer to clarify whether they need LN2 supply or sample storage.
+
+  NEVER quote SC/XC series in response to a bare "LN2 storage container" request.
+
   MVE MODEL SEARCH: MVE model names in the pricelist use spaces around slashes (e.g. "SC 4 / 3 V", "SC 2 / 1 V"). When a dealer writes "SC4/3V" or "SC 4/3V", search using the key terms separated — e.g. search "SC 4 3 V" or just "SC 4" and then filter results. Do NOT mark as "Not Available" without trying multiple search terms. Vapor shippers are SC 2/1V, SC 4/2V, SC 4/3V. CryoShippers are CT-50, CT-250, CryoShipper XC, CryoShipper 2000.
   
   MVE DEWAR BUNDLING: When quoting MVE dewars, ALWAYS include the complete package — never quote just the bare dewar. The pricelist groups items by model: the main unit is listed first, followed by accessories in parenthesized model names.
@@ -260,7 +273,8 @@ const BRAND_INSTRUCTIONS = {
     - RD-2 (2.0L): dewar M02-13982277 + cork M02-13976387
     - RD-3 (3.0L): dewar M02-13982285 + stainless lid M02-21007715
     - RD-6 (6.0L): dewar M02-13982293 + stainless lid M02-21007715
-  For STORAGE DEWARS (SC, XC, Lab, Doble, etc.): Include the main unit. Also list available accessories (spare canister, cork/cover, hinged lid kit, roller base) that appear under the same model group in the pricelist, so the dealer can see the full package.
+  For SAMPLE STORAGE DEWARS (SC, XC, CryoSystem, Doble): Include the main unit. Also list available accessories (spare canister, cork/cover, hinged lid kit, roller base) that appear under the same model group in the pricelist, so the dealer can see the full package.
+  For LN2 SUPPLY DEWARS (Lab 4, Lab 10, Lab 20, Lab 30, Lab 50): Include the main unit. List available accessories that appear under the same model group in the pricelist (e.g. roller base, pouring spout, discharge device, transfer hose, phase separator, replaceable neck cork) so the dealer can see the full package. Do NOT quote canisters/racks for Lab series — these are LN2 supply tanks, not sample storage.
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
   
