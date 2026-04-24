@@ -123,11 +123,23 @@ When the email contains an explicit instruction like "Send this quotation email 
   REVERSE: If dealer specifically asks for a MESALABS/Raven product, quote it BUT also search UGAIYA for the equivalent product and offer it as a more price-competitive alternative.
   CRITICAL PRODUCT TYPE MATCHING: Chemical integrators and biological indicators are COMPLETELY DIFFERENT products. Never substitute one for the other.
   - Chemical Integrator (CI) = paper strip indicator. MESALABS equivalents: CI-SSW (Class 5), CI-OK (pass/fail). SKU starts with "CI-"
-  - Biological Indicator (BI) = spore vial/ampoule. MESALABS equivalents: EZTEST products. SKU starts with "EZ"
-  - If dealer asks for "chemical integrator" or "Type 5/Class 5 integrator" → search for CI- products ONLY, never EZTEST
-  - If dealer asks for "biological indicator" or "spore test" → search for EZTEST products ONLY, never CI-
+  - Biological Indicator (BI) = spore product. Two physical formats exist — see BI FORMAT MATCHING below.
+  - If dealer asks for "chemical integrator" or "Type 5/Class 5 integrator" → search for CI- products ONLY, never BI products
+  - If dealer asks for "biological indicator" or "spore test" → search for BI products ONLY, never CI-
+  CRITICAL BI FORMAT MATCHING — Biological indicators come in TWO physically different formats. You MUST identify the format the dealer wants before selecting SKUs. If the dealer attaches a product image, match the visible format before selecting SKU.
+  - AMPOULE / VIAL (liquid) format = glass ampoule containing purple/pink liquid media with spores. Snap-open tip.
+    → MESALABS ProSpore ONLY (PS-5-10, PS-5-50, PS-6-50). SKU starts with "PS-"
+    → UGAIYA does NOT make ampoule format — NEVER quote UGAIYA for ampoule requests
+    → MESALABS EZTest (EZS/...) is NOT ampoule — NEVER quote EZTest for ampoule requests
+  - SELF-CONTAINED STRIP/VIAL format = plastic vial with internal spore strip + media ampoule, crushed to activate
+    → Priority: UGAIYA (UGBI0501-LOG5/LOG6, etc.)
+    → Alternative: MESALABS EZTest (EZS/5, EZS/6, EZS/525, EZS/625)
+    → MESALABS ProSpore (PS-...) is NOT strip format — NEVER quote ProSpore for strip requests
+  - Format unclear / not specified → offer both formats clearly labelled, or ask dealer to clarify
+  - Dealer signals that indicate AMPOULE format: words "ampoule", "ampule", "vial 5ml", "liquid BI", "glass ampoule", or image showing glass ampoule with purple/pink liquid
+  - Dealer signals that indicate STRIP/SELF-CONTAINED format: words "self-contained", "strip", "EZTest", or image showing plastic vial
   CRITICAL ORGANISM-STERILIZATION MATCHING — Biological indicators use DIFFERENT organisms for DIFFERENT sterilization methods. You MUST match the organism to the correct sterilization type:
-  - Geobacillus stearothermophilus (G. stearothermophilus) = STEAM sterilization BIs → UGAIYA: UGBI0501 (Log5/Log6), UGBI0506B | MESALABS: EZS/5, EZS/6 (EZTest Steam)
+  - Geobacillus stearothermophilus (G. stearothermophilus) = STEAM sterilization BIs → UGAIYA: UGBI0501 (Log5/Log6), UGBI0506B (self-contained strip format) | MESALABS: EZS/5, EZS/6 (EZTest Steam — self-contained strip format), PS-5-10, PS-5-50, PS-6-50 (ProSpore — AMPOULE format). Choose MESALABS product based on format requested — see BI FORMAT MATCHING above.
   - Bacillus atrophaeus (B. atrophaeus, formerly B. subtilis var. niger) = EO (Ethylene Oxide) sterilization BIs → UGAIYA: UGBI0503 (EO, 24-48hr, 50/box) | MESALABS: EZG/6, EZG/625 (EZTest EO)
   - Bacillus atrophaeus = also used for DRY HEAT sterilization BIs → UGAIYA: UGBI0504 (Dry Heat, B. atrophaeus ATCC9372, 160-250°C, 50/box)
   - Geobacillus stearothermophilus = also used for VHP (Hydrogen Peroxide Plasma) BIs → UGAIYA: UGBI0502 (VHP) | MESALABS: EZH/6I (EZTest H2O2)
@@ -135,7 +147,8 @@ When the email contains an explicit instruction like "Send this quotation email 
   - "Bacillus subtilis" or "B. subtilis" → EO (Ethylene Oxide) sterilization BIs. Search for UGBI0503 (EO). NOT steam, NOT dry heat.
   - "Bacillus atrophaeus" or "B. atrophaeus" → DRY HEAT sterilization BIs. Search for UGBI0504 (Dry Heat, ATCC9372). Also offer UGBI0503 (EO) as B. atrophaeus is used for EO as well.
   - "Geobacillus stearothermophilus" or "G. stearothermophilus" → STEAM or VHP BIs. Search for UGBI0501 (Steam). Default to steam unless they mention VHP/H2O2.
-  - If dealer just says "biological indicator" or "BI for autoclave" or "BI for steam" without specifying Log level or brand → default to UGAIYA UGBI0501-LOG5 ONLY. Do NOT offer Log 6, do NOT offer MESALABS alternatives. Log 5 is the standard for routine autoclave monitoring. Only offer Log 6 if dealer specifically asks for "Log 6", "high risk", or "implant/surgical" applications. Only offer MESALABS if dealer specifically asks for "EZTest" or "Mesa Labs".
+  - If dealer just says "biological indicator" or "BI for autoclave" or "BI for steam" without specifying Log level, brand, OR format → default to UGAIYA UGBI0501-LOG5 ONLY (self-contained strip format). Do NOT offer Log 6, do NOT offer MESALABS alternatives. Log 5 is the standard for routine autoclave monitoring. Only offer Log 6 if dealer specifically asks for "Log 6", "high risk", or "implant/surgical" applications. Only offer MESALABS if dealer specifically asks for "EZTest", "ProSpore", or "Mesa Labs".
+  - HOWEVER: If dealer specifies AMPOULE format (words "ampoule"/"ampule"/"liquid BI"/"glass ampoule"/"vial 5ml", or attaches an image of glass ampoules with purple/pink liquid) → quote MESALABS ProSpore (PS-5-10, PS-5-50, PS-6-50) ONLY. Do NOT quote UGAIYA (UGAIYA has no ampoule format). Do NOT quote EZTest (EZTest is strip format, not ampoule). See BI FORMAT MATCHING above.
   - "LIQUID STERILIZATION" or "BI for liquid" → offer BOTH options:
     1. UGAIYA UGBI0501-LOG5 (standard steam BI) — for monitoring autoclave liquid sterilization cycles (autoclaving liquids/media). Note: "For autoclaving liquid loads, the standard steam sterilization BI is used."
     2. MESALABS SterilAmp (R01-SA/6) — submersible BI designed to be immersed directly in liquid solutions for in-liquid sterilization validation. Search MESALABS for "STERILAMP" to get options and pricing.
