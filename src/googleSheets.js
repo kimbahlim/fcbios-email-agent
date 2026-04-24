@@ -511,7 +511,8 @@ module.exports = {
   getLeadTime,
   listSheets,
   fetchSheet,
-  recommendRotor
+  recommendRotor,
+  fetchFcbiosProductUrl
 };
 
 // Rotor recommendation tool for Gyrozen centrifuges
@@ -674,4 +675,110 @@ async function recommendRotor(model, tubeType, tubeSize, quantity) {
     accessories,
     totalOptions: mainEntries.length
   };
+}
+
+// Fetch and parse an FC-BIOS eStore product page, extracting key fields (SKU, title, brand, packing).
+// Uses Shopify's built-in .json product endpoint for reliable structured data.
+// Used when a dealer sends a specific fcbios.com.my/products/... URL — the URL maps 1-to-1 to a specific SKU.
+async function fetchFcbiosProductUrl(url) {
+  // Validate URL is from fcbios.com.my/products/
+  const urlMatch = url.match(/^https?:\/\/(?:www\.)?fcbios\.com\.my\/products\/([a-z0-9-]+)/i);
+  if (!urlMatch) {
+    return { error: 'URL is not a valid fcbios.com.my product URL. Expected format: https://www.fcbios.com.my/products/[slug]' };
+  }
+
+  const slug = urlMatch[1];
+  // Strip query params/fragment and use Shopify's .json endpoint for structured data
+  const jsonUrl = `https://www.fcbios.com.my/products/${slug}.json`;
+
+  try {
+    const response = await fetch(jsonUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json'
+      },
+      redirect: 'follow'
+    });
+
+    if (!response.ok) {
+      // Fallback: try HTML endpoint and regex-parse (less reliable)
+      return await fetchFcbiosProductUrlHtml(url, slug);
+    }
+
+    const data = await response.json();
+    const product = data.product;
+    if (!product) {
+      return { error: 'Unexpected response format from eStore', url };
+    }
+
+    // Shopify products have variants — for FC-BIOS, each product typically has 1 variant with the SKU
+    const variants = product.variants || [];
+    const primaryVariant = variants[0] || {};
+
+    // Extract SKU — prefer variant SKU (FC-BIOS convention), fallback to product-level if present
+    const sku = primaryVariant.sku || null;
+
+    // If there are multiple variants with different SKUs, flag this so the agent knows
+    const hasMultipleVariants = variants.length > 1;
+    const allVariantSkus = variants.map(v => v.sku).filter(Boolean);
+
+    return {
+      url,
+      slug,
+      sku,
+      title: product.title || null,
+      brand: product.vendor || null,
+      packing: primaryVariant.title && primaryVariant.title !== 'Default Title' ? primaryVariant.title : null,
+      list_price_estore: primaryVariant.price ? parseFloat(primaryVariant.price) : null,
+      has_multiple_variants: hasMultipleVariants,
+      all_variant_skus: hasMultipleVariants ? allVariantSkus : undefined,
+      note: 'This is the SKU the dealer wants. Use this EXACT SKU in your quotation. Do NOT offer other variants unless the dealer explicitly asks. The list_price_estore is the eStore list price — still search the pricelist for the dealer price.'
+    };
+  } catch (err) {
+    return { error: `Network or parsing error: ${err.message}`, url };
+  }
+}
+
+// Fallback: parse the HTML version if .json endpoint is unavailable
+async function fetchFcbiosProductUrlHtml(url, slug) {
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html'
+      },
+      redirect: 'follow'
+    });
+
+    if (!response.ok) {
+      return { error: `Failed to fetch URL: HTTP ${response.status}`, url };
+    }
+
+    const html = await response.text();
+    const skuMatch = html.match(/SKU:\s*([A-Z0-9][A-Z0-9-]{2,60})/i);
+    const sku = skuMatch ? skuMatch[1].trim() : null;
+
+    let title = null;
+    const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
+    if (titleMatch) title = titleMatch[1].replace(/\s*[–-]\s*FC-?BIOS.*$/i, '').trim();
+
+    const packingMatch = html.match(/Packing:\s*([^<\n]+)/i);
+    const packing = packingMatch ? packingMatch[1].trim().replace(/\s+/g, ' ') : null;
+
+    if (!sku) {
+      return { error: 'Could not extract SKU from page HTML.', url, title };
+    }
+
+    return {
+      url,
+      slug,
+      sku,
+      title,
+      packing,
+      source: 'html_fallback',
+      note: 'This is the SKU the dealer wants. Use this EXACT SKU in your quotation. Do NOT offer other variants unless the dealer explicitly asks.'
+    };
+  } catch (err) {
+    return { error: `HTML fallback failed: ${err.message}`, url };
+  }
 }

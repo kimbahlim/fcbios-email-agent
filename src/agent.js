@@ -1,6 +1,6 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const { getSystemPrompt } = require('./systemPrompt');
-const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets, fetchSheet, recommendRotor } = require('./googleSheets');
+const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets, fetchSheet, recommendRotor, fetchFcbiosProductUrl } = require('./googleSheets');
 const { getBrandInstructions } = require('./brandInstructions');
 
 const client = new Anthropic();
@@ -137,6 +137,17 @@ const tools = [
       },
       required: ['model']
     }
+  },
+  {
+    name: 'fetch_fcbios_product_url',
+    description: 'Fetch the exact SKU from an FC-BIOS eStore product URL. ALWAYS call this FIRST when the dealer email contains a URL matching "fcbios.com.my/products/...". Each eStore product URL maps 1-to-1 to one specific SKU — this tool returns that exact SKU so you do not have to guess. After getting the SKU, use search_brand to find its pricelist row, then check_stock. Quote ONLY the returned SKU — do NOT offer other variants or similar products unless the dealer explicitly asks for alternatives.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        url: { type: 'string', description: 'The full fcbios.com.my/products/... URL from the dealer email (can include query parameters like ?srsltid=...)' }
+      },
+      required: ['url']
+    }
   }
 ];
 
@@ -254,6 +265,10 @@ async function processToolCall(toolName, toolInput) {
       case 'recommend_rotor':
         result = await recommendRotor(toolInput.model, toolInput.tube_type, toolInput.tube_size, toolInput.quantity);
         console.log(`[ROTOR] Recommendations for ${toolInput.model}: ${JSON.stringify(result).substring(0, 200)}`);
+        break;
+      case 'fetch_fcbios_product_url':
+        result = await fetchFcbiosProductUrl(toolInput.url);
+        console.log(`[FCBIOS_URL] ${toolInput.url} → SKU: ${result.sku || 'ERROR: ' + result.error}`);
         break;
       case 'draft_email':
         result = { success: true, type: toolInput.type };
