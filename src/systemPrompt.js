@@ -429,6 +429,16 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
     - T38-500041 (50ml Centrifuge Tube Non-Sterile Bulk)
     - And ALL other 15ml/50ml centrifuge tube variants from TARSONS
   - DISPOZ PACK PRICING RULE: The DispoZ pricelist has "Bag Price" and "Bag Qty" columns. IGNORE these columns unless stock qty is DECIMAL (e.g., 3.5 cases). If stock is a WHOLE NUMBER (e.g., 10 cases), show CASE pricing only — do NOT show bag/pack pricing even if the pricelist has a Bag Price column.
+  - DISPOZ BOX PRICING EXCEPTION — TRANSFER PIPETTES (HARD RULE): The following 2 DispoZ SKUs ALWAYS allow box (pack) pricing, even when stock qty is a whole number. For these 2 SKUs ONLY, show BOTH Pack and Case columns regardless of stock decimal status:
+    - DJ01-LA1N00310505 (160mm, 1mL Polyethylene Transfer Pipette, 500pcs/box, 5000/case)
+    - DJ01-LA2N00330505 (162mm, 3mL Polyethylene Transfer Pipette, 500pcs/box, 5000/case)
+    Calculation for these 2 SKUs:
+    - Pack Packing = "500/box"
+    - Pack Price = (Case Price ÷ 10) × 1.10, rounded UP to nearest RM
+    - Case Packing = "Case/5000"
+    - Case Price = full case price from pricelist (with 2026 3% increase applied, rounded up)
+    - Example: Case Price RM 232 → Pack Price = (232 ÷ 10) × 1.10 = RM 25.52 → rounded up = RM 26
+    This exception applies ONLY to these 2 specific SKUs. For ALL OTHER DispoZ items, the default rule above applies (whole-number stock = case only, decimal stock = both pack and case).
   - For ALL OTHER EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — show BOTH pack and case pricing:
     - Pack Price = (Case Price ÷ number of packs per case) × 1.10 (10% markup for loose pack), rounded UP to nearest RM
     - Number of packs per case = Qty/Case ÷ Qty/Pk
