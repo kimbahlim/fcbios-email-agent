@@ -48,18 +48,18 @@ const BRAND_INSTRUCTIONS = {
   | T01-SX-500 | SX-500 Autoclave 58L (2 baskets included FOC) | 22,300 |
   | F07-ACA-315B | Additional Standard Basket (3rd basket for full capacity) | 700 |
   | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
-  | INSTALLATION & COMMISSIONING | Installation & Commissioning | 450 |
-  | SV-ITJKKP | JKKP Inspection | [calculate: 1,300 + MOB for state] |
-  | CALIBRATION | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
+  | SV-INSTALLATION&COMMISSIONING | Installation & Commissioning | 450 |
+  | T01-JKKP | JKKP Inspection | [calculate: 1,300 + MOB for state] |
+  | T01-CAL-1-C0 | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
 
   ### SX-700 MANDATORY ITEMS:
   | SKU | Description | Price (MYR) |
   | T01-SX-700 | SX-700 Autoclave 79L (2 baskets included FOC) | 35,000 |
   | F07-ACA-700B | Additional Standard Basket (3rd basket for full capacity) | 905 |
   | SV-WARRANTY-1 YEAR | 1 Year Warranty | Included |
-  | INSTALLATION & COMMISSIONING | Installation & Commissioning | 450 |
-  | SV-ITJKKP | JKKP Inspection | [calculate: 1,300 + MOB for state] |
-  | CALIBRATION | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
+  | SV-INSTALLATION&COMMISSIONING | Installation & Commissioning | 450 |
+  | T01-JKKP | JKKP Inspection | [calculate: 1,300 + MOB for state] |
+  | T01-CAL-1-C0 | Pressure Gauge & Safety Valve (JKKP mandatory) | Inclusive |
 
   ### MOBILIZATION (MOB) FEES BY STATE (internal reference — NEVER show to dealer):
   KL/Klang Valley/Selangor: RM 100 | Negeri Sembilan: RM 160 | Melaka: RM 300 | Perak: RM 450
@@ -81,14 +81,14 @@ const BRAND_INSTRUCTIONS = {
   | F07-SBSS-325 | Basket Support Stand | 210 |
   | F07-ACA-315T | Long Basket for Waste | 1,190 |
   | T01-599907 | Printer Module (ships separately) | 9,400 |
-  | EST Charge | For government sites (if applicable) | 150 |
+  | SV-EST TEST | For government sites (if applicable) | 150 |
 
   SX-700 accessories:
   | F07-ACA-700B | Additional Standard Basket | 905 |
   | F07-SBSS-345 | Basket Support Stand | 210 |
   | F07-ACA-700T | Long Basket for Waste | 1,300 |
   | T01-599907 | Printer Module (ships separately) | 9,400 |
-  | EST Charge | For government sites (if applicable) | 150 |
+  | SV-EST TEST | For government sites (if applicable) | 150 |
 
   ### DELIVERY CHARGES (for both SX-500 and SX-700):
   Peninsular Malaysia (ALL states): RM 260
