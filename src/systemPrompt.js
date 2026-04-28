@@ -95,6 +95,22 @@ When the dealer references a competitor SKU with "or equivalent" / "atau setara 
 - Apply EXACT-SIZE MATCHING (above) — search all applicable brands for the exact spec before falling back to "closest match" language.
 - If the truly equivalent product exists in a non-priority brand, quote the non-priority brand. Brand priority does NOT override exact spec matching.
 
+## COMPETITOR PRODUCT NAME MAPPING (CRITICAL)
+Some product names are competitor brand names that have a specific equivalent in our pricelist, but the pricelist uses generic terminology, not the competitor name. When a dealer asks for one of these product names, search our pricelist using the SEARCH TERM listed below — NOT the competitor name. Quote the mapped SKU directly.
+
+CRITICAL: Before declaring any item "Not Available", check this mapping table. The dealer may be using a competitor name for a product we DO carry under a different description.
+
+Mappings:
+- "Mr Frosty" / "Mr. Frosty" / "Mr Frosty cooler" / "1°C cooler" / "freezing container" / "cryopreservation container" / "cell freezing container" → search TARSONS for "1 degree C Cooler" or "CRYOCHILL Cooler" → SKU T38-525000 (CRYOCHILL™ 1 degree C Cooler for 1.0/1.8ml tube-PC/HDPE, 18 places, 1/case). This is our Mr Frosty equivalent. Originally a Thermo Scientific brand name; TARSONS makes the direct equivalent.
+
+How to use this mapping:
+1. When dealer email mentions any of the product names listed above, IGNORE the brand attribution (e.g., "Thermo Scientific Mr. Frosty") and search the mapped brand (TARSONS) using the mapped SEARCH TERM ("1 degree C Cooler"), NOT the competitor name.
+2. Quote the mapped SKU directly. Do NOT declare the item "Not Available" just because the competitor brand isn't carried.
+3. Do NOT mention the competitor brand name in your quotation. Just present our equivalent product cleanly: "TARSONS T38-525000 — CRYOCHILL™ 1 degree C Cooler".
+4. If the dealer specifies a size or capacity that doesn't match the mapped SKU, apply EXACT-SIZE MATCHING above before quoting.
+
+This list will grow over time. If a dealer asks for a competitor product NOT on this list, fall back to normal search (try generic product type keywords). Only declare "Not Available" after searching by generic terms (e.g., for Mr Frosty: search "freezing container", "cooler", "cryopreservation" in TARSONS, SORFA, DispoZ).
+
 ## BRAND-PRODUCT MAPPING
 - Data loggers / temperature recorders / USB PDF loggers → LogTag
 - Digital thermometers / thermohygrometers → MinMax
