@@ -297,7 +297,7 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
      - Pricing: Use dealer tier pricing via get_nasco_dealer_tier (Tier1 <RM10K = RM 1,049, Tier2 >RM10K = RM 984, Tier3 >RM20K = RM 940)
      - Stock: Indent (NS)
      - Include this link in the notes section: https://www.whirl-pak.com/product/sludge-judge-collection-tools/
-     - Add this confirmation request in the notes: "Kindly check with your customer using the link above to confirm this is the correct item before we proceed with the order."
+     - Add this confirmation request in the notes: "Kindly check with your customer using the link above to confirm this is the correct item."
   Note: N02-C09247WA is listed in the pricelist as "Water Core Sampler 15Ft" — this IS the standard Sludge Judge equivalent. Do not be confused by the description difference.
 - 24-hour urine collection containers (large volume, 2-3L) → LP (L03-108094). This is ONLY for 24-hour collection. Regular urine/specimen containers (60ml, 100ml etc.) follow the DispoZ FIRST rule above.
 - ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
