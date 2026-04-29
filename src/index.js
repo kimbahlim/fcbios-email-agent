@@ -197,7 +197,10 @@ async function pollForEmails() {
       console.log(`[POLL] Checking thread ${threadId}, msg ${latestMsg.id}, from: ${latestMsg.from_email}`);
       
       if (processedMessages.has(latestMsg.id)) {
-        console.log(`[SKIP] Already processed msg ${latestMsg.id}`);
+        console.log(`[SKIP] Already processed msg ${latestMsg.id} — ensuring Agent label is cleared to break poll loop`);
+        // Defensive: if the label is still on this thread, the poller will keep finding it.
+        // Swap to "Agent Replied" so it stops appearing in label:agent queries.
+        await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
         continue; // Already processed this exact message
       }
 
@@ -206,6 +209,7 @@ async function pollForEmails() {
       if (lastProcessedTime && (Date.now() - lastProcessedTime) < THREAD_COOLDOWN) {
         console.log(`[SKIP] Thread ${threadId} in cooldown (processed ${Math.round((Date.now() - lastProcessedTime) / 1000)}s ago), skipping msg ${latestMsg.id}`);
         processedMessages.add(latestMsg.id);
+        await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
         continue;
       }
 
@@ -250,6 +254,7 @@ async function pollForEmails() {
       if (subjectLower.includes('auto-reply') || subjectLower.includes('automatic reply') || subjectLower.includes('out of office')) {
         console.log('[SKIP] Auto-reply, skipping');
         processedMessages.add(latestMsg.id);
+        await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
         continue;
       }
 
@@ -285,6 +290,7 @@ async function pollForEmails() {
       if (isFromSelf && hasOurSignature) {
         console.log(`[SKIP] Sent reply from self with signature, skipping`);
         processedMessages.add(latestMsg.id);
+        await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
         continue;
       }
       
@@ -296,6 +302,7 @@ async function pollForEmails() {
       if (subject.includes('auto-reply') || subject.includes('automatic reply') || subject.includes('out of office')) {
         console.log('[SKIP] Auto-reply, skipping');
         processedMessages.add(latestMsg.id);
+        await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
         continue;
       }
 
@@ -384,6 +391,7 @@ async function pollForEmails() {
             console.log(`[AGENT] Giving up after ${retries + 1} attempts — marking as processed`);
             processedMessages.add(latestMsg.id);
             processedThreads.set(latestMsg.thread_id, Date.now());
+            await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
             console.log(`[THREAD] Cooldown set for thread ${latestMsg.thread_id} (10 min)`);
           } else {
             processedThreads.set(retryKey, retries + 1);
@@ -401,6 +409,7 @@ async function pollForEmails() {
         if (retries >= 2) {
           console.log(`[AGENT] Giving up after ${retries + 1} failed attempts — marking as processed`);
           processedMessages.add(latestMsg.id);
+          await swapAgentLabel(latestMsg.id, latestMsg.thread_id);
         } else {
           processedThreads.set(retryKey, retries + 1);
           console.log(`[AGENT] Error — will retry (attempt ${retries + 1}/3)`);
