@@ -288,6 +288,17 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
   - 19cm x 30cm ≈ 7½"x12" (1627mL/55oz)
   - 15cm x 38cm ≈ 6"x15" (1242mL/42oz)
   When a dealer gives dimensions in cm, convert to the nearest inch size and search for that. If not an exact match, offer the closest sizes available.
+  NASCO SLUDGE JUDGE / SLUDGE SAMPLER RULES:
+  1. NEVER assemble a "complete unit" by combining Top Section + Extension + Bottom Section + Cap rows from the pricelist. Each component row must be treated as a single standalone item only. Do NOT add component prices together to build a quote for a "complete" sampler.
+  2. Search the NASCO tab for the dealer's specific request (with any SKU, dimensions, or descriptors given).
+  3. FALLBACK FOR UNKNOWN/UNMATCHED SLUDGE JUDGE REQUESTS: If the dealer asks for a "Sludge Judge" (e.g., "15'L complete", "with red ring", or any general Sludge Judge request) AND no exact pricelist match is found for the specific description, offer this as the standard fallback:
+     - SKU: N02-C09247WA
+     - Description: Water Core Sampler 15Ft
+     - Pricing: Use dealer tier pricing via get_nasco_dealer_tier (Tier1 <RM10K = RM 1,049, Tier2 >RM10K = RM 984, Tier3 >RM20K = RM 940)
+     - Stock: Indent (NS)
+     - Include this link in the notes section: https://www.whirl-pak.com/product/sludge-judge-collection-tools/
+     - Add this confirmation request in the notes: "Kindly check with your customer using the link above to confirm this is the correct item before we proceed with the order."
+  Note: N02-C09247WA is listed in the pricelist as "Water Core Sampler 15Ft" — this IS the standard Sludge Judge equivalent. Do not be confused by the description difference.
 - 24-hour urine collection containers (large volume, 2-3L) → LP (L03-108094). This is ONLY for 24-hour collection. Regular urine/specimen containers (60ml, 100ml etc.) follow the DispoZ FIRST rule above.
 - ACC (Associates of Cape Cod) products (LAL reagent water, endotoxin testing, 96-well microplates) → We do NOT carry ACC products. Mark as "Not Available" in the quotation. Do NOT search for alternatives or suggest procurement assistance.
 - Sigma Aldrich / Merck / Roche / Epredia / Thermo Fisher / Gibco / Oxoid / BD Difco branded products:
