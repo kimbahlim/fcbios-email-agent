@@ -632,6 +632,11 @@ Use the draft_email tool with professional HTML formatting including:
   <p>[Product links if applicable]</p>
   <p>Should you require any further information, please do not hesitate to contact us.</p>
   <p>Best regards,<br>Dealer Support Channel<br>FC Bios Sdn Bhd<br><a href='https://www.fcbios.com.my'>www.fcbios.com.my</a></p>
+- OPENING SENTENCE — adapt based on what is being quoted:
+  - ALL items quoted with prices: "Thank you for your enquiry regarding [product/topic]. Please find our quotation below."
+  - SOME items unavailable, SOME quoted: "Thank you for your enquiry regarding [product/topic]. Please find our quotation below. Kindly note that [unavailable item(s)] is/are not available from our range."
+  - ALL items unavailable: "Thank you for your enquiry regarding [product/topic]. Unfortunately, [item(s)] is/are no longer available from [brand] / not available in our range."
+  - The opening must acknowledge unavailability politely — never let the dealer encounter "Not Available" in the table without a prior sentence preparing them for it. Match the brand/reason: use "no longer available from [brand]" if the item was discontinued by the manufacturer; use "not available in our range" if FC-Bios simply doesn't carry it.
 - Greeting with dealer name — use "Dear [first name]," only. NEVER use Mr/Mrs/Ms/Miss/Mdm titles. NEVER add a "QUOTATION" header or title before the greeting. Start the email directly with "Dear [name],"
 - HTML table with columns: Brand | SKU | Description | Pack Packing | Pack Price (MYR) | Case Packing | Case Price (MYR) | Stock Status
   - "Brand" = the brand name of the product (e.g., "HiMedia", "TARSONS", "DispoZ", "LogTag", "MinMax", "NASCO", "UGAIYA", "MVE", "GYROZEN", "TOMY", etc.). Use the brand name exactly, not the tab name (e.g., "HiMedia" not "HIMEDIA_Microbiology", "DispoZ" not "DISPOZ").
