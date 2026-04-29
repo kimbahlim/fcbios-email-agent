@@ -201,6 +201,26 @@ function findAttachments(payload, messageId) {
   return attachments;
 }
 
+// Detect actual image format from magic bytes (first few bytes of file).
+// Email clients often mislabel inline images (e.g., declaring a JPEG as image/png).
+// Anthropic's API rejects mismatches, so we sniff the actual format and override.
+// Returns the correct image/* media type, or null if not a recognized image format.
+function detectImageMediaType(base64Data) {
+  // Decode just the first 12 bytes — enough for all common image format signatures
+  const buf = Buffer.from(base64Data.substring(0, 24), 'base64');
+  if (buf.length < 4) return null;
+  // PNG: 89 50 4E 47
+  if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4E && buf[3] === 0x47) return 'image/png';
+  // JPEG: FF D8 FF
+  if (buf[0] === 0xFF && buf[1] === 0xD8 && buf[2] === 0xFF) return 'image/jpeg';
+  // GIF: 47 49 46 38 ("GIF8")
+  if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x38) return 'image/gif';
+  // WEBP: starts with "RIFF" then 4 size bytes then "WEBP"
+  if (buf.length >= 12 && buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 &&
+      buf[8] === 0x57 && buf[9] === 0x45 && buf[10] === 0x42 && buf[11] === 0x50) return 'image/webp';
+  return null;
+}
+
 async function downloadAttachment(messageId, attachmentId) {
   const data = await gmailApi(`/messages/${messageId}/attachments/${attachmentId}`);
   return data.data;
@@ -344,15 +364,26 @@ async function processAttachments(attachments, emailBody = '', htmlBody = '') {
       const imageTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'];
       
       if (imageTypes.includes(att.mimeType.toLowerCase())) {
+        // Sniff the actual format — email clients often mislabel inline images
+        // (e.g., declaring a JPEG as image/png). Anthropic API rejects the mismatch.
+        const detectedType = detectImageMediaType(standardBase64);
+        let finalMediaType = att.mimeType.toLowerCase();
+        if (finalMediaType === 'image/jpg') finalMediaType = 'image/jpeg'; // normalize
+        if (detectedType && detectedType !== finalMediaType) {
+          console.log(`[ATTACHMENT] MIME mismatch for ${att.filename}: declared ${finalMediaType}, actual ${detectedType} — using actual`);
+          finalMediaType = detectedType;
+        } else if (!detectedType) {
+          console.log(`[ATTACHMENT] Could not detect image format for ${att.filename} — trusting declared ${finalMediaType}`);
+        }
         visionContent.push({
           type: 'image',
           source: {
             type: 'base64',
-            media_type: att.mimeType,
+            media_type: finalMediaType,
             data: standardBase64
           }
         });
-        console.log(`[ATTACHMENT] Image ready for Vision: ${att.filename}`);
+        console.log(`[ATTACHMENT] Image ready for Vision: ${att.filename} (${finalMediaType})`);
       } else if (att.mimeType === 'application/pdf') {
         visionContent.push({
           type: 'document',
