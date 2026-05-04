@@ -397,7 +397,19 @@ async function checkStock(sku) {
 
   if (!match) {
     console.log(`[STOCK] NOT FOUND: "${sku}"`);
-    return { found: false, sku };
+    // CASE-ONLY ENFORCEMENT for indent items: DispoZ indent items are also case-only (no loose packs available without stock)
+    const TRANSFER_PIPETTE_EXC = ['dj01-la1n00310505', 'dj01-la2n00330505'];
+    const skuLC = sku.toString().toLowerCase().trim();
+    const isDispoZIndent = (skuLC.startsWith('dz02-') || skuLC.startsWith('dj01-')) && !TRANSFER_PIPETTE_EXC.some(e => skuLC.includes(e));
+    const TARSONS_CASE_ONLY = ['t38-546021', 't38-546041', 't38-500031', 't38-500041'];
+    const isTarsonsCO = TARSONS_CASE_ONLY.some(c => skuLC.includes(c));
+    const indentCaseOnly = isDispoZIndent || isTarsonsCO;
+    return {
+      found: false,
+      sku,
+      case_only: indentCaseOnly,
+      case_only_reason: indentCaseOnly ? (isTarsonsCO ? 'TARSONS centrifuge tube — case pricing only, never show pack price' : 'DispoZ indent item — case pricing only, never show pack price') : null
+    };
   }
 
   console.log(`[STOCK] FOUND: "${sku}" → row: ${JSON.stringify(match).substring(0, 200)}`);
@@ -451,6 +463,28 @@ async function checkStock(sku) {
     }
   }
 
+  // CASE-ONLY ENFORCEMENT (DispoZ): If item is DispoZ (DZ02- prefix) AND stock is a whole number (not decimal),
+  // the item is sold by the case ONLY — agent must NOT show pack pricing.
+  // Exception: 2 specific transfer pipette SKUs always allow pack/box pricing.
+  const TRANSFER_PIPETTE_EXCEPTIONS = ['dj01-la1n00310505', 'dj01-la2n00330505'];
+  const skuLowerForFlag = (match['NAME'] || match['name'] || match['Name'] || sku).toString().toLowerCase().trim();
+  const isDispoZ = skuLowerForFlag.startsWith('dz02-') || skuLowerForFlag.startsWith('dj01-');
+  const isException = TRANSFER_PIPETTE_EXCEPTIONS.some(ex => skuLowerForFlag.includes(ex));
+  const qtyNum = parseFloat(qty);
+  const isWholeNumber = !isNaN(qtyNum) && Number.isInteger(qtyNum);
+  const caseOnly = isDispoZ && isWholeNumber && !isException && qtyNum > 0;
+  if (caseOnly) {
+    console.log(`[STOCK] CASE-ONLY enforced for ${sku}: DispoZ + whole-number stock (${qty}) → agent MUST NOT show pack pricing`);
+  }
+
+  // CASE-ONLY ENFORCEMENT (TARSONS centrifuge tubes): These specific SKUs are ALWAYS case-only regardless of stock decimal.
+  const TARSONS_CASE_ONLY_SKUS = ['t38-546021', 't38-546041', 't38-500031', 't38-500041'];
+  const isTarsonsCaseOnly = TARSONS_CASE_ONLY_SKUS.some(c => skuLowerForFlag.includes(c));
+  const finalCaseOnly = caseOnly || isTarsonsCaseOnly;
+  if (isTarsonsCaseOnly && !caseOnly) {
+    console.log(`[STOCK] CASE-ONLY enforced for ${sku}: TARSONS centrifuge tube hard rule → agent MUST NOT show pack pricing`);
+  }
+
   return {
     found: true,
     sku: match['NAME'] || match['name'] || match['Name'] || sku,
@@ -460,7 +494,9 @@ async function checkStock(sku) {
     uom: uom,
     storage_temp: match['STORAGE TEMP'] || match['Storage Temp'] || match['STORAGE TEMPERATURE'] || '',
     shipping_condition: match['SHIPPING CONDITION'] || match['Shipping Condition'] || '',
-    notes: match['DESCRIPTION 2'] || match['Description 2'] || ''
+    notes: match['DESCRIPTION 2'] || match['Description 2'] || '',
+    case_only: finalCaseOnly,
+    case_only_reason: finalCaseOnly ? (isTarsonsCaseOnly ? 'TARSONS centrifuge tube — case pricing only, never show pack price' : 'DispoZ + whole-number stock — case pricing only, never show pack price') : null
   };
 }
 
