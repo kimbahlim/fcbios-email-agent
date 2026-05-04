@@ -116,6 +116,12 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
 - Digital thermometers / thermohygrometers → MinMax
 - MinMax model codes: 308, 308-3, 508, 508-3, ADT-308, ADT-508, ADT-308-3, ADT-508-3 → ALL are MinMax products → search MINMAX tab
 - Petri dishes, loops, spreaders, specimen containers, urine containers, stool containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items. When dealer says "urine container" search DispoZ for "specimen container" — DispoZ calls them "Specimen Container" not "Urine Container". The 60ml sterile yellow cap version is DZ02-CA2S10600205.
+  CRITICAL — "DISPOZ FIRST → LP BACKUP" MEANING: This is a sequential fallback rule, NOT a "show both brands" rule. Do NOT quote both DispoZ and LP for the same product. The flow is:
+  (a) Search DispoZ first.
+  (b) If DispoZ has the item EX-STOCK (any positive stock quantity, decimal or whole), quote DispoZ ONLY. Do NOT also quote LP. Do NOT add LP as a "backup" or "alternative" in the same quote.
+  (c) Only fall through to LP if DispoZ does NOT have the item at all (no pricelist match) OR if DispoZ is also indent AND LP has it ex-stock (in that case quote LP for faster delivery).
+  (d) Exception: Dealer explicitly asks for LP by name or LP SKU → quote LP as requested. The "LP INDENT → DISPOZ ALTERNATIVE" rule below applies in this case.
+  Quoting an indent LP item alongside an ex-stock DispoZ item makes no commercial sense — LP at 12-16 weeks lead time will never be chosen over DispoZ ex-stock. Do NOT do this.
   PETRI DISH SIZE GUIDE:
   - 90mm petri dish → DZ02-MP1S00900105 (standard size, Case/500)
   - 45mm-60mm petri dish (small diameter) → DZ02-MP3S00600101 (60x15mm EO Sterile, Case/1000, 10pcs/bag × 100 bags)
