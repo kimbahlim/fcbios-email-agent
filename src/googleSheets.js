@@ -159,7 +159,24 @@ async function searchProducts(keyword) {
     });
   }
 
-  return results.slice(0, 20);
+  // Inject pricing-availability flags (same as searchByBrand)
+  const enrichedAll = results.slice(0, 20).map(row => {
+    const keys = Object.keys(row);
+    const findKey = (...patterns) => keys.find(k => patterns.some(p => k.toLowerCase().includes(p)));
+    const bagPriceKey = findKey('bag price', 'pack price', 'bag dealer price');
+    const bagQtyKey = findKey('bag qty', 'pack qty', 'qty/bag', 'qty/pack', 'units/bag', 'units/pack');
+    const bagPriceVal = bagPriceKey ? row[bagPriceKey] : null;
+    const bagQtyVal = bagQtyKey ? row[bagQtyKey] : null;
+    const hasPackPricing = !!(bagPriceVal && String(bagPriceVal).trim() !== '' && bagQtyVal && String(bagQtyVal).trim() !== '');
+    return {
+      ...row,
+      _has_pack_pricing: hasPackPricing,
+      _pricing_note: hasPackPricing
+        ? null
+        : 'NO PACK PRICING AVAILABLE — this item is sold by the case ONLY. Pricelist row has no Bag Price/Bag Qty columns. Agent MUST leave Pack columns blank in quote. NEVER fabricate pack pricing by dividing case price.'
+    };
+  });
+  return enrichedAll;
 }
 
 async function searchByBrand(brandTab, keyword) {
@@ -303,7 +320,25 @@ async function searchByBrand(brandTab, keyword) {
     }
   }
 
-  return matches.slice(0, 20);
+  // Inject explicit pricing-availability flags into each row so agent can't fabricate pack pricing
+  const enriched = matches.slice(0, 20).map(row => {
+    // Detect bag/pack columns (case-insensitive key match)
+    const keys = Object.keys(row);
+    const findKey = (...patterns) => keys.find(k => patterns.some(p => k.toLowerCase().includes(p)));
+    const bagPriceKey = findKey('bag price', 'pack price', 'bag dealer price');
+    const bagQtyKey = findKey('bag qty', 'pack qty', 'qty/bag', 'qty/pack', 'units/bag', 'units/pack');
+    const bagPriceVal = bagPriceKey ? row[bagPriceKey] : null;
+    const bagQtyVal = bagQtyKey ? row[bagQtyKey] : null;
+    const hasPackPricing = !!(bagPriceVal && String(bagPriceVal).trim() !== '' && bagQtyVal && String(bagQtyVal).trim() !== '');
+    return {
+      ...row,
+      _has_pack_pricing: hasPackPricing,
+      _pricing_note: hasPackPricing
+        ? null
+        : 'NO PACK PRICING AVAILABLE — this item is sold by the case ONLY. Pricelist row has no Bag Price/Bag Qty columns. Agent MUST leave Pack columns blank in quote. NEVER fabricate pack pricing by dividing case price.'
+    };
+  });
+  return enriched;
 }
 
 async function checkStock(sku) {
