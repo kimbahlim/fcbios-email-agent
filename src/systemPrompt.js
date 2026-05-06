@@ -163,6 +163,31 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
 - Autoclavable waste bags (biohazard bags, red/yellow bags for autoclaving waste) → SORFA (S28-AB series) or LP (L03-131xxx/132xxx/134xxx/135xxx)
 - Vacuum/membrane/syringe filters → Membrane Solutions or SORFA
 - Microbiology media (agar, broth) → HiMedia (search HIMEDIA_Microbiology first)
+- HIMEDIA AGAR vs BROTH/MEDIUM DISAMBIGUATION (CRITICAL — applies to ALL HiMedia culture media): HiMedia descriptions in the pricelist are truncated at 40 characters, which makes "Agar" and "Broth/Medium" versions of similar products look almost identical. Before quoting any HiMedia culture media, you MUST match the dealer's EXACT wording for the product physical form (agar/plate vs broth/medium/fluid). This is the single most important disambiguation step for HiMedia.
+  STEP 1 — Read the dealer's exact wording. Identify whether they asked for:
+    AGAR/PLATE form: keywords "agar", "plate", "plates", "plated"
+    BROTH/MEDIUM/FLUID form: keywords "broth", "medium", "fluid", "liquid medium"
+    SEMI-SOLID/SLANT/STAB form: keywords "slant", "stab", "semi-solid", "soft agar"
+  STEP 2 — When evaluating search results, READ EACH DESCRIPTION CAREFULLY for the form-type keyword:
+    AGAR products contain "Agar" in the description (e.g., "Tryptone Soya Agar", "MacConkey Agar", "Sabouraud Dextrose Agar")
+    BROTH/MEDIUM products contain "Broth", "Medium", "Fluid", or "Liquid" (e.g., "Tryptone Soya Broth", "Soyabean Casein Digest Medium", "Fluid Casein Digest Medium")
+  STEP 3 — STRICT FILTERING: NEVER quote an Agar SKU when the dealer asked for Broth/Medium. NEVER quote a Broth/Medium SKU when the dealer asked for Agar/Plate. These are different physical products, not interchangeable. The dealer chose one form deliberately because their protocol/method requires it.
+  COMMON HIMEDIA AGAR vs BROTH/MEDIUM PAIRS — keep these strictly separate:
+    - Tryptone Soya: M290/MH290 (TSA, agar) vs M011 (TSB, broth)
+    - Soyabean Casein Digest: M449/MV449 (SCDA agar w/ lecithin & polysorbate) vs M2115 (SCDM/SCDLP broth w/ 0.5% lecithin & 4% polysorbate, Twin Pack)
+    - SCD with Lecithin/Polysorbate variants:
+        M2115 = Soyabean Casein Digest MEDIUM/BROTH w/ 0.5% Soya Lecithin & 4% Polysorbate 80 (Twin Pack)
+        M5297 = Soyabean Casein Digest AGAR (SCDA) w/ 0.5% Lecithin & 2% Polysorbate 80
+        M449 = Tryptone Soya AGAR w/ Lecithin & Polysorbate 80 (Microbial Content Test Agar)
+        M117 = Fluid Casein Digest Soya Lecithin MEDIUM (Twin Pack)
+        MAP117 = Fluid Casein Digest-Soy-Lecithin Polysorbate 20 MEDIUM (Twin Pack)
+        M1838 = Soyabean Casein Digest MEDIUM w/ Tween 80 and Lecithin
+      When dealer asks "Soya Casein Digest Lecithin Polysorbate Broth" without specifying %, default to M2115 (SCDM/SCDLP Twin Pack — the standard SCDLP broth). NEVER quote M5297 or M449 for a "broth" request.
+    - Sabouraud Dextrose: M063 (SDA, agar) vs M033 (SDB, broth)
+    - Brain Heart Infusion: M211 (BHIA, agar) vs M210 (BHIB, broth)
+    - MacConkey: M082 (MacConkey Agar) vs M081 (MacConkey Broth)
+    - Nutrient: M001 (Nutrient Agar) vs M002 (Nutrient Broth)
+  WHEN IN DOUBT: If the dealer's wording is ambiguous (e.g., they only say "Soya Casein Digest" without "agar" or "broth"), DO NOT guess. Ask the dealer to clarify whether they need the agar (solid) or broth/medium (liquid) form before quoting. Better to ask a one-line clarification than to quote the wrong product.
 - Molecular biology reagents → HiMedia (HIMEDIA_Molecular_Biology)
   TEACHING KITS vs RESEARCH KITS: HiMedia has two types of kits:
   - HTBM series = "HiPer" Teaching Kits (for educational/student use only, small prep counts)
