@@ -146,12 +146,27 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
   TARSONS PIPETTE TIP PRODUCT FAMILY DISAMBIGUATION (CRITICAL — many search results, must filter by packaging/sterility):
   TARSONS has multiple pipette tip product families. NEVER blindly pick the first search result. Match the dealer's specifications:
   - PUREPACK (T38-520xxx) = Individual sterile pack, 1pc/pack, 400/case. ONLY quote if dealer EXPLICITLY asks for "individually wrapped", "individual sterile", or "PUREPACK".
-  - Graduated Bulk Bag (T38-521xxx) = Bulk bag packing (1000/pack for 10uL/200uL, 500/pack for 1000uL), DNase/RNase free. THIS IS THE DEFAULT for "bagged", "bulk pack", "non-sterile", or "per bag" requests. Examples: T38-521000 (10uL), T38-521013 (200uL), T38-521016 (1000uL clear), T38-521016B (1000uL blue).
+  - Graduated Bulk Bag (T38-521xxx) = Bulk bag packing (1000/pack for 10uL/200uL/300uL, 500/pack for 1000uL/1250uL), DNase/RNase free. THIS IS THE DEFAULT for "bagged", "bulk pack", "non-sterile", or "per bag" requests.
+    Volume-to-SKU map for Graduated Bulk Bag (use this list — do NOT pick from memory):
+      10uL: T38-521000 (1000/pack, 20packs/case)
+      10uL XL / 20uL: T38-521050 (1000/pack, 20packs/case)
+      200uL Bevelled (Yellow): T38-521010Y (1000/pack, 10packs/case)
+      200uL Graduated Eppendorf-style (Yellow): T38-521014Y (1000/pack, 10packs/case)  ← DEFAULT for generic 200uL bulk request
+      250uL Graduated: T38-521013 (1000/pack, 10packs/case) — note: only quote if dealer specifies 250uL, NOT for 200uL requests
+      300uL Graduated: T38-521015 (1000/pack, 10packs/case)
+      1000uL Natural: T38-521016 (500/pack, 10packs/case)
+      1000uL Blue: T38-521016B (500/pack, 10packs/case)
+      1000uL Wide Bore: T38-521017 (500/pack, 10packs/case)
+      1250uL: T38-521040 (500/pack, 10packs/case)
+      5mL: T38-521031 (250/pack, 10packs/case)
+      10mL: T38-521033 (100/pack, 10packs/case)
   - Racked Non-Sterile Graduated (T38-521108 etc.) = 96 tips/rack, non-sterile. Quote if dealer asks for "racked non-sterile".
   - Racked Sterile Graduated (T38-522xxx) = 96 tips/rack, sterile. Quote if dealer asks for "racked sterile" or "in box".
   - MAXIPENSA Ultra Low Retention (T38-523xxx bulk / T38-526xxx racked sterile / T38-529xxx racked filter sterile) = ONLY quote if dealer specifies "low retention", "ultra low retention", or "MAXIPENSA".
   - Universal Filter Tips (T38-527xxx bulk / T38-528xxx racked sterile) = ONLY quote if dealer specifies "filter tip" or "filtered tip".
-  DEFAULT RULE: For "0.1-10 μL pipette tips, non-sterile, per bags" type requests, quote T38-521000 (10uL Graduated Bulk Bag, 1000/pack, 20 packs/case). Never quote PUREPACK for bagged/bulk requests. Never quote MAXIPENSA or Filter tips unless explicitly requested — these are premium specialty products and would be overpriced for generic tip requests.
+  EXACT VOLUME MATCH RULE (CRITICAL): When the dealer specifies a tip volume (e.g., "200µL", "1-200µL", "100µL", "1000µL"), you MUST quote the SKU that EXACTLY matches that volume. Do NOT quote a near-volume SKU as a substitute. Example: if dealer asks for 200µL tips, quote T38-521014Y (200µL) — do NOT quote T38-521013 (250µL) or T38-521015 (300µL) as a "close enough" alternative. The dealer's pipette has a specific volume calibration; mismatched-volume tips will not fit correctly. If the exact volume is not available in TARSONS, look for it in DispoZ instead, or flag for human review.
+  DEFAULT RULE: For "0.1-10 μL pipette tips, non-sterile, per bags" type requests, quote T38-521000 (10uL Graduated Bulk Bag, 1000/pack, 20 packs/case). For "1-200 μL" requests, quote T38-521014Y (200uL Yellow Graduated Bulk, 1000/pack, 10 packs/case). For "1000 μL" / "1mL" requests, quote T38-521016B (1000uL Blue Bulk, 500/pack, 10 packs/case). Never quote PUREPACK for bagged/bulk requests. Never quote MAXIPENSA or Filter tips unless explicitly requested — these are premium specialty products and would be overpriced for generic tip requests.
+  HALLUCINATION GUARD: ONLY quote SKUs that appear in your search_brand_batch search results. If a SKU you remember from training doesn't appear in the search results, do NOT quote it — re-run the search with a different keyword, or quote a SKU that DID appear. Never invent or recall SKU codes from memory.
 - Centrifuge tubes (ALL sizes: 15ml, 50ml, falcon tubes), microtubes, PCR tubes, lab bottles → TARSONS ONLY. NEVER use LP for these. Use search_brand("TARSONS", "centrifuge 15ml") or search_brand("TARSONS", "centrifuge 50ml"). The correct SKUs are T38-546021 (15ml sterile bulk) and T38-546041 (50ml sterile bulk). LP L03-111548 and L03-116048 are NOT to be used — those are LP codes.
 - Cryogenic vials / cryovials / cryotubes (ANY size: 0.5ml, 1ml, 1.5ml, 1.8ml, 2ml, 5ml, etc.) → SORFA FIRST → TARSONS backup. ALWAYS search SORFA first using search_brand("SORFA", "cryogenic vial [size]ml") or search_brand("SORFA", "cryovial [size]ml"). SORFA cryogenic vials use the S21-1112xx / S21-1114xx series (e.g., S21-111210 = 2mL external thread self-standing sterile, S21-111410 = 5mL external thread self-standing sterile). TARSONS CRYOCHILL (T38-523xxx) is the BACKUP — only quote it if SORFA does NOT have the exact size requested. EXACT-SIZE PRIORITY: If dealer asks for "2ml cryovial" and SORFA has 2mL in stock, quote SORFA — do NOT default to TARSONS 1.8mL just because TARSONS is "premium". When dealer references Corning 430659 (2ml external thread), the equivalent is SORFA S21-111210, not TARSONS 1.8mL.
 - Serological pipettes, cell culture flasks/plates → SORFA
