@@ -8,22 +8,34 @@ const BRAND_INSTRUCTIONS = {
   ## STEP 1: PRE-QUOTE (always send this FIRST before quoting)
   When a dealer asks for any TOMY autoclave (SX-500 or SX-700), you need the INSTALLATION SITE name and STATE for JKKP compliance. You MUST have BOTH pieces of info explicitly stated in the email before quoting.
   
-  CHECK THE EMAIL — only skip the pre-quote if:
-  - The dealer explicitly provides a site/end-user name AND a Malaysian state (e.g., "end user: Hospital ABC, Sabah" or a full address with state visible like "Universiti Malaya, Kuala Lumpur")
-  - The dealer's COMPANY NAME alone is NOT sufficient as the site name — the autoclave may be installed at a different end-user location
-  - A company domain (e.g., "ebsperfectlab.com") or email signature without a state does NOT count
-  - If in doubt, ALWAYS send the pre-quote to ask — it is better to ask than to quote without site info
+  CRITICAL — DEALER'S OWN COMPANY/ADDRESS IS NEVER THE INSTALL SITE:
+  The dealer is a reseller. The autoclave is being purchased FOR THEIR CUSTOMER, who is the end-user. The dealer's own company name, signature address, email domain, or office location in Malaysia is NEVER an acceptable substitute for end-user site info — even if the dealer's signature includes a state. The whole point of asking is to find out where the dealer's CUSTOMER will install it. Examples of what does NOT count as valid install site info:
+    - Dealer's company name in From/CC/signature (e.g., "TAAT BESTARI SDN BHD", "GAIA SCIENCE", "Polyscientific")
+    - Dealer's office address with state (e.g., "Ampang, Selangor", "Puchong, Selangor", "Kuala Lumpur")
+    - Dealer's email domain or website
+    - Forwarded emails routed via enquiry@fcbios.com.my — the original sender is still a dealer enquiring on behalf of their customer
   
-  Send the pre-quote email if EITHER the installation site name OR state is missing:
+  CHECK THE EMAIL — only skip the pre-quote if the dealer EXPLICITLY identifies the END-USER site, using language like:
+    - "end user: [Hospital/University/Company name], [State]"
+    - "for our customer [Name] in [State]"
+    - "to be installed at [Site name], [State]"
+    - "the user is [Name], located in [State]"
+    - "site: [Name]" with state
+    - Or similar wording that makes it unambiguous that the named site is the END-USER (not the dealer themselves)
+  
+  When the email contains ONLY the dealer's signature with their own company name and address, that is NOT enough — even if the signature says a Malaysian state, that state is the dealer's office, not the install site. The agent MUST send the pre-quote in this case.
+  
+  Send the pre-quote email if EITHER the END-USER installation site name OR state is missing or unclear:
   
   Pre-quote email template (ONLY if site info is missing):
   "Thank you for your enquiry on the TOMY [model] autoclave.
   Before we can prepare your quotation, could you please provide the following:
-  - Site/company name: (where the autoclave will be installed)
-  - State: (location state)
-  This is required as our engineer will need to perform the JKKP compulsory safety pressure test on site during installation together with the JKKP officer.
-  Looking forward to hearing from you!"
+  - End-user site/company name: (where the autoclave will be installed at your customer's premises)
+  - State: (Malaysian state where the install site is located)
+  This is required as our engineer will need to perform the JKKP compulsory safety pressure test on site during installation together with the JKKP officer. The MOB (mobilization) cost varies by state, so we cannot prepare an accurate quotation without this information."
   
+  WHEN IN DOUBT: Send the pre-quote. It is far better to ask one clarifying question than to send a quote with the wrong MOB cost or assume the dealer's address is the install site.
+
   Include these links in the pre-quote:
   - TOMY brochures: https://drive.google.com/drive/folders/14Zwvt44_b4SG8dtnlGe3ZbPy7LYlMMQo
   - Do NOT include the eStore message in TOMY pre-quote emails.
