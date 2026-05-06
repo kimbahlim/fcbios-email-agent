@@ -147,15 +147,15 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
   TARSONS has multiple pipette tip product families. NEVER blindly pick the first search result. Match the dealer's specifications:
   - PUREPACK (T38-520xxx) = Individual sterile pack, 1pc/pack, 400/case. ONLY quote if dealer EXPLICITLY asks for "individually wrapped", "individual sterile", or "PUREPACK".
   - Graduated Bulk Bag (T38-521xxx) = Bulk bag packing (1000/pack for 10uL/200uL/300uL, 500/pack for 1000uL/1250uL), DNase/RNase free. THIS IS THE DEFAULT for "bagged", "bulk pack", "non-sterile", or "per bag" requests.
-    Volume-to-SKU map for Graduated Bulk Bag (use this list — do NOT pick from memory):
+    Volume-to-SKU map for Graduated Bulk Bag (use this list — do NOT pick from memory). Note: NetSuite uses Y suffix for Yellow (200uL) and B suffix for Blue (1000uL) variants. Pricelist sometimes has the SKU without the Y/B suffix — both refer to the same product. The stock check tolerates this mismatch; quote whichever SKU appears in your search result:
       10uL: T38-521000 (1000/pack, 20packs/case)
       10uL XL / 20uL: T38-521050 (1000/pack, 20packs/case)
-      200uL Bevelled (Yellow): T38-521010Y (1000/pack, 10packs/case)
-      200uL Graduated Eppendorf-style (Yellow): T38-521014Y (1000/pack, 10packs/case)  ← DEFAULT for generic 200uL bulk request
+      200uL Bevelled (Yellow): T38-521010Y or T38-521010 (1000/pack, 10packs/case)
+      200uL Graduated Eppendorf-style (Yellow): T38-521014Y or T38-521014 (1000/pack, 10packs/case)  ← DEFAULT for generic 200uL bulk request
       250uL Graduated: T38-521013 (1000/pack, 10packs/case) — note: only quote if dealer specifies 250uL, NOT for 200uL requests
       300uL Graduated: T38-521015 (1000/pack, 10packs/case)
       1000uL Natural: T38-521016 (500/pack, 10packs/case)
-      1000uL Blue: T38-521016B (500/pack, 10packs/case)
+      1000uL Blue: T38-521016B or T38-521016 (500/pack, 10packs/case)
       1000uL Wide Bore: T38-521017 (500/pack, 10packs/case)
       1250uL: T38-521040 (500/pack, 10packs/case)
       5mL: T38-521031 (250/pack, 10packs/case)

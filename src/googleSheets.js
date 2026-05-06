@@ -383,6 +383,22 @@ async function checkStock(sku) {
     console.log(`[STOCK] NASCO: also checking with WA suffix: ${skuLower}wa`);
   }
   
+  // TARSONS Y/B color suffix tolerance: Pricelist sometimes has T38-521014 but NetSuite has T38-521014Y
+  // Try both with and without Y/B suffix to handle the mismatch
+  if (skuLower.startsWith('t38-')) {
+    if (skuLower.endsWith('y') || skuLower.endsWith('b')) {
+      // Has color suffix — also try without
+      const withoutSuffix = skuLower.slice(0, -1);
+      skuVariants.push(withoutSuffix);
+      console.log(`[STOCK] TARSONS: also checking without color suffix: ${withoutSuffix}`);
+    } else if (/t38-\d+$/.test(skuLower)) {
+      // Pure numeric — also try with Y and B suffixes
+      skuVariants.push(skuLower + 'y');
+      skuVariants.push(skuLower + 'b');
+      console.log(`[STOCK] TARSONS: also checking with Y/B color suffixes: ${skuLower}y, ${skuLower}b`);
+    }
+  }
+  
   // If SKU doesn't start with a brand prefix like H05-, try adding common prefixes
   if (!/^[a-z]\d{2}-/i.test(sku)) {
     // Vendor code like SD153-5CT → try H05-SD153-5CT
