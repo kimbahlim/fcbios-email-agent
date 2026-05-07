@@ -471,15 +471,16 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 - This applies to ALL brands. The dealer wants what's available now, not what takes 8-12 weeks.
 
 ## BRAND-SPECIFIC RULES
-- LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION). CRITICAL: Use the CORRECT BRAND's calibration SKU — NEVER mix brands:
+- LogTag/MinMax: ALWAYS add CALIBRATION option (not RE-CALIBRATION) AS A SEPARATE LINE ITEM IN THE QUOTATION TABLE. Mentioning calibration "as available" or "service available" in the Notes section is NOT sufficient — the calibration MUST appear as its own row in the table alongside the data logger row, with the calibration SKU, description, and price visible. Failure to add the calibration as a table row is a quote error. Format the row as: Brand=LogTag (or MinMax), SKU=correct calibration code, Description="Calibration Service - [point count] points, [temp range]", with Pack/Case columns appropriate. The customer needs to see the calibration as a quotable line so they can choose to include or exclude it — burying it in notes hides the option.
+  CRITICAL: Use the CORRECT BRAND's calibration SKU — NEVER mix brands:
   MinMax calibration SKUs (R20- prefix):
   - Model 308/308-3/408 (temperature only) → R20-CALIBRATION-TEMP (3-point) or R20-CALIBRATION-TEMP-5 (5-point)
   - Model 308-W (wireless) → R20-CALIBRATION-TEMP-3W
   - Model 508/508-3 (temp + humidity) → R20-CALIBRATION TEMP-RH (3-point) or R20-CALIBRATION TEMP-RH5 (5-point)
   LogTag calibration SKUs (L21- prefix):
-  - UTRIX-16, UTRID-16R, UTRED-16F, UTRED30-16 (temperature only) → L21-CALIBRATION-TEMP2
+  - UTRIX-16, UTRID-16R, UTRED-16F, UTRED30-16 (temperature only, standard range) → L21-CALIBRATION-TEMP2
   - HAXO-16U (temperature + humidity) → L21-CALIBRATION-C/RH
-  - Ultra-low (-80°C) loggers → L21-CALIBRATION-TEMP3
+  - Ultra-low (-80°C / -90°C) loggers including UTREL-16F → L21-CALIBRATION-TEMP3
   NEVER use L21- calibration for MinMax products. NEVER use R20- calibration for LogTag products.
 - LogTag OBSOLETE MODELS: If dealer requests an obsolete model, quote the replacement directly WITHOUT asking for confirmation. Known replacements: UHADO-16 → HAXO-16U, HAXO-8 → HAXO-16U, UTRID-16 → UTRID-16R. Simply state in the notes: "Please note [old model] has been replaced by [new model]."
 - LogTag INTERFACE CRADLES: The HAXO-16U, UTRIX-16, UTRID-16R, UTRED-16F, UTRED30-16, and UTREL-16F all connect directly to a PC via their built-in USB connector — they do NOT need an interface cradle. The LTI-HID cradle is ONLY for older LogTag models (e.g., HAXO-8, TRIX-8, TRID30-7) that do not have a built-in USB connector. If a dealer requests an interface cradle together with a USB-direct model (HAXO-16U, UTRIX-16, UTRID-16R, etc.), do NOT quote the cradle. Instead, politely inform the dealer in the notes: "The [model] connects directly to your PC via its built-in USB connector — no interface cradle is required." If the dealer is asking for the cradle because they mentioned an older model (e.g., HAXO-8), also explain that the older model has been replaced and the new model no longer needs a cradle.
@@ -560,12 +561,13 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 
   All multi-use models: can be stopped/restarted, generate PDF reports via USB, 5+ year usable life.
   Always offer BOTH with and without wall mounting bracket (-WMB variant).
-  Always add CALIBRATION service (not RE-CALIBRATION). Use the correct calibration code based on the model:
+  Always add CALIBRATION service (not RE-CALIBRATION) AS A SEPARATE LINE ITEM IN THE QUOTE TABLE — NOT just as a note. Each data logger row must be followed by a corresponding calibration row in the same table. Use the correct calibration code based on the model:
   - UTRIX-16, UTRID-16R → L21-CALIBRATION-TEMP2 (temperature only, -30°C to +40°C)
-  - UTRED-16F, UTRED30-16, UTREL-16F → L21-CALIBRATION-TEMP2 (temperature only)
+  - UTRED-16F, UTRED30-16 → L21-CALIBRATION-TEMP2 (temperature only, standard range)
+  - UTREL-16F → L21-CALIBRATION-TEMP3 (ULTRA-LOW range -80°C/-90°C — NEVER use TEMP2 for UTREL-16F, it is the ultra-low logger)
   - HAXO-16U → L21-CALIBRATION-C/RH (temperature AND humidity — NEVER use TEMP2 for HAXO)
   CALIBRATION DESCRIPTION: Use the FULL description from the pricelist including the calibration points. Example: "SAMM Accredited 3 Points Temperature Calibration (0C, 20C, 40C) and RH (20%, 55%, 90%)" — do NOT shorten or omit the points in parentheses. The dealer needs to see exactly what points are covered.
-  - Ultra-low freezer loggers (-80°C range) → L21-CALIBRATION-TEMP3
+  - Ultra-low freezer loggers (-80°C / -90°C range) including UTREL-16F → L21-CALIBRATION-TEMP3
   TRAINING: NEVER mention training in any quotation email. Do not say "1x online training session is provided free of charge" or anything about training unless the dealer explicitly asks the question "do you provide training?" or similar. Mentioning training unprompted is a violation.
 - TARSONS PRICING: The "Dealer Price 2026" column is the CASE price.
   - DEFAULT: Show CASE columns ONLY (Case Packing + Case Price). Leave Pack Packing and Pack Price columns BLANK. There is no separate pack price unless the item is ex-stock with loose packs (see below).
