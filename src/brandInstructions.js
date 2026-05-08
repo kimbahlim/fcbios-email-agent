@@ -285,7 +285,19 @@ const BRAND_INSTRUCTIONS = {
     - RD-2 (2.0L): dewar M02-13982277 + cork M02-13976387
     - RD-3 (3.0L): dewar M02-13982285 + stainless lid M02-21007715
     - RD-6 (6.0L): dewar M02-13982293 + stainless lid M02-21007715
-  For SAMPLE STORAGE DEWARS (SC, XC, CryoSystem, Doble): Include the main unit. Also list available accessories (spare canister, cork/cover, hinged lid kit, roller base) that appear under the same model group in the pricelist, so the dealer can see the full package.
+  For SAMPLE STORAGE DEWARS (SC, XC, CryoSystem, Doble) when used as STATIONARY SAMPLE STORAGE (not for transport): Include the main unit. Also list available accessories (spare canister, cork/cover, hinged lid kit, roller base) that appear under the same model group in the pricelist, so the dealer can see the full package.
+  For VAPOR SHIPPERS / CRYOSHIPPERS (SC 2/1V, SC 4/2V, SC 4/3V, XC 20/3V, CryoShipper, CryoShipper XC, CryoShipper 2000, CT-50, CT-250, CryoShipper Mini, Qwick series) — these are TRANSPORT units, NOT sample storage. CRITICAL ACCESSORY POLICY for new vapor shipper / cryoshipper purchases:
+    DO NOT QUOTE the following spare/replacement parts unless the dealer EXPLICITLY asks for them or describes a maintenance/replacement scenario:
+      - Spare Canister (e.g., M02-20045793 for SC 2/1V, M02-9710171 for SC 4/2V)
+      - Spare Cork and Cover (e.g., M02-10507219 for SC 2/1V, M02-10507032 for SC 4/2V)
+      - Spare absorbent / wicking material
+      - Replacement neck tube
+    Reasoning: These are MAINTENANCE/REPLACEMENT parts. A new vapor shipper / cryoshipper unit ships with one canister and one cork/cover already included. Quoting these as line items inflates the quote unnecessarily and confuses the customer into thinking they're required for the new purchase.
+    DO QUOTE these accessories when relevant:
+      - Data Logger Lid Assembly / Datalogger Kit (e.g., M02-21553216S for SC 4/2V, M02-14070202 for CryoShipper) — when the dealer requests temperature monitoring, when the spec mentions "datalogger"/"temperature logger"/"validated logger", or when implied by clinical/GMP/IATA-compliant transport requirements
+      - Protective Shipping Container / Carton — when IATA-compliant shipping packaging is requested
+      - Vial racks / sample storage configurations — when capacity/configuration is specified by dealer
+    Important caveat about ISO 21973: When tender specs mention "ISO 21973, CE or equivalent", note that ISO 21973:2020 is a transport SERVICE PROVIDER standard (covers chain-of-custody, traceability, logistics processes — not equipment itself). MVE CryoShippers conform to MDD 93/42/EEC (CE marked under MDD) and are IATA DGR Special Provision A152 compliant for non-hazardous classification. The unit itself is NOT ISO 21973 certified — only logistics service providers can be. Do not claim ISO 21973 certification for MVE units.
   For LN2 SUPPLY DEWARS (Lab 4, Lab 10, Lab 20, Lab 30, Lab 50): Include the main unit. List available accessories that appear under the same model group in the pricelist (e.g. roller base, pouring spout, discharge device, transfer hose, phase separator, replaceable neck cork) so the dealer can see the full package. Do NOT quote canisters/racks for Lab series — these are LN2 supply tanks, not sample storage.
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
