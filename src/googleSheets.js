@@ -38,6 +38,55 @@ let cacheTimes = {}; // per-tab cache timestamps
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 const LEAD_TIMES_TTL = 60 * 1000; // 1 minute for LEAD_TIMES so updates are picked up quickly
 
+// Parse pack structure from description string.
+// Used when pricelist row has no explicit Bag Price/Bag Qty columns but description
+// embeds pack/case structure like "500/pack, 5000/case" or "100bags/box, 6boxes/case".
+// Returns { qty_per_pack, qty_per_case, packs_per_case } or null.
+// IMPORTANT: This only describes physical pack structure. Whether the agent should QUOTE
+// loose pack pricing is still gated by the case_only flag from checkStock (decimal stock = OK,
+// whole-number stock = case-only). See test-pack-parser.js for regression tests.
+function parsePackStructure(description) {
+  if (!description || typeof description !== 'string') return null;
+  const desc = description.toLowerCase();
+
+  // Pattern A: "X/pack, Y/case" or "Xpcs/box, Y/case" or "Xpcs/bag, Y/case"
+  // Allows commas in numbers like "30,000"; allows optional pcs/units between number and slash
+  // Examples: "500/pack, 5000/case", "500pcs/box, 5000/case", "1000/pack, 30,000/case"
+  const patternA = /(\d{1,3}(?:,\d{3})*|\d+)\s*(?:pcs?|units?)?\s*\/\s*(?:pack|box|bag)\s*,?\s*(\d{1,3}(?:,\d{3})*|\d+)\s*(?:pcs?|units?)?\s*\/\s*case/i;
+  const matchA = desc.match(patternA);
+  if (matchA) {
+    const qtyPerPack = parseInt(matchA[1].replace(/,/g, ''), 10);
+    const qtyPerCase = parseInt(matchA[2].replace(/,/g, ''), 10);
+    if (qtyPerPack > 0 && qtyPerCase > qtyPerPack && qtyPerCase % qtyPerPack === 0) {
+      return {
+        qty_per_pack: qtyPerPack,
+        qty_per_case: qtyPerCase,
+        packs_per_case: qtyPerCase / qtyPerPack,
+        pattern: 'A: X/pack, Y/case'
+      };
+    }
+  }
+
+  // Pattern B: "Xpcs/bag, Ybags/box, Zboxes/case" — three-level structure (e.g. inoculating loops)
+  const patternB = /(\d+)\s*pcs?\s*\/\s*bag\s*,?\s*(\d+)\s*bags?\s*\/\s*box\s*,?\s*(\d+)\s*box(?:es)?\s*\/\s*case/i;
+  const matchB = desc.match(patternB);
+  if (matchB) {
+    const pcsPerBag = parseInt(matchB[1], 10);
+    const bagsPerBox = parseInt(matchB[2], 10);
+    const boxesPerCase = parseInt(matchB[3], 10);
+    const qtyPerPack = pcsPerBag * bagsPerBox; // pack unit = box
+    const qtyPerCase = qtyPerPack * boxesPerCase;
+    return {
+      qty_per_pack: qtyPerPack,
+      qty_per_case: qtyPerCase,
+      packs_per_case: boxesPerCase,
+      pattern: 'B: pcs/bag, bags/box, boxes/case'
+    };
+  }
+
+  return null;
+}
+
 async function fetchSheet(tabName) {
   const now = Date.now();
   const ttl = tabName === 'LEAD_TIMES' ? LEAD_TIMES_TTL : CACHE_TTL;
@@ -167,13 +216,28 @@ async function searchProducts(keyword) {
     const bagQtyKey = findKey('bag qty', 'pack qty', 'qty/bag', 'qty/pack', 'units/bag', 'units/pack');
     const bagPriceVal = bagPriceKey ? row[bagPriceKey] : null;
     const bagQtyVal = bagQtyKey ? row[bagQtyKey] : null;
-    const hasPackPricing = !!(bagPriceVal && String(bagPriceVal).trim() !== '' && bagQtyVal && String(bagQtyVal).trim() !== '');
+    const hasExplicitPackCols = !!(bagPriceVal && String(bagPriceVal).trim() !== '' && bagQtyVal && String(bagQtyVal).trim() !== '');
+
+    // Fallback: parse pack structure from description string
+    // Used when sheet has no explicit Bag Price/Bag Qty columns but description embeds the structure
+    const descKey = findKey('description', 'display name');
+    const descVal = descKey ? row[descKey] : '';
+    const packStructure = !hasExplicitPackCols ? parsePackStructure(descVal) : null;
+
+    let pricingNote;
+    if (hasExplicitPackCols) {
+      pricingNote = null;
+    } else if (packStructure) {
+      pricingNote = `Pack structure parsed from description: ${packStructure.qty_per_pack}/pack, ${packStructure.packs_per_case} packs per case. Loose pack pricing IS available IF stock check returns case_only=false (i.e. decimal stock qty). Compute pack price = (case price ÷ ${packStructure.packs_per_case}) × 1.10, rounded UP to nearest RM. If case_only=true, leave Pack columns blank.`;
+    } else {
+      pricingNote = 'NO PACK PRICING AVAILABLE — this item is sold by the case ONLY. Pricelist row has no Bag Price/Bag Qty columns and description has no parseable pack/case structure. Agent MUST leave Pack columns blank in quote. NEVER fabricate pack pricing by dividing case price.';
+    }
+
     return {
       ...row,
-      _has_pack_pricing: hasPackPricing,
-      _pricing_note: hasPackPricing
-        ? null
-        : 'NO PACK PRICING AVAILABLE — this item is sold by the case ONLY. Pricelist row has no Bag Price/Bag Qty columns. Agent MUST leave Pack columns blank in quote. NEVER fabricate pack pricing by dividing case price.'
+      _has_pack_pricing: hasExplicitPackCols || !!packStructure,
+      _pack_structure: packStructure,
+      _pricing_note: pricingNote
     };
   });
   return enrichedAll;
@@ -329,13 +393,27 @@ async function searchByBrand(brandTab, keyword) {
     const bagQtyKey = findKey('bag qty', 'pack qty', 'qty/bag', 'qty/pack', 'units/bag', 'units/pack');
     const bagPriceVal = bagPriceKey ? row[bagPriceKey] : null;
     const bagQtyVal = bagQtyKey ? row[bagQtyKey] : null;
-    const hasPackPricing = !!(bagPriceVal && String(bagPriceVal).trim() !== '' && bagQtyVal && String(bagQtyVal).trim() !== '');
+    const hasExplicitPackCols = !!(bagPriceVal && String(bagPriceVal).trim() !== '' && bagQtyVal && String(bagQtyVal).trim() !== '');
+
+    // Fallback: parse pack structure from description string
+    const descKey = findKey('description', 'display name');
+    const descVal = descKey ? row[descKey] : '';
+    const packStructure = !hasExplicitPackCols ? parsePackStructure(descVal) : null;
+
+    let pricingNote;
+    if (hasExplicitPackCols) {
+      pricingNote = null;
+    } else if (packStructure) {
+      pricingNote = `Pack structure parsed from description: ${packStructure.qty_per_pack}/pack, ${packStructure.packs_per_case} packs per case. Loose pack pricing IS available IF stock check returns case_only=false (i.e. decimal stock qty). Compute pack price = (case price ÷ ${packStructure.packs_per_case}) × 1.10, rounded UP to nearest RM. If case_only=true, leave Pack columns blank.`;
+    } else {
+      pricingNote = 'NO PACK PRICING AVAILABLE — this item is sold by the case ONLY. Pricelist row has no Bag Price/Bag Qty columns and description has no parseable pack/case structure. Agent MUST leave Pack columns blank in quote. NEVER fabricate pack pricing by dividing case price.';
+    }
+
     return {
       ...row,
-      _has_pack_pricing: hasPackPricing,
-      _pricing_note: hasPackPricing
-        ? null
-        : 'NO PACK PRICING AVAILABLE — this item is sold by the case ONLY. Pricelist row has no Bag Price/Bag Qty columns. Agent MUST leave Pack columns blank in quote. NEVER fabricate pack pricing by dividing case price.'
+      _has_pack_pricing: hasExplicitPackCols || !!packStructure,
+      _pack_structure: packStructure,
+      _pricing_note: pricingNote
     };
   });
   return enriched;
@@ -599,7 +677,8 @@ module.exports = {
   listSheets,
   fetchSheet,
   recommendRotor,
-  fetchFcbiosProductUrl
+  fetchFcbiosProductUrl,
+  parsePackStructure
 };
 
 // Rotor recommendation tool for Gyrozen centrifuges

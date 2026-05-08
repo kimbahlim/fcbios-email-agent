@@ -583,7 +583,11 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
     - T38-500041 (50ml Centrifuge Tube Non-Sterile Bulk)
     - And ALL other 15ml/50ml centrifuge tube variants from TARSONS
   - DISPOZ PACK PRICING RULE: The DispoZ pricelist has "Bag Price" and "Bag Qty" columns. IGNORE these columns unless stock qty is DECIMAL (e.g., 3.5 cases). If stock is a WHOLE NUMBER (e.g., 10 cases), show CASE pricing only — do NOT show bag/pack pricing even if the pricelist has a Bag Price column.
-  - NEVER FABRICATE PACK PRICING (CRITICAL — applies to ALL brands, not just DispoZ): If the pricelist row for a SKU does NOT have explicit "Bag Price"/"Pack Price" and "Bag Qty"/"Pack Qty" columns with non-empty values, you MUST leave the Pack Packing and Pack Price columns BLANK in the quote table. Do NOT calculate a pack price by dividing the case price by an assumed bag count. Do NOT invent "500/pack" or "1000/pack" or any other pack quantity that doesn't appear in the pricelist row. Do NOT split a case price across an assumed pack quantity. The ONLY valid pack pricing values are those that come directly from explicit Bag Price + Bag Qty columns in the pricelist row. If those columns don't exist or are empty, the item is sold by the case ONLY — period. Many DispoZ items (especially DJ01- prefix items like Hitachi sample cups, transfer pipettes) have ONLY Case packing and Case price in the pricelist — no bag columns at all. For these items, leave Pack columns blank.
+  - PACK PRICING DATA SOURCES (CRITICAL — applies to ALL brands): There are TWO valid sources for pack quantity data, and you MUST use one of them — never fabricate. Each search result row includes a "_has_pack_pricing" boolean and a "_pack_structure" field that tell you which source applies:
+    1. EXPLICIT COLUMNS — pricelist row has "Bag Price"/"Pack Price" + "Bag Qty"/"Pack Qty" columns with non-empty values. Use the column values directly. "_has_pack_pricing" will be true and "_pack_structure" will be null.
+    2. DESCRIPTION-PARSED — pricelist row has no Bag Price/Bag Qty columns, but the description string contains explicit pack/case structure (e.g. "500/pack, 5000/case" or "100bags/box, 6boxes/case"). The code parses this and provides it in the "_pack_structure" field as { qty_per_pack, qty_per_case, packs_per_case }. Use these parsed numbers — they come from the actual description text, not fabrication.
+    3. NEITHER — "_has_pack_pricing" is false AND "_pack_structure" is null. The item is sold by the case ONLY. Leave Pack Packing and Pack Price BLANK. NEVER calculate a pack price by dividing the case price by an assumed bag count. NEVER invent "500/pack" or "1000/pack" or any other pack quantity. The "_pricing_note" field will explicitly say "NO PACK PRICING AVAILABLE".
+    Whether to actually QUOTE pack pricing for cases (1) and (2) is gated by the "case_only" flag from check_stock — see next rule.
   - CASE-ONLY FLAG (HARD RULE — code-enforced): Every check_stock and check_stock_batch result includes a "case_only" boolean field. When case_only is true, you MUST leave the Pack Packing and Pack Price columns BLANK in the quotation table. NEVER show pack pricing for an item where case_only is true — this is a hard rule with no exceptions. The system has already determined that pack pricing is not allowed for that SKU based on brand rules and stock status. The "case_only_reason" field explains why (e.g., "DispoZ + whole-number stock", "TARSONS centrifuge tube hard rule"). Trust the flag — do not override it based on other reasoning. If case_only is true: show ONLY Case Packing and Case Price, leave Pack columns empty.
   - DISPOZ BOX PRICING EXCEPTION — TRANSFER PIPETTES (HARD RULE): The following 2 DispoZ SKUs ALWAYS allow box (pack) pricing, even when stock qty is a whole number. For these 2 SKUs ONLY, show BOTH Pack and Case columns regardless of stock decimal status:
     - DJ01-LA1N00310505 (160mm, 1mL Polyethylene Transfer Pipette, 500pcs/box, 5000/case)
@@ -595,14 +599,14 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
     - Case Price = full case price from pricelist (with 2026 3% increase applied, rounded up)
     - Example: Case Price RM 232 → Pack Price = (232 ÷ 10) × 1.10 = RM 25.52 → rounded up = RM 26
     This exception applies ONLY to these 2 specific SKUs. For ALL OTHER DispoZ items, the default rule above applies (whole-number stock = case only, decimal stock = both pack and case).
-  - For ALL OTHER EX-STOCK items with DECIMAL stock qty (e.g., 3.5): loose packs available — show BOTH pack and case pricing:
-    - Pack Price = (Case Price ÷ number of packs per case) × 1.10 (10% markup for loose pack), rounded UP to nearest RM
-    - Number of packs per case = Qty/Case ÷ Qty/Pk
-    - Example: Tips → Case Price RM 500, Qty/Case 10000, Qty/Pk 1000 → 10 packs per case → Base pack price = 500 ÷ 10 = RM 50 → With 10% markup = RM 55
-    - Pack Packing = show as "[Qty/Pk]/pack" (e.g., "1000/pack")
+  - For ALL OTHER EX-STOCK items with DECIMAL stock qty (e.g., 3.5) AND case_only=false from check_stock: loose packs available — show BOTH pack and case pricing:
+    - Get packs_per_case from the "_pack_structure.packs_per_case" field on the search result (or from explicit Bag Qty column if present). NEVER guess or infer this number from anywhere else.
+    - Pack Price = (Case Price ÷ packs_per_case) × 1.10 (10% markup for loose pack), rounded UP to nearest RM
+    - Example: Tips → Case Price RM 500, "_pack_structure.packs_per_case" = 10 → Base pack price = 500 ÷ 10 = RM 50 → With 10% markup = RM 55
+    - Pack Packing = show as "[_pack_structure.qty_per_pack]/pack" (e.g., "1000/pack")
     - Case Price = Dealer Price 2026 as-is
-    - Case Packing = "Case/[Qty/Case]"
-    - NEVER divide Dealer Price by Qty/Pk directly — that gives per-unit price which is wrong. Always divide by NUMBER OF PACKS PER CASE, then add 10%.
+    - Case Packing = "Case/[_pack_structure.qty_per_case]"
+    - NEVER divide Dealer Price by qty_per_pack directly — that gives per-unit price which is wrong. Always divide by packs_per_case, then add 10%.
   - For EX-STOCK items with WHOLE NUMBER stock qty (e.g., 5): case only, same as non-stocking
   - TARSONS SKU RULE: Always use the "NetSuite Code" column as the SKU. This column now contains the correct NetSuite item code (e.g., T38-546041, T38-521014Y). Never use the old "Cat No" or "Nalgene Code" columns.
 - Centrifuge tubes (falcon tubes, 15ml, 50ml) → ALWAYS search TARSONS first, not LP. LP is for consumables like swabs, loops, spreaders only.
