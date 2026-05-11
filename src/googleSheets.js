@@ -416,6 +416,63 @@ async function searchByBrand(brandTab, keyword) {
       _pricing_note: pricingNote
     };
   });
+
+  // HIMEDIA VARIANT GROUPING (M/MH/GM/GMH/MV series priority)
+  // When multiple variants of the same HiMedia code appear in results, mark the recommended one
+  // M-series-priority rule: when dealer hasn't specified a series, prefer cheapest M > MH > GM > GMH > MV
+  if (brandTab && brandTab.toUpperCase().includes('HIMEDIA')) {
+    // Extract HiMedia code (digits) and series prefix from SKU
+    // e.g. H05-M929-500G → series=M, code=929, size=500G
+    // e.g. H05-GMH096-100G → series=GMH, code=096, size=100G
+    const parseHimediaSku = (sku) => {
+      if (!sku) return null;
+      const m = String(sku).match(/^H05-(MCD|GMH|MH|GM|MV|CMS|MM|M)([0-9]+[A-Z]?)-([0-9.]+[A-Z]+)$/i);
+      if (!m) return null;
+      return { series: m[1].toUpperCase(), code: m[2], size: m[3].toUpperCase() };
+    };
+
+    // Series priority for generic dealer requests (lower number = higher priority)
+    const SERIES_PRIORITY = { 'M': 1, 'MH': 2, 'GM': 3, 'GMH': 4, 'MV': 5, 'CMS': 6, 'MM': 7, 'MCD': 99 }; // MCD blocked anyway
+
+    // Group enriched results by code+size
+    const groups = {};
+    enriched.forEach(row => {
+      const skuKey = Object.keys(row).find(k => k.toLowerCase().includes('netsuite') && k.toLowerCase().includes('code'));
+      if (!skuKey) return;
+      const parsed = parseHimediaSku(row[skuKey]);
+      if (!parsed) return;
+      const groupKey = `${parsed.code}-${parsed.size}`;
+      if (!groups[groupKey]) groups[groupKey] = [];
+      groups[groupKey].push({ row, parsed });
+    });
+
+    // For each group with multiple variants, mark the recommended one
+    Object.entries(groups).forEach(([groupKey, items]) => {
+      if (items.length < 2) return; // single variant, nothing to recommend
+      // Sort by series priority, then by price (ascending)
+      const priceKey = Object.keys(items[0].row).find(k => k.toLowerCase().includes('dealer price') || k.toLowerCase() === 'price');
+      items.sort((a, b) => {
+        const pA = SERIES_PRIORITY[a.parsed.series] ?? 999;
+        const pB = SERIES_PRIORITY[b.parsed.series] ?? 999;
+        if (pA !== pB) return pA - pB;
+        const priceA = priceKey ? parseFloat(a.row[priceKey]) || Infinity : Infinity;
+        const priceB = priceKey ? parseFloat(b.row[priceKey]) || Infinity : Infinity;
+        return priceA - priceB;
+      });
+      // The first item in sorted order is the recommended default
+      const recommended = items[0];
+      const alternateVariants = items.slice(1).map(i => `${i.parsed.series}${i.parsed.code} (${i.parsed.series} series)`).join(', ');
+      recommended.row._himedia_recommended_default = true;
+      recommended.row._himedia_variant_note = `RECOMMENDED DEFAULT for generic dealer requests (no specific series asked). M-series-priority rule: M > MH > GM > GMH > MV. Other variants exist for this product code: ${alternateVariants}. Only quote the alternate variant if dealer explicitly requested that series (e.g., asked for MH for pharmaceutical/USP harmonised, asked for MV for vegan/HiVeg, asked for GM for granulated).`;
+      // Mark the non-recommended ones
+      items.slice(1).forEach(item => {
+        item.row._himedia_recommended_default = false;
+        item.row._himedia_variant_note = `NOT recommended default — this is the ${item.parsed.series} variant (${item.parsed.series === 'GM' ? 'Granulated' : item.parsed.series === 'GMH' ? 'Granulated Harmonised' : item.parsed.series === 'MH' ? 'Harmonised pharmacopeia' : item.parsed.series === 'MV' ? 'HiVeg vegan' : item.parsed.series === 'CMS' ? 'Certified' : item.parsed.series === 'MM' ? 'Modified formulation' : 'specialty'}). The recommended default is ${recommended.parsed.series}${recommended.parsed.code}. Only quote this variant if dealer explicitly requested the ${item.parsed.series} series.`;
+      });
+    });
+    console.log(`[SEARCH] HiMedia variant grouping: ${Object.values(groups).filter(g => g.length > 1).length} multi-variant groups marked with recommended defaults`);
+  }
+
   return enriched;
 }
 
