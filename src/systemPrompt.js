@@ -132,6 +132,21 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
   - 90mm petri dish → DZ02-MP1S00900105 (standard size, Case/500)
   - 45mm-60mm petri dish (small diameter) → DZ02-MP3S00600101 (60x15mm EO Sterile, Case/1000, 10pcs/bag × 100 bags)
   - For dealers asking for small petri dishes (anywhere between 45mm-60mm diameter), offer the 60mm option as the closest available match.
+  PLAIN TEST TUBES / CYLINDRICAL SAMPLE TUBES WITH PUSH-FIT CAPS OR STOPPERS:
+  When the dealer asks for a "plain tube with red/blue/coloured stopper", "test tube with stopper", "tube with plug cap", or similar push-fit tube + cap combination, follow this brand priority:
+  - 12mm or 13mm diameter tubes → DispoZ FIRST → LP backup (DispoZ has these in stock with matching push-fit Flange Plug Caps)
+  - 16mm diameter tubes → LP ONLY (DispoZ does not carry 16mm tubes — search LP directly for these). LP has full 16mm coloured stopper range (red, white, yellow, green, light blue, blue).
+  CAP DIAMETER MUST EXACTLY MATCH TUBE DIAMETER. Never pair a 12mm cap with a 13mm tube, or 16mm cap with 12mm tube. The valid pairings are 12-to-12, 13-to-13, 16-to-16. If you don't have a matching-diameter cap in the same brand, ask the dealer to confirm an available size — do NOT quote a mismatched-diameter cap or claim "closest match".
+  DispoZ pre-mapped tube + cap pairs (both items must appear as separate line items in the quote):
+  - 12x75mm 5mL PP tube → DJ01-TA2N00050505 + cap DJ01-FA1N00120520 (12mm Flange Plug, PE)
+  - 12x75mm 5mL PS tube → DJ01-TA1N00050505 + cap DJ01-FA1N00120520 (12mm Flange Plug, PE)
+  - 13x75mm 5mL PP tube → DZ02-TE2N00050505 + cap DZ02-FA2N00051020 (13mm Flange Plug, PE)
+  LP pre-mapped tube + stopper pairs (use these ONLY for 16mm diameter, or when DispoZ has no 12mm/13mm match):
+  - 16x100mm 10mL PS tube → L03-111010 + stopper L03-116131 (16mm LDPE red, or 116132/3/4/5/6 for other colours)
+  - 16x150mm 20mL PS tube → L03-110110 + stopper L03-116131 (16mm LDPE red, or other colours)
+  - 16x75mm 8mL PS tube → L03-119010 + stopper L03-116131 (16mm LDPE red, or other colours)
+  SCREW-CAP TUBES → LP ONLY (DispoZ does not carry screw-cap tubes). When dealer specifies "screw cap", "screw top", "screw-capped", search LP directly. Examples: L03-115710 (13x75 screw cap), L03-118710 (13x100 screw cap). Screw-cap tubes come with their cap integrated — do NOT add a separate stopper line item.
+  ALWAYS QUOTE TUBE + CAP AS A PAIR for push-fit tubes — when the dealer specifies "tube with stopper/cap/plug", quote BOTH the tube AND the matching cap as two separate line items. Quoting only the tube leaves the dealer with an unusable open tube.
 - Rayon swabs, transport swabs, swab with transport medium → DispoZ FIRST → LP backup
 - Pasteur pipettes, transfer pipettes, disposable droppers → DispoZ FIRST. Search DispoZ for "pasteur" or "pipette". Do NOT offer LP or TARSONS transfer pipettes for Pasteur pipette requests. If the dealer needs larger volumes (5mL, 10mL, 25mL), offer SORFA serological pipettes as alternatives — do NOT offer LP PS pipettes.
   LP INDENT → DISPOZ ALTERNATIVE: When an LP item (L03- prefix) for swabs, tubes, containers, or other consumables is NOT in stock (indent), ALWAYS also search DispoZ for the equivalent product. If DispoZ has it ex-stock, include it as an alternative option in the quotation with a note like: "Ex-stock alternative from DispoZ available for immediate delivery". This applies to all shared product categories between LP and DispoZ (swabs, transport tubes, specimen containers, loops, spreaders, etc.).
