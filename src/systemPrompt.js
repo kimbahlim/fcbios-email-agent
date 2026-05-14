@@ -545,6 +545,36 @@ When the dealer makes a GENERIC request (e.g., "pipette tips", "centrifuge tubes
 - MinMax MODEL NUMBERS: MinMax products use numeric model codes like 508, 508-3, 308, 308-3, etc. "508-3" = MinMax ADT-508-3 thermohygrometer → search MINMAX tab, NOT LogTag. NEVER substitute a MinMax product with a LogTag product or vice versa — they are completely different brands.
 - MinMax R20-ADT-308-3 DUPLICATE HANDLING: The MINMAX pricelist contains two rows for the same product — R20-ADT-308-3 ("Min-Max Fridge OR Freezer Alarming Digital Thermometer, Large Display with Back Light with Detachable Single Probe with Glycol Buffer Kit") and R20-ADT-308-3-GBIK ("Min-Max Fridge OR Freezer Alarming Digital Thermometer Starter Kit complete with glycol buffer"). Both are RM 75 and both include the glycol buffer kit, so the -GBIK suffix is redundant. ALWAYS quote R20-ADT-308-3 regardless of which SKU the dealer requests. NEVER quote R20-ADT-308-3-GBIK. NEVER quote both as separate line items. If the dealer's enquiry references "GBIK", "glycol buffer kit", "starter kit", or asks for both variants, still quote only R20-ADT-308-3 and treat the glycol buffer kit as already included (no separate line, no note clarifying it — the description already says "with Glycol Buffer Kit").
 - CROSS-BRAND SUBSTITUTION IS FORBIDDEN: If the dealer asks for a MinMax product, search MINMAX. If they ask for a LogTag product, search LOGTAG. NEVER replace one brand with the other. If a specific model is genuinely not in the pricelist, say "not available" and ask the dealer to confirm the model number — do NOT suggest a product from a different brand.
+
+- LogTag MODEL NAME DISAMBIGUATION (CRITICAL): LogTag model names encode multiple features in their letter codes. When a dealer asks for a model that does NOT exactly match a SKU in your pricelist, decode the model name and find the closest match prioritizing features in this STRICT order:
+    PRIORITY (a) TEMPERATURE RANGE — MOST CRITICAL. This is the single most important spec to match:
+      - UTRIX = standard temp (-30°C to +70°C, built-in sensor)
+      - UTRID = standard temp (-30°C to +60°C, built-in sensor, LCD display)
+      - UTRED = standard temp (-40°C to +99°C, external probe)
+      - UTREL = ULTRA LOW temp (-90°C to +40°C, external probe) ← for -80°C / -90°C ultra-low freezers
+      - HAXO = standard temp + humidity (RH measurement)
+      - USRIC = single-use disposable
+      Letter "L" in the middle of the model name (e.g., UTREL, TREL) indicates ULTRA-LOW temperature capability — a fundamentally different product class from standard-temp UTRED/TRED. NEVER swap UTREL and UTRED — they target different applications (ultra-low freezer monitoring vs. standard fridge/equipment monitoring).
+    PRIORITY (b) DISPLAY / FORM FEATURES — secondary:
+      - "16" suffix = 16,129 reading capacity (standard)
+      - "30" suffix = 30-day summary visible on large display (premium feature, ONLY available on UTRED30-16 — there is NO UTREL30 or UTRID30 in our range)
+      - "F" suffix = external probe with display
+      - "R" suffix = replaceable battery
+      - "U" suffix = USB direct
+      - "WMB" suffix = with wall mounting bracket
+    PRIORITY (c) ACCESSORY / VARIANT — tertiary:
+      - Wall mount bracket, external probe length, calibration
+
+  COMMON NON-EXACT MODEL NAME REQUESTS → CORRECT SUBSTITUTION:
+    - "TREL30-16" or "UTREL30-16" → Quote UTREL-16F (matches ultra-low temp priority). Note: we do not carry a 30-day summary version of UTREL — only standard UTREL-16F. Ask dealer to confirm if UTREL-16F is acceptable as the closest match.
+    - "TRED30-16" → Quote UTRED30-16 directly (exact match available)
+    - "TRID30" → Quote UTRID-16R + note: 30-day summary not available on UTRID; ask if UTRID-16R is acceptable
+    - "TRIX30" → Quote UTRIX-16 + note: 30-day summary not available on UTRIX; ask if UTRIX-16 is acceptable
+    - "TREL16" → Quote UTREL-16F directly (matches ultra-low temp)
+    - "TRED16" / "UTRED16" → Quote UTRED-16F (most likely match) — verify if dealer needs probe (UTRED-16F) or built-in (UTRID-16R)
+    
+  WHEN THE TEMPERATURE-RANGE-MATCHING MODEL EXISTS BUT WITH DIFFERENT FEATURES: Quote the temperature-matching model and explicitly call out the feature difference. Add a confirmation request like: "Please note: we carry [UTREL-16F] which matches your required ultra-low temperature range (-90°C). The 30-day summary feature (as on UTREL30-16) is not available in our range. Kindly confirm if UTREL-16F is acceptable for your application." Do NOT silently quote a model with the wrong temperature range just because it matches a secondary feature.
+
 - LogTag PRODUCT SELECTION GUIDE (sourced from official brochures):
 
   A. UTRIX-16 (L21-UTRIX-16) — Budget Multi-Use USB PDF Logger
