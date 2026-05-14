@@ -151,6 +151,89 @@ const tools = [
   }
 ];
 
+/**
+ * Validate the agent's draft HTML against the set of SKUs that are case-only.
+ * For each case-only SKU found in the draft's quote table, check that the row's
+ * Pack Packing and Pack Price columns are blank/empty.
+ *
+ * Returns an array of violation messages. Empty array = no violations.
+ *
+ * Pricelist quote tables follow this column order (after Brand):
+ *   Brand | SKU | Description | Pack Packing | Pack Price | Case Packing | Case Price | Stock Status
+ *
+ * So in a row containing a case-only SKU, columns 4 and 5 (Pack Packing, Pack Price)
+ * MUST be empty / dash / non-numeric. If they contain numeric pricing data, that's a
+ * violation.
+ */
+function validateDraftHtml(html, caseOnlySkus) {
+  if (!html || caseOnlySkus.size === 0) return [];
+  const violations = [];
+
+  // Extract all <tr>...</tr> blocks
+  const trMatches = html.match(/<tr\b[^>]*>[\s\S]*?<\/tr>/gi) || [];
+
+  for (const tr of trMatches) {
+    // Extract cell contents — strip HTML tags inside each cell
+    const cellMatches = tr.match(/<(?:td|th)\b[^>]*>([\s\S]*?)<\/(?:td|th)>/gi) || [];
+    if (cellMatches.length < 6) continue; // Not enough cells to be a quote row
+
+    const cells = cellMatches.map(c => {
+      // Strip inner HTML tags, normalize whitespace, decode common entities
+      return c
+        .replace(/<(?:td|th)\b[^>]*>/i, '')
+        .replace(/<\/(?:td|th)>$/i, '')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/&amp;/gi, '&')
+        .replace(/\s+/g, ' ')
+        .trim();
+    });
+
+    // Standard column order: [Brand, SKU, Description, Pack Packing, Pack Price, Case Packing, Case Price, Stock Status]
+    // SKU is typically in column index 1; Pack Packing in 3; Pack Price in 4.
+    // Scan all cells for a case-only SKU to be robust to minor column shifts.
+    let skuMatchIdx = -1;
+    let matchedSku = null;
+    for (let idx = 0; idx < cells.length; idx++) {
+      const cellLower = cells[idx].toLowerCase();
+      for (const co of caseOnlySkus) {
+        if (cellLower === co || cellLower.includes(co)) {
+          skuMatchIdx = idx;
+          matchedSku = co;
+          break;
+        }
+      }
+      if (matchedSku) break;
+    }
+
+    if (!matchedSku) continue;
+
+    // Pack columns are 2 and 3 cells AFTER the SKU cell (Description sits in between).
+    const packPackingIdx = skuMatchIdx + 2;
+    const packPriceIdx = skuMatchIdx + 3;
+
+    const isBlank = (v) => {
+      if (v === undefined || v === null) return true;
+      const t = v.toString().trim();
+      if (t === '' || t === '-' || t === '–' || t === '—' || t === 'N/A' || t === 'n/a' || t === '–') return true;
+      return false;
+    };
+    const containsNumeric = (v) => /\d/.test(v || '');
+
+    const packPackingVal = cells[packPackingIdx] || '';
+    const packPriceVal = cells[packPriceIdx] || '';
+
+    if (!isBlank(packPackingVal) && containsNumeric(packPackingVal)) {
+      violations.push(`SKU ${matchedSku.toUpperCase()}: Pack Packing column contains "${packPackingVal}" — must be BLANK (case-only item, no pack pricing in pricelist).`);
+    }
+    if (!isBlank(packPriceVal) && containsNumeric(packPriceVal)) {
+      violations.push(`SKU ${matchedSku.toUpperCase()}: Pack Price column contains "${packPriceVal}" — must be BLANK (case-only item, no pack pricing in pricelist). Do NOT fabricate pack price by dividing case price. Quote case price only.`);
+    }
+  }
+
+  return violations;
+}
+
 async function processToolCall(toolName, toolInput) {
   console.log(`[TOOL] ${toolName}: ${JSON.stringify(toolInput).substring(0, 100)}`);
 
@@ -315,6 +398,15 @@ Process this email according to your instructions. Search the pricelists, check 
   let messages = [{ role: 'user', content: userContent }];
   let draftResult = null;
 
+  // SANITY CHECK: Track SKUs that must be case-only (cannot have pack pricing)
+  // Populated from search_brand / search_brand_batch / check_stock results where:
+  //   _has_pack_pricing === false   (pricelist row has no pack columns)
+  //   case_only === true            (stock check determined case-only enforcement)
+  const caseOnlySkus = new Set();
+  // Track how many regenerations have been requested (to avoid infinite loop)
+  let regenerationAttempts = 0;
+  const MAX_REGENERATIONS = 2;
+
   for (let i = 0; i < 20; i++) {
     console.log(`[AGENT] Loop ${i + 1}/20`);
 
@@ -371,7 +463,82 @@ Process this email according to your instructions. Search the pricelists, check 
       for (const toolUse of toolUseBlocks) {
         const result = await processToolCall(toolUse.name, toolUse.input);
 
+        // SANITY CHECK TRACKING: extract case-only SKUs from search and stock results
+        try {
+          // search_brand returns array of row objects
+          if (toolUse.name === 'search_brand' && Array.isArray(result)) {
+            for (const row of result) {
+              if (row && row._has_pack_pricing === false) {
+                const sku = row['NetSuite Item Code'] || row['NetSuite Code'] || row.sku;
+                if (sku) caseOnlySkus.add(String(sku).toLowerCase());
+              }
+            }
+          }
+          // search_brand_batch returns { "tab:keyword": [rows], ... }
+          if (toolUse.name === 'search_brand_batch' && result && typeof result === 'object') {
+            for (const groupKey of Object.keys(result)) {
+              const rows = result[groupKey];
+              if (!Array.isArray(rows)) continue;
+              for (const row of rows) {
+                if (row && row._has_pack_pricing === false) {
+                  const sku = row['NetSuite Item Code'] || row['NetSuite Code'] || row.sku;
+                  if (sku) caseOnlySkus.add(String(sku).toLowerCase());
+                }
+              }
+            }
+          }
+          // check_stock returns single object with case_only flag
+          if (toolUse.name === 'check_stock' && result && result.case_only === true) {
+            const sku = result.sku || toolUse.input.sku;
+            if (sku) caseOnlySkus.add(String(sku).toLowerCase());
+          }
+          // check_stock_batch (if it returns a dict of sku -> stock result)
+          if (toolUse.name === 'check_stock_batch' && result && typeof result === 'object') {
+            for (const sku of Object.keys(result)) {
+              const stockResult = result[sku];
+              if (stockResult && stockResult.case_only === true) {
+                caseOnlySkus.add(String(sku).toLowerCase());
+              }
+            }
+          }
+        } catch (e) {
+          console.log(`[SANITY] Tracking error (non-fatal): ${e.message}`);
+        }
+
         if (toolUse.name === 'draft_email') {
+          // SANITY CHECK: validate the draft HTML against caseOnlySkus before accepting
+          const html = toolUse.input.html_body || '';
+          const violations = validateDraftHtml(html, caseOnlySkus);
+
+          if (violations.length > 0 && regenerationAttempts < MAX_REGENERATIONS) {
+            regenerationAttempts++;
+            console.log(`[SANITY] ❌ Draft validation FAILED (attempt ${regenerationAttempts}/${MAX_REGENERATIONS}): ${violations.length} violation(s)`);
+            for (const v of violations) {
+              console.log(`[SANITY]   - ${v}`);
+            }
+            // Return an error tool result that forces the agent to regenerate without breaking the loop
+            toolResults.push({
+              type: 'tool_result',
+              tool_use_id: toolUse.id,
+              content: JSON.stringify({
+                error: 'DRAFT_VALIDATION_FAILED',
+                error_summary: 'Your quote table contains pack pricing for SKUs that are case-only. You MUST regenerate the draft with the violations below corrected. NEVER fabricate pack pricing — quote ONLY the case packing and case price for these SKUs, and leave the Pack Packing and Pack Price columns BLANK.',
+                violations: violations,
+                action_required: 'Call draft_email AGAIN with corrected html_body. The corrected version must: (1) leave Pack Packing column BLANK for each listed SKU, (2) leave Pack Price column BLANK for each listed SKU, (3) keep Case Packing and Case Price as quoted. Do not change any other content.'
+              }),
+              is_error: true
+            });
+            // Do NOT set draftResult — let the loop continue so the agent can regenerate
+            continue;
+          }
+
+          // Either no violations, or we've exhausted regeneration attempts
+          if (violations.length > 0) {
+            console.log(`[SANITY] ⚠️  Max regenerations reached (${MAX_REGENERATIONS}); accepting draft with ${violations.length} unresolved violation(s) — operator review recommended`);
+          } else {
+            console.log(`[SANITY] ✓ Draft passed validation (${caseOnlySkus.size} case-only SKUs tracked)`);
+          }
+
           draftResult = {
             type: toolUse.input.type,
             reply_to: toolUse.input.reply_to,
