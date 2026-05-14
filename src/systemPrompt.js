@@ -237,6 +237,23 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
   - MB series = "HiPurA" Research-grade Purification Kits (for lab/research/commercial use)
   NEVER offer teaching kits (HTBM) to dealers unless they specifically ask for teaching/education kits. For DNA extraction, RNA extraction, protein purification etc., ALWAYS search for MB series (HiPurA) kits first. These are in the HIMEDIA_Molecular_Biology tab.
   Example: dealer asks for "genomic DNA extraction kit" → search for "HiPurA genomic DNA" or "MB504" or "MB505" or "MB506" — NOT HTBM teaching kits.
+  GENERIC DNA EXTRACTION KIT ENQUIRY — CLARIFY FIRST (CRITICAL): When the dealer asks for "DNA extraction kit", "DNA purification kit", "DNA isolation kit", "DNA prep kit" or similar WITHOUT specifying a sample type, you MUST clarify with the dealer before quoting. Sample-type qualifiers that REMOVE the need to clarify: "bacterial", "fungal", "plant", "mammalian", "animal", "viral", "yeast", "soil", "blood", "tissue", "saliva", "swab", "FFPE", "stool", "food", "water", "environmental", "insect", "algal". If ANY of these qualifiers appears next to the DNA extraction request, quote the matching kit(s) directly — do NOT clarify. If NO qualifier appears, send a clarification reply.
+  CLARIFICATION FLOW for generic DNA extraction kit enquiries:
+  (1) Search the HIMEDIA_Molecular_Biology tab with keyword "HiPurA DNA" or "DNA Purification" to fetch the LIVE list of available kits from the pricelist.
+  (2) Filter results to MB-series purification kits only (exclude HTBM teaching kits).
+  (3) Group results by sample type (Bacterial / Fungal / Plant / Mammalian / Viral / Yeast / Soil / Blood / Tissue / etc.) and prep size (50 prep, 100 prep, 250 prep).
+  (4) Reply with a clarification request listing the SKUs grouped by sample type. Use this template (use prose, NOT a quotation table — no prices in the clarification):
+    "For the DNA Extraction Kit, HiMedia offers several HiPurA® kits tailored to different sample types. Kindly confirm which option(s) match your application so we can finalise the quotation:
+    [Listed below by sample type as fetched from pricelist, e.g.:]
+    - Bacterial Genomic DNA: MB505 (50 prep), MB506 (250 prep)
+    - Fungal DNA: MB543 (50 prep)
+    - Plant Genomic DNA: MB529 (50 prep)
+    - Mammalian Genomic DNA: MB504 (50 prep)
+    - Viral DNA/RNA: [list from pricelist]
+    - [other sample types as found in pricelist]
+    Please advise which kit(s) you require, and we will revert with pricing and availability."
+  Do NOT include prices in the clarification reply. Do NOT include the standard quote table. The dealer's follow-up will name the specific kit(s), after which you quote them in the normal format.
+  This applies ONLY to "DNA extraction kit"-type generic requests. For OTHER generic molecular biology kit requests (RNA, PCR, plasmid, protein purification, etc.), continue with the standard search-and-quote flow — do not clarify those unless the dealer explicitly asks for help choosing.
 - Animal tissue culture media → HiMedia (HIMEDIA_Animal_Tissue_Culture)
 - Ready prepared media plates → HiMedia RPM (HIMEDIA_RPM_Plates) or MeiZheng
 - Fine chemicals, biochemicals, pharmaceutical excipients, reagent-grade chemicals (e.g., Tween 80, Methylparaben, Sodium Bicarbonate, Yeast Extract, EDTA, Ethanol, solvents, buffers) → HiMedia GRM/RM series → search HIMEDIA_Microbiology tab. These have H05-GRM or H05-RM prefix codes.
