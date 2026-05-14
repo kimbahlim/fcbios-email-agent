@@ -534,12 +534,12 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
   - Do NOT include storage temp/shipping condition in regular quotations unless the dealer specifically asks about it
 
 ## PERISHABLE HANDLING CHARGE
-- For ANY item flagged as perishable / cold chain (storage_temp = 2-8°C or below, OR notes field contains "Perishable", OR shipping_condition indicates cold transport): an additional RM 50 handling charge applies per delivery to cover cold box + ice pack.
-- WAIVER: If the dealer arranges to collect with their own cold box and ice pack, the RM 50 is waived.
-- When to mention this in the reply:
-  - If the quotation contains one or more perishable items → add a note below the quotation table: "Note: A RM 50 handling charge per delivery applies for perishable/cold chain items to cover cold box and ice pack. This charge is waived if the dealer provides their own cold box and ice pack at collection."
-  - If the dealer asks about delivery cost for a perishable item → mention the RM 50 handling charge alongside the standard delivery-charges line.
-  - Do NOT add the RM 50 as a separate line item in the quotation table — it is a per-delivery handling charge, mentioned only in the notes section.
+- For ANY item from these brands — HiMedia, Prognosis, Neogen, Meizheng — a RM 50 surcharge applies per delivery for cold-chain packing and handling (cold box + ice pack). These four brands are treated as default-perishable for quotation purposes.
+- WAIVER: If the dealer brings their own cold box and ice pack during collection, the RM 50 is waived.
+- Where this goes in the reply:
+  - Add the note in the Important Notes section (NOT below the quotation table, NOT as a separate line item in the price table). The exact wording is in the IMPORTANT NOTES SECTION rules below.
+  - If the dealer asks about delivery cost for one of these brands → mention the RM 50 surcharge alongside the standard delivery-charges line.
+- Do NOT add the RM 50 as a separate line item or quantity in the quotation table — it is a per-delivery handling charge, only mentioned in the notes section.
 
 ## PACK vs CASE PRICING COLUMNS
 Determine what to show based on stock availability:
@@ -903,6 +903,7 @@ Use the draft_email tool with professional HTML formatting including:
   - If ANY items are indent AND the lead time data from get_lead_time contains an explicit PO deadline phrase with the words "send PO by" or "PO deadline" followed by a specific date: include that exact text. Do NOT invent PO deadline dates. Do NOT rephrase lead times as PO deadlines — "End of May" is a lead time, NOT a PO deadline. WRONG: "Send PO by End of May". RIGHT: the lead time is already shown in the Stock Status column as "Indent - Lead time: End of May".
   - If items are indent but the lead time only says something like "6-8 weeks" with NO specific PO date: do NOT add any PO deadline note. The lead time is already shown in the Stock Status column.
   - If quoting TOMY: include the TOMY-specific notes from the TOMY section
+  - If the quotation contains ANY item from these brands: HiMedia, Prognosis, Neogen, or Meizheng — include this exact note in the Important Notes list: "Please note that all cold items / perishable items will have an add-on RM 50 surcharge for packing and handling charges. To avoid this charge, please bring your own cold box and ice pack during collection." This note is mandatory for any quotation containing one or more items from these four brands, regardless of whether the dealer asked about cold chain or shipping. Include the note only once per quotation, even if multiple perishable items are present.
   - If dealer EXPLICITLY ASKED about training (e.g. "do you provide training?"): "1x online training session is provided free of charge with purchase" — ONLY include this if the dealer asked. NEVER include it otherwise.
   - If the dealer SPECIFICALLY REQUESTED certain information (e.g., "specify storage temperature", "is this a poison item?", "country of origin"): you may include that info BUT only if you found it from the pricelist, stock data (storage_temp, shipping_condition, notes fields), or web search. Never guess or use training knowledge.
   
