@@ -254,6 +254,28 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
     Please advise which kit(s) you require, and we will revert with pricing and availability."
   Do NOT include prices in the clarification reply. Do NOT include the standard quote table. The dealer's follow-up will name the specific kit(s), after which you quote them in the normal format.
   This applies ONLY to "DNA extraction kit"-type generic requests. For OTHER generic molecular biology kit requests (RNA, PCR, plasmid, protein purification, etc.), continue with the standard search-and-quote flow — do not clarify those unless the dealer explicitly asks for help choosing.
+- HIMEDIA PROTEIN ESTIMATION / PROTEIN ASSAY (CRITICAL — common dealer request, agent has historically picked wrong products): When dealer asks for "protein assay", "protein estimation", "protein quantitation", "protein quantification", "Bradford assay", "Bradford reagent", "Lowry assay", "Biuret test", "BCA assay", or similar, quote from HiMedia's Protein Estimation product range. These are all ML- and MBT- prefix products in the HIMEDIA_Molecular_Biology tab.
+  AVAILABLE HIMEDIA PROTEIN ESTIMATION PRODUCTS (search these SKUs directly):
+  - H05-ML178 = Bradford Kit for Protein Estimation (complete kit with reagent + standard + protocol) — THIS IS THE DEFAULT for generic "protein assay" requests
+  - H05-ML106 = Bradford Reagent (1X, ready to use)
+  - H05-ML202 = 5X Bradford Reagent (concentrate)
+  - H05-ML059 = Folin's Reagent (for Lowry method)
+  - H05-ML122 = Biuret Reagent (for Biuret method)
+  - H05-MBT129 = Protein Standard 1 mg/mL (BSA standard for calibration curve)
+  - H05-MBT206 = Protein Standard 2 mg/mL (BSA standard)
+  MAPPING dealer's wording → SKU:
+  - "Protein assay" / "Protein estimation" / generic request → H05-ML178 (Bradford Kit — default, most commonly used method)
+  - "Bradford" → H05-ML178 (kit) OR H05-ML106 (reagent only, if dealer prefers à la carte)
+  - "Lowry" → H05-ML059 (Folin's Reagent) + H05-MBT129 (standard) — note: Lowry method also needs alkaline copper reagent which the dealer typically prepares from sodium carbonate, copper sulfate, sodium potassium tartrate (all in HiMedia GRM range)
+  - "Biuret" → H05-ML122 (Biuret Reagent)
+  - "BCA" / "Bicinchoninic Acid Assay" → HiMedia does NOT carry BCA. State this and offer Bradford (ML178) or Biuret (ML122) as alternative. Ask if either is acceptable.
+  - "BSA standard" / "Protein standard" → H05-MBT129 (1 mg/mL) or H05-MBT206 (2 mg/mL)
+  CRITICAL — DO NOT confuse "Protein assay" with these unrelated products:
+  - CCK023 = EZAssay TBARS Estimation Kit for LIPID peroxidation — NOT a protein assay. TBARS measures malondialdehyde (lipid oxidation byproduct), not protein.
+  - MB083 (Bovine serum albumin Ultrapure) = a PROTEIN itself (for use AS a standard or carrier), NOT a protein assay
+  - HiPurA MB-series = nucleic acid purification kits, NOT protein assays
+  When the dealer's quote already includes Coomassie Brilliant Blue (which is the Bradford dye) AND BSA (Bradford standard), the "Protein assay" item they're asking for is almost certainly the Bradford reagent or Bradford kit — quote H05-ML178 (Bradford Kit) or H05-ML106 (Bradford Reagent).
+- MALONDIALDEHYDE (MDA) MAPPING: When dealer asks for "MDA", "malondialdehyde", or "MDA standard", quote H05-RM3776 (1,1,3,3-Tetramethoxypropane). Pure MDA is unstable and not commercially available — it's commercially supplied as its acetal precursor 1,1,3,3-Tetramethoxypropane, which hydrolyzes to MDA in situ. This is the industry-standard MDA source used in TBARS assays and lipid peroxidation studies. Do NOT mark MDA as "Not Available" — search HiMedia for "tetramethoxypropane" or "RM3776" to find it. Search the HIMEDIA_Microbiology tab (RM-series chemicals live there).
 - Animal tissue culture media → HiMedia (HIMEDIA_Animal_Tissue_Culture)
 - Ready prepared media plates → HiMedia RPM (HIMEDIA_RPM_Plates) or MeiZheng
 - Fine chemicals, biochemicals, pharmaceutical excipients, reagent-grade chemicals (e.g., Tween 80, Methylparaben, Sodium Bicarbonate, Yeast Extract, EDTA, Ethanol, solvents, buffers) → HiMedia GRM/RM series → search HIMEDIA_Microbiology tab. These have H05-GRM or H05-RM prefix codes.
