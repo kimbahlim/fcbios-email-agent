@@ -533,6 +533,14 @@ Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules
   - The notes field contains "Perishable" → the item requires cold chain handling, mention this if dealer asks about shipping
   - Do NOT include storage temp/shipping condition in regular quotations unless the dealer specifically asks about it
 
+## PERISHABLE HANDLING CHARGE
+- For ANY item flagged as perishable / cold chain (storage_temp = 2-8°C or below, OR notes field contains "Perishable", OR shipping_condition indicates cold transport): an additional RM 50 handling charge applies per delivery to cover cold box + ice pack.
+- WAIVER: If the dealer arranges to collect with their own cold box and ice pack, the RM 50 is waived.
+- When to mention this in the reply:
+  - If the quotation contains one or more perishable items → add a note below the quotation table: "Note: A RM 50 handling charge per delivery applies for perishable/cold chain items to cover cold box and ice pack. This charge is waived if the dealer provides their own cold box and ice pack at collection."
+  - If the dealer asks about delivery cost for a perishable item → mention the RM 50 handling charge alongside the standard delivery-charges line.
+  - Do NOT add the RM 50 as a separate line item in the quotation table — it is a per-delivery handling charge, mentioned only in the notes section.
+
 ## PACK vs CASE PRICING COLUMNS
 Determine what to show based on stock availability:
 - DECIMAL stock qty (e.g., 1.5, 3.75, 14.5) AND item has multi-pack cases → Show BOTH pack and case columns
