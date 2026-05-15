@@ -142,7 +142,7 @@ async function listSheets() {
 
 async function searchProducts(keyword) {
   const sheets = await listSheets();
-  const exclude = ['MASTER_INDEX', 'PRICE_INCREASE_2026', 'Stock', 'Nasco_Tiers', 'LEAD_TIMES', 'HIMEDIA_Not_For_Export'];
+  const exclude = ['MASTER_INDEX', 'Stock', 'Nasco_Tiers', 'LEAD_TIMES', 'HIMEDIA_Not_For_Export'];
   const brandTabs = sheets.filter(s => !exclude.includes(s));
 
   let results = [];
