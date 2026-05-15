@@ -427,24 +427,23 @@ FALLBACK FOR UNMAPPED PRODUCTS: If a dealer asks for a product type NOT listed i
 The mapping above covers common enquiries but is NOT exhaustive — many products exist in the pricelist tabs that aren't explicitly mapped here.
 
 ## PRICING RULES
-Check the MASTER_INDEX tab for each brand's price increase percentage. Key rules:
-- HiMedia (all): 0% (already 2026)
-- TARSONS: 0% (already 2026)
-- UGAIYA, MeiZheng, AnQing, MinMax, SORFA, DispoZ, Membrane Solutions: 0%
-- TOMY: 0% — the TOMY tab prices are ALREADY the valid 2026 dealer prices. Do NOT apply any markup. Quote the prices exactly as they appear in the pricelist. The column may say "PL2025" but these are the confirmed 2026 prices — use them as-is.
-- LogTag: 0% (already 2026 dealer prices)
-- NASCO: 3%
-- PROGNOSIS: 3%
-- IUL: 3% common, 5% battery
-- NEOGEN: 5%
-- LP: 5%
-  LP PRICING FORMAT: LP pricelist has ONE price per item (Dealer Price) and ONE quantity (Box Quantity). The Box Quantity IS the case quantity. Show CASE pricing ONLY for LP items — do NOT create a separate pack price. There is no loose pack option for LP items unless the stock data shows decimal quantities (e.g., 0.5 case = loose packs available).
-- GYROZEN: 0% (maintain 2024 prices as-is)
-- GOSSELIN: 0% (already 2026 dealer prices)
-- MESALABS: 10%
+The dealer markup percentage for each brand is stored LIVE in the MASTER_INDEX tab of the Google Sheet. The agent MUST call get_price_increase(brand) for each brand in a quote to fetch the current markup — do NOT use any hardcoded value.
+
+WORKFLOW:
+1. For every brand that appears in the dealer's quote, call get_price_increase(brand) where brand matches the pricelist tab name (e.g., "HIMEDIA_Microbiology", "TARSONS", "NASCO", "LP", "MESALABS", "LOGTAG", "MVE", "GYROZEN").
+2. The tool returns the current "Increase %" (e.g., "0%", "3%", "5%", "10%") plus PL year and notes.
+3. Apply that exact % as the markup on top of the pricelist's dealer price. Example: pricelist shows RM 100, get_price_increase returns "3%" → quoted dealer price = RM 100 × 1.03 = RM 103.
+4. Prices with cents → ROUND UP to nearest RM (no cents).
+
+EXCEPTIONS (hardcoded — these override MASTER_INDEX because they are tied to SKU prefix, not brand):
 - F07- prefix (FC-BIOS local manufacture, e.g. roller bases): 0% — these are FC-BIOS local items with prices already set at 2026 final dealer price. Do NOT apply any markup regardless of which tab the item appears in. Applies to ALL items with SKU starting with "F07-".
-- Prices with cents → ROUND UP to nearest RM (no cents)
-- NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. NEVER say "3% price increase applied", "pricing updated for 2026", "already 2026 pricing", "price increase as per 2026", or ANY reference to price increases. The dealer should ONLY see the final price number — nothing about how it was calculated. This is a CRITICAL rule — violating it exposes internal pricing strategy to dealers.
+
+BRAND-SPECIFIC PRICING NOTES (operational details — these do NOT override the % from MASTER_INDEX):
+- TOMY: the TOMY tab prices are ALREADY the valid 2026 dealer prices. Use them as-is — when MASTER_INDEX shows 0%, that means no further markup. The column may say "PL2025" but these are confirmed 2026 prices.
+- LP PRICING FORMAT: LP pricelist has ONE price per item (Dealer Price) and ONE quantity (Box Quantity). The Box Quantity IS the case quantity. Show CASE pricing ONLY for LP items — do NOT create a separate pack price. There is no loose pack option for LP items unless the stock data shows decimal quantities (e.g., 0.5 case = loose packs available).
+
+CRITICAL — DEALER COMMUNICATION:
+NEVER mention pricing years, price increase percentages, or internal pricing information in the quotation email. NEVER say "3% price increase applied", "pricing updated for 2026", "already 2026 pricing", "price increase as per 2026", or ANY reference to price increases. The dealer should ONLY see the final price number — nothing about how it was calculated. This is a CRITICAL rule — violating it exposes internal pricing strategy to dealers.
 
 ## STOCK CHECK (MANDATORY FOR EVERY ITEM)
 - Check Stock tab for every quoted item

@@ -1,6 +1,6 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const { getSystemPrompt } = require('./systemPrompt');
-const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, listSheets, fetchSheet, recommendRotor, fetchFcbiosProductUrl } = require('./googleSheets');
+const { searchProducts, searchByBrand, checkStock, getNascoDealerTier, getLeadTime, getPriceIncrease, listSheets, fetchSheet, recommendRotor, fetchFcbiosProductUrl } = require('./googleSheets');
 const { getBrandInstructions } = require('./brandInstructions');
 
 const client = new Anthropic();
@@ -84,6 +84,17 @@ const tools = [
       type: 'object',
       properties: {
         brand: { type: 'string', description: 'Brand name' }
+      },
+      required: ['brand']
+    }
+  },
+  {
+    name: 'get_price_increase',
+    description: 'Get the dealer markup percentage for a brand from the MASTER_INDEX tab. This is the live source of truth for pricing rules — ALWAYS call this for each brand in a quote before applying any markup. The tab name should match the pricelist tab (e.g., "HIMEDIA_Microbiology", "TARSONS", "NASCO", "LP", "MESALABS"). Returns the Increase % (e.g., "0%", "3%", "5%", "10%") plus PL year, currency, and any notes. Use the returned Increase % as the markup for that brand — do NOT use any hardcoded value.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        brand: { type: 'string', description: 'Brand or tab name (e.g., HIMEDIA_Microbiology, TARSONS, NASCO, LP, MESALABS, MVE, LOGTAG)' }
       },
       required: ['brand']
     }
@@ -337,6 +348,16 @@ async function processToolCall(toolName, toolInput) {
         break;
       case 'get_lead_time':
         result = await getLeadTime(toolInput.brand);
+        break;
+      case 'get_price_increase':
+        result = await getPriceIncrease(toolInput.brand);
+        if (result.found && !result.multiple_matches) {
+          console.log(`[PRICE_INCREASE] ${toolInput.brand} → ${result.increase_pct} (PL ${result.pl_year}, ${result.currency}) — notes: ${result.notes || 'none'}`);
+        } else if (result.multiple_matches) {
+          console.log(`[PRICE_INCREASE] ${toolInput.brand} → multiple matches returned`);
+        } else {
+          console.log(`[PRICE_INCREASE] ${toolInput.brand} → NOT FOUND in MASTER_INDEX`);
+        }
         break;
       case 'list_brands':
         result = await listSheets();

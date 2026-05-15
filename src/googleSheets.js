@@ -725,12 +725,75 @@ async function getLeadTime(brand) {
   };
 }
 
+async function getPriceIncrease(brand) {
+  const rows = await fetchSheet('MASTER_INDEX');
+  const brandLC = brand.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  // MASTER_INDEX columns: Tab Name | Brand | PL Year | Increase % | Currency | Notes
+  // Match on either Tab Name OR Brand column for flexibility
+  const matches = rows.filter(row => {
+    const tabName = (row['Tab Name'] || row['tab_name'] || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '');
+    const brandCol = (row['Brand'] || row['brand'] || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '');
+    return (
+      tabName === brandLC ||
+      brandCol === brandLC ||
+      tabName.includes(brandLC) ||
+      brandCol.includes(brandLC) ||
+      brandLC.includes(tabName) ||
+      brandLC.includes(brandCol)
+    );
+  });
+
+  if (matches.length === 0) {
+    return {
+      found: false,
+      brand,
+      error: `Brand "${brand}" not found in MASTER_INDEX. Available brands: ${[...new Set(rows.map(r => r['Brand'] || r['brand'] || '').filter(Boolean))].join(', ')}`
+    };
+  }
+
+  // If multiple matches (e.g., 4 HIMEDIA_* tabs), prefer exact tab match;
+  // otherwise return all so the agent can see context
+  const exact = matches.find(row => {
+    const tabName = (row['Tab Name'] || row['tab_name'] || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '');
+    return tabName === brandLC;
+  });
+
+  if (exact) {
+    return {
+      found: true,
+      brand: exact['Brand'] || exact['brand'] || brand,
+      tab_name: exact['Tab Name'] || exact['tab_name'] || '',
+      pl_year: exact['PL Year'] || exact['pl_year'] || '',
+      increase_pct: exact['Increase %'] || exact['increase_pct'] || exact['increase'] || '0%',
+      currency: exact['Currency'] || exact['currency'] || '',
+      notes: exact['Notes'] || exact['notes'] || ''
+    };
+  }
+
+  // Multiple matches and no exact tab — return all
+  return {
+    found: true,
+    brand,
+    multiple_matches: true,
+    rows: matches.map(row => ({
+      tab_name: row['Tab Name'] || row['tab_name'] || '',
+      brand: row['Brand'] || row['brand'] || '',
+      pl_year: row['PL Year'] || row['pl_year'] || '',
+      increase_pct: row['Increase %'] || row['increase_pct'] || row['increase'] || '0%',
+      currency: row['Currency'] || row['currency'] || '',
+      notes: row['Notes'] || row['notes'] || ''
+    }))
+  };
+}
+
 module.exports = {
   searchProducts,
   searchByBrand,
   checkStock,
   getNascoDealerTier,
   getLeadTime,
+  getPriceIncrease,
   listSheets,
   fetchSheet,
   recommendRotor,
