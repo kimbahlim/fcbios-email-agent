@@ -415,7 +415,13 @@ Process this email according to your instructions. Search the pricelists, check 
       response = await client.messages.create({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 16384,
-        system: systemPrompt,
+        system: [
+          {
+            type: 'text',
+            text: systemPrompt,
+            cache_control: { type: 'ephemeral' }
+          }
+        ],
         tools: [
           ...tools,
           {
@@ -446,6 +452,17 @@ Process this email according to your instructions. Search the pricelists, check 
     }
 
     console.log(`[AGENT] Stop reason: ${response.stop_reason}`);
+
+    // Log token usage including cache stats — verifies prompt caching is working
+    if (response.usage) {
+      const u = response.usage;
+      const cacheRead = u.cache_read_input_tokens || 0;
+      const cacheWrite = u.cache_creation_input_tokens || 0;
+      const input = u.input_tokens || 0;
+      const output = u.output_tokens || 0;
+      const cacheStatus = cacheRead > 0 ? '✓ HIT' : (cacheWrite > 0 ? '✗ MISS (writing)' : '— no cache');
+      console.log(`[AGENT] Tokens: input=${input}, cache_read=${cacheRead}, cache_write=${cacheWrite}, output=${output} [${cacheStatus}]`);
+    }
 
     if (response.stop_reason === 'max_tokens') {
       console.log('[AGENT WARNING] ⚠️  Response was truncated — output exceeded max_tokens (16384). Draft may be incomplete or missing.');
