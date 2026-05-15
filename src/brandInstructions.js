@@ -350,7 +350,178 @@ const BRAND_INSTRUCTIONS = {
   - Masticators: https://iul-instruments.com/product/masticator-homogenizator/
   - Colony counters (SphereFlash): https://iul-instruments.com/product/sphereflash/
   - Colony counters (manual/digital): https://iul-instruments.com/product/colony-counter/
-  Do NOT use the air sampler link when quoting masticators or colony counters. Match the link to the product being quoted.`
+  Do NOT use the air sampler link when quoting masticators or colony counters. Match the link to the product being quoted.`,
+
+  HIMEDIA: `## HIMEDIA QUOTING — COMPLETE INSTRUCTIONS
+
+  ## AGAR vs BROTH/MEDIUM DISAMBIGUATION (CRITICAL — applies to ALL HiMedia culture media)
+  HiMedia descriptions in the pricelist are truncated at 40 characters, which makes "Agar" and "Broth/Medium" versions of similar products look almost identical. Before quoting any HiMedia culture media, you MUST match the dealer's EXACT wording for the product physical form (agar/plate vs broth/medium/fluid). This is the single most important disambiguation step for HiMedia.
+  STEP 1 — Read the dealer's exact wording. Identify whether they asked for:
+    AGAR/PLATE form: keywords "agar", "plate", "plates", "plated"
+    BROTH/MEDIUM/FLUID form: keywords "broth", "medium", "fluid", "liquid medium"
+    SEMI-SOLID/SLANT/STAB form: keywords "slant", "stab", "semi-solid", "soft agar"
+  STEP 2 — When evaluating search results, READ EACH DESCRIPTION CAREFULLY for the form-type keyword:
+    AGAR products contain "Agar" in the description (e.g., "Tryptone Soya Agar", "MacConkey Agar", "Sabouraud Dextrose Agar")
+    BROTH/MEDIUM products contain "Broth", "Medium", "Fluid", or "Liquid" (e.g., "Tryptone Soya Broth", "Soyabean Casein Digest Medium", "Fluid Casein Digest Medium")
+  STEP 3 — STRICT FILTERING: NEVER quote an Agar SKU when the dealer asked for Broth/Medium. NEVER quote a Broth/Medium SKU when the dealer asked for Agar/Plate. These are different physical products, not interchangeable. The dealer chose one form deliberately because their protocol/method requires it.
+  COMMON HIMEDIA AGAR vs BROTH/MEDIUM PAIRS — keep these strictly separate:
+    - Tryptone Soya: M290/MH290 (TSA, agar) vs M011 (TSB, broth)
+    - Soyabean Casein Digest: M449/MV449 (SCDA agar w/ lecithin & polysorbate) vs M2115 (SCDM/SCDLP broth w/ 0.5% lecithin & 4% polysorbate, Twin Pack)
+    - SCD with Lecithin/Polysorbate variants:
+        M2115 = Soyabean Casein Digest MEDIUM/BROTH w/ 0.5% Soya Lecithin & 4% Polysorbate 80 (Twin Pack)
+        M5297 = Soyabean Casein Digest AGAR (SCDA) w/ 0.5% Lecithin & 2% Polysorbate 80
+        M449 = Tryptone Soya AGAR w/ Lecithin & Polysorbate 80 (Microbial Content Test Agar)
+        M117 = Fluid Casein Digest Soya Lecithin MEDIUM (Twin Pack)
+        MAP117 = Fluid Casein Digest-Soy-Lecithin Polysorbate 20 MEDIUM (Twin Pack)
+        M1838 = Soyabean Casein Digest MEDIUM w/ Tween 80 and Lecithin
+      When dealer asks "Soya Casein Digest Lecithin Polysorbate Broth" without specifying %, default to M2115 (SCDM/SCDLP Twin Pack — the standard SCDLP broth). NEVER quote M5297 or M449 for a "broth" request.
+    - Sabouraud Dextrose: M063 (SDA, agar) vs M033 (SDB, broth)
+    - Brain Heart Infusion: M211 (BHIA, agar) vs M210 (BHIB, broth)
+    - MacConkey: M082 (MacConkey Agar) vs M081 (MacConkey Broth)
+    - Nutrient: M001 (Nutrient Agar) vs M002 (Nutrient Broth)
+  WHEN IN DOUBT: If the dealer's wording is ambiguous (e.g., they only say "Soya Casein Digest" without "agar" or "broth"), DO NOT guess. Ask the dealer to clarify whether they need the agar (solid) or broth/medium (liquid) form before quoting. Better to ask a one-line clarification than to quote the wrong product.
+
+  ## HICYNTH (MCD- prefix) EXCLUSION RULE (CRITICAL)
+  HiCynth is HiMedia's animal-origin-free (AOF) / plant-based variant range, identified by the "MCD-" prefix in the SKU (e.g., H05-MCD1651-500G is the HiCynth version of H05-M1651-500G HiCrome Bacillus Agar). NEVER quote any HiCynth (MCD-) SKU unless the dealer EXPLICITLY asks for one of: "HiCynth", "MCD-", "animal-origin-free", "AOF", "vegan", "plant-based", or "animal-free" media. When the dealer asks for a standard HiMedia product (e.g., "HiCrome Bacillus Agar"), quote ONLY the standard M-prefix SKU (M1651). Do NOT also offer the HiCynth/MCD- variant as an alternative, equivalent, or "for your reference" — this inflates the quote and creates confusion. The HiCynth range is a specialty product line for specific use cases; only customers who specifically need animal-origin-free media will ask for it. If you see MCD- SKUs appearing in your search results, FILTER THEM OUT unless the dealer's request explicitly mentions one of the trigger keywords above.
+
+  ## M-PREFIX PRIORITY RULE (CRITICAL — applies to ALL HiMedia culture media)
+  The M-prefix (e.g., M011, M322, M290) is HiMedia's main / default culture media line. Alternative prefixes that map to the same product family include GM- (granulated sterile), MV- (HiVeg / vegetable-origin), MH- (HiMedia Premium), and MCD- (HiCynth, already excluded above). The M-prefix is the standard formulation that dealers want by default; the others are specialty variants. RULES:
+  (1) NAME-ONLY ENQUIRY: When the dealer mentions a product NAME without specifying a SKU (e.g., "Soyabean Casein Digest Medium", "MacConkey Broth", "Tryptone Soya Agar"), search for and quote the M-prefix SKU FIRST. Do NOT offer GM-/MV-/MH- variants as alternatives unless the dealer explicitly asks for granulated, HiVeg, or premium versions.
+  (2) NON-M SKU SPECIFIED WITH MATCHING NAME: When the dealer specifies a non-M SKU (e.g., GM011, MV322, MH011) AND the product name they mention also matches an M-prefix equivalent, quote the M-prefix SKU FIRST and include their requested SKU as a clearly-labelled alternative. Example: dealer asks for "Soyabean Casein Digest Medium, H05-GM011-500G" → quote H05-M011-500G FIRST (M-prefix equivalent), then H05-GM011-500G as alternative. Mention in the Important Notes that M-prefix is the standard / default formulation and the GM- variant is a sterile granulated option.
+  (3) NON-M SKU SPECIFIED, NO M EQUIVALENT: When the dealer specifies a non-M SKU that has NO M-prefix equivalent (verify by searching M+<number> in HIMEDIA_Microbiology), quote the exact SKU requested. Do not invent an M-prefix SKU that doesn't exist in the pricelist.
+  (4) NAME/SKU MISMATCH: When dealer's stated product name does NOT match the SKU they provided (like the H05-M322-500G / "Soyabean Casein Digest Medium" case where M322 is actually "Tryptone Soya Broth w/o Dextrose"), quote BOTH: (a) the M-prefix SKU that matches the NAME (M011 / SCDM) FIRST, (b) the exact SKU the dealer typed (M322) as second item, AND flag the discrepancy clearly in Important Notes asking dealer to confirm. Always lead with the M-prefix product matching the name, not the one matching the typed SKU.
+  (5) FINDING THE M-EQUIVALENT: To find the M-prefix equivalent of a GM-/MV-/MH- SKU, strip the leading letter(s) before "M" and search HIMEDIA_Microbiology for the result. Examples: GM011 → search M011; MV290 → search M290; MH011 → search M011 (note: MH and M can share the same number for the same product, MH being the premium grade). Always verify the M-prefix match by comparing descriptions — if descriptions differ significantly, do NOT substitute.
+
+  ## MOLECULAR BIOLOGY KITS (HIMEDIA_Molecular_Biology tab)
+  TEACHING KITS vs RESEARCH KITS: HiMedia has two types of kits:
+  - HTBM series = "HiPer" Teaching Kits (for educational/student use only, small prep counts)
+  - MB series = "HiPurA" Research-grade Purification Kits (for lab/research/commercial use)
+  NEVER offer teaching kits (HTBM) to dealers unless they specifically ask for teaching/education kits. For DNA extraction, RNA extraction, protein purification etc., ALWAYS search for MB series (HiPurA) kits first. These are in the HIMEDIA_Molecular_Biology tab.
+  Example: dealer asks for "genomic DNA extraction kit" → search for "HiPurA genomic DNA" or "MB504" or "MB505" or "MB506" — NOT HTBM teaching kits.
+  GENERIC DNA EXTRACTION KIT ENQUIRY — CLARIFY FIRST (CRITICAL): When the dealer asks for "DNA extraction kit", "DNA purification kit", "DNA isolation kit", "DNA prep kit" or similar WITHOUT specifying a sample type, you MUST clarify with the dealer before quoting. Sample-type qualifiers that REMOVE the need to clarify: "bacterial", "fungal", "plant", "mammalian", "animal", "viral", "yeast", "soil", "blood", "tissue", "saliva", "swab", "FFPE", "stool", "food", "water", "environmental", "insect", "algal". If ANY of these qualifiers appears next to the DNA extraction request, quote the matching kit(s) directly — do NOT clarify. If NO qualifier appears, send a clarification reply.
+  CLARIFICATION FLOW for generic DNA extraction kit enquiries:
+  (1) Search the HIMEDIA_Molecular_Biology tab with keyword "HiPurA DNA" or "DNA Purification" to fetch the LIVE list of available kits from the pricelist.
+  (2) Filter results to MB-series purification kits only (exclude HTBM teaching kits).
+  (3) Group results by sample type (Bacterial / Fungal / Plant / Mammalian / Viral / Yeast / Soil / Blood / Tissue / etc.) and prep size (50 prep, 100 prep, 250 prep).
+  (4) Reply with a clarification request listing the SKUs grouped by sample type. Use this template (use prose, NOT a quotation table — no prices in the clarification):
+    "For the DNA Extraction Kit, HiMedia offers several HiPurA® kits tailored to different sample types. Kindly confirm which option(s) match your application so we can finalise the quotation:
+    [Listed below by sample type as fetched from pricelist, e.g.:]
+    - Bacterial Genomic DNA: MB505 (50 prep), MB506 (250 prep)
+    - Fungal DNA: MB543 (50 prep)
+    - Plant Genomic DNA: MB529 (50 prep)
+    - Mammalian Genomic DNA: MB504 (50 prep)
+    - Viral DNA/RNA: [list from pricelist]
+    - [other sample types as found in pricelist]
+    Please advise which kit(s) you require, and we will revert with pricing and availability."
+  Do NOT include prices in the clarification reply. Do NOT include the standard quote table. The dealer's follow-up will name the specific kit(s), after which you quote them in the normal format.
+  This applies ONLY to "DNA extraction kit"-type generic requests. For OTHER generic molecular biology kit requests (RNA, PCR, plasmid, protein purification, etc.), continue with the standard search-and-quote flow — do not clarify those unless the dealer explicitly asks for help choosing.
+
+  ## PROTEIN ESTIMATION / PROTEIN ASSAY (CRITICAL — common dealer request)
+  When dealer asks for "protein assay", "protein estimation", "protein quantitation", "protein quantification", "Bradford assay", "Bradford reagent", "Lowry assay", "Biuret test", "BCA assay", or similar, quote from HiMedia's Protein Estimation product range. These are all ML- and MBT- prefix products in the HIMEDIA_Molecular_Biology tab.
+  AVAILABLE HIMEDIA PROTEIN ESTIMATION PRODUCTS (search these SKUs directly):
+  - H05-ML178 = Bradford Kit for Protein Estimation (complete kit with reagent + standard + protocol) — THIS IS THE DEFAULT for generic "protein assay" requests
+  - H05-ML106 = Bradford Reagent (1X, ready to use)
+  - H05-ML202 = 5X Bradford Reagent (concentrate)
+  - H05-ML059 = Folin's Reagent (for Lowry method)
+  - H05-ML122 = Biuret Reagent (for Biuret method)
+  - H05-MBT129 = Protein Standard 1 mg/mL (BSA standard for calibration curve)
+  - H05-MBT206 = Protein Standard 2 mg/mL (BSA standard)
+  MAPPING dealer's wording → SKU:
+  - "Protein assay" / "Protein estimation" / generic request → H05-ML178 (Bradford Kit — default, most commonly used method)
+  - "Bradford" → H05-ML178 (kit) OR H05-ML106 (reagent only, if dealer prefers à la carte)
+  - "Lowry" → H05-ML059 (Folin's Reagent) + H05-MBT129 (standard) — note: Lowry method also needs alkaline copper reagent which the dealer typically prepares from sodium carbonate, copper sulfate, sodium potassium tartrate (all in HiMedia GRM range)
+  - "Biuret" → H05-ML122 (Biuret Reagent)
+  - "BCA" / "Bicinchoninic Acid Assay" → HiMedia does NOT carry BCA. State this and offer Bradford (ML178) or Biuret (ML122) as alternative. Ask if either is acceptable.
+  - "BSA standard" / "Protein standard" → H05-MBT129 (1 mg/mL) or H05-MBT206 (2 mg/mL)
+  CRITICAL — DO NOT confuse "Protein assay" with these unrelated products:
+  - CCK023 = EZAssay TBARS Estimation Kit for LIPID peroxidation — NOT a protein assay. TBARS measures malondialdehyde (lipid oxidation byproduct), not protein.
+  - MB083 (Bovine serum albumin Ultrapure) = a PROTEIN itself (for use AS a standard or carrier), NOT a protein assay
+  - HiPurA MB-series = nucleic acid purification kits, NOT protein assays
+  When the dealer's quote already includes Coomassie Brilliant Blue (which is the Bradford dye) AND BSA (Bradford standard), the "Protein assay" item they're asking for is almost certainly the Bradford reagent or Bradford kit — quote H05-ML178 (Bradford Kit) or H05-ML106 (Bradford Reagent).
+
+  ## MALONDIALDEHYDE (MDA) MAPPING
+  When dealer asks for "MDA", "malondialdehyde", or "MDA standard", quote H05-RM3776 (1,1,3,3-Tetramethoxypropane). Pure MDA is unstable and not commercially available — it's commercially supplied as its acetal precursor 1,1,3,3-Tetramethoxypropane, which hydrolyzes to MDA in situ. This is the industry-standard MDA source used in TBARS assays and lipid peroxidation studies. Do NOT mark MDA as "Not Available" — search HiMedia for "tetramethoxypropane" or "RM3776" to find it. Search the HIMEDIA_Microbiology tab (RM-series chemicals live there).
+
+  ## FINE CHEMICALS, BIOCHEMICALS, REAGENTS (GRM/RM series)
+  Fine chemicals, biochemicals, pharmaceutical excipients, reagent-grade chemicals (e.g., Tween 80, Methylparaben, Sodium Bicarbonate, Yeast Extract, EDTA, Ethanol, solvents, buffers) → HiMedia GRM/RM series → search HIMEDIA_Microbiology tab. These have H05-GRM or H05-RM prefix codes.
+  PCT vs GRM RULE — CRITICAL:
+  - PCT series (e.g., PCT1535) = Plant Cell/Tissue Culture grade chemicals. ONLY offer PCT when the dealer explicitly mentions plant tissue culture, plant growth media, Murashige & Skoog, MS medium, or plant culture applications.
+  - For ALL OTHER chemical requests (general lab, microbiology, pharmaceutical, food testing) → offer GRM or RM series ONLY. NEVER offer PCT for general chemical requests.
+  - Example: Dealer asks for "Sodium Bicarbonate 500g" → search "GRM253" or "GRM849" directly. NEVER H05-PCT1535-500G unless dealer mentions plant culture.
+  - When searching for chemicals, if PCT results appear alongside GRM/RM results, ALWAYS choose GRM/RM. PCT is a last resort only for plant culture applications.
+  TRYPTIC SOYA AGAR (TSA) NOTE: M290, MH290, GM290, GMH290, and M1968 are ALL forms of TSA/Tryptone Soya Agar/Soybean Casein Digest Agar. When dealer asks for TSA or Tryptic Soya Agar, search "290" to find all variants — MH290-500G is rank 1 stocking item (RM 251). Do NOT use M1968 unless specifically requested by code.
+  PACK SIZE MATCHING — CRITICAL: Always match the pack size the dealer requested. If dealer asks for 500g, offer 500g. NEVER offer 5kg or 10kg unless the dealer specifically requests bulk or larger sizes.
+  - Example: Dealer asks for "Yeast Extract 500g" → offer H05-RM027-500G (stocking, RM 218). NEVER RM027F-5KG. The correct SKU is RM027, NOT RMG027 — there is no "RMG027" in the pricelist.
+
+  ## NOT FOR EXPORT
+  Before quoting any HiMedia product, check if the SKU appears in the HIMEDIA_Not_For_Export tab. If found, do NOT quote it.
+
+  ## CHROMOGENIC AGAR — DISAMBIGUATION (CRITICAL)
+  HiCrome/chromogenic media have multiple formulations with VERY similar names but DIFFERENT catalogue codes and prices. When a dealer asks for a HiCrome product and your search returns multiple different M-codes (not just pack size variants), you MUST quote ALL of them and ask the dealer to confirm. NEVER pick just one.
+  Key examples:
+  - "HiCrome ECC" → could be M1293 (ECC Agar), M1294 (ECC Selective Agar Base), M2056 (ECC Selective Agar Base Modified) — different products, RM 1,382 vs RM 2,195 vs RM 3,054
+  - "EC O157" → could be M1574A (EC O157:H7 Agar) or M1575A (EC O157:H7 Selective Agar Base) — different products
+  - "ECC" and "EC O157" are DIFFERENT product categories — ECC = generic E.coli/Coliform detection, EC O157 = specific O157:H7 strain detection
+  If a dealer writes "HiCrome ECC Selective Agar (EC O157:H7 Selective agar base, modified)", they may be confused about the product names. Quote ALL matches from both "ECC" and "O157" searches and let them confirm.
+
+  ## COMMON PRODUCT NAME ABBREVIATIONS (HiMedia)
+  - VRBA = Violet Red Bile Agar (M049). Do NOT confuse with HiDip PCA-VRBA (HD009) which is a dip slide — completely different product. When dealer asks for "VRBA", search for "Violet Red Bile" to find M049.
+  - TSI = Triple Sugar Iron Agar (M021). Search for "Triple Sugar Iron" or "TSI".
+  - BHI = Brain Heart Infusion Broth (M210). Search for "Brain Heart Infusion".
+  - BPW = Buffered Peptone Water (M614). Search for "Buffered Peptone".
+  - EMB = Eosin Methylene Blue Agar (M317). Search for "Eosin Methylene" or "Levine".
+  - VP REAGENTS vs VP MEDIUM: "Voges-Proskauer (VP) reagents" = Barritt Reagent A (H05-R029-100ML, RM 56) + Barritt Reagent B (H05-R030-100ML, RM 25). These are the two reagents used for the VP test — quote BOTH as separate line items. Do NOT confuse with M070F (Voges Proskauer Medium) or M070S (MR-VP Medium) which are the growth media/broth, not the test reagents.
+
+  ## ITEMS NOT FOUND — DECISION FLOW
+  When a dealer requests a HiMedia product and you cannot find it, follow this EXACT sequence before saying "Not Available":
+  
+  STEP 1 — Search by BASE CODE (strip the size suffix):
+  - Dealer asks for "M467-100G" → search "M467" NOT "M467-100G"
+  - Dealer asks for "M1743-250G" → search "M1743" NOT "M1743-250G"
+  - This returns ALL pack sizes: 100G, 250G, 500G, etc.
+  
+  STEP 2 — Pick the best match from results:
+  - If requested size exists in the pricelist with a price → quote it. Use the NetSuite Item Code if available, otherwise use the Vendor Code with the correct brand prefix (e.g., HiMedia "GRM103-100G" → "H05-GRM103-100G", LP "176018" → "L03-176018")
+  - Items in the pricelist WITH a price but WITHOUT a NetSuite Item Code are INDENT items — quote them with status "Indent" and the lead time from get_lead_time. These are orderable from the manufacturer, just not stocked in Malaysia.
+  - If requested size does NOT exist in the pricelist at all → offer the next available size
+  - Example: M467-100G not found → M467-500G exists → quote M467-500G with note "available in 500g only"
+  - CRITICAL: If a size doesn't exist in the pricelist AT ALL (no row, no price), do NOT invent it. A missing size = offer the alternative size, not a phantom entry.
+  
+  STEP 3 — Try synonyms if still not found:
+  - Try chemical synonyms (Tween 80 → "Polysorbate", "GRM159")
+  - Try web_search("himedialabs.com [product name] SKU") to find the correct code
+  
+  STEP 4 — Only after ALL steps fail:
+  - State: "We regret to inform you that [item] is not available for sale in Malaysia."
+  - NEVER say "not available for export" unless the item appears in the HIMEDIA_Not_For_Export tab
+  
+  CRITICAL: NEVER mark a HiMedia product as "Not Available" just because the specific pack size wasn't found. M467-100G not found ≠ M467 not available. Always try the base code search first.
+  CRITICAL: Before marking ANY HiMedia item as "Not Available", you MUST try web_search("himedialabs.com [product name] SKU") to find the correct HiMedia catalogue code. Only mark "Not Available" AFTER web search also fails to find a match. The dealer may use a common/generic name that doesn't match our pricelist description — web search on himedialabs.com will translate it to the correct SKU.
+
+  ## SERIES PRIORITY RULE
+  HiMedia has multiple series for the same media product. The series prefix determines the type:
+  - M = Standard dehydrated media (cheapest, most common)
+  - MH = Harmonised Media (EP/USP/BP harmonised formulation — commonly required for pharmaceutical/QC labs)
+  - GM = Granulated media (more expensive than M)
+  - MV = HiVeg (vegetable-based, more expensive)
+  - GMH = Granulated Harmonised Media
+  - CMS = Certified media
+  - MM = Modified formulation
+  - NOTE: Both GM and GMH series are granulated. When quoting both GM and GMH variants together, make clear that both are granulated — GMH is the granulated harmonised version. Do not describe only the GM as "Granulated" while omitting it from GMH, as this is misleading.
+  
+  SEARCH STRATEGY: When searching for a HiMedia product, use a SHORT keyword that will match ALL series at once. Do NOT include series prefix in the search — just search the product name.
+  - Example: For "Kings Medium B Base" → search "King" (returns M1544, GM1544, MV1235 etc. all at once)
+  - Example: For "Tryptone Soya Agar" → search "Tryptone Soya" or "290" (returns M290, MH290, GM290, GMH290 etc. all at once)
+  - Example: For "Columbia Blood Agar" → search "Columbia Blood" (returns M144, GM144 etc.)
+  - This avoids needing multiple search loops to find different series.
+  
+  When a dealer asks for a generic product without specifying a series:
+  - FIRST: From the search results, check stock for ALL matching series in ONE check_stock_batch call. If ANY series is ex-stock, offer the ex-stock one regardless of series.
+  - IF NONE are ex-stock (all indent): Always offer the M series first (e.g., M144 not GM144). M series is the standard and cheapest option. Also offer MH series if it exists (pharmaceutical labs often need it). Only offer GM/MV/CMS if the M series doesn't exist or dealer requests it.
+  - CODE-ENFORCED FLAG: Each HiMedia search result row now includes a "_himedia_recommended_default" boolean flag and a "_himedia_variant_note" string. When multiple variants of the same product code exist (e.g., M929, GM929, MV929), the system has already determined which variant to recommend based on the M-series-priority rule + price comparison. You MUST quote the row where "_himedia_recommended_default" is true and NOT the rows where it is false. Trust the flag. The flag defaults to M-series for generic requests; the agent's only responsibility is to override the flag IF the dealer EXPLICITLY asked for a specific series (e.g., "MH for pharmaceutical use", "MV vegan", "GM granulated"). If the dealer did not explicitly ask, ALWAYS follow the flag.
+  - If the dealer specifically asks for MH (Harmonised) by code, quote that specific product — do NOT substitute with M series.
+  - If the dealer specifically asks for a GM or MV product by code, quote that specific product.
+  - Do NOT do multiple separate searches for different series — get them all in one search, then pick the right one.`
 };
 
 function getBrandInstructions(brand) {

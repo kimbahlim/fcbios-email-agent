@@ -115,11 +115,11 @@ const tools = [
   },
   {
     name: 'get_brand_instructions',
-    description: 'Get detailed quoting instructions for equipment/specialty brands: TOMY (autoclave MOB fees, JKKP rules, accessories), GYROZEN (centrifuge model range, rotor selection, delivery/TnC charges), MVE (dewar bundling rules, research dewar lid pairings, product links), IUL (air sampler/masticator/colony counter rules). Call this BEFORE quoting these brands.',
+    description: 'Get detailed quoting instructions for these brands: HIMEDIA (agar/broth disambiguation, M-prefix priority, HiCynth exclusion, protein assay mappings, MDA, chemicals/GRM-RM, series priority, not-for-export check, chromogenic disambiguation, items-not-found flow), TOMY (autoclave MOB fees, JKKP rules, accessories), GYROZEN (centrifuge model range, rotor selection, delivery/TnC charges), MVE (dewar bundling rules, research dewar lid pairings, product links), IUL (air sampler/masticator/colony counter rules). Note: HIMEDIA instructions are usually AUTO-LOADED at the top of your first user message — only call this for HIMEDIA as a fallback if you do not see the HIMEDIA block in the user message. Call this BEFORE quoting these brands.',
     input_schema: {
       type: 'object',
       properties: {
-        brand: { type: 'string', description: 'Brand name: TOMY, GYROZEN, MVE, or IUL' }
+        brand: { type: 'string', description: 'Brand name: HIMEDIA, TOMY, GYROZEN, MVE, or IUL' }
       },
       required: ['brand']
     }
@@ -372,7 +372,20 @@ async function processToolCall(toolName, toolInput) {
 async function runAgent(emailData) {
   const systemPrompt = getSystemPrompt();
 
-  const textContent = `New dealer email received:
+  // Auto-detect brand mentions in the email content and load brand-specific instructions.
+  // This keeps the main system prompt lean — brand-specific rules (HiMedia, etc.) only
+  // ride along with the dealer's first message when they're actually relevant.
+  const { detectBrandsInEmail, buildBrandContextBlock } = require('./brandDetect');
+  const detectionText = `${emailData.subject || ''}\n${emailData.body || ''}`;
+  const detectedBrands = detectBrandsInEmail(detectionText);
+  const brandContextBlock = buildBrandContextBlock(detectedBrands);
+  if (detectedBrands.length > 0) {
+    console.log(`[AGENT] Brands auto-detected from email: [${detectedBrands.join(', ')}] (loading ${brandContextBlock.length} chars of brand-specific rules)`);
+  } else {
+    console.log('[AGENT] No specific brand auto-detected — using main prompt only');
+  }
+
+  const textContent = `${brandContextBlock}New dealer email received:
 
 FROM: ${emailData.from_name} <${emailData.from_email}>
 SUBJECT: ${emailData.subject}
