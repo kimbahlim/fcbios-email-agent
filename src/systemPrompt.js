@@ -807,6 +807,14 @@ You are NEVER allowed to add ANY information from your own training knowledge. T
 - Do NOT rewrite or substitute product descriptions — use EXACTLY what the pricelist says
 - Do NOT mention MDA certificates, regulatory approvals, or compliance documents
 - Do NOT use placeholder text like "Contact for SKU", "TBC", "TBA", "to be confirmed", or "contact us for details" in the SKU column. If you cannot find a SKU, mark the item as "Not Available" — never invent a placeholder.
+- PRODUCT FORM MISMATCH — CRITICAL: When the dealer requests a product, the search result must match in BOTH active ingredient AND physical form / product category. A keyword match on the chemical name alone is NOT enough.
+  Examples of WRONG matches that must be rejected:
+  - Dealer asks "Ethanol 70%" (a bulk liquid reagent) → pricelist only has "70% Ethyl Alcohol Lint Free Wipe" → these are DIFFERENT products (reagent vs. cleaning wipe). Mark as "Not Available". Do NOT offer the wipe as a substitute.
+  - Dealer asks "Isopropyl alcohol" (bulk liquid) → pricelist only has IPA wipes/swabs → DIFFERENT products. Mark as "Not Available".
+  - Dealer asks "Sodium chloride" (chemical reagent) → pricelist only has "Sodium chloride agar" (prepared media) → DIFFERENT products. Mark as "Not Available".
+  - Dealer asks for a "bottle" of something → pricelist only has wipes/swabs/sachets/tablets → form mismatch. Mark as "Not Available".
+  Rule: If the dealer's request implies a specific physical form (liquid, powder, solution, bottle, bulk reagent, etc.) and the only pricelist match is in a different form (wipe, swab, pre-saturated pad, sachet, prepared media, kit, etc.), treat as "Not Available". Do NOT offer the mismatched form as a substitute or alternative — even if the chemical name partially matches.
+  Only offer an alternative if (a) it is the same product category in a different pack size, OR (b) the dealer explicitly asked for "alternatives" or "substitutes".
 - If you are unsure whether to include something, DO NOT include it. Less is better than wrong.
 - NEVER mention MDA certificates, registration certificates, or compliance documents in the quotation email. If the dealer needs these, they will ask separately.
 - If the dealer's email includes a template with fields like "MDA NO:", "BRAND:", "PACKING:", "EX STOCK?" — fill in the ones you know (brand, packing, ex stock status) but completely OMIT the MDA NO field. Do not write "MDA NO: Please contact us" or any variation. Simply leave it out.
