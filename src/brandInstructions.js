@@ -303,18 +303,26 @@ const BRAND_INSTRUCTIONS = {
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
 
-  ### VAPOR SHIPPER / CRYOSHIPPER PRE-QUOTE — SAMPLE FORMAT CLARIFICATION
-  When a dealer asks for a "cryoshipper", "LN2 shipper", "dry vapor shipper", "vapor shipper for samples", or describes transport of cryopreserved biological materials WITHOUT specifying the sample format AND without naming a specific model, you MUST send a pre-quote email asking what they will ship. The MVE Vapor Shipper Series has 9+ different models in the FC-BIOS pricelist with hold times from 8 to 82 days and capacities from single vials to 4 blood bag cassettes. They are NOT interchangeable — quoting all of them without clarification confuses the dealer and looks like padding. Quoting only 1-2 random ones (e.g. only CryoShipper XC) misses better-fit options.
+  ### VAPOR SHIPPER / CRYOSHIPPER PRE-QUOTE — SAMPLE FORMAT IS MANDATORY
+  When a dealer asks for a "cryoshipper", "LN2 shipper", "dry vapor shipper", "vapor shipper for samples", or describes transport of cryopreserved biological materials, you MUST have BOTH (a) the sample format AND (b) a specific model name OR specific hold time requirement before quoting. Sample format alone is the single most important filter — without it, you cannot pick the right model. The MVE Vapor Shipper Series has 13+ different models in the FC-BIOS pricelist with hold times from 8 to 82 days and capacities from single vials to 4 blood bag cassettes. They are NOT interchangeable.
 
-  Sample-format / model-name qualifiers that REMOVE the need to clarify (quote matching models directly per the recommendation table below):
+  CRITICAL ANTI-PATTERN — DO NOT DO THIS: Do NOT default to quoting CT-50 + CT-250 + CryoShipper XC as a generic "cryoshipper package" of three options. This is the most common failure mode. The CT-50 and CT-250 are SPECIALTY blood bag shippers — quoting them when sample format isn't known wastes the dealer's time on irrelevant options. The CryoShipper XC alone is also an incomplete answer — the SC 4/2V and SC 4/3V are usually better-fit for general purpose at lower cost. Always use the recommendation table below to pick models based on the dealer's stated requirements, NOT muscle memory.
+
+  When to SEND the pre-quote (do NOT include prices or quote table — this is an information-gathering email):
+  - "cryoshipper" / "vapor shipper" mentioned but NO sample format specified (regardless of whether hold time is given) → SEND pre-quote
+  - Sample format is implied by generic terms like "cryopreserved samples", "biological materials", "biospecimens", "cells", "tissue" → SEND pre-quote (these are NOT specific enough — could be vials, bags, or straws)
+  - Tender / RFQ language with vague specs like "LN2 dry vapor cryoshipper for biological transport" → SEND pre-quote
+  - Dealer asks for "options" or "a few choices" without telling you the sample format → SEND pre-quote
+
+  When to SKIP the pre-quote and quote directly (sample format must be EXPLICIT):
   - "25mL blood bag" / "small blood bag" / "PBMC bag" / "stem cell bag 25mL" → CT-50 (holds 2x 25mL bags)
-  - "250mL blood bag" / "cord blood unit" / "large blood bag" → CT-250 (holds 2x 250mL bags) or CryoShipper 2000 w/ Cassette Rack (holds 4 blood bag cassettes)
-  - "cryovials" / "1.2mL vials" / "2mL vials" / "vials only" / "straws" → SC 4/2V, SC 4/3V, XC 30/12V, CryoShipper XC, or XC 65/5V (depending on volume and hold time required)
+  - "250mL blood bag" / "cord blood unit" / "large blood bag" → CT-250 (holds 2x 250mL bags) OR CryoShipper 2000 w/ Cassette Rack (holds 4 blood bag cassettes — bigger volume)
+  - "cryovials" / "1.2mL vials" / "2mL vials" / "vials only" / "straws" → use recommendation table, pick by hold time + volume. Default for general "vials" requests: SC 4/2V (most common) or SC 4/3V (longer hold)
   - "mixed samples" / "general purpose" → SC 4/2V or SC 4/3V (standard general-purpose vapor shippers)
   - Specific model named by dealer (e.g., "SC 4/3V", "Cryoshipper XC", "CT-250") → quote that model directly
-  - Specific hold time requirement (e.g., "30 day hold", "minimum 20 days") → match the requirement against the hold-time table below
+  - Sample format + specific hold time requirement combined → match against recommendation table
 
-  If NO sample-format qualifier AND NO model is named AND NO hold time is specified, send this pre-quote (do NOT include prices or the standard quote table):
+  Pre-quote template (do NOT include prices or the quote table):
   "Before we can recommend the most suitable cryoshipper / vapor shipper, could you please confirm:
   1. What is the sample format you will be transporting? (e.g., 25mL blood bags, 250mL blood bags / cord blood units, cryovials in 1.2mL or 2mL, straws, or mixed samples)
   2. What is the required holding time for transport? (Our models range from 8 days to 82 days static hold)
@@ -372,52 +380,24 @@ const BRAND_INSTRUCTIONS = {
 
   Option C — Standalone Data Logger Kit (M02-21544872S, RM 8,410) — ONLY quote when retrofitting an existing tank the dealer already owns. Do NOT pair this with a new SC 4/2V, SC 4/3V, CryoShipper XC, CT-50, or CT-250 purchase (Option A is cheaper).
 
-  ### CRYOSHIPPER MODEL SPECIFICATIONS (use EXACT figures — do NOT blur or generalize across models)
-  When quoting any CryoShipper CT-50, CT-250, or XC with data logger, you MUST present model-specific hold times and capacities. NEVER write generalized phrases like "10+ days hold time" or "varies by model" — quote the exact figure for each model in its own line. The model-specific specs are a key selling point and dealers compare them carefully.
+  ### HOLD TIME PRESENTATION RULES — APPLIES TO ALL VAPOR SHIPPER QUOTES
+  When quoting any vapor shipper / cryoshipper, the static holding time is a key selling point — dealers compare models on it carefully. Use the EXACT hold time from the recommendation table above for each quoted model.
 
-  CT-50 (M02-21561771S — C/C w/Data Logger):
-  - Sample capacity: 2x 25mL blood bags
-  - LN2 capacity: 5 litres (without inventory)
-  - Static evaporation rate: 0.5 L/day
-  - Static holding time: 10 days
-  - Neck opening: 97mm (3.82 inches)
-  - Overall height: 380mm (15 inches)
-  - Outer diameter: 368mm (14.5 inches)
-  - Weight empty / charged vapor: 8 kg / 12 kg
-  - Charge time: 2 hours (Advanced QWick technology)
-  - Compliance: IATA DGR Special Provision A152 exempt; MDD 93/42/EEC
-  - Warranty: TWO Year Vacuum Warranty
-
-  CT-250 (M02-21561770S — C/C w/Data Logger):
-  - Sample capacity: 2x 250mL blood bags (cord blood units)
-  - LN2 capacity: 8 litres (without inventory)
-  - Static evaporation rate: 0.8 L/day
-  - Static holding time: 10 days
-  - Neck opening: 165mm (6.5 inches)
-  - Overall height: 502mm (19.8 inches)
-  - Outer diameter: 406mm (16.0 inches)
-  - Weight empty / charged vapor: 11 kg / 17.5 kg
-  - Charge time: 2 hours (Advanced QWick technology)
-  - Compliance: IATA DGR Special Provision A152 exempt; MDD 93/42/EEC
-  - Warranty: TWO Year Vacuum Warranty
-
-  CryoShipper XC (M02-21553211S — Cryoshipper XC with Data Logger Kit):
-  - Sample capacity: vials, straws, small bags (general purpose); up to 966 x 2.0mL vials in compatible rack
-  - LN2 capacity: 10 litres
-  - Static evaporation rate: 0.70 L/day
-  - Static holding time: 14 days
-  - Neck opening: 216mm (8.5 inches)
-  - Overall height: 584mm (23 inches)
-  - Outer diameter: 381mm (15 inches)
-  - Weight empty / charged vapor: 15 kg / 22.2 kg
-  - Charge time: 2 hours (Advanced QWick technology)
-  - Compliance: IATA DGR Special Provision A152 exempt; MDD 93/42/EEC
-  - Warranty: TWO Year Parts Warranty; THREE Year Vacuum Warranty
-
-  PRESENTING HOLD TIMES IN THE QUOTATION:
-  - When quoting MULTIPLE CryoShipper models in the same quotation, present each model's hold time as a SEPARATE bullet in the Important Notes section. Format example: "Static holding time: CT-50 (10 days), CT-250 (10 days), CryoShipper XC (14 days)" — NOT "10+ days, varies by model".
-  - When quoting a SINGLE CryoShipper model, state the exact hold time for that model only — do not reference the other models' specs.
+  Format rules:
+  - When quoting MULTIPLE models in the same quotation, present each model's hold time as a SEPARATE line in the Important Notes section. Format example: "Static holding time: SC 4/2V (13 days), CryoShipper XC (14 days), CT-250 (10 days)" — NOT vague phrases like "10+ days, varies by model".
+  - When quoting a SINGLE model, state the exact hold time for that model only — do not reference other models' specs.
   - All static hold times are nominal — actual performance varies with atmospheric conditions, sample temperature, and usage. You may add this caveat once at the end of the specs.
+  - NEVER copy hold times from the wrong model (e.g., do not quote SC 4/2V at "14 days" — that's the CryoShipper XC value; SC 4/2V is 13 days).
+
+  Detailed specs for individual models (use ONLY when the dealer specifically asks for full technical specs / brochure-level detail for a particular model):
+  - CT-50 (M02-21561771S): 2x 25mL blood bags, 5L LN2, 0.5 L/day evap, 10-day hold, 8/12kg empty/charged, IATA exempt, MDD compliant
+  - CT-250 (M02-21561770S): 2x 250mL blood bags, 8L LN2, 0.8 L/day evap, 10-day hold, 11/17.5kg empty/charged, IATA exempt, MDD compliant
+  - CryoShipper XC (M02-21553211S): 966 vials bulk or 500 vials caned, 10L LN2, 0.70 L/day evap, 14-day hold, 15/22.2kg empty/charged, IATA exempt, MDD compliant, 3-year vacuum warranty
+  - SC 4/2V (M02-9918479): 440 straws bulk / 95-102 vials caned, 3.6L LN2, 0.26 L/day evap, 13-day hold, 4.5/7.7kg empty/charged, 2.75" neck. With PPSC (M02-21134754): IATA exempt
+  - SC 4/3V (M02-10817330): 210 straws bulk / 40-48 vials caned, 4.3L LN2, 0.20 L/day evap, 21-day hold, 5.3/8.7kg empty/charged, 2.00" neck. With PPSC (M02-21134753): IATA exempt
+  - XC 30/12V (M02-21244576): 312 straws bulk / 30-36 vials caned (1 rack), 18L LN2, 0.22 L/day evap, 82-day hold, 20/34kg empty/charged
+  - XC 65/5V (M02-21559429): 1x 5/2 vial box rack (100 vials/box), 10L LN2, 0.79 L/day evap, 40-day hold, includes PPSC
+  All MVE Vapor Shippers: Advanced QWick charge technology (2-hour charge time); IATA DGR Special Provision A152 exempt (with PPSC); MDD 93/42/EEC (CE) compliant; TWO Year Parts + THREE Year Vacuum warranty.
 
   ### CRYOSHIPPER BROCHURE LINKS
   Include the model-specific spec sheet when quoting CryoShippers:
