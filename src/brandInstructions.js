@@ -275,7 +275,8 @@ const BRAND_INSTRUCTIONS = {
 
   NEVER quote SC/XC series in response to a bare "LN2 storage container" request.
 
-  MVE MODEL SEARCH: MVE model names in the pricelist use spaces around slashes (e.g. "SC 4 / 3 V", "SC 2 / 1 V"). When a dealer writes "SC4/3V" or "SC 4/3V", search using the key terms separated — e.g. search "SC 4 3 V" or just "SC 4" and then filter results. Do NOT mark as "Not Available" without trying multiple search terms. Vapor shippers are SC 2/1V, SC 4/2V, SC 4/3V. CryoShippers are CT-50, CT-250, CryoShipper XC, CryoShipper 2000.
+  MVE MODEL SEARCH: MVE model names in the pricelist use spaces around slashes (e.g. "SC 4 / 3 V", "SC 2 / 1 V"). When a dealer writes "SC4/3V" or "SC 4/3V", search using the key terms separated — e.g. search "SC 4 3 V" or just "SC 4" and then filter results. Do NOT mark as "Not Available" without trying multiple search terms.
+  IMPORTANT: All of the following are part of the MVE Vapor Shipper Series (per official MVE catalogue ML-000050) — they are all LN2 dry vapor shippers, NOT separate product categories. The "CryoShipper" name is just MVE's brand name for some models. The full series includes: SC 2/1V, SC 4/2V, SC 4/3V, XC 30/12V, CryoShipper, CryoShipper XC, CryoShipper 2000, IATA CryoShipper, XC 65/5V, CT-50, CT-250. When a dealer asks for a "vapor shipper" OR "cryoshipper", consider the ENTIRE range — do not artificially limit to only CT-50/CT-250/XC.
   
   MVE DEWAR BUNDLING: When quoting MVE dewars, ALWAYS include the complete package — never quote just the bare dewar. The pricelist groups items by model: the main unit is listed first, followed by accessories in parenthesized model names.
   For RESEARCH DEWARS (RD-0.5, RD-1, RD-1W, RD-2, RD-3, RD-6): Lids are sold separately. ALWAYS include the matching lid/cork:
@@ -286,7 +287,7 @@ const BRAND_INSTRUCTIONS = {
     - RD-3 (3.0L): dewar M02-13982285 + stainless lid M02-21007715
     - RD-6 (6.0L): dewar M02-13982293 + stainless lid M02-21007715
   For SAMPLE STORAGE DEWARS (SC, XC, CryoSystem, Doble) when used as STATIONARY SAMPLE STORAGE (not for transport): Include the main unit. Also list available accessories (spare canister, cork/cover, hinged lid kit, roller base) that appear under the same model group in the pricelist, so the dealer can see the full package.
-  For VAPOR SHIPPERS / CRYOSHIPPERS (SC 2/1V, SC 4/2V, SC 4/3V, XC 20/3V, CryoShipper, CryoShipper XC, CryoShipper 2000, CT-50, CT-250, CryoShipper Mini, Qwick series) — these are TRANSPORT units, NOT sample storage. CRITICAL ACCESSORY POLICY for new vapor shipper / cryoshipper purchases:
+  For VAPOR SHIPPERS / CRYOSHIPPERS (SC 2/1V, SC 4/2V, SC 4/3V, XC 30/12V, XC 65/5V, CryoShipper, CryoShipper XC, CryoShipper 2000, IATA CryoShipper, CT-50, CT-250) — these are TRANSPORT units, NOT sample storage. CRITICAL ACCESSORY POLICY for new vapor shipper / cryoshipper purchases:
     DO NOT QUOTE the following spare/replacement parts unless the dealer EXPLICITLY asks for them or describes a maintenance/replacement scenario:
       - Spare Canister (e.g., M02-20045793 for SC 2/1V, M02-9710171 for SC 4/2V)
       - Spare Cork and Cover (e.g., M02-10507219 for SC 2/1V, M02-10507032 for SC 4/2V)
@@ -294,7 +295,7 @@ const BRAND_INSTRUCTIONS = {
       - Replacement neck tube
     Reasoning: These are MAINTENANCE/REPLACEMENT parts. A new vapor shipper / cryoshipper unit ships with one canister and one cork/cover already included. Quoting these as line items inflates the quote unnecessarily and confuses the customer into thinking they're required for the new purchase.
     DO QUOTE these accessories when relevant:
-      - Data Logger Lid Assembly / Datalogger Kit (e.g., M02-21553216S for SC 4/2V, M02-14070202 for CryoShipper) — when the dealer requests temperature monitoring, when the spec mentions "datalogger"/"temperature logger"/"validated logger", or when implied by clinical/GMP/IATA-compliant transport requirements
+      - Data Logger options — see the dedicated "DATA LOGGER OPTIONS FOR VAPOR SHIPPERS" section below for which SKU to use based on model and dealer requirements (preinstalled SKUs preferred over base unit + separate logger kit)
       - Protective Shipping Container / Carton — when IATA-compliant shipping packaging is requested
       - Vial racks / sample storage configurations — when capacity/configuration is specified by dealer
     Important caveat about ISO 21973: When tender specs mention "ISO 21973, CE or equivalent", note that ISO 21973:2020 is a transport SERVICE PROVIDER standard (covers chain-of-custody, traceability, logistics processes — not equipment itself). MVE CryoShippers conform to MDD 93/42/EEC (CE marked under MDD) and are IATA DGR Special Provision A152 compliant for non-hazardous classification. The unit itself is NOT ISO 21973 certified — only logistics service providers can be. Do not claim ISO 21973 certification for MVE units.
@@ -302,27 +303,74 @@ const BRAND_INSTRUCTIONS = {
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
 
-  ### CRYOSHIPPER PRE-QUOTE — SAMPLE FORMAT CLARIFICATION
-  When a dealer asks for a "cryoshipper", "LN2 shipper", "dry vapor shipper", "vapor shipper for samples", or describes transport of cryopreserved biological materials WITHOUT specifying the sample format, you MUST send a pre-quote email asking what they will ship. The CT-50, CT-250, and CryoShipper XC are NOT interchangeable — they hold different sample formats and have different hold times. Quoting all three without clarification confuses the dealer and looks like padding.
+  ### VAPOR SHIPPER / CRYOSHIPPER PRE-QUOTE — SAMPLE FORMAT CLARIFICATION
+  When a dealer asks for a "cryoshipper", "LN2 shipper", "dry vapor shipper", "vapor shipper for samples", or describes transport of cryopreserved biological materials WITHOUT specifying the sample format AND without naming a specific model, you MUST send a pre-quote email asking what they will ship. The MVE Vapor Shipper Series has 9+ different models in the FC-BIOS pricelist with hold times from 8 to 82 days and capacities from single vials to 4 blood bag cassettes. They are NOT interchangeable — quoting all of them without clarification confuses the dealer and looks like padding. Quoting only 1-2 random ones (e.g. only CryoShipper XC) misses better-fit options.
 
-  Sample-format qualifiers that REMOVE the need to clarify (quote the matching model directly):
+  Sample-format / model-name qualifiers that REMOVE the need to clarify (quote matching models directly per the recommendation table below):
   - "25mL blood bag" / "small blood bag" / "PBMC bag" / "stem cell bag 25mL" → CT-50 (holds 2x 25mL bags)
-  - "250mL blood bag" / "cord blood unit" / "large blood bag" → CT-250 (holds 2x 250mL bags)
-  - "cryovials" / "1.2mL vials" / "2mL vials" / "vials" / "straws" / "general purpose" / "mixed samples" → CryoShipper XC
-  - Specific model named by dealer (e.g., "CT-250", "Cryoshipper XC") → quote that model directly
+  - "250mL blood bag" / "cord blood unit" / "large blood bag" → CT-250 (holds 2x 250mL bags) or CryoShipper 2000 w/ Cassette Rack (holds 4 blood bag cassettes)
+  - "cryovials" / "1.2mL vials" / "2mL vials" / "vials only" / "straws" → SC 4/2V, SC 4/3V, XC 30/12V, CryoShipper XC, or XC 65/5V (depending on volume and hold time required)
+  - "mixed samples" / "general purpose" → SC 4/2V or SC 4/3V (standard general-purpose vapor shippers)
+  - Specific model named by dealer (e.g., "SC 4/3V", "Cryoshipper XC", "CT-250") → quote that model directly
+  - Specific hold time requirement (e.g., "30 day hold", "minimum 20 days") → match the requirement against the hold-time table below
 
-  If NO sample-format qualifier appears and NO specific model is named, send this pre-quote (do NOT include prices or the standard quote table):
-  "Before we can recommend the most suitable cryoshipper, could you please confirm:
-  1. What is the sample format you will be transporting? (e.g., 25mL blood bags, 250mL blood bags / cord blood units, cryovials, straws, or mixed samples)
-  2. What is the required holding time for transport? (Our models offer 10 days or 14 days static hold time)
+  If NO sample-format qualifier AND NO model is named AND NO hold time is specified, send this pre-quote (do NOT include prices or the standard quote table):
+  "Before we can recommend the most suitable cryoshipper / vapor shipper, could you please confirm:
+  1. What is the sample format you will be transporting? (e.g., 25mL blood bags, 250mL blood bags / cord blood units, cryovials in 1.2mL or 2mL, straws, or mixed samples)
+  2. What is the required holding time for transport? (Our models range from 8 days to 82 days static hold)
   3. Approximate sample volume / quantity per shipment
+  4. Is the unit required for IATA-compliant international shipping? (We can supply with Protective Shipping Container / PPSC)
+  5. Do you require an integrated temperature data logger for the transport?
 
-  This is important because our MVE CryoShipper models are purpose-built for specific sample formats:
-  - CT-50 — dedicated for 2x 25mL blood bags, 10-day hold
-  - CT-250 — dedicated for 2x 250mL blood bags (cord blood units), 10-day hold
-  - CryoShipper XC — general purpose for vials/straws/small bags, 14-day hold"
+  Once we have these details, we can recommend the best-fit model from our MVE Vapor Shipper range."
 
-  Include the brochure links (below) in the pre-quote so the dealer can review.
+  Include the brochure links (below) in the pre-quote so the dealer can review the full series.
+
+  ### VAPOR SHIPPER MODEL RECOMMENDATION TABLE (use this when matching dealer requirements to models)
+  All models are LN2 dry vapor shippers, ≤-150°C, IATA DGR Special Provision A152 exempt (with PPSC where applicable), MDD 93/42/EEC compliant.
+  Hold times are STATIC nominal — actual performance varies with conditions.
+
+  | Model | Hold Time | Sample Capacity | Pricelist SKU (active) | Use case |
+  |-------|-----------|-----------------|------------------------|----------|
+  | SC 2/1V | 8 days | 88 straws bulk; small samples | M02-9922339 | Smallest, lowest cost, very short transport only — usually not enough hold for international |
+  | SC 4/2V | 13 days | 440 straws / 95-102 vials | M02-9918479 | General purpose, mid-volume, mid-distance — most common choice |
+  | SC 4/2V WITH PPSC | 13 days | 440 straws / 95-102 vials | M02-21134754 | SC 4/2V bundled with IATA shipping container |
+  | SC 4/3V | 21 days | 210 straws / 40-48 vials | M02-10817330 | Longer hold time, slimmer canister (1.81" dia) — for international transport |
+  | SC 4/3V WITH PPSC | 21 days | 210 straws / 40-48 vials | M02-21134753 | SC 4/3V bundled with IATA shipping container |
+  | XC 30/12V | 82 days | 312 straws / 30-36 vials / 1 rack | M02-21244576 | Longest hold time — bulk/long-duration transport, larger 18L tank |
+  | CryoShipper (10-day) | 10 days | Blood bag rack OR 5-2 square rack | M02-10508967 / M02-20925284 | Premium 10-day option with shipping container included |
+  | CryoShipper XC (14-day) | 14 days | 966 vials bulk / 500 vials cane | M02-11015195 | Premium 14-day with high vial capacity (PPSC included) |
+  | CryoShipper 2000 (15-day) | 15 days | 4 square racks / vial boxes | M02-11366673 | Premium high-volume, includes PPSC |
+  | CryoShipper 2000 w/ Cassette Rack | 15 days | 4 blood bag cassette racks | M02-21839182 | High-volume blood bag transport (cassette-based) |
+  | IATA CryoShipper | 14 days | Vials in secondary container | M02-10777411 | Premium pre-bundled with secondary container + PPSC for guaranteed IATA |
+  | XC 65/5V | 40 days | 1x 5/2 vial box rack (100 vials/box) | M02-21559429 | Long-hold mid-volume vial transport (PPSC included) |
+  | CT-50 | 10 days | 2x 25mL blood bags | M02-21007700 (bare) / M02-21156062 (w/PPSC) | Dedicated for 25mL bags only |
+  | CT-250 | 10 days | 2x 250mL blood bags | M02-21000341 (bare) / M02-21092630 (w/PPSC) | Dedicated for 250mL bags (cord blood units) only |
+
+  CRITICAL — LEGACY SKU EXCLUSION: The pricelist contains duplicate entries for SC 4/2V, SC 4/3V, SC 4/2V WITH PPSC, and SC 4/3V WITH PPSC with a "U" suffix in the SKU (e.g. M02-9918479U, M02-10817330U, M02-21134754U, M02-21134753U) labeled "(LEGACY)". DO NOT quote the "U"-suffix Legacy SKUs. Always quote the non-"U" versions (M02-9918479, M02-10817330, M02-21134754, M02-21134753) listed in the table above.
+
+  ### NEXT-GEN SC 4/2V AND SC 4/3V — NOT YET AVAILABLE
+  The MVE catalogue features Next-Generation SC 4/2V (19-day hold) and SC 4/3V (26-day hold) with improved durability. The FC-BIOS pricelist currently only has Next-Gen spare cork/covers (M02-21839652S, M02-21839651S) but NOT the main units. DO NOT recommend or quote the Next-Gen SC 4/2V or SC 4/3V main units — they are not yet available. If a dealer specifically asks for the Next-Gen versions, flag for human review and note that current standard SC 4/2V (13-day) and SC 4/3V (21-day) are available.
+
+  ### DATA LOGGER OPTIONS FOR VAPOR SHIPPERS
+  When the dealer requires temperature monitoring, integrated data logger, or clinical/GMP-compliant transport with temperature recording, the agent MUST offer the appropriate logger option. There are THREE generations of data logger options in the pricelist — pick based on the model:
+
+  Option A — "Preinstalled Data Logger Kit" SKUs (PREFERRED when available — significantly cheaper than buying base unit + separate logger kit):
+  - SC 4/2V with Data Logger preinstalled: M02-21553216S — RM 10,680 (vs M02-9918479 SC 4/2V RM 8,030 + M02-21544872S Data Logger Kit RM 8,410 = RM 16,440 separate. Saves RM 5,760.)
+  - SC 4/3V with Data Logger preinstalled: M02-21553217S — RM 10,680 (vs M02-10817330 SC 4/3V RM 8,180 + M02-21544872S Data Logger Kit RM 8,410 = RM 16,590 separate. Saves RM 5,910.)
+  - CryoShipper XC with Data Logger preinstalled: M02-21553211S — RM 10,840
+  - CT-50 with Data Logger preinstalled: M02-21561771S — RM 13,490
+  - CT-250 with Data Logger preinstalled: M02-21561770S — RM 13,610
+  RULE: When the dealer wants SC 4/2V, SC 4/3V, CryoShipper XC, CT-50, or CT-250 WITH a data logger, ALWAYS quote the "Preinstalled Data Logger Kit" SKU instead of pairing the base unit with a separate logger kit. Explain in the notes: "The preinstalled data logger SKU is significantly more cost-effective than purchasing the base unit and data logger kit separately."
+
+  Option B — SMARTTAG / CRYOBEACON (newer condition monitoring systems for SC 4/2V and SC 4/3V — offer as alternatives when dealer wants connectivity/tracking):
+  - SMARTTAG SC 4/2V CMS: M02-21839077S — RM 5,820 (Cork w/ Datalogger & Probe + World Track 12 Months connectivity)
+  - SMARTTAG SC 4/3V CMS: M02-21838826S — RM 5,820
+  - CRYOBEACON SC 4/2V CMS: M02-21839078S — RM 3,560 (Cork w/ Datalogger & Probe + standard Connectivity 12 Months)
+  - CRYOBEACON SC 4/3V CMS: M02-21838827S — RM 3,560
+  When to offer: If the dealer mentions remote tracking, real-time connectivity, IoT, asset tracking, fleet monitoring, or chain-of-custody — these are condition monitoring systems (CMS) with embedded data loggers + connectivity. SMARTTAG includes broader "World Track" coverage; CRYOBEACON is the standard connectivity option. These ADD to a base SC 4/2V or SC 4/3V purchase (they are cork-with-logger assemblies that replace the standard cork). Do NOT quote these in place of Option A unless dealer specifically asks for connectivity/tracking.
+
+  Option C — Standalone Data Logger Kit (M02-21544872S, RM 8,410) — ONLY quote when retrofitting an existing tank the dealer already owns. Do NOT pair this with a new SC 4/2V, SC 4/3V, CryoShipper XC, CT-50, or CT-250 purchase (Option A is cheaper).
 
   ### CRYOSHIPPER MODEL SPECIFICATIONS (use EXACT figures — do NOT blur or generalize across models)
   When quoting any CryoShipper CT-50, CT-250, or XC with data logger, you MUST present model-specific hold times and capacities. NEVER write generalized phrases like "10+ days hold time" or "varies by model" — quote the exact figure for each model in its own line. The model-specific specs are a key selling point and dealers compare them carefully.
