@@ -2,7 +2,7 @@
 // Scans email text for SKU patterns and product keywords, returns list of brand keys
 // whose detailed instructions should be auto-injected into the agent's user message.
 //
-// Currently supports: HIMEDIA
+// Currently supports: HIMEDIA, MVE
 // To add more brands: append a check below, return the BRAND key matching
 // brandInstructions.js (e.g., 'TARSONS', 'DISPOZ', 'LP', etc.)
 
@@ -19,7 +19,8 @@ function detectBrandsInEmail(emailBody) {
   //                   GRM###, RM###, LQ###, MB###, ML###, MS###, MBT###, HTBM###,
   //                   CCK###, PCT###, AT###, FD###, OD###, PT###, PW###, SD###, SF###,
   //                   TC###, TCP###, CO###, CR###, SL###, SM###, LA###, MAP###, MF###
-  const himediaSkuRegex = /\b(H05-|M\d{2,5}\b|MV\d{2,5}\b|MH\d{2,5}\b|GM\d{2,5}\b|GMH\d{2,5}\b|MCD\d{2,5}\b|GRM\d{2,5}\b|RM\d{2,5}\b|LQ\d{2,5}\b|MB\d{2,5}\b|ML\d{2,5}\b|MS\d{2,5}\b|MBT\d{2,5}\b|HTBM\d{2,5}\b|CCK\d{2,5}\b|PCT\d{2,5}\b)/i;
+  // Negative lookahead: exclude M02 (MVE SKU prefix) from M### matching
+  const himediaSkuRegex = /\b(H05-|M(?!02\b|02-)\d{2,5}\b|MV\d{2,5}\b|MH\d{2,5}\b|GM\d{2,5}\b|GMH\d{2,5}\b|MCD\d{2,5}\b|GRM\d{2,5}\b|RM\d{2,5}\b|LQ\d{2,5}\b|MB\d{2,5}\b|ML\d{2,5}\b|MS\d{2,5}\b|MBT\d{2,5}\b|HTBM\d{2,5}\b|CCK\d{2,5}\b|PCT\d{2,5}\b)/i;
   // Strong signal: HiMedia by name
   const himediaNameRegex = /\bhi[\s-]?media\b|\bhimedialabs\b/i;
   // Microbiology media product keywords (very high HiMedia probability)
@@ -37,6 +38,26 @@ function detectBrandsInEmail(emailBody) {
     himediaTissueCultureRegex.test(text)
   ) {
     brands.add('HIMEDIA');
+  }
+
+  // ===== MVE detection =====
+  // Strong signal: M02- SKU prefix (all MVE NetSuite codes start with M02-)
+  const mveSkuRegex = /\bM02-[\w]+/i;
+  // Strong signal: MVE by name
+  const mveNameRegex = /\bMVE\b|\bmvebio\b|\bmve\s+biological\b/i;
+  // Product keywords spanning the MVE catalogue:
+  //   - Vapor shippers / cryoshippers (SC, XC, CT-50, CT-250, CryoShipper, IATA)
+  //   - LN2 storage dewars (Doble, CryoSystem, XC Signature, SC Signature, RD-)
+  //   - Lab series LN2 supply (Lab 4, Lab 10, Lab 20, etc.)
+  //   - Generic cryogenic equipment language
+  const mveProductRegex = /\b(cryoshipper|cryo[\s-]?shipper|vapor[\s-]?shipper|LN2[\s-]?shipper|dry[\s-]?vapor|liquid nitrogen (?:shipper|dewar|tank|container|storage)|cryogenic (?:transport|shipper|dewar|storage|tank)|cryopreserved (?:sample|material|biological)|CT[\s-]?50|CT[\s-]?250|SC ?\d+ ?\/ ?\d+ ?V?|XC ?\d+ ?\/ ?\d+ ?V?|cryosystem|doble[\s-]?\d+|research dewar|RD[\s-]?\d|MVE[\s-]?lab[\s-]?\d|TEC ?3000|TEC ?2000|cryocube|cryotipper|cryobeacon|smarttag|PPSC|protective shipping container|IATA (?:cryoshipper|shipper)|dewar(?:s)?|LN[\s-]?2 (?:storage|supply|level)|vapor phase|cryocane)\b/i;
+
+  if (
+    mveSkuRegex.test(text) ||
+    mveNameRegex.test(text) ||
+    mveProductRegex.test(text)
+  ) {
+    brands.add('MVE');
   }
 
   // ===== Future brands go here =====
