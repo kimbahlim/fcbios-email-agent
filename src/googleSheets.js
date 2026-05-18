@@ -121,6 +121,33 @@ async function fetchSheet(tabName) {
     return obj;
   });
 
+  // MVE-specific fix: the MVE tab splits product info across two columns:
+  //   - "Model" (col B): the product model name, e.g. "SC 35/24 - NEW MODEL!"
+  //     or parenthesized for accessories, e.g. "(SC 35/24 - NEW MODEL!)"
+  //   - "Description" (col C): only the spec detail, e.g. "With (6) 11 Inch Canisters" or "Spare Canister"
+  // Without combining, the agent only reads Description, which is meaningless out of context
+  // (e.g. a "Spare Canister" line with no parent model). Combine them so the agent and dealer
+  // always see the model name alongside the spec. Only applies to MVE — other equipment tabs
+  // (GYROZEN, TOMY) already include the model name inside Description.
+  if (tabName === 'MVE') {
+    let combinedCount = 0;
+    for (const row of results) {
+      const modelKey = Object.keys(row).find(k => k.toLowerCase() === 'model');
+      const descKey = Object.keys(row).find(k => k.toLowerCase() === 'description');
+      if (!modelKey || !descKey) continue;
+      const model = row[modelKey];
+      const desc = row[descKey];
+      if (!model) continue;
+      // Skip if description already contains the model name (avoid duplication)
+      const modelStripped = model.replace(/^\(|\)$/g, '').trim().toLowerCase();
+      if (desc && desc.toLowerCase().includes(modelStripped)) continue;
+      // Combine: "{Model} - {Description}" (or just Model if Description is empty)
+      row[descKey] = desc ? `${model} - ${desc}` : model;
+      combinedCount++;
+    }
+    console.log(`[SHEETS] MVE: combined Model+Description on ${combinedCount} rows`);
+  }
+
   // Log first row for Stock tab to verify data
   if (tabName === 'Stock' && results.length > 0) {
     console.log(`[SHEETS] Stock tab first row: ${JSON.stringify(results[0])}`);
