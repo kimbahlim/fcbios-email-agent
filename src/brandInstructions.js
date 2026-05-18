@@ -301,7 +301,82 @@ const BRAND_INSTRUCTIONS = {
   For LN2 SUPPLY DEWARS (Lab 4, Lab 10, Lab 20, Lab 30, Lab 50): Include the main unit. List available accessories that appear under the same model group in the pricelist (e.g. roller base, pouring spout, discharge device, transfer hose, phase separator, replaceable neck cork) so the dealer can see the full package. Do NOT quote canisters/racks for Lab series — these are LN2 supply tanks, not sample storage.
   NEVER say "lids sold separately" — instead, include the lid as a line item in the quotation table.
   MVE has NO minimum order quantity — dealers can order 1 unit of any MVE product. Do NOT add any MOQ notes to MVE quotations.
-  
+
+  ### CRYOSHIPPER PRE-QUOTE — SAMPLE FORMAT CLARIFICATION
+  When a dealer asks for a "cryoshipper", "LN2 shipper", "dry vapor shipper", "vapor shipper for samples", or describes transport of cryopreserved biological materials WITHOUT specifying the sample format, you MUST send a pre-quote email asking what they will ship. The CT-50, CT-250, and CryoShipper XC are NOT interchangeable — they hold different sample formats and have different hold times. Quoting all three without clarification confuses the dealer and looks like padding.
+
+  Sample-format qualifiers that REMOVE the need to clarify (quote the matching model directly):
+  - "25mL blood bag" / "small blood bag" / "PBMC bag" / "stem cell bag 25mL" → CT-50 (holds 2x 25mL bags)
+  - "250mL blood bag" / "cord blood unit" / "large blood bag" → CT-250 (holds 2x 250mL bags)
+  - "cryovials" / "1.2mL vials" / "2mL vials" / "vials" / "straws" / "general purpose" / "mixed samples" → CryoShipper XC
+  - Specific model named by dealer (e.g., "CT-250", "Cryoshipper XC") → quote that model directly
+
+  If NO sample-format qualifier appears and NO specific model is named, send this pre-quote (do NOT include prices or the standard quote table):
+  "Before we can recommend the most suitable cryoshipper, could you please confirm:
+  1. What is the sample format you will be transporting? (e.g., 25mL blood bags, 250mL blood bags / cord blood units, cryovials, straws, or mixed samples)
+  2. What is the required holding time for transport? (Our models offer 10 days or 14 days static hold time)
+  3. Approximate sample volume / quantity per shipment
+
+  This is important because our MVE CryoShipper models are purpose-built for specific sample formats:
+  - CT-50 — dedicated for 2x 25mL blood bags, 10-day hold
+  - CT-250 — dedicated for 2x 250mL blood bags (cord blood units), 10-day hold
+  - CryoShipper XC — general purpose for vials/straws/small bags, 14-day hold"
+
+  Include the brochure links (below) in the pre-quote so the dealer can review.
+
+  ### CRYOSHIPPER MODEL SPECIFICATIONS (use EXACT figures — do NOT blur or generalize across models)
+  When quoting any CryoShipper CT-50, CT-250, or XC with data logger, you MUST present model-specific hold times and capacities. NEVER write generalized phrases like "10+ days hold time" or "varies by model" — quote the exact figure for each model in its own line. The model-specific specs are a key selling point and dealers compare them carefully.
+
+  CT-50 (M02-21561771S — C/C w/Data Logger):
+  - Sample capacity: 2x 25mL blood bags
+  - LN2 capacity: 5 litres (without inventory)
+  - Static evaporation rate: 0.5 L/day
+  - Static holding time: 10 days
+  - Neck opening: 97mm (3.82 inches)
+  - Overall height: 380mm (15 inches)
+  - Outer diameter: 368mm (14.5 inches)
+  - Weight empty / charged vapor: 8 kg / 12 kg
+  - Charge time: 2 hours (Advanced QWick technology)
+  - Compliance: IATA DGR Special Provision A152 exempt; MDD 93/42/EEC
+  - Warranty: TWO Year Vacuum Warranty
+
+  CT-250 (M02-21561770S — C/C w/Data Logger):
+  - Sample capacity: 2x 250mL blood bags (cord blood units)
+  - LN2 capacity: 8 litres (without inventory)
+  - Static evaporation rate: 0.8 L/day
+  - Static holding time: 10 days
+  - Neck opening: 165mm (6.5 inches)
+  - Overall height: 502mm (19.8 inches)
+  - Outer diameter: 406mm (16.0 inches)
+  - Weight empty / charged vapor: 11 kg / 17.5 kg
+  - Charge time: 2 hours (Advanced QWick technology)
+  - Compliance: IATA DGR Special Provision A152 exempt; MDD 93/42/EEC
+  - Warranty: TWO Year Vacuum Warranty
+
+  CryoShipper XC (M02-21553211S — Cryoshipper XC with Data Logger Kit):
+  - Sample capacity: vials, straws, small bags (general purpose); up to 966 x 2.0mL vials in compatible rack
+  - LN2 capacity: 10 litres
+  - Static evaporation rate: 0.70 L/day
+  - Static holding time: 14 days
+  - Neck opening: 216mm (8.5 inches)
+  - Overall height: 584mm (23 inches)
+  - Outer diameter: 381mm (15 inches)
+  - Weight empty / charged vapor: 15 kg / 22.2 kg
+  - Charge time: 2 hours (Advanced QWick technology)
+  - Compliance: IATA DGR Special Provision A152 exempt; MDD 93/42/EEC
+  - Warranty: TWO Year Parts Warranty; THREE Year Vacuum Warranty
+
+  PRESENTING HOLD TIMES IN THE QUOTATION:
+  - When quoting MULTIPLE CryoShipper models in the same quotation, present each model's hold time as a SEPARATE bullet in the Important Notes section. Format example: "Static holding time: CT-50 (10 days), CT-250 (10 days), CryoShipper XC (14 days)" — NOT "10+ days, varies by model".
+  - When quoting a SINGLE CryoShipper model, state the exact hold time for that model only — do not reference the other models' specs.
+  - All static hold times are nominal — actual performance varies with atmospheric conditions, sample temperature, and usage. You may add this caveat once at the end of the specs.
+
+  ### CRYOSHIPPER BROCHURE LINKS
+  Include the model-specific spec sheet when quoting CryoShippers:
+  - CT-50 & CT-250 spec sheet: https://mvebio.com/wp-content/uploads/sites/4/2024/02/MVE-CryoShipper-CT-50-and-CT-250-Spec-Sheet.pdf
+  - Blood Bag Shippers product page: https://mvebio.com/our-products/life-science-aluminum/mve-blood-bag-shippers/
+  - Vapor Shipper Series (XC and others): https://mvebio.com/our-products/life-science-aluminum/mve-vapor-shipper-series/
+
   ### MVE PRODUCT LINKS — include in every MVE quotation:
   - FC-BIOS collection: https://www.fcbios.com.my/collections/cryopreservation-dewar
   - SC & XC Series: https://mvebio.com/our-products/breeders-aluminum/mve-sc-and-xc-series/
