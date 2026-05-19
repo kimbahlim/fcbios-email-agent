@@ -121,7 +121,28 @@ This list will grow over time. If a dealer asks for a competitor product NOT on 
 - Data loggers / temperature recorders / USB PDF loggers → LogTag
 - Digital thermometers / thermohygrometers → MinMax
 - MinMax model codes: 308, 308-3, 508, 508-3, ADT-308, ADT-508, ADT-308-3, ADT-508-3 → ALL are MinMax products → search MINMAX tab
-- Petri dishes, loops, spreaders, specimen containers, urine containers, stool containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items. When dealer says "urine container" search DispoZ for "specimen container" — DispoZ calls them "Specimen Container" not "Urine Container". The 60ml sterile yellow cap version is DZ02-CA2S10600205.
+- Petri dishes, loops, spreaders, specimen containers (small, for clinical/diagnostic samples e.g. urine/stool/sputum), urine containers, stool containers, swabs, wooden sticks, applicator sticks, orange sticks, cotton swabs → DispoZ FIRST → LP backup. NEVER suggest HiMedia for these items. When dealer says "urine container" search DispoZ for "specimen container" — DispoZ calls them "Specimen Container" not "Urine Container". The 60ml sterile yellow cap version is DZ02-CA2S10600205.
+
+  EXCEPTION — SURGICAL / ANATOMICAL SPECIMEN POTS → LP PRIMARY (NOT DispoZ):
+  Surgical or anatomical specimen pots are a SEPARATE product category from clinical diagnostic specimen containers. They are larger (250mL to 5000mL), made of polystyrene (PS), printed with biohazard markings, and designed for transport of surgical/pathology specimens to incineration. DispoZ does NOT make this category — DispoZ specimen containers are small (60mL) PP screw-cap containers for clinical diagnostic samples (urine, stool, sputum), which is a different workflow.
+  Quote LP DIRECTLY (do not search DispoZ first) when the dealer asks for any of:
+  - "surgical specimen pot" / "surgical specimen container"
+  - "anatomical specimen pot" / "histology specimen pot" / "pathology pot"
+  - "specimen pot" with a size >100mL (clinical diagnostic samples are typically ≤60mL; larger volumes indicate surgical/anatomical use)
+  - Disposable container marked "destroy after use" or "for incinerator disposal"
+  - Image shows a printed (orange-and-white biohazard design) leak-proof pot with Italian-style typography
+  LP SKUs (all ex-stock, "S" status in pricelist):
+  - L03-190300 — Disposable specimen pot 250ml Ø125x54mm printed — Case/240
+  - L03-190301 — Disposable specimen pot 250ml Ø125x54mm white (unprinted) — Case/240
+  - L03-190500 — Disposable specimen pot 500ml Ø125x70mm printed — Case/180
+  - L03-190501 — Disposable specimen pot 500ml Ø125x70mm white — Case/180
+  - L03-191000 — Disposable specimen pot 1000ml Ø125x120mm printed — Case/180
+  - L03-191001 — Disposable specimen pot 1000ml Ø125x70mm white — Case/180
+  - L03-192500 — Disposable specimen pot 2500ml Ø200x130mm printed — Case/52
+  - L03-195000 — Disposable specimen pot 5000ml Ø200x215mm printed — Case/40
+  - L03-198313 — Handle accessory for 2.5L / 5L pots (optional add-on)
+  Manufacturer page (include as a brochure link in LP specimen pot quotations): https://www.lpitaliana.com/en/groups/3760/polystyrene-disposable-pot-for-surgical-or-anatomical-specimens-with-leak-proof-closure.html
+  When the dealer enquiry is image-only or vague about volume (e.g., just a photo of a specimen pot with no size mentioned), quote the FULL RANGE (250mL, 500mL, 1L, 2.5L, 5L) and ask the dealer to confirm which capacity they require. Do NOT default to a single size guess.
   CRITICAL — "DISPOZ FIRST → LP BACKUP" MEANING: This is a sequential fallback rule, NOT a "show both brands" rule. Do NOT quote both DispoZ and LP for the same product. The flow is:
   (a) Search DispoZ first.
   (b) If DispoZ has the item EX-STOCK (any positive stock quantity, decimal or whole), quote DispoZ ONLY. Do NOT also quote LP. Do NOT add LP as a "backup" or "alternative" in the same quote.
