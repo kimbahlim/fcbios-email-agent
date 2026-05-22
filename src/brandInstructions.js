@@ -154,32 +154,34 @@ const BRAND_INSTRUCTIONS = {
 
   GYROZEN: `## GYROZEN CENTRIFUGE RANGE (FC-BIOS carries all models below):
   
+  PRICING: Do NOT use any hardcoded prices below — there are none, by design. Always read the current price from the GYROZEN pricelist tab (search by model name or Code), then apply the markup returned by get_price_increase("GYROZEN"). The specs below are for MODEL SELECTION only, never for pricing.
+
   ### MICRO CENTRIFUGES (for microtubes 0.2-5.0mL):
-  - Mini 6 (AC-mini6): Personal quick spinner, 6 x 2.0mL, 6,500 rpm, 0.65kg, ventilated — RM 990
-  - Mini 6-RC (AC-mini6-RC): Same but with reverse spin function — RM 1,260
-  - Mini (GZ-1312): Personal microcentrifuge, 12 x 2.0mL, 13,500 rpm, 4.4kg, ventilated — RM 3,610
-  - 1524 (GZ-1524): 24 x 2.0mL microcentrifuge, 15,000 rpm, 11.9kg — RM 7,785
-  - 1536 (GZ-1536): Medium throughput, 36 x 2.0mL, 15,000 rpm, 17.5kg, ventilated — RM 8,740
-  - 1730R (GZ-1730R): Refrigerated micro, 36 x 2.0mL, 17,000 rpm, 43kg — RM 18,126 [STOCKING]
-  - 1848R (GZ-1848R): High throughput refrigerated micro, 48 x 2.0mL or 8 x 50mL conical, 18,000 rpm, 53.5kg — RM 24,570
+  - Mini 6 (AC-mini6): Personal quick spinner, 6 x 2.0mL, 6,500 rpm, 0.65kg, ventilated. Includes rotors. ← ENTRY MODEL for simple microtube spin-down
+  - Mini (GZ-1312): Personal microcentrifuge, 12 x 2.0mL, 13,500 rpm, 4.4kg, ventilated. Includes rotor.
+  - 1524 (GZ-1524): 24 x 2.0mL microcentrifuge, 15,000 rpm, 11.9kg. Includes rotor.
+  - 1536 (GZ-1536): Medium throughput, 36 x 2.0mL, 15,000 rpm, 17.5kg, ventilated. Sold WITHOUT rotor.
+  - 1730R (GZ-1730R): Refrigerated micro, 36 x 2.0mL, 17,000 rpm, 43kg [STOCKING]. Sold WITHOUT rotor.
+  - 1848R (GZ-1848R): High throughput refrigerated micro, 48 x 2.0mL or 8 x 50mL conical, 18,000 rpm, 53.5kg. Sold WITHOUT rotor.
+  NOTE: Do NOT offer the Mini 6-RC variant. Quote only the standard Mini 6 (AC-mini6) for micro spin-down requests.
   
   ### LOW SPEED CENTRIFUGES (for 15mL, 50mL, 100mL tubes, vacuum tubes, blood):
-  - 406 (GZ-0406): Basic, 6 x 15mL, 4,000 rpm, ventilated — RM 7,050
-  - 416 (GZ-0416): Compact, swing-out capable, up to 16 x 15mL or 10 x 50mL, 4,000 rpm, ventilated — RM 8,820 [STOCKING]
-  - 624R (GZ-0624R-B): Refrigerated, up to 24 x 15mL or 4 x 100mL, 6,000 rpm — RM 21,475
+  - 406 (GZ-0406): Basic, 6 x 15mL, 4,000 rpm, ventilated. Sold WITHOUT rotor.
+  - 416 (GZ-0416): Compact, swing-out capable, up to 16 x 15mL or 10 x 50mL, 4,000 rpm, ventilated [STOCKING]. Sold WITHOUT rotor.
+  - 624R (GZ-0624R-B): Refrigerated, up to 24 x 15mL or 4 x 100mL, 6,000 rpm. Sold WITHOUT rotor.
   
   ### MULTI-PURPOSE CENTRIFUGES (for high speed + large volume):
-  - 1248 (GZ-1248): 12,000 rpm, ventilated, bench top — RM 15,330
-  - 1248R (GZ-1248R): 12,000 rpm, refrigerated, bench top — RM 26,560
-  - 1236R (GZ-1236R): Same as 1248R but floor standing — RM 26,790
-  - 1580 (GZ-1580): 15,000 rpm, ventilated, bench top — RM 21,710
-  - 1580R (GZ-1580R): 15,000 rpm, refrigerated, bench top — RM 32,730 [STOCKING]
-  - 1696R (GZ-1696R): 16,000 rpm, refrigerated, highest capacity multi-purpose — RM 43,695
+  - 1248 (GZ-1248): 12,000 rpm, ventilated, bench top. Sold WITHOUT rotor.
+  - 1248R (GZ-1248R): 12,000 rpm, refrigerated, bench top. Sold WITHOUT rotor.
+  - 1236R (GZ-1236R): Same as 1248R but floor standing. Sold WITHOUT rotor.
+  - 1580 (GZ-1580): 15,000 rpm, ventilated, bench top. Sold WITHOUT rotor.
+  - 1580R (GZ-1580R): 15,000 rpm, refrigerated, bench top [STOCKING]. Sold WITHOUT rotor.
+  - 1696R (GZ-1696R II): 16,000 rpm, refrigerated, highest capacity multi-purpose. Sold WITHOUT rotor.
     Dimensions: 775 x 695 x 395mm (W x D x H) | Weight without rotor: 132 kg
   
   ### FLOOR STANDING HIGH SPEED:
-  - 1736R (GZ-1736R): 17,000 rpm, refrigerated, floor standing — RM 41,535
-  - 2236R (GZ-2236R): 22,000 rpm, refrigerated, 6L capacity, floor standing — RM 84,375
+  - 1736R (GZ-1736R): 17,000 rpm, refrigerated, floor standing. Sold WITHOUT rotor.
+  - 2236R (GZ-2236R): 22,000 rpm, refrigerated, 6L capacity, floor standing. Sold WITHOUT rotor.
     Dimensions: 640 x 820 x 1,235mm (W x D x H) | Weight without rotor: 218 kg
   
   ### KEY DECISION FACTORS (what to ask the dealer):
@@ -210,8 +212,15 @@ const BRAND_INSTRUCTIONS = {
   Use the pricelist description to accurately describe what each bucket holds. Do NOT invent capacity claims — quote the description exactly.
 
   ## GYROZEN CENTRIFUGE QUOTING:
-  ### PRE-QUOTE (send FIRST if dealer doesn't specify model):
-  When a dealer asks for "a centrifuge" without specifying a model, send a pre-quote email asking:
+  ### CRITICAL — DO NOT OVER-QUOTE. Match the quote to the dealer's stated need:
+  Never dump the entire model range. The number of models quoted must fit what the dealer asked for:
+  - If the dealer's application is clear enough to point to a category (e.g. "mini/microcentrifuge for 2mL tubes" = micro spin-down), quote ONLY the 1-2 most suitable entry models for that need (e.g. Mini 6, and Mini if higher speed is implied). Do NOT include refrigerated, high-throughput, or large-capacity models the dealer did not ask for.
+  - If the request is genuinely vague ("quote a centrifuge"), send the PRE-QUOTE clarifying questions below INSTEAD of a price list. Do not quote anything until they answer.
+  - Only quote 3+ models when the dealer explicitly asks to compare options or asks for "the full range".
+  Quoting expensive models (refrigerated / floor-standing) that the dealer did not ask for looks unprofessional and buries the relevant option.
+
+  ### PRE-QUOTE (send FIRST if request is too vague to identify a category):
+  When a dealer asks for "a centrifuge" with no usable detail, send a pre-quote email asking:
   1. What type of tubes/samples will you be spinning? (microtubes, 15mL/50mL conical, blood/vacuum tubes, plates)
   2. How many tubes do you need to spin per run?
   3. Do you need refrigeration? (for temperature-sensitive samples)
@@ -222,13 +231,13 @@ const BRAND_INSTRUCTIONS = {
   
   ### DIRECT QUOTE (when dealer specifies a model or gives enough info):
   If the dealer names a specific model (e.g., "quote for 1580R") or gives enough detail to identify the model:
-  1. Quote the main unit from the GYROZEN pricelist tab
-  2. Use the recommend_rotor tool with the centrifuge model, dealer's tube type/size, and quantity needed. The tool will return the best rotor/bucket configuration with calculated capacity.
+  1. Quote the main unit from the GYROZEN pricelist tab (read the live price — never use a remembered/old price)
+  2. For models that include a rotor (Mini 6, Mini, 1524), the rotor is already part of the main unit — do not quote it separately. For all other models (sold WITHOUT rotor), use the recommend_rotor tool with the centrifuge model, dealer's tube type/size, and quantity needed.
   3. Search the GYROZEN pricelist tab for the recommended rotor's price using the Rotor Cat No
   4. If the rotor requires buckets (Bucket Cat No is not empty), also quote the buckets
   5. Include relevant adaptors/sleeves if needed for their specific tube sizes
   6. Include delivery charge from the policy (by state) and TnC charge if applicable
-  7. Gyrozen prices are maintained at 2024 levels — do NOT apply any price increase
+  7. PRICING: read each price from the GYROZEN pricelist tab, then apply the markup returned by get_price_increase("GYROZEN") — same as every other brand. Do NOT assume a fixed year or 0%; always fetch the live value.
 
   ## DELIVERY & TnC CHARGES (from Gyrozen Policy):
   Delivery charges vary by state and model weight. TnC (Testing & Commissioning) is optional if done by the dealer's service personnel.
