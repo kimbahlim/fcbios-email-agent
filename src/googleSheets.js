@@ -87,6 +87,51 @@ function parsePackStructure(description) {
   return null;
 }
 
+// Derive pack structure from explicit "Qty/Pk" + "Qty/Case" columns (e.g. TARSONS tab).
+// Many brand tabs (notably TARSONS) provide quantity-per-pack and quantity-per-case as
+// separate numeric columns rather than a single "Pack Price" column or a description string.
+// In that case there is ONE price (the case/dealer price) and the pack price must be COMPUTED:
+//   packs_per_case = qty_per_case / qty_per_pack
+//   pack_price = (case_price / packs_per_case) * 1.10, rounded up
+// This helper extracts qty_per_pack and qty_per_case from the row and returns the same shape
+// as parsePackStructure so downstream logic is identical.
+// Handles values like "500", "5000", and composite forms like "(100x5)" → 500.
+function deriveStructureFromQtyCols(row) {
+  const keys = Object.keys(row);
+  const findKey = (...patterns) => keys.find(k => patterns.some(p => k.toLowerCase().includes(p)));
+  // Match the pack-qty column: "Qty/Pk", "Qty/Pack", "Qty per Pack", "Units/Pk", etc.
+  const pkKey = findKey('qty/pk', 'qty/pack', 'qty per pk', 'qty per pack', 'units/pk', 'units/pack', 'qty/bag', 'units/bag');
+  // Match the case-qty column: "Qty/Case", "Qty per Case", "Units/Case", etc.
+  const caseKey = findKey('qty/case', 'qty per case', 'units/case', 'qty/cs');
+  if (!pkKey || !caseKey) return null;
+
+  const parseQty = (val) => {
+    if (val === null || val === undefined) return NaN;
+    const s = String(val).trim();
+    if (s === '') return NaN;
+    // Composite form like "(100x5)" or "100x5" → multiply the factors
+    const composite = s.match(/\(?\s*(\d+)\s*[x×]\s*(\d+)\s*\)?/i);
+    if (composite) return parseInt(composite[1], 10) * parseInt(composite[2], 10);
+    // Plain number, possibly with commas
+    const plain = s.replace(/,/g, '').match(/(\d+(?:\.\d+)?)/);
+    return plain ? parseFloat(plain[1]) : NaN;
+  };
+
+  const qtyPerPack = parseQty(row[pkKey]);
+  const qtyPerCase = parseQty(row[caseKey]);
+  if (isNaN(qtyPerPack) || isNaN(qtyPerCase)) return null;
+  if (qtyPerPack <= 0 || qtyPerCase <= 0) return null;
+  // Pack must be smaller than case and divide evenly for a clean packs_per_case
+  if (qtyPerCase <= qtyPerPack) return null;
+  if (qtyPerCase % qtyPerPack !== 0) return null;
+  return {
+    qty_per_pack: qtyPerPack,
+    qty_per_case: qtyPerCase,
+    packs_per_case: qtyPerCase / qtyPerPack,
+    pattern: 'QtyCols: Qty/Pk + Qty/Case columns'
+  };
+}
+
 async function fetchSheet(tabName) {
   const now = Date.now();
   const ttl = tabName === 'LEAD_TIMES' ? LEAD_TIMES_TTL : CACHE_TTL;
@@ -249,7 +294,10 @@ async function searchProducts(keyword) {
     // Used when sheet has no explicit Bag Price/Bag Qty columns but description embeds the structure
     const descKey = findKey('description', 'display name');
     const descVal = descKey ? row[descKey] : '';
-    const packStructure = !hasExplicitPackCols ? parsePackStructure(descVal) : null;
+    // Try, in order: (1) Qty/Pk + Qty/Case columns (e.g. TARSONS), (2) description-parsed structure
+    const packStructure = !hasExplicitPackCols
+      ? (deriveStructureFromQtyCols(row) || parsePackStructure(descVal))
+      : null;
 
     let pricingNote;
     if (hasExplicitPackCols) {
@@ -425,7 +473,10 @@ async function searchByBrand(brandTab, keyword) {
     // Fallback: parse pack structure from description string
     const descKey = findKey('description', 'display name');
     const descVal = descKey ? row[descKey] : '';
-    const packStructure = !hasExplicitPackCols ? parsePackStructure(descVal) : null;
+    // Try, in order: (1) Qty/Pk + Qty/Case columns (e.g. TARSONS), (2) description-parsed structure
+    const packStructure = !hasExplicitPackCols
+      ? (deriveStructureFromQtyCols(row) || parsePackStructure(descVal))
+      : null;
 
     let pricingNote;
     if (hasExplicitPackCols) {
