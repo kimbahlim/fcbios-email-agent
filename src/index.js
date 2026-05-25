@@ -283,7 +283,9 @@ async function pollForEmails() {
       
       // Check signature only in the NEW content, not the quoted thread
       const hasOurSignature = newContentLower.includes('dealer support channel') && newContentLower.includes('fc bios sdn bhd') && newContentLower.includes('019-2663675');
-      const fromEmail = latestMsg.from_email.toLowerCase().trim();
+      // Use the TRUE header sender for self-detection — from_email may have
+      // been overwritten with the dealer's address for a forwarded enquiry.
+      const fromEmail = (latestMsg.header_from_email || latestMsg.from_email).toLowerCase().trim();
       const userEmail = (process.env.GMAIL_USER_EMAIL || '').toLowerCase().trim();
       const isFromSelf = (fromEmail === userEmail || fromEmail.includes('dealer_support') || fromEmail.includes('dealer-support'));
       
@@ -361,11 +363,20 @@ async function pollForEmails() {
           const replyName = result.dealer_name || latestMsg.from_name;
           const draftSubject = result.subject || `Re: ${latestMsg.subject}`;
 
-          console.log(`[REPLY TO] ${replyName} <${replyTo}>`);
+          // If this was a forward from our own staff but we couldn't recover the
+          // dealer's address, leave To: blank so the quotation can't be sent back
+          // to our own staff by accident — forces a conscious paste of the dealer.
+          let toField = `${replyName} <${replyTo}>`;
+          if (latestMsg.forwardedFromOwn) {
+            toField = '';
+            console.log(`[REPLY TO] BLANK — forwarded enquiry, dealer address not found in body. Draft left with empty To: for manual entry.`);
+          } else {
+            console.log(`[REPLY TO] ${replyName} <${replyTo}>`);
+          }
           if (result.cc) console.log(`[CC] ${result.cc}`);
 
           const draftResult = await createGmailDraft({
-            to: `${replyName} <${replyTo}>`,
+            to: toField,
             cc: result.cc || null,
             subject: draftSubject,
             htmlBody: result.draft_html,

@@ -80,6 +80,73 @@ function extractEmailName(fromHeader) {
   return match ? match[1].trim() : fromHeader.split('@')[0];
 }
 
+// ------------------------------------------------------------
+// FORWARDED-SENDER DETECTION
+// When a staff member forwards a dealer enquiry (e.g. Penang branch
+// forwarding to dealersupport@), the top-level From: header is the
+// staff member, NOT the dealer. This finds the dealer's real address
+// inside the forwarded header block in the body so the reply goes to
+// the customer, not back to our own staff.
+//
+// Guards:
+//  - Only returns an address that is NOT one of our own (@fcbios.com.my
+//    / dealer_support). Since the forwarder is always an FC Bios address,
+//    the first non-FC-Bios address in a forward block is the real dealer.
+//  - Returns null when nothing forward-like is found, so direct dealer
+//    emails (all KL traffic) are left completely untouched.
+// ------------------------------------------------------------
+const OWN_DOMAIN_RE = /fcbios\.com\.my|dealer[_-]?support/i;
+
+function isOwnAddress(email) {
+  return OWN_DOMAIN_RE.test(email || '');
+}
+
+function extractForwardedSender(body) {
+  if (!body) return null;
+
+  // Markers that indicate a forwarded block, across Gmail / Outlook / Apple Mail.
+  const hasForwardMarker =
+    /-{2,}\s*forwarded message\s*-{2,}/i.test(body) ||
+    /begin forwarded message:/i.test(body) ||
+    /^\s*from:\s.*\n(\s*sent:|\s*date:)/im.test(body);
+
+  if (!hasForwardMarker) return null;
+
+  // Collect every "From:" line in the body and pull name + email from each.
+  // Gmail uses:   From: Jane Dealer <jane@acme.com>
+  // Outlook uses: From: Jane Dealer [mailto:jane@acme.com]  (or just the address)
+  const fromLineRe = /^\s*from:\s*(.+)$/gim;
+  let m;
+  while ((m = fromLineRe.exec(body)) !== null) {
+    const line = m[1].trim();
+
+    // Try angle-bracket form first, then a bare email anywhere on the line.
+    let email = null;
+    const angle = line.match(/<([^>]+@[^>]+)>/);
+    if (angle) {
+      email = angle[1].trim();
+    } else {
+      const bare = line.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+      if (bare) email = bare[0].trim();
+    }
+
+    if (!email) continue;
+    if (isOwnAddress(email)) continue; // skip the forwarding staff member
+
+    // Derive a display name: text before the address, cleaned of mailto/brackets.
+    let name = line
+      .replace(/<[^>]*>/g, '')
+      .replace(/\[mailto:[^\]]*\]/gi, '')
+      .replace(/[",]/g, '')
+      .trim();
+    if (!name || /@/.test(name)) name = email.split('@')[0];
+
+    return { from_email: email, from_name: name };
+  }
+
+  return null;
+}
+
 function decodeBase64Url(data) {
   return Buffer.from(data.replace(/-/g, '+').replace(/_/g, '/'), 'base64');
 }
@@ -238,11 +305,39 @@ function parseMessage(msg) {
   // Also extract raw HTML to find inline images embedded as external URLs
   const htmlBody = extractHtmlBody(msg.payload);
   
+  let from_name = extractEmailName(from);
+  let from_email = extractEmailAddress(from);
+
+  // Preserve the true header sender so downstream self-reply detection
+  // (skip our own sent quotations) keys off the real sender, not the
+  // dealer address we may substitute below.
+  const header_from_email = from_email;
+  const header_from_name = from_name;
+
+  // Forwarded-enquiry handling only applies when the email actually came
+  // from one of our own addresses (e.g. Penang staff forwarding). This
+  // guard prevents the body parser from misfiring on quoted forward blocks
+  // inside a genuine external dealer email.
+  const headerFromIsOwn = isOwnAddress(from_email);
+  const fwd = headerFromIsOwn ? extractForwardedSender(body) : null;
+  if (fwd) {
+    console.log(`[FORWARD] Detected forwarded enquiry. Header from "${from_email}" → real dealer "${fwd.from_email}"`);
+    from_name = fwd.from_name;
+    from_email = fwd.from_email;
+  } else if (headerFromIsOwn) {
+    // From our own address but no dealer address recovered from the body.
+    // Could be a forward that stripped the header block, OR a genuine sent
+    // reply. Flag it; downstream decides (blank To: on draft, self-skip).
+    console.log(`[FORWARD] From own address but no dealer address found in body — flagging for review`);
+  }
+
   return {
     id: msg.id,
     threadId: msg.threadId,
-    from_name: extractEmailName(from),
-    from_email: extractEmailAddress(from),
+    from_name,
+    from_email,
+    header_from_email,
+    header_from_name,
     subject,
     body,
     htmlBody,
@@ -250,6 +345,7 @@ function parseMessage(msg) {
     thread_id: msg.threadId,
     date,
     attachments,
+    forwardedFromOwn: headerFromIsOwn && !fwd, // true = from us but no dealer found
     internalDate: parseInt(msg.internalDate || '0')
   };
 }
