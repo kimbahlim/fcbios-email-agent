@@ -5,6 +5,106 @@ const { getBrandInstructions } = require('./brandInstructions');
 
 const client = new Anthropic();
 
+// ---------------------------------------------------------------------------
+// NEOGEN PETRIFILM → MEIZHENG MICROFAST AUTO-PIVOT
+// FC Bios does NOT carry Neogen Petrifilm count plates. When a dealer asks for
+// them, the agent must DECLINE the Neogen item and OFFER the equivalent Meizheng
+// MicroFast count plate as an alternative. This map is keyed by plate TYPE so it
+// catches both Petrifilm catalog numbers (6400/6404/6490 etc.) and plain-language
+// requests ("E.coli/coliform count plate"). Item codes are read live from the
+// MEIZHENG tab at runtime — only the code is hardcoded here, never the price.
+// NOTE: Petrifilm packs are typically 50 plates/pack; MicroFast is 25T/Box —
+// pack sizes differ, so the reply must flag the different packing.
+// ---------------------------------------------------------------------------
+const PETRIFILM_TO_MICROFAST = [
+  // { match: [keywords/catalog nos that identify the Petrifilm plate], code: MicroFast Item Code }
+  { match: ['6404', 'ecc', 'ecoli/coliform', 'e.coli/coliform', 'e. coli/coliform', 'coliform & e', 'coliform and e'], code: 'P08-LR1307' }, // Coliform & E.coli
+  { match: ['6490', 'stx', 'staph express', 'staphylococcus'], code: 'P08-LR1305' }, // Staphylococcus aureus
+  { match: ['6400', ' ac ', 'aerobic count', 'aerobic plate'], code: 'P08-LR1301' }, // Aerobic Count
+  { match: ['6407', '6417', 'yeast', 'mold', 'mould', 'y&m', 'yeast & mold', 'yeast and mold'], code: 'P08-LR1303' }, // Yeast & Mold
+  { match: ['6402', 'coliform count', 'cc plate'], code: 'P08-LR1302' }, // Coliform Count
+  { match: ['enterobacteriaceae', 'eb plate'], code: 'P08-LR1311' }, // Enterobacteriaceae
+  { match: ['lactic acid', 'lab plate'], code: 'P08-LR1312' }, // Lactic Acid Bacteria
+];
+
+// Detect whether a NEOGEN search keyword is really a Petrifilm request,
+// and if so return the matching MicroFast item codes.
+function detectPetrifilmRequest(keyword) {
+  const kw = ` ${String(keyword || '').toLowerCase()} `;
+  const isPetrifilm = kw.includes('petrifilm') || kw.includes('petri film') ||
+    /\b6[0-9]{3}\b/.test(kw) || // Petrifilm catalog numbers are 4-digit 6xxx
+    (kw.includes('count plate') && (kw.includes('neogen') || kw.includes('petrifilm')));
+
+  // PASS 1: if an exact Petrifilm catalog number (6xxx) is present, that is authoritative —
+  // map ONLY to the entry containing that number. This prevents looser text like
+  // "coliform count" from also matching the plain Coliform plate when the dealer
+  // clearly gave the ECC (6404) catalog number.
+  const catalogNos = (kw.match(/\b6[0-9]{3}\b/g) || []);
+  if (catalogNos.length > 0) {
+    const codes = new Set();
+    for (const no of catalogNos) {
+      const entry = PETRIFILM_TO_MICROFAST.find(e => e.match.includes(no));
+      if (entry) codes.add(entry.code);
+    }
+    if (codes.size > 0) return [...codes];
+    // catalog number present but unmapped — still a Petrifilm request, fall through
+  }
+
+  // PASS 2: no usable catalog number — match on plate-type text.
+  const codes = new Set();
+  for (const entry of PETRIFILM_TO_MICROFAST) {
+    if (entry.match.some(m => kw.includes(m))) codes.add(entry.code);
+  }
+  if (!isPetrifilm && codes.size === 0) return null;
+  return [...codes];
+}
+
+// Given MicroFast item codes, fetch their full rows from the MEIZHENG tab.
+async function fetchMicrofastAlternatives(codes) {
+  if (!codes || codes.length === 0) return [];
+  let rows;
+  try {
+    rows = await fetchSheet('MEIZHENG');
+  } catch (e) {
+    console.log(`[PETRIFILM ALT] Failed to fetch MEIZHENG tab: ${e.message}`);
+    return [];
+  }
+  const codeKey = (r) => Object.keys(r).find(k => k.toLowerCase().includes('item code')) || Object.keys(r)[0];
+  const out = [];
+  for (const code of codes) {
+    const row = rows.find(r => String(r[codeKey(r)] || '').trim().toUpperCase() === code.toUpperCase());
+    if (row) out.push(row);
+  }
+  return out;
+}
+
+// Inspect a NEOGEN search (keyword + result array). If it was a Petrifilm
+// request that came back with no usable Neogen hit, attach MicroFast alternatives.
+async function maybeAttachMicrofast(brandTab, keyword, result) {
+  if (!brandTab || brandTab.toUpperCase() !== 'NEOGEN') return result;
+  const codes = detectPetrifilmRequest(keyword);
+  if (!codes) return result;
+
+  // Did the Neogen search actually find a Petrifilm item? (It never should — Neogen
+  // divested Petrifilm — but guard anyway.) result is an array from searchByBrand.
+  const arr = Array.isArray(result) ? result : [];
+  const foundPetrifilm = arr.some(r => {
+    const desc = Object.values(r).join(' ').toLowerCase();
+    return desc.includes('petrifilm');
+  });
+  if (foundPetrifilm) return result; // genuinely available, leave alone
+
+  const alts = await fetchMicrofastAlternatives(codes);
+  console.log(`[PETRIFILM ALT] "${keyword}" → not in Neogen; offering ${alts.length} MicroFast alternative(s): ${codes.join(', ')}`);
+
+  return {
+    neogen_petrifilm_unavailable: true,
+    neogen_results: arr,
+    meizheng_alternatives: alts,
+    instruction: 'FC Bios does NOT carry Neogen Petrifilm count plates. In the quotation: (1) clearly state that the requested Neogen Petrifilm item(s) are not available, and (2) OFFER the Meizheng MicroFast equivalent(s) listed in meizheng_alternatives as the recommended alternative. Present MicroFast in the quote table with its Item Code, name, packing, and Dealer Price 2026. IMPORTANT: Petrifilm is typically 50 plates/pack whereas MicroFast is 25 tests/box — explicitly note the different pack size so the dealer can adjust quantities. Do NOT apply any % increase to MEIZHENG prices (Dealer Price 2026 is already final).'
+  };
+}
+
 const tools = [
   {
     name: 'search_brand',
@@ -253,6 +353,7 @@ async function processToolCall(toolName, toolInput) {
     switch (toolName) {
       case 'search_brand':
         result = await searchByBrand(toolInput.brand_tab, toolInput.keyword);
+        result = await maybeAttachMicrofast(toolInput.brand_tab, toolInput.keyword, result);
         break;
       case 'search_brand_batch': {
         const batchResults = {};
@@ -268,7 +369,9 @@ async function processToolCall(toolName, toolInput) {
         for (const search of searches) {
           const key = `${search.brand_tab}:${search.keyword}`;
           console.log(`[BATCH SEARCH] ${search.brand_tab} → "${search.keyword}"`);
-          batchResults[key] = await searchByBrand(search.brand_tab, search.keyword);
+          let r = await searchByBrand(search.brand_tab, search.keyword);
+          r = await maybeAttachMicrofast(search.brand_tab, search.keyword, r);
+          batchResults[key] = r;
         }
         result = batchResults;
         break;
