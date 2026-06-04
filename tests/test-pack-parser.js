@@ -25,6 +25,7 @@ const cases = [
   { desc: "PP Embedding Cassette, Bulk, White, 250/pack, 2500/case", expectPacksPerCase: 10 },
   { desc: "Test Tube, 12x75mm, 5mL, PP, 500/bag, 5000/case", expectPacksPerCase: 10 },
   { desc: "1uL + Needle Tip Inoculating Loops, Sterile, 10pcs/bag, 100bags/box, 6boxes/case", expectPacksPerCase: 6 },
+  { desc: "10uL + Needle Tip Inoculating Loops, Sterile, 10pcs/bag, 100bags/pack, 6packs/case", expectPacksPerCase: 6 },
 
   // Critical edge case — Hitachi sample cup IS parseable. case_only flag (whole-number stock)
   // is what stops misuse, NOT the parser. Parser correctly parses; downstream gating handles the rest.

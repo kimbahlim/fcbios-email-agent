@@ -67,20 +67,27 @@ function parsePackStructure(description) {
     }
   }
 
-  // Pattern B: "Xpcs/bag, Ybags/box, Zboxes/case" — three-level structure (e.g. inoculating loops)
-  const patternB = /(\d+)\s*pcs?\s*\/\s*bag\s*,?\s*(\d+)\s*bags?\s*\/\s*box\s*,?\s*(\d+)\s*box(?:es)?\s*\/\s*case/i;
+  // Pattern B: three-level structure "X pcs/bag, Y bags/box, Z boxes/case" (e.g. inoculating loops).
+  // The middle and outer container words vary across DispoZ rows — some say "bags/box, boxes/case",
+  // others say "bags/pack, packs/case". Accept bag|box|pack interchangeably at every level so a
+  // phrasing change doesn't silently drop pack pricing. The leading unit can also be pcs|units.
+  // Examples that must all parse:
+  //   "10pcs/bag, 100bags/box, 6boxes/case"
+  //   "10pcs/bag, 100bags/pack, 6packs/case"
+  //   "10units/bag, 100bags/bag, 6bags/case"
+  const patternB = /(\d+)\s*(?:pcs?|units?)?\s*\/\s*(?:bag|box|pack)\s*,?\s*(\d+)\s*(?:bags?|box(?:es)?|packs?)\s*\/\s*(?:bag|box|pack)\s*,?\s*(\d+)\s*(?:bags?|box(?:es)?|packs?)\s*\/\s*case/i;
   const matchB = desc.match(patternB);
   if (matchB) {
-    const pcsPerBag = parseInt(matchB[1], 10);
-    const bagsPerBox = parseInt(matchB[2], 10);
-    const boxesPerCase = parseInt(matchB[3], 10);
-    const qtyPerPack = pcsPerBag * bagsPerBox; // pack unit = box
-    const qtyPerCase = qtyPerPack * boxesPerCase;
+    const pcsPerInner = parseInt(matchB[1], 10);   // pieces in the smallest unit (bag)
+    const innerPerPack = parseInt(matchB[2], 10);  // inner units per pack/box
+    const packsPerCase = parseInt(matchB[3], 10);  // packs/boxes per case
+    const qtyPerPack = pcsPerInner * innerPerPack; // pack unit = box/pack
+    const qtyPerCase = qtyPerPack * packsPerCase;
     return {
       qty_per_pack: qtyPerPack,
       qty_per_case: qtyPerCase,
-      packs_per_case: boxesPerCase,
-      pattern: 'B: pcs/bag, bags/box, boxes/case'
+      packs_per_case: packsPerCase,
+      pattern: 'B: pcs/bag, bags/(box|pack), (box|pack)/case'
     };
   }
 
