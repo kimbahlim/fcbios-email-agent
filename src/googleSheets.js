@@ -139,6 +139,46 @@ function deriveStructureFromQtyCols(row) {
   };
 }
 
+// Derive pack structure for the LP-style format: ONE case-quantity column plus a
+// description that states the bag size as "in bags of N" (e.g. LP loops/pipettes).
+// LP tabs have a "Case Quantity" column (total pieces per case) and a description like
+// "PS loop 10 µl in bags of 20 sterile" — the pack unit is the bag of N pieces, and
+// packs_per_case = caseQty / N. parsePackStructure can't see the case-qty column, and
+// deriveStructureFromQtyCols needs an explicit per-pack column (LP has none), so this
+// bridges the gap. Returns the same shape as parsePackStructure.
+function deriveStructureFromBagsOf(row) {
+  if (!row || typeof row !== 'object') return null;
+  const keys = Object.keys(row);
+  const findKey = (...patterns) => keys.find(k => patterns.some(p => k.toLowerCase().includes(p)));
+
+  const descKey = findKey('description', 'display name');
+  const desc = descKey ? String(row[descKey] || '') : '';
+  if (!desc) return null;
+
+  // Match "bags of 20", "bag of 5", "bags of 25 pcs", "in bags of 100 pieces"
+  const m = desc.toLowerCase().match(/bags?\s+of\s+(\d+)\b/);
+  if (!m) return null;
+  const qtyPerPack = parseInt(m[1], 10);
+  if (!qtyPerPack || qtyPerPack <= 0) return null;
+
+  // Case quantity column: "Case Quantity", "Box Quantity", "Case Qty", "Qty/Case", etc.
+  const caseQtyKey = findKey('case quantity', 'box quantity', 'case qty', 'box qty', 'qty/case', 'qty per case');
+  if (!caseQtyKey) return null;
+  const caseQty = parseInt(String(row[caseQtyKey]).replace(/[^\d.]/g, ''), 10);
+  if (!caseQty || caseQty <= 0) return null;
+
+  // Pack must be smaller than case and divide evenly
+  if (caseQty <= qtyPerPack) return null;
+  if (caseQty % qtyPerPack !== 0) return null;
+
+  return {
+    qty_per_pack: qtyPerPack,
+    qty_per_case: caseQty,
+    packs_per_case: caseQty / qtyPerPack,
+    pattern: 'BagsOf: "bags of N" + Case Quantity column'
+  };
+}
+
 async function fetchSheet(tabName) {
   const now = Date.now();
   const ttl = tabName === 'LEAD_TIMES' ? LEAD_TIMES_TTL : CACHE_TTL;
@@ -303,7 +343,7 @@ async function searchProducts(keyword) {
     const descVal = descKey ? row[descKey] : '';
     // Try, in order: (1) Qty/Pk + Qty/Case columns (e.g. TARSONS), (2) description-parsed structure
     const packStructure = !hasExplicitPackCols
-      ? (deriveStructureFromQtyCols(row) || parsePackStructure(descVal))
+      ? (deriveStructureFromQtyCols(row) || deriveStructureFromBagsOf(row) || parsePackStructure(descVal))
       : null;
 
     let pricingNote;
@@ -482,7 +522,7 @@ async function searchByBrand(brandTab, keyword) {
     const descVal = descKey ? row[descKey] : '';
     // Try, in order: (1) Qty/Pk + Qty/Case columns (e.g. TARSONS), (2) description-parsed structure
     const packStructure = !hasExplicitPackCols
-      ? (deriveStructureFromQtyCols(row) || parsePackStructure(descVal))
+      ? (deriveStructureFromQtyCols(row) || deriveStructureFromBagsOf(row) || parsePackStructure(descVal))
       : null;
 
     let pricingNote;
