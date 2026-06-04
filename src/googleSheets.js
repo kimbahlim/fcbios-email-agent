@@ -736,18 +736,28 @@ async function checkStock(sku) {
 
   if (!match) {
     console.log(`[STOCK] NOT FOUND: "${sku}"`);
-    // CASE-ONLY ENFORCEMENT for indent items: DispoZ indent items are also case-only (no loose packs available without stock)
-    const TRANSFER_PIPETTE_EXC = ['dj01-la1n00310505', 'dj01-la2n00330505'];
+    // UNIVERSAL RULE: an item not present in the Stock tab is indent / not ex-stock.
+    // Loose (broken-case) packs only physically exist when there is opened ex-stock
+    // (a decimal case quantity on hand). With no ex-stock there are NO loose packs to
+    // sell, so pack pricing must NOT be shown for ANY brand — case pricing only.
+    // (Previously this defaulted to case_only:false for non-DispoZ/TARSONS items, which
+    // let indent LP/other items render pack pricing incorrectly.)
     const skuLC = sku.toString().toLowerCase().trim();
-    const isDispoZIndent = (skuLC.startsWith('dz02-') || skuLC.startsWith('dj01-')) && !TRANSFER_PIPETTE_EXC.some(e => skuLC.includes(e));
     const TARSONS_CASE_ONLY = ['t38-546021', 't38-546041', 't38-500031', 't38-500041'];
     const isTarsonsCO = TARSONS_CASE_ONLY.some(c => skuLC.includes(c));
-    const indentCaseOnly = isDispoZIndent || isTarsonsCO;
+    let reason;
+    if (isTarsonsCO) {
+      reason = 'TARSONS centrifuge tube — case pricing only, never show pack price';
+    } else if (skuLC.startsWith('dz02-') || skuLC.startsWith('dj01-')) {
+      reason = 'DispoZ indent item (not ex-stock) — case pricing only, never show pack price';
+    } else {
+      reason = 'Indent / not ex-stock — no loose packs available, case pricing only';
+    }
     return {
       found: false,
       sku,
-      case_only: indentCaseOnly,
-      case_only_reason: indentCaseOnly ? (isTarsonsCO ? 'TARSONS centrifuge tube — case pricing only, never show pack price' : 'DispoZ indent item — case pricing only, never show pack price') : null
+      case_only: true,        // indent / not found → always case-only
+      case_only_reason: reason
     };
   }
 
@@ -807,13 +817,25 @@ async function checkStock(sku) {
   // Exception: 2 specific transfer pipette SKUs always allow pack/box pricing.
   const TRANSFER_PIPETTE_EXCEPTIONS = ['dj01-la1n00310505', 'dj01-la2n00330505'];
   const skuLowerForFlag = (match['NAME'] || match['name'] || match['Name'] || sku).toString().toLowerCase().trim();
-  const isDispoZ = skuLowerForFlag.startsWith('dz02-') || skuLowerForFlag.startsWith('dj01-');
   const isException = TRANSFER_PIPETTE_EXCEPTIONS.some(ex => skuLowerForFlag.includes(ex));
   const qtyNum = parseFloat(qty);
-  const isWholeNumber = !isNaN(qtyNum) && Number.isInteger(qtyNum);
-  const caseOnly = isDispoZ && isWholeNumber && !isException && qtyNum > 0;
+  const isDecimalStock = !isNaN(qtyNum) && qtyNum > 0 && !Number.isInteger(qtyNum);
+
+  // UNIVERSAL LOOSE-PACK RULE: loose (broken-case) packs only exist when there is a
+  // DECIMAL case quantity on hand (a partially-used case). Therefore pack pricing is
+  // allowed ONLY when stock is decimal AND > 0. Any whole-number qty, or zero/negative
+  // qty, means case-only for EVERY brand — there are no loose packs to sell.
+  // The transfer-pipette exception keeps pack/box pricing regardless.
+  let caseOnly;
+  if (isException) {
+    caseOnly = false;
+  } else if (isDecimalStock) {
+    caseOnly = false; // genuine broken-case stock → loose packs available
+  } else {
+    caseOnly = true;  // whole-number or zero stock → case only (all brands)
+  }
   if (caseOnly) {
-    console.log(`[STOCK] CASE-ONLY enforced for ${sku}: DispoZ + whole-number stock (${qty}) → agent MUST NOT show pack pricing`);
+    console.log(`[STOCK] CASE-ONLY enforced for ${sku}: stock "${qty}" is not a positive decimal → no loose packs, agent MUST NOT show pack pricing`);
   }
 
   // CASE-ONLY ENFORCEMENT (TARSONS centrifuge tubes): These specific SKUs are ALWAYS case-only regardless of stock decimal.
@@ -835,7 +857,7 @@ async function checkStock(sku) {
     shipping_condition: match['SHIPPING CONDITION'] || match['Shipping Condition'] || '',
     notes: match['DESCRIPTION 2'] || match['Description 2'] || '',
     case_only: finalCaseOnly,
-    case_only_reason: finalCaseOnly ? (isTarsonsCaseOnly ? 'TARSONS centrifuge tube — case pricing only, never show pack price' : 'DispoZ + whole-number stock — case pricing only, never show pack price') : null
+    case_only_reason: finalCaseOnly ? (isTarsonsCaseOnly ? 'TARSONS centrifuge tube — case pricing only, never show pack price' : 'Stock is not a positive decimal (whole-number or zero on hand) — no loose packs, case pricing only') : null
   };
 }
 
