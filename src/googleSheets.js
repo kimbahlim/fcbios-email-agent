@@ -179,6 +179,32 @@ function deriveStructureFromBagsOf(row) {
   };
 }
 
+// Build ready-to-display pack fields from a row + its parsed pack structure, so the
+// agent does NOT have to derive the pack quantity or carry numbers across rows (a known
+// failure mode where it copied another row's "1000/pack"). Returns:
+//   _pack_packing_label : e.g. "20/pack" (qty_per_pack as the dealer-facing pack size)
+//   _base_pack_price    : base (pre-markup) pack price = base case price / packs_per_case
+// The agent still applies the brand's live increase % and the 10% loose-pack markup,
+// exactly as it does for the case price, then rounds up. case_only gating still applies.
+function computePackDisplayFields(row, packStructure) {
+  if (!packStructure || !packStructure.packs_per_case) return {};
+  const keys = Object.keys(row);
+  const findKey = (...patterns) => keys.find(k => patterns.some(p => k.toLowerCase().includes(p)));
+  const priceKey = findKey('dealer price', 'sp base price', 'price');
+  const out = {
+    _pack_packing_label: `${packStructure.qty_per_pack}/pack`
+  };
+  if (priceKey) {
+    const baseCase = parseFloat(String(row[priceKey]).replace(/[^\d.]/g, ''));
+    if (!isNaN(baseCase) && baseCase > 0) {
+      // Base pack price BEFORE brand increase % and BEFORE 10% loose-pack markup.
+      out._base_pack_price = baseCase / packStructure.packs_per_case;
+      out._pack_price_formula = `base_pack_price (${out._base_pack_price.toFixed(4)}) × (1 + brand_increase%) × 1.10, then round UP to nearest RM`;
+    }
+  }
+  return out;
+}
+
 async function fetchSheet(tabName) {
   const now = Date.now();
   const ttl = tabName === 'LEAD_TIMES' ? LEAD_TIMES_TTL : CACHE_TTL;
@@ -359,6 +385,7 @@ async function searchProducts(keyword) {
       ...row,
       _has_pack_pricing: hasExplicitPackCols || !!packStructure,
       _pack_structure: packStructure,
+      ...computePackDisplayFields(row, packStructure),
       _pricing_note: pricingNote
     };
   });
@@ -538,6 +565,7 @@ async function searchByBrand(brandTab, keyword) {
       ...row,
       _has_pack_pricing: hasExplicitPackCols || !!packStructure,
       _pack_structure: packStructure,
+      ...computePackDisplayFields(row, packStructure),
       _pricing_note: pricingNote
     };
   });
