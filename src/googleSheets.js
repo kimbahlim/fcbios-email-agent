@@ -394,7 +394,14 @@ async function searchProducts(keyword) {
 
 async function searchByBrand(brandTab, keyword) {
   const rows = await fetchSheet(brandTab);
-  const kw = keyword.toLowerCase();
+  // Normalize common spelling variants HiMedia uses inconsistently across the pricelist,
+  // so a dealer's spelling matches regardless of which form the sheet row uses.
+  // (e.g. "soybean" vs "soyabean", "mould" vs "mold".) Applied to BOTH the keyword and,
+  // later, the row text used for matching/scoring.
+  const normalizeSpelling = (s) => String(s).toLowerCase()
+    .replace(/soyabean/g, 'soybean')   // collapse soyabean → soybean
+    .replace(/\bmould\b/g, 'mold');
+  const kw = normalizeSpelling(keyword);
   const keywords = kw.split(/\s+/).filter(k => k.length > 1);
 
   // Auto-expand synonyms: check if the full keyword or any partial matches a known synonym
@@ -428,7 +435,7 @@ async function searchByBrand(brandTab, keyword) {
   // Also create slash/space-normalized versions for MVE-style models (SC4/3V → sc 4 / 3 v, sc4/3v, sc 4/3 v etc.)
   const kwNormalized = kw.replace(/[\/\s]+/g, '');  // strip all slashes and spaces
   let matches = rows.filter(row => {
-    const text = Object.values(row).join(' ').toLowerCase();
+    const text = normalizeSpelling(Object.values(row).join(' '));
     const textNormalized = text.replace(/[\/\s]+/g, '');  // normalize pricelist text too
     // Quick check: if slash-normalized keyword matches slash-normalized text, it's a hit
     if (kwNormalized.length >= 3 && textNormalized.includes(kwNormalized)) return true;
@@ -531,6 +538,50 @@ async function searchByBrand(brandTab, keyword) {
       console.log(`[SEARCH] Filtered out ${matches.length - filtered.length} PCT (plant tissue culture) result(s) — non-PCT alternatives exist`);
       matches = filtered;
     }
+  }
+
+  // RELEVANCE SORT (base-medium preference): the raw match list is in sheet order, so a
+  // generic request like "Soybean Casein Digest Broth" could surface a specialized variant
+  // (e.g. M2115 "...w/ 0.5% Soya Lecithin & 4% Polysorbate 80") ahead of the plain base
+  // medium (MH011). Score each match so the PLAINEST product that best matches the dealer's
+  // words ranks first, and ADDITIVE/MODIFIER variants sink UNLESS the dealer actually asked
+  // for that additive. Applied to all brands; matters most for HiMedia's huge variant lists.
+  if (matches.length > 1) {
+    const ADDITIVE_TERMS = ['w/', 'with ', 'polysorbate', 'tween', 'lecithin', 'bcp', 'lthth',
+      'neutraliz', 'modified', 'double', 'twin pack', 'screw', 'wide mouth', 'gamma', 'irradiat',
+      'mannitol', 'yeast extract', 'b-lactam', 'beta lactam', 'b lactam', '%', 'sterile',
+      'hiveg', 'economy', 'slant', 'teaching kit', 'base'];
+    // Which additive terms did the DEALER explicitly ask for? Those should NOT be penalized.
+    const dealerAskedAdditive = ADDITIVE_TERMS.filter(t => kw.includes(t.replace('w/', '').trim()) && t !== 'w/' && t !== '%');
+    const descKeyForScore = Object.keys(matches[0]).find(k => k.toLowerCase().includes('description') || k.toLowerCase().includes('display name'));
+
+    const scoreRow = (row) => {
+      const desc = normalizeSpelling(descKeyForScore ? String(row[descKeyForScore] || '') : Object.values(row).join(' '));
+      const matchesAll = keywords.every(k => desc.includes(k));
+      // Rows missing any keyword are weak matches — give them a low base so a full
+      // keyword match (even a slightly "wordy" one) always outranks a partial match.
+      if (!matchesAll) {
+        let partial = keywords.filter(k => desc.includes(k)).length; // 0..n-1
+        return partial; // small positive, always below the +100 floor of full matches
+      }
+      let score = 100; // full keyword match floor — dominates all partial matches
+      // Among full matches, prefer the PLAINEST: penalize extra words and unrequested additives.
+      const extraWords = desc.split(/\s+/).length - keywords.length;
+      score -= Math.max(0, extraWords); // each extra descriptive word = small penalty
+      for (const term of ADDITIVE_TERMS) {
+        const t = term.trim();
+        if (!t) continue;
+        if (dealerAskedAdditive.includes(term)) continue; // dealer wanted this — don't penalize
+        if (desc.includes(t)) score -= 6;
+      }
+      return score;
+    };
+    // Stable sort by score descending; ties keep original sheet order
+    matches = matches
+      .map((row, i) => ({ row, i, s: scoreRow(row) }))
+      .sort((a, b) => (b.s - a.s) || (a.i - b.i))
+      .map(x => x.row);
+    console.log(`[SEARCH] Relevance-sorted ${matches.length} matches (base-medium preference). Dealer-requested additives: ${dealerAskedAdditive.length ? dealerAskedAdditive.join(', ') : 'none'}`);
   }
 
   // Inject explicit pricing-availability flags into each row so agent can't fabricate pack pricing
