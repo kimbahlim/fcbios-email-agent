@@ -278,6 +278,22 @@ const BRAND_INSTRUCTIONS = {
 
   (B) SAMPLE STORAGE DEWARS — SC, XC, CryoSystem, Doble series. These store biological samples (vials, straws, semen, cells) submerged in LN2. Signals: "sample storage", "vial storage", "cryopreservation", "semen tank", "straw storage", mentions of canisters/racks/vial capacity, or specific model numbers like SC 35/24, XC 32/8, XC 33/22, XC 34/18.
 
+  ### CRYOSYSTEM FAMILY — HIGH-CAPACITY INVENTORY-RACK STORAGE (READ BEFORE QUOTING ANY LARGE SAMPLE STORAGE TANK)
+  The CryoSystem series is MVE's high-capacity sample storage line that uses SQUARE INVENTORY RACKS holding 2-inch storage BOXES (not round canisters). It is a DIFFERENT sub-family from the XC sample-storage dewars. Pick CryoSystem — NOT XC — when the request describes square inventory racks, layered/tiered box storage, large vial counts in the thousands, or names a competitor box-storage system. CryoSystem main units in the pricelist:
+    - CRYOSYSTEM 750  (M02-11886450, RM 15,270) — (6) inventory racks for (30) mini boxes
+    - CRYOSYSTEM 2000 (M02-10650200, RM 24,550) — (4) inventory racks for (20) large boxes
+    - CRYOSYSTEM 4000 (M02-10650197, RM 28,040) — (4) inventory racks for (40) large boxes
+    - CRYOSYSTEM 6000 (M02-10718067, RM 31,690) — (6) inventory racks for (60) large boxes
+    - CRYOSYSTEM 6000 Full Auto (M02-14796775, RM 62,020) — with TEC3000 auto-fill controller
+  Accessories appear under each model in parentheses (spare cork/cover, roller base, spare square racks). For CryoSystem the correct roller base is the 22" CS 2000/4000 roller (M02-10937420 / F07-ROLLERBASE-10937420), NOT the XC roller.
+
+  TENDER / COMPETITOR-EQUIVALENT MAPPING: Tenders often name a target model from another brand or an MVE model the dealer wants matched. When a tender or enquiry says "equivalent to Cryosystem 2000" (or 750/4000/6000), quote the SAME CryoSystem model by name — these ARE MVE models, present in the pricelist. Do NOT substitute an XC-series dewar for a stated CryoSystem requirement. Defining tender signals that point to CryoSystem (NOT XC): capacity 50-65L+, "square canisters/racks with 4-6 floors/layers/tiers", "well racks for 2ml vials", vial counts of 900-2400+, "inventory racks", "box storage". The XC 47 series is only 47L and uses round canisters or mini square racks — it does NOT satisfy a 50-65L + inventory-rack spec. If a tender's capacity floor exceeds the XC's 47L, that alone rules XC out.
+
+  CRITICAL DISAMBIGUATION — "CRYOSYSTEM" vs "CRYOSHIPPER" (DO NOT CONFUSE): These are different PRODUCT CLASSES that unfortunately share numbers like "2000".
+    - CRYOSYSTEM 2000 (M02-10650200) = STATIONARY sample STORAGE freezer with inventory racks. Category (B) sample storage.
+    - CRYOSHIPPER 2000 (M02-11366673) = a dry-vapor TRANSPORT shipper. Category vapor shipper.
+  When the request is about on-site sample STORAGE (a tender for a storage freezer/biological container with racks), it means CryoSYSTEM. When it is about TRANSPORTING samples between sites, it means CryoSHIPPER. Read the use-case; never pick CryoShipper for a storage tender or CryoSystem for a transport request. A bare "2000" is ambiguous — resolve it from the storage-vs-transport context, and if still unclear, ask.
+
   If the dealer asks for "LN2 storage X litres" (or similar) with NO sample-related context, this is category (A) — quote Lab series, NOT SC/XC. Match the requested capacity to the closest Lab model at or above that size (e.g. "min 25L" → Lab 30; "40L" → Lab 50; "min 15L" → Lab 20). Optionally offer the next size as an alternative.
 
   If the request is genuinely ambiguous (e.g. bare "cryogenic container 30L" with no other context), do NOT guess — ask the dealer to clarify whether they need LN2 supply or sample storage.
