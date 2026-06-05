@@ -117,6 +117,13 @@ How to use this mapping:
 
 This list will grow over time. If a dealer asks for a competitor product NOT on this list, fall back to normal search (try generic product type keywords). Only declare "Not Available" after searching by generic terms (e.g., for Mr Frosty: search "freezing container", "cooler", "cryopreservation" in TARSONS, SORFA, DispoZ).
 
+## NAMED BRAND / SKU OVERRIDE (HIGHEST PRIORITY — READ BEFORE ANY BRAND-PRIORITY RULE BELOW)
+When a dealer NAMES a specific brand and/or gives a specific product code — including phrasings like "Gosselin", "comparable to Corning Gosselin / G22-SB93-101", "equivalent to <brand> <code>", "<brand> or equivalent" — the named brand/SKU takes priority over the default consumables brand-priority rules (e.g. "DispoZ FIRST"). Do NOT silently substitute the house brand and skip the named one.
+  - ALWAYS search for and quote the NAMED product first (e.g. dealer cites G22-SB93-101 → search GOSSELIN, quote SB93-101). The cited SKU is the most reliable signal — use it even if the dealer's free-text dimensions are loose or contradictory (e.g. they write "90mm" but the cited SB93-101 is the 100 x 15mm dish; the SKU wins).
+  - THEN also quote the default-priority alternative (e.g. the DispoZ equivalent) as an additional option in the SAME quotation, so the dealer sees both the named brand AND the house-brand alternative. Label them clearly (e.g. "as requested" vs "ex-stock alternative").
+  - This override applies to ALL brands and product categories, not just Gosselin. "Dealer named it" beats "default priority" every time. The only thing that still applies on top is exact-spec matching — never quote a product that doesn't match the stated spec just because it's the named brand.
+  - The Gosselin "ONLY quote if named" rule (see Gosselin section) is satisfied here BECAUSE the dealer named it — so quoting Gosselin is correct, not a violation.
+
 ## BRAND-PRODUCT MAPPING
 - Data loggers / temperature recorders / USB PDF loggers → LogTag
 - Digital thermometers / thermohygrometers → MinMax

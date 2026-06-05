@@ -649,7 +649,24 @@ const BRAND_INSTRUCTIONS = {
   - CODE-ENFORCED FLAG: Each HiMedia search result row now includes a "_himedia_recommended_default" boolean flag and a "_himedia_variant_note" string. When multiple variants of the same product code exist (e.g., M929, GM929, MV929), the system has already determined which variant to recommend based on the M-series-priority rule + price comparison. You MUST quote the row where "_himedia_recommended_default" is true and NOT the rows where it is false. Trust the flag. The flag defaults to M-series for generic requests; the agent's only responsibility is to override the flag IF the dealer EXPLICITLY asked for a specific series (e.g., "MH for pharmaceutical use", "MV vegan", "GM granulated"). If the dealer did not explicitly ask, ALWAYS follow the flag.
   - If the dealer specifically asks for MH (Harmonised) by code, quote that specific product — do NOT substitute with M series.
   - If the dealer specifically asks for a GM or MV product by code, quote that specific product.
-  - Do NOT do multiple separate searches for different series — get them all in one search, then pick the right one.`
+  - Do NOT do multiple separate searches for different series — get them all in one search, then pick the right one.`,
+
+  GOSSELIN: `## GOSSELIN (Corning Gosselin) — QUOTING RULES
+  Gosselin is a "quote ONLY when named" brand — these instructions load because the dealer named Gosselin or gave a G22- SKU, so quoting Gosselin is correct here (not a violation of the normal "don't proactively offer Gosselin" rule).
+
+  WHAT TO DO:
+  - Search the GOSSELIN tab and quote the EXACT SKU/product the dealer cited (e.g. "comparable to Corning Gosselin / G22-SB93-101" → quote SB93-101 / G22-SB93-101). The cited SKU is the authoritative signal.
+  - ALSO quote the default-priority house-brand alternative (DispoZ for petri dishes/consumables) in the same quotation, so the dealer sees both: the named Gosselin product AND the ex-stock DispoZ alternative. Label clearly ("as requested (Gosselin)" vs "ex-stock alternative (DispoZ)").
+
+  DIMENSION NAMING CAVEAT (IMPORTANT): Gosselin petri dish SKUs use a catalog convention where the code stem (e.g. SB93, SH93, BP93) does NOT equal the dish diameter. Gosselin petri dishes are physically 60mm, 100x15mm, 120mm (square), or 150mm — there is NO true 90mm Gosselin dish. SB93-101 / SH93-101 / BP93B-xxx are all the 100 x 15mm, 3-vent dishes. So if a dealer writes "90mm" but cites a Gosselin "93" SKU (or a 100x15mm description), quote the cited 100x15mm SKU — the SKU/description wins over the loose "90mm" wording. Do NOT claim "90mm not available" and stop; quote the cited SKU.
+
+  CASE QTY: Match the dealer's stated case quantity when possible (e.g. "825 pcs/case" → SB93-101 is 825/Case; SH93-101 is 700/Case). Petri dishes are typically Case/case-only unless stock is decimal.
+
+  Common Gosselin petri dish SKUs (100x15mm, aseptic/sterile, for reference):
+    - SB93-101 (G22-SB93-101): 3 Vents, Aseptic, 33/Bag, 825/Case
+    - SH93-101 (G22-SH93-101): 3 Vents, Aseptic, 28/Bag, 700/Case
+    - SB93-102 (G22-SB93-102): 3 Vents, Sterile, 33/Bag, 825/Case
+  Always confirm the live price/stock from the GOSSELIN tab — do not hardcode prices from this note.`
 };
 
 function getBrandInstructions(brand) {

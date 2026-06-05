@@ -60,6 +60,17 @@ function detectBrandsInEmail(emailBody) {
     brands.add('MVE');
   }
 
+  // ===== GOSSELIN detection =====
+  // Gosselin is "quote ONLY if named" — so detecting the name/SKU is exactly when its
+  // rules should load. Triggers: "Gosselin" / "Corning Gosselin" by name, or a G22- SKU.
+  // Also catch the common Gosselin petri-dish code stems (SB/SH/BP/BT##-### , e.g. SB93-101)
+  // when "gosselin" or "corning" appears alongside, to handle "comparable to Corning Gosselin / G22-SB93-101".
+  const gosselinNameRegex = /\bgosselin\b/i;
+  const gosselinSkuRegex = /\bG22-[\w]+/i;
+  if (gosselinNameRegex.test(text) || gosselinSkuRegex.test(text)) {
+    brands.add('GOSSELIN');
+  }
+
   // ===== Future brands go here =====
   // if (/\bT38-|\btarsons\b/i.test(text)) brands.add('TARSONS');
   // if (/\bDZ02-|\bdispoz\b|\bdisposable petri\b/i.test(text)) brands.add('DISPOZ');
