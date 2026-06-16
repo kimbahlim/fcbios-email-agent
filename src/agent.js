@@ -550,7 +550,7 @@ Process this email according to your instructions. Search the pricelists, check 
     let response;
     try {
       response = await client.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 16384,
         system: [
           {
