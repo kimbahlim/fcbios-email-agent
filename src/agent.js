@@ -263,6 +263,64 @@ const tools = [
 ];
 
 /**
+ * Collect the real SKU strings from a single search-result row into `seenSkus`.
+ * Adds every form the agent might legitimately quote: the NetSuite Item Code, and the
+ * vendor-code-with-brand-prefix form (e.g. vendor code "M1481-500G" -> "h05-m1481-500g").
+ * All stored lowercase for case-insensitive comparison.
+ */
+const BRAND_PREFIX_BY_TAB = {
+  himedia: 'h05-', lp: 'l03-', tarsons: 't38-', nasco: 'n02-', ugaiya: 'u11-',
+  sorfa: 's21-', iul: 'i11-', mve: 'm02-', mesalabs: 'r01-', gosselin: 'g22-',
+  dispoz: 'dz02-', prognosis: 'p21-', neogen: 'n13-', meizheng: 'p08-'
+};
+function collectSeenSkus(row, seenSkus) {
+  if (!row || typeof row !== 'object') return;
+  // Direct NetSuite / code fields
+  const codeFields = ['NetSuite Item Code', 'NetSuite Code', 'sku', 'SKU'];
+  for (const f of codeFields) {
+    if (row[f]) seenSkus.add(String(row[f]).toLowerCase().trim());
+  }
+  // Vendor-code-derived form: <brand prefix> + vendor code. We don't always know the tab
+  // here, so add the bare vendor code AND every plausible brand-prefixed form. This is a
+  // whitelist for fabrication detection, so being generous avoids false positives.
+  const vendor = row['Vendor Code'] || row['vendor code'] || row['VendorCode'];
+  if (vendor) {
+    const v = String(vendor).toLowerCase().trim();
+    seenSkus.add(v);
+    for (const pref of Object.values(BRAND_PREFIX_BY_TAB)) seenSkus.add(pref + v);
+  }
+}
+
+/**
+ * Detect fabricated SKUs in the draft HTML. Extracts every brand-prefixed SKU token
+ * (e.g. H05-RM350-100G, M02-..., T38-...) from the quote table and flags any that did
+ * NOT appear in a search result this session (`seenSkus`). This catches the agent
+ * inventing a size variant that does not exist in the pricelist.
+ *
+ * Conservative: only flags tokens matching a known brand prefix, and only when we have
+ * a non-empty seenSkus set (otherwise we can't judge). Returns array of fabricated SKUs.
+ */
+function detectFabricatedSkus(html, seenSkus) {
+  if (!html || !seenSkus || seenSkus.size === 0) return [];
+  const prefixes = Object.values(BRAND_PREFIX_BY_TAB);
+  // Brand-prefixed SKU token: prefix + alphanumerics/dashes. Case-insensitive.
+  const skuRegex = /\b((?:H05|L03|T38|N02|U11|S21|I11|M02|R01|G22|DZ02|P21|N13|P08)-[A-Z0-9]+(?:-[A-Z0-9]+)*)\b/gi;
+  const fabricated = new Set();
+  let m;
+  while ((m = skuRegex.exec(html)) !== null) {
+    const sku = m[1].toLowerCase();
+    if (!seenSkus.has(sku)) {
+      // Not an exact match to anything seen. Before flagging, guard against harmless
+      // formatting differences: also accept if seenSkus has this sku without a trailing
+      // size suffix mismatch handled elsewhere — but a size mismatch is exactly what we
+      // WANT to catch, so we flag on exact-miss.
+      fabricated.add(m[1]); // preserve original casing for the message
+    }
+  }
+  return [...fabricated];
+}
+
+/**
  * Validate the agent's draft HTML against the set of SKUs that are case-only.
  * For each case-only SKU found in the draft's quote table, check that the row's
  * Pack Packing and Pack Price columns are blank/empty.
@@ -540,6 +598,10 @@ Process this email according to your instructions. Search the pricelists, check 
   //   _has_pack_pricing === false   (pricelist row has no pack columns)
   //   case_only === true            (stock check determined case-only enforcement)
   const caseOnlySkus = new Set();
+  // SANITY CHECK: Track EVERY SKU that actually appeared in a search result this session.
+  // Any SKU the agent puts in the final quote table that is NOT in here was fabricated
+  // (e.g. taking base code RM350 + requested size 100G -> invented "H05-RM350-100G").
+  const seenSkus = new Set();
   // Track how many regenerations have been requested (to avoid infinite loop)
   let regenerationAttempts = 0;
   const MAX_REGENERATIONS = 2;
@@ -626,6 +688,8 @@ Process this email according to your instructions. Search the pricelists, check 
                 const sku = row['NetSuite Item Code'] || row['NetSuite Code'] || row.sku;
                 if (sku) caseOnlySkus.add(String(sku).toLowerCase());
               }
+              // Track every real SKU seen (NetSuite code AND vendor-code-derived form)
+              collectSeenSkus(row, seenSkus);
             }
           }
           // search_brand_batch returns { "tab:keyword": [rows], ... }
@@ -638,6 +702,7 @@ Process this email according to your instructions. Search the pricelists, check 
                   const sku = row['NetSuite Item Code'] || row['NetSuite Code'] || row.sku;
                   if (sku) caseOnlySkus.add(String(sku).toLowerCase());
                 }
+                collectSeenSkus(row, seenSkus);
               }
             }
           }
@@ -663,23 +728,32 @@ Process this email according to your instructions. Search the pricelists, check 
           // SANITY CHECK: validate the draft HTML against caseOnlySkus before accepting
           const html = toolUse.input.html_body || '';
           const violations = validateDraftHtml(html, caseOnlySkus);
+          // SANITY CHECK 2: detect fabricated SKUs — any brand-prefixed SKU in the quote
+          // table that never appeared in a search result this session (e.g. inventing a
+          // size variant like H05-RM350-100G that does not exist in the pricelist).
+          const fabricated = detectFabricatedSkus(html, seenSkus);
 
-          if (violations.length > 0 && regenerationAttempts < MAX_REGENERATIONS) {
+          if ((violations.length > 0 || fabricated.length > 0) && regenerationAttempts < MAX_REGENERATIONS) {
             regenerationAttempts++;
-            console.log(`[SANITY] ❌ Draft validation FAILED (attempt ${regenerationAttempts}/${MAX_REGENERATIONS}): ${violations.length} violation(s)`);
-            for (const v of violations) {
-              console.log(`[SANITY]   - ${v}`);
+            console.log(`[SANITY] ❌ Draft validation FAILED (attempt ${regenerationAttempts}/${MAX_REGENERATIONS}): ${violations.length} case-only violation(s), ${fabricated.length} fabricated SKU(s)`);
+            for (const v of violations) console.log(`[SANITY]   - caseonly: ${v}`);
+            for (const f of fabricated) console.log(`[SANITY]   - FABRICATED: ${f}`);
+            const errorParts = {
+              error: 'DRAFT_VALIDATION_FAILED'
+            };
+            if (violations.length > 0) {
+              errorParts.case_only_violations = violations;
+              errorParts.case_only_summary = 'Your quote table contains pack pricing for SKUs that are case-only. Leave Pack Packing and Pack Price BLANK for these SKUs.';
             }
-            // Return an error tool result that forces the agent to regenerate without breaking the loop
+            if (fabricated.length > 0) {
+              errorParts.fabricated_skus = fabricated;
+              errorParts.fabricated_summary = 'CRITICAL: Your quote table contains SKU(s) that DO NOT EXIST in any search result from this session — they appear to have been invented (e.g. appending a requested pack size like "-100G" to a base code whose only real sizes are different). You MUST NOT quote a SKU or price that did not come from an actual search result. For each fabricated SKU: either quote the REAL available sizes for that product (from your search results) and state that the requested size is not available, or mark the item "Not Available". NEVER invent a SKU, a pack size, or a price.';
+              errorParts.action_required = 'Call draft_email AGAIN. Remove every fabricated SKU. Replace with a real SKU+price that appeared in a search result, or state the requested size is unavailable and quote the nearest REAL size, or mark "Not Available". Do not fabricate.';
+            }
             toolResults.push({
               type: 'tool_result',
               tool_use_id: toolUse.id,
-              content: JSON.stringify({
-                error: 'DRAFT_VALIDATION_FAILED',
-                error_summary: 'Your quote table contains pack pricing for SKUs that are case-only. You MUST regenerate the draft with the violations below corrected. NEVER fabricate pack pricing — quote ONLY the case packing and case price for these SKUs, and leave the Pack Packing and Pack Price columns BLANK.',
-                violations: violations,
-                action_required: 'Call draft_email AGAIN with corrected html_body. The corrected version must: (1) leave Pack Packing column BLANK for each listed SKU, (2) leave Pack Price column BLANK for each listed SKU, (3) keep Case Packing and Case Price as quoted. Do not change any other content.'
-              }),
+              content: JSON.stringify(errorParts),
               is_error: true
             });
             // Do NOT set draftResult — let the loop continue so the agent can regenerate
@@ -687,10 +761,10 @@ Process this email according to your instructions. Search the pricelists, check 
           }
 
           // Either no violations, or we've exhausted regeneration attempts
-          if (violations.length > 0) {
-            console.log(`[SANITY] ⚠️  Max regenerations reached (${MAX_REGENERATIONS}); accepting draft with ${violations.length} unresolved violation(s) — operator review recommended`);
+          if (violations.length > 0 || fabricated.length > 0) {
+            console.log(`[SANITY] ⚠️  Max regenerations reached (${MAX_REGENERATIONS}); accepting draft with ${violations.length} case-only + ${fabricated.length} fabricated unresolved — operator review recommended`);
           } else {
-            console.log(`[SANITY] ✓ Draft passed validation (${caseOnlySkus.size} case-only SKUs tracked)`);
+            console.log(`[SANITY] ✓ Draft passed validation (${caseOnlySkus.size} case-only SKUs, ${seenSkus.size} seen SKUs tracked)`);
           }
 
           draftResult = {
