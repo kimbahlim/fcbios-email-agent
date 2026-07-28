@@ -205,6 +205,43 @@ function computePackDisplayFields(row, packStructure) {
   return out;
 }
 
+// Extract storage temperature and shelf life from a row, handling the inconsistent
+// column names/formats across the HiMedia tabs:
+//   Microbiology:          Temperature        | Shelflife            (string e.g. "48 Months")
+//   Molecular_Biology:     Temperature        | Shelflife (months)   (number e.g. 36)
+//   Animal_Tissue_Culture: Storage Condition  | Shelflife (months)   (number e.g. 24)
+//   RPM_Plates:            Temperature        | Shelf Life + Shelf Life Unit (4 + "Months")
+// Returns { _temperature, _shelflife, _shelflife_months } with blanks when absent, so the
+// agent can render Temperature/Shelflife columns for HiMedia quotes. _shelflife_months is
+// the numeric months (best-effort) for any threshold logic; _shelflife is the display string.
+function extractStorageInfo(row) {
+  if (!row || typeof row !== 'object') return { _temperature: '', _shelflife: '', _shelflife_months: null };
+  const keys = Object.keys(row);
+  const getByNames = (...names) => {
+    for (const n of names) {
+      const k = keys.find(key => key.toLowerCase().trim() === n.toLowerCase());
+      if (k && row[k] != null && String(row[k]).trim() !== '') return String(row[k]).trim();
+    }
+    return '';
+  };
+  // Temperature / storage condition
+  const temperature = getByNames('Temperature', 'Storage Condition', 'Storage Temp', 'Storage Temperature');
+
+  // Shelf life — may be a combined string, a bare number, or number + unit column
+  let shelflife = getByNames('Shelflife', 'Shelflife (months)', 'Shelf Life', 'Shelf life');
+  const unit = getByNames('Shelf Life Unit', 'Shelflife Unit');
+  let months = null;
+  if (shelflife) {
+    const m = shelflife.match(/(\d+(?:\.\d+)?)/);
+    if (m) months = parseFloat(m[1]);
+    // If the value was a bare number, append the unit (RPM_Plates split columns) or default "Months"
+    if (/^\d+(?:\.\d+)?$/.test(shelflife.trim())) {
+      shelflife = `${shelflife.trim()} ${unit || 'Months'}`.trim();
+    }
+  }
+  return { _temperature: temperature, _shelflife: shelflife, _shelflife_months: months };
+}
+
 async function fetchSheet(tabName) {
   const now = Date.now();
   const ttl = tabName === 'LEAD_TIMES' ? LEAD_TIMES_TTL : CACHE_TTL;
@@ -386,6 +423,7 @@ async function searchProducts(keyword) {
       _has_pack_pricing: hasExplicitPackCols || !!packStructure,
       _pack_structure: packStructure,
       ...computePackDisplayFields(row, packStructure),
+      ...extractStorageInfo(row),
       _pricing_note: pricingNote
     };
   });
@@ -617,6 +655,7 @@ async function searchByBrand(brandTab, keyword) {
       _has_pack_pricing: hasExplicitPackCols || !!packStructure,
       _pack_structure: packStructure,
       ...computePackDisplayFields(row, packStructure),
+      ...extractStorageInfo(row),
       _pricing_note: pricingNote
     };
   });

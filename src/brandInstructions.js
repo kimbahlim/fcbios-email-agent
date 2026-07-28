@@ -482,6 +482,14 @@ const BRAND_INSTRUCTIONS = {
 
   HIMEDIA: `## HIMEDIA QUOTING — COMPLETE INSTRUCTIONS
 
+  ## STORAGE TEMPERATURE + SHELF LIFE COLUMNS (MANDATORY FOR ALL HIMEDIA QUOTES)
+  Every HiMedia quotation table MUST include two extra columns — "Temperature" and "Shelflife" — placed AFTER "Case Price (MYR)" and BEFORE "Stock Status". So the HiMedia table column order is:
+    Brand | SKU | Description | Pack Packing | Pack Price (MYR) | Case Packing | Case Price (MYR) | Temperature | Shelflife | Stock Status
+  Populate these two columns from the search-result fields on each row:
+    - Temperature column = the row's "_temperature" field (e.g. "On Receipt Store at -20° C", "Temp 2° - 8° C", "Room Temperature").
+    - Shelflife column = the row's "_shelflife" field (e.g. "23 Months", "48 Months").
+  Use the field values VERBATIM — do NOT paraphrase, round, or invent them. If a row's "_temperature" or "_shelflife" is blank/empty, leave that cell blank (some items genuinely have no stored value); do NOT make one up. This gives dealers storage and expiry information upfront (especially important for indent/non-stocking and short-shelf-life items) so they can make informed decisions before confirming an order. The "_shelflife" shown is the TOTAL shelf life from manufacture — do NOT describe it as "remaining" shelf life. These columns apply to HiMedia items only; non-HiMedia rows have blank "_temperature"/"_shelflife" and keep the standard column set.
+
   ## AGAR vs BROTH/MEDIUM DISAMBIGUATION (CRITICAL — applies to ALL HiMedia culture media)
   HiMedia descriptions in the pricelist are truncated at 40 characters, which makes "Agar" and "Broth/Medium" versions of similar products look almost identical. Before quoting any HiMedia culture media, you MUST match the dealer's EXACT wording for the product physical form (agar/plate vs broth/medium/fluid). This is the single most important disambiguation step for HiMedia.
   STEP 1 — Read the dealer's exact wording. Identify whether they asked for:
