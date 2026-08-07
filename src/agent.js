@@ -567,7 +567,21 @@ async function runAgent(emailData) {
     console.log('[AGENT] No specific brand auto-detected — using main prompt only');
   }
 
-  const textContent = `${brandContextBlock}New dealer email received:
+  // Build the cached system blocks ONCE (reused across all loops).
+  // Block 1: the main system prompt — static, so it caches and hits on every loop.
+  // Block 2: brand-specific rules (when a brand was detected) — also cached, so they
+  // cost ~10% on loops 2..N instead of full price. Previously the brand block rode in
+  // the user message, which meant it was re-sent UNCACHED on every loop. Two cache
+  // breakpoints keep the main prompt cacheable independently of the (email-varying)
+  // brand block. Max 4 breakpoints allowed; we use at most 2.
+  const systemBlocks = [
+    { type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }
+  ];
+  if (brandContextBlock && brandContextBlock.trim().length > 0) {
+    systemBlocks.push({ type: 'text', text: brandContextBlock, cache_control: { type: 'ephemeral' } });
+  }
+
+  const textContent = `New dealer email received:
 
 FROM: ${emailData.from_name} <${emailData.from_email}>
 SUBJECT: ${emailData.subject}
@@ -614,13 +628,7 @@ Process this email according to your instructions. Search the pricelists, check 
       response = await client.messages.create({
         model: 'claude-sonnet-4-6',
         max_tokens: 16384,
-        system: [
-          {
-            type: 'text',
-            text: systemPrompt,
-            cache_control: { type: 'ephemeral' }
-          }
-        ],
+        system: systemBlocks,
         tools: [
           ...tools,
           {
